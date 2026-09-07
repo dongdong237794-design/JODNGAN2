@@ -1,0 +1,8 @@
+{
+  "name": "JodNGan",
+  "description": "Task, schedule, and study timer application with Supabase persistence, authentication, and Google Calendar event integration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
