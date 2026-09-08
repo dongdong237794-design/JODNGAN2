@@ -120,6 +120,53 @@ async function verifyGoogleIdToken(idToken) {
   }
 }
 
+// Verify a Google OAuth2 access token with Google to ensure it belongs to this client and extract profile info.
+async function verifyGoogleAccessToken(accessToken) {
+  if (!accessToken || typeof accessToken !== 'string') return null;
+  try {
+    // 1. Verify token audience with Google's tokeninfo endpoint
+    const tokenInfoResp = await fetch(`https://oauth2.googleapis.com/tokeninfo?access_token=${encodeURIComponent(accessToken)}`);
+    if (!tokenInfoResp.ok) {
+      console.warn('Google tokeninfo rejected access token');
+      return null;
+    }
+    const tokenInfo = await tokenInfoResp.json();
+    const expectedAud = getGoogleOAuthClientId();
+    if (!expectedAud) {
+      console.error('GOOGLE_CLIENT_ID is not configured; refusing Google login.');
+      return null;
+    }
+    const tokenAud = tokenInfo.aud || tokenInfo.azp;
+    if (tokenAud !== expectedAud) {
+      console.warn('Google access token audience mismatch:', tokenAud, 'expected:', expectedAud);
+      return null;
+    }
+
+    // 2. Fetch authenticated profile from Google userinfo
+    const userInfoResp = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    });
+    if (!userInfoResp.ok) {
+      console.warn('Google userinfo request failed');
+      return null;
+    }
+    const userInfo = await userInfoResp.json();
+    if (!userInfo || !userInfo.email) return null;
+    if (userInfo.email_verified === false || userInfo.email_verified === 'false') {
+      return null;
+    }
+
+    return {
+      email: userInfo.email,
+      name: userInfo.name || userInfo.given_name || userInfo.email.split('@')[0],
+      picture: userInfo.picture
+    };
+  } catch (err) {
+    console.error('Google access token verification error:', err.message);
+    return null;
+  }
+}
+
 // GET /api/auth-config - Expose public Supabase credentials and Google OAuth client ID
 apiRouter.get('/auth-config', (req, res) => {
   res.json({
@@ -133,18 +180,24 @@ apiRouter.get('/auth-config', (req, res) => {
   });
 });
 
-// POST /api/auth/google-login - Verify a real Google Identity Services credential
-// (ID token) and issue a session. The client must send the raw `credential` JWT
-// obtained from Google - never a plain email/name pair - so identity is always
-// confirmed by Google, not merely claimed by the browser.
+// POST /api/auth/google-login - Verify a real Google credential (ID token or OAuth access token)
+// and issue a session. The client must send a cryptographic token obtained from Google.
 apiRouter.post('/auth/google-login', async (req, res) => {
-  const { credential } = req.body || {};
-  if (!credential || typeof credential !== 'string') {
-    return res.status(400).json({ error: 'Missing Google credential (ID token)' });
+  const { credential, accessToken, access_token } = req.body || {};
+  const tokenToVerify = accessToken || access_token;
+
+  if (!credential && !tokenToVerify) {
+    return res.status(400).json({ error: 'Missing Google credential or access token' });
   }
 
-  const payload = await verifyGoogleIdToken(credential);
-  if (!payload) {
+  let payload = null;
+  if (credential && typeof credential === 'string') {
+    payload = await verifyGoogleIdToken(credential);
+  } else if (tokenToVerify && typeof tokenToVerify === 'string') {
+    payload = await verifyGoogleAccessToken(tokenToVerify);
+  }
+
+  if (!payload || !payload.email) {
     return res.status(401).json({
       error: 'ไม่สามารถยืนยันตัวตนกับ Google ได้ กรุณาลองเข้าสู่ระบบใหม่อีกครั้ง'
     });
