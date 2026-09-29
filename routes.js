@@ -6,13 +6,22 @@ import {
   getScopedSupabase,
   verifyUserToken,
   isSupabaseConfigured,
+  isSupabaseAvailable,
+  checkSupabaseHealth,
+  markSupabaseFailed,
+  getSupabaseDiagnosticInfo,
+  testSupabaseCredentials,
+  updateSupabaseConfig,
+  clearCustomSupabaseConfig,
   fallbackStore,
+  saveFallbackStore,
   seedUserDataIfNeeded,
   mapTaskFromDb,
   mapTaskToDb,
   mapStudySessionFromDb,
   mapStudySessionToDb,
   emailToUuid,
+  resolveRealSupabaseUserId,
   createSessionToken
 } from './supabase.js';
 
@@ -21,12 +30,15 @@ export const apiRouter = express.Router();
 // Helper to detect whether Supabase database currently has user_id columns
 let _hasUserIdCache = null;
 async function dbSupportsUserId(supabase) {
-  if (!supabase) return false;
+  if (!supabase || !isSupabaseAvailable()) return false;
   if (_hasUserIdCache !== null) return _hasUserIdCache;
   try {
     const { error } = await supabase.from('tasks').select('user_id').limit(1);
     _hasUserIdCache = !error;
   } catch (err) {
+    if (err.message && (err.message.includes('fetch failed') || err.message.includes('network'))) {
+      markSupabaseFailed(err);
+    }
     _hasUserIdCache = false;
   }
   return _hasUserIdCache;
@@ -34,12 +46,15 @@ async function dbSupportsUserId(supabase) {
 
 let _hasStudySessionsCache = null;
 async function dbSupportsStudySessions(supabase) {
-  if (!supabase) return false;
+  if (!supabase || !isSupabaseAvailable()) return false;
   if (_hasStudySessionsCache !== null) return _hasStudySessionsCache;
   try {
     const { error } = await supabase.from('study_sessions').select('id').limit(1);
     _hasStudySessionsCache = !error;
   } catch (err) {
+    if (err.message && (err.message.includes('fetch failed') || err.message.includes('network'))) {
+      markSupabaseFailed(err);
+    }
     _hasStudySessionsCache = false;
   }
   return _hasStudySessionsCache;
@@ -47,12 +62,15 @@ async function dbSupportsStudySessions(supabase) {
 
 let _hasDueTimeCache = null;
 async function dbSupportsDueTime(supabase) {
-  if (!supabase) return false;
+  if (!supabase || !isSupabaseAvailable()) return false;
   if (_hasDueTimeCache !== null) return _hasDueTimeCache;
   try {
     const { error } = await supabase.from('tasks').select('due_time').limit(1);
     _hasDueTimeCache = !error;
   } catch (err) {
+    if (err.message && (err.message.includes('fetch failed') || err.message.includes('network'))) {
+      markSupabaseFailed(err);
+    }
     _hasDueTimeCache = false;
   }
   return _hasDueTimeCache;
@@ -60,12 +78,15 @@ async function dbSupportsDueTime(supabase) {
 
 let _hasCalendarEventIdCache = null;
 async function dbSupportsCalendarEventId(supabase) {
-  if (!supabase) return false;
+  if (!supabase || !isSupabaseAvailable()) return false;
   if (_hasCalendarEventIdCache !== null) return _hasCalendarEventIdCache;
   try {
     const { error } = await supabase.from('tasks').select('calendar_event_id').limit(1);
     _hasCalendarEventIdCache = !error;
   } catch (err) {
+    if (err.message && (err.message.includes('fetch failed') || err.message.includes('network'))) {
+      markSupabaseFailed(err);
+    }
     _hasCalendarEventIdCache = false;
   }
   return _hasCalendarEventIdCache;
@@ -168,13 +189,16 @@ async function verifyGoogleAccessToken(accessToken) {
 }
 
 // GET /api/auth-config - Expose public Supabase credentials and Google OAuth client ID
-apiRouter.get('/auth-config', (req, res) => {
+apiRouter.get('/auth-config', async (req, res) => {
+  const configured = isSupabaseConfigured();
+  const available = await checkSupabaseHealth(req.query.retry === 'true');
   res.json({
-    configured: isSupabaseConfigured(),
-    supabaseConfigured: isSupabaseConfigured(),
+    configured: configured && available,
+    supabaseConfigured: configured,
+    supabaseAvailable: available,
     googleConfigured: !!getGoogleOAuthClientId(),
-    supabaseUrl: process.env.SUPABASE_URL || '',
-    supabaseAnonKey: process.env.SUPABASE_ANON_KEY || '',
+    supabaseUrl: available ? (process.env.SUPABASE_URL || '') : '',
+    supabaseAnonKey: available ? (process.env.SUPABASE_ANON_KEY || '') : '',
     googleClientId: getGoogleOAuthClientId(),
     calendarScope: 'https://www.googleapis.com/auth/calendar.events'
   });
@@ -204,9 +228,21 @@ apiRouter.post('/auth/google-login', async (req, res) => {
   }
 
   const cleanEmail = payload.email.toLowerCase().trim();
-  const userId = emailToUuid(cleanEmail);
   const fullName = payload.name && payload.name.trim() ? payload.name.trim() : cleanEmail.split('@')[0];
   const avatarUrl = payload.picture || `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName)}&background=1E293B&color=fff&size=96`;
+
+  const supabase = getSupabase();
+  let userId = null;
+  if (supabase) {
+    userId = await resolveRealSupabaseUserId(supabase, cleanEmail, {
+      full_name: fullName,
+      name: fullName,
+      avatar_url: avatarUrl
+    });
+  }
+  if (!userId) {
+    userId = emailToUuid(cleanEmail);
+  }
 
   const userPayload = {
     id: userId,
@@ -218,7 +254,6 @@ apiRouter.post('/auth/google-login', async (req, res) => {
   const token = createSessionToken(userPayload);
 
   // Record or update user profile in Supabase if table exists
-  const supabase = getSupabase();
   if (supabase) {
     try {
       await supabase.from('profiles').upsert({
@@ -255,8 +290,20 @@ apiRouter.post('/auth/google-login', async (req, res) => {
 apiRouter.post('/auth/guest-login', async (req, res) => {
   const cleanEmail = 'student.demo@jodngan.local';
   const fullName = 'นักเรียนทดลอง';
-  const userId = emailToUuid(cleanEmail);
   const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName)}&background=10B981&color=fff&size=96`;
+
+  const supabase = getSupabase();
+  let userId = null;
+  if (supabase) {
+    userId = await resolveRealSupabaseUserId(supabase, cleanEmail, {
+      full_name: fullName,
+      name: fullName,
+      avatar_url: avatarUrl
+    });
+  }
+  if (!userId) {
+    userId = emailToUuid(cleanEmail);
+  }
 
   const token = createSessionToken({ id: userId, email: cleanEmail, name: fullName, picture: avatarUrl });
 
@@ -304,38 +351,140 @@ export async function requireAuth(req, res, next) {
   next();
 }
 
-// GET /api/status - Check Supabase connectivity
+// GET /api/status - Check Supabase connectivity with diagnostic information
 apiRouter.get('/status', async (req, res) => {
-  const configured = isSupabaseConfigured();
-  if (!configured) {
+  const diag = getSupabaseDiagnosticInfo();
+  if (!diag.configured) {
     return res.json({
       configured: false,
       connected: false,
-      message: 'Supabase credentials not configured in environment variables. Running in local fallback mode.'
+      mode: 'local_storage',
+      maskedUrl: '',
+      isPausedOrUnreachable: false,
+      message: 'ระบบกำลังทำงานในโหมดจัดเก็บข้อมูลในเครื่อง (Local Persistent Storage)'
+    });
+  }
+
+  const isHealthy = await checkSupabaseHealth(req.query.force === 'true');
+  if (!isHealthy) {
+    let msg = 'ไม่สามารถเชื่อมต่อกับโฮสต์ Supabase ได้ ระบบกำลังทำงานด้วยโหมดจัดเก็บข้อมูลในเครื่อง';
+    if (diag.isDnsError) {
+      msg = 'ไม่พบชื่อโฮสต์ Supabase (ENOTFOUND) โครงการอาจถูกหยุดชั่วคราว (Paused) บน Supabase หรือ URL ไม่ถูกต้อง ระบบจึงสลับมาใช้โหมดจัดเก็บในเครื่องอย่างปลอดภัย';
+    }
+    return res.json({
+      configured: true,
+      connected: false,
+      mode: 'local_storage',
+      maskedUrl: diag.maskedUrl,
+      isPausedOrUnreachable: true,
+      isDnsError: diag.isDnsError,
+      message: msg
     });
   }
 
   const supabase = getSupabase();
+  if (!supabase) {
+    return res.json({
+      configured: true,
+      connected: false,
+      mode: 'local_storage',
+      maskedUrl: diag.maskedUrl,
+      isPausedOrUnreachable: false,
+      message: 'Supabase client ไม่พร้อมใช้งาน ระบบสลับมาใช้โหมดจัดเก็บข้อมูลในเครื่อง'
+    });
+  }
+
   try {
     const { error } = await supabase.from('subjects').select('id', { head: true, count: 'exact' });
     if (error) {
       return res.json({
         configured: true,
         connected: false,
-        message: `Connected to Supabase URL, but database error occurred: ${error.message}`
+        mode: 'local_storage',
+        maskedUrl: diag.maskedUrl,
+        hasSchemaError: true,
+        message: `เชื่อมต่อเซิร์ฟเวอร์สำเร็จ แต่ยังไม่พบตารางในฐานข้อมูล (${error.message}) กรุณารัน supabase_schema.sql ใน Supabase SQL Editor`
       });
     }
     return res.json({
       configured: true,
       connected: true,
-      message: 'Connected to Supabase PostgreSQL database successfully.'
+      mode: 'supabase',
+      maskedUrl: diag.maskedUrl,
+      message: 'เชื่อมต่อฐานข้อมูล Supabase PostgreSQL สำเร็จ ข้อมูลจะถูกบันทึกบนคลาวด์'
     });
   } catch (err) {
+    markSupabaseFailed(err);
     return res.json({
       configured: true,
       connected: false,
-      message: `Connection test failed: ${err.message}`
+      mode: 'local_storage',
+      maskedUrl: diag.maskedUrl,
+      message: `การทดสอบฐานข้อมูล: ${err.message}`
     });
+  }
+});
+
+// GET /api/supabase-config - Fetch current connection status & diagnostic details for UI
+apiRouter.get('/supabase-config', async (req, res) => {
+  const diag = getSupabaseDiagnosticInfo();
+  res.json({
+    configured: diag.configured,
+    connected: diag.connected,
+    supabaseUrl: process.env.SUPABASE_URL || '',
+    maskedUrl: diag.maskedUrl,
+    hasKey: diag.hasKey,
+    mode: diag.mode,
+    isPausedOrUnreachable: diag.isPausedOrUnreachable,
+    isDnsError: diag.isDnsError,
+    lastError: diag.lastError
+  });
+});
+
+// POST /api/supabase-config - Test and save custom Supabase credentials
+apiRouter.post('/supabase-config', async (req, res) => {
+  const { supabaseUrl, supabaseAnonKey, supabaseServiceRoleKey } = req.body || {};
+  try {
+    const result = await updateSupabaseConfig({
+      supabaseUrl,
+      supabaseAnonKey,
+      supabaseServiceRoleKey
+    });
+    return res.json(result);
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      connected: false,
+      message: 'เกิดข้อผิดพลาดในการบันทึกการตั้งค่า: ' + err.message
+    });
+  }
+});
+
+// POST /api/supabase-config/clear - Clear custom config and switch cleanly to local storage
+apiRouter.post('/supabase-config/clear', async (req, res) => {
+  try {
+    const result = await clearCustomSupabaseConfig();
+    return res.json(result);
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: 'เกิดข้อผิดพลาดในการรีเซ็ต: ' + err.message
+    });
+  }
+});
+
+// GET /api/supabase-schema - Return schema SQL for easy one-click copying
+apiRouter.get('/supabase-schema', (req, res) => {
+  try {
+    const schemaPath = path.join(process.cwd(), 'supabase_schema.sql');
+    if (fs.existsSync(schemaPath)) {
+      const content = fs.readFileSync(schemaPath, 'utf8');
+      res.type('text/plain').send(content);
+    } else {
+      res.status(404).send('-- Schema file not found');
+    }
+  } catch (err) {
+    res.status(500).send('-- Error loading schema: ' + err.message);
   }
 });
 
@@ -391,33 +540,48 @@ apiRouter.get('/data', requireAuth, async (req, res) => {
       await seedUserDataIfNeeded(supabase, userId);
     }
 
-    // 1. Fetch Subjects
+    // 1. Fetch Subjects (User-specific + shared subjects)
     let subQuery = supabase.from('subjects').select('*').order('created_at', { ascending: true });
-    if (hasUserId) subQuery = subQuery.eq('user_id', userId);
-    const { data: subData, error: subErr } = await subQuery;
+    if (hasUserId) subQuery = subQuery.or(`user_id.eq.${userId},user_id.is.null`);
+    const { data: subDataRaw, error: subErr } = await subQuery;
     if (subErr) throw subErr;
 
-    // 2. Fetch Active Tasks
+    // Deduplicate subjects by name, giving priority to user customized ones
+    const subMap = new Map();
+    (subDataRaw || []).forEach(s => {
+      const existing = subMap.get(s.name);
+      if (!existing || (!existing.user_id && s.user_id)) {
+        subMap.set(s.name, s);
+      }
+    });
+    const subData = Array.from(subMap.values());
+
+    // 2. Fetch Active Tasks (User tasks + unassigned/shared tasks)
     let taskQuery = supabase.from('tasks').select('*').eq('is_deleted', false).order('order_date', { ascending: false });
-    if (hasUserId) taskQuery = taskQuery.eq('user_id', userId);
+    if (hasUserId) taskQuery = taskQuery.or(`user_id.eq.${userId},user_id.is.null`);
     const { data: taskData, error: taskErr } = await taskQuery;
     if (taskErr) throw taskErr;
 
     // 3. Fetch Trash Tasks
     let trashQuery = supabase.from('tasks').select('*').eq('is_deleted', true).order('deleted_at', { ascending: false });
-    if (hasUserId) trashQuery = trashQuery.eq('user_id', userId);
+    if (hasUserId) trashQuery = trashQuery.or(`user_id.eq.${userId},user_id.is.null`);
     const { data: trashData, error: trashErr } = await trashQuery;
     if (trashErr) throw trashErr;
 
     // 4. Fetch Schedule
     let schedQuery = supabase.from('schedule').select('*');
-    if (hasUserId) schedQuery = schedQuery.eq('user_id', userId);
+    if (hasUserId) schedQuery = schedQuery.or(`user_id.eq.${userId},user_id.is.null`);
     const { data: schedData, error: schedErr } = await schedQuery;
     if (schedErr) throw schedErr;
 
     const formattedSchedule = {};
     if (schedData && schedData.length > 0) {
-      for (const row of schedData) {
+      const sortedSched = [...schedData].sort((a, b) => {
+        if (!a.user_id && b.user_id) return -1;
+        if (a.user_id && !b.user_id) return 1;
+        return 0;
+      });
+      for (const row of sortedSched) {
         if (!formattedSchedule[row.day]) {
           formattedSchedule[row.day] = {};
         }
@@ -426,13 +590,17 @@ apiRouter.get('/data', requireAuth, async (req, res) => {
     }
 
     // 5. Fetch Settings
-    let setQuery = supabase.from('settings').select('data');
+    let setQuery = supabase.from('settings').select('data, user_id');
     if (hasUserId) {
-      setQuery = setQuery.eq('user_id', userId);
+      setQuery = setQuery.or(`user_id.eq.${userId},id.eq.default`);
     } else {
       setQuery = setQuery.eq('id', 'default');
     }
-    const { data: setRow } = await setQuery.maybeSingle();
+    const { data: setRows } = await setQuery;
+    let setRow = null;
+    if (Array.isArray(setRows) && setRows.length > 0) {
+      setRow = setRows.find(r => r.user_id === userId) || setRows[0];
+    }
 
     // 6. Fetch Study Sessions (recent 50, ordered by started_at desc)
     let studySessions = [];
@@ -469,10 +637,14 @@ apiRouter.get('/data', requireAuth, async (req, res) => {
       studySessions
     });
   } catch (err) {
-    console.error('Error querying Supabase for user data:', err.message);
+    if (err.message && (err.message.includes('fetch failed') || err.message.includes('network'))) {
+      markSupabaseFailed(err);
+    } else {
+      console.warn('[Storage] Fallback to local store for user data:', err.message);
+    }
     return res.json({
       source: 'local_fallback',
-      error: err.message,
+      userId,
       assignments: fallbackStore.assignments,
       subjects: fallbackStore.subjects,
       schedule: fallbackStore.schedule,
@@ -529,8 +701,12 @@ apiRouter.post('/tasks', requireAuth, async (req, res) => {
       if (error) throw error;
       return res.json({ success: true, task: mapTaskFromDb(data) });
     } catch (err) {
-      console.error('Failed to save task to Supabase:', err.message);
-      return res.status(500).json({ error: 'Database save failed', message: err.message });
+      if (err.message && (err.message.includes('fetch failed') || err.message.includes('network'))) {
+        markSupabaseFailed(err);
+      } else {
+        console.error('Failed to save task to Supabase:', err.message);
+        return res.status(500).json({ error: 'Database save failed', message: err.message });
+      }
     }
   }
 
@@ -546,6 +722,7 @@ apiRouter.post('/tasks', requireAuth, async (req, res) => {
   } else {
     fallbackStore.assignments.unshift(normalizedTask);
   }
+  saveFallbackStore();
   return res.json({ success: true, task: normalizedTask });
 });
 
@@ -573,8 +750,12 @@ apiRouter.delete('/tasks/:id', requireAuth, async (req, res) => {
       if (error) throw error;
       return res.json({ success: true, id });
     } catch (err) {
-      console.error('Failed to soft delete task in Supabase:', err.message);
-      return res.status(500).json({ error: 'Database delete failed', message: err.message });
+      if (err.message && (err.message.includes('fetch failed') || err.message.includes('network'))) {
+        markSupabaseFailed(err);
+      } else {
+        console.error('Failed to soft delete task in Supabase:', err.message);
+        return res.status(500).json({ error: 'Database delete failed', message: err.message });
+      }
     }
   }
 
@@ -585,6 +766,7 @@ apiRouter.delete('/tasks/:id', requireAuth, async (req, res) => {
     fallbackStore.trash.unshift({ ...task, _deletedAt: new Date().toISOString() });
     if (fallbackStore.trash.length > 50) fallbackStore.trash.pop();
   }
+  saveFallbackStore();
   return res.json({ success: true, id });
 });
 
@@ -612,8 +794,12 @@ apiRouter.post('/tasks/:id/restore', requireAuth, async (req, res) => {
       if (error) throw error;
       return res.json({ success: true, task: mapTaskFromDb(data) });
     } catch (err) {
-      console.error('Failed to restore task in Supabase:', err.message);
-      return res.status(500).json({ error: 'Database restore failed', message: err.message });
+      if (err.message && (err.message.includes('fetch failed') || err.message.includes('network'))) {
+        markSupabaseFailed(err);
+      } else {
+        console.error('Failed to restore task in Supabase:', err.message);
+        return res.status(500).json({ error: 'Database restore failed', message: err.message });
+      }
     }
   }
 
@@ -623,8 +809,10 @@ apiRouter.post('/tasks/:id/restore', requireAuth, async (req, res) => {
     const [task] = fallbackStore.trash.splice(idx, 1);
     delete task._deletedAt;
     fallbackStore.assignments.push(task);
+    saveFallbackStore();
     return res.json({ success: true, task });
   }
+  saveFallbackStore();
   return res.json({ success: true, id });
 });
 
@@ -644,13 +832,18 @@ apiRouter.delete('/tasks/:id/permanent', requireAuth, async (req, res) => {
       if (error) throw error;
       return res.json({ success: true, id });
     } catch (err) {
-      console.error('Failed to permanently delete task in Supabase:', err.message);
-      return res.status(500).json({ error: 'Database permanent delete failed', message: err.message });
+      if (err.message && (err.message.includes('fetch failed') || err.message.includes('network'))) {
+        markSupabaseFailed(err);
+      } else {
+        console.error('Failed to permanently delete task in Supabase:', err.message);
+        return res.status(500).json({ error: 'Database permanent delete failed', message: err.message });
+      }
     }
   }
 
   // Local fallback
   fallbackStore.trash = fallbackStore.trash.filter(t => t.id !== id);
+  saveFallbackStore();
   return res.json({ success: true, id });
 });
 
@@ -669,12 +862,17 @@ apiRouter.post('/tasks/clear-trash', requireAuth, async (req, res) => {
       if (error) throw error;
       return res.json({ success: true });
     } catch (err) {
-      console.error('Failed to clear trash in Supabase:', err.message);
-      return res.status(500).json({ error: 'Clear trash failed', message: err.message });
+      if (err.message && (err.message.includes('fetch failed') || err.message.includes('network'))) {
+        markSupabaseFailed(err);
+      } else {
+        console.error('Failed to clear trash in Supabase:', err.message);
+        return res.status(500).json({ error: 'Clear trash failed', message: err.message });
+      }
     }
   }
 
   fallbackStore.trash = [];
+  saveFallbackStore();
   return res.json({ success: true });
 });
 
@@ -712,8 +910,12 @@ apiRouter.post('/subjects', requireAuth, async (req, res) => {
       if (error) throw error;
       return res.json({ success: true, subject: data });
     } catch (err) {
-      console.error('Failed to save subject to Supabase:', err.message);
-      return res.status(500).json({ error: 'Subject save failed', message: err.message });
+      if (err.message && (err.message.includes('fetch failed') || err.message.includes('network'))) {
+        markSupabaseFailed(err);
+      } else {
+        console.error('Failed to save subject to Supabase:', err.message);
+        return res.status(500).json({ error: 'Subject save failed', message: err.message });
+      }
     }
   }
 
@@ -724,6 +926,7 @@ apiRouter.post('/subjects', requireAuth, async (req, res) => {
   } else {
     fallbackStore.subjects.push(subject);
   }
+  saveFallbackStore();
   return res.json({ success: true, subject });
 });
 
@@ -743,12 +946,17 @@ apiRouter.delete('/subjects/:id', requireAuth, async (req, res) => {
       if (error) throw error;
       return res.json({ success: true, id });
     } catch (err) {
-      console.error('Failed to delete subject in Supabase:', err.message);
-      return res.status(500).json({ error: 'Subject delete failed', message: err.message });
+      if (err.message && (err.message.includes('fetch failed') || err.message.includes('network'))) {
+        markSupabaseFailed(err);
+      } else {
+        console.error('Failed to delete subject in Supabase:', err.message);
+        return res.status(500).json({ error: 'Subject delete failed', message: err.message });
+      }
     }
   }
 
   fallbackStore.subjects = fallbackStore.subjects.filter(s => s.id !== id);
+  saveFallbackStore();
   return res.json({ success: true, id });
 });
 
@@ -782,14 +990,19 @@ apiRouter.post('/schedule', requireAuth, async (req, res) => {
       if (error) throw error;
       return res.json({ success: true, day, period, subject });
     } catch (err) {
-      console.error('Failed to update schedule in Supabase:', err.message);
-      return res.status(500).json({ error: 'Schedule update failed', message: err.message });
+      if (err.message && (err.message.includes('fetch failed') || err.message.includes('network'))) {
+        markSupabaseFailed(err);
+      } else {
+        console.error('Failed to update schedule in Supabase:', err.message);
+        return res.status(500).json({ error: 'Schedule update failed', message: err.message });
+      }
     }
   }
 
   // Local fallback
   if (!fallbackStore.schedule[day]) fallbackStore.schedule[day] = {};
   fallbackStore.schedule[day][period] = subject;
+  saveFallbackStore();
   return res.json({ success: true, day, period, subject });
 });
 
@@ -816,12 +1029,17 @@ apiRouter.post('/settings', requireAuth, async (req, res) => {
       if (error) throw error;
       return res.json({ success: true, settings: settingsData });
     } catch (err) {
-      console.error('Failed to update settings in Supabase:', err.message);
-      return res.status(500).json({ error: 'Settings update failed', message: err.message });
+      if (err.message && (err.message.includes('fetch failed') || err.message.includes('network'))) {
+        markSupabaseFailed(err);
+      } else {
+        console.error('Failed to update settings in Supabase:', err.message);
+        return res.status(500).json({ error: 'Settings update failed', message: err.message });
+      }
     }
   }
 
   fallbackStore.settings = { ...fallbackStore.settings, ...settingsData };
+  saveFallbackStore();
   return res.json({ success: true, settings: fallbackStore.settings });
 });
 
@@ -854,7 +1072,7 @@ apiRouter.post('/study-sessions', requireAuth, async (req, res) => {
         subjectId = null;
       }
     } catch(e) {
-      console.warn('Subject verification check failed:', e.message);
+      subjectId = null;
     }
   } else if (!subjectId && subjectName && subjectName !== 'ทั่วไป' && supabase) {
     try {
@@ -869,7 +1087,9 @@ apiRouter.post('/study-sessions', requireAuth, async (req, res) => {
         subjectId = matchedSub.id;
         if (matchedSub.name) subjectName = matchedSub.name;
       }
-    } catch(e) {}
+    } catch(e) {
+      subjectId = null;
+    }
   }
 
   const targetMins = Math.max(1, parseInt(session.targetDurationMinutes || session.targetMinutes, 10) || 25);
@@ -899,6 +1119,7 @@ apiRouter.post('/study-sessions', requireAuth, async (req, res) => {
     } else {
       fallbackStore.studySessions.unshift(sessionData);
     }
+    saveFallbackStore();
     return res.json({ success: true, source: 'fallback', session: sessionData });
   }
 
@@ -911,6 +1132,7 @@ apiRouter.post('/study-sessions', requireAuth, async (req, res) => {
       } else {
         fallbackStore.studySessions.unshift(sessionData);
       }
+      saveFallbackStore();
       return res.json({ success: true, source: 'fallback', session: sessionData });
     }
 
@@ -928,13 +1150,16 @@ apiRouter.post('/study-sessions', requireAuth, async (req, res) => {
     if (!saved.subjectName && subjectName) saved.subjectName = subjectName;
     return res.json({ success: true, source: 'supabase', session: saved });
   } catch (err) {
-    console.error('Error saving study session:', err.message);
+    if (err.message && (err.message.includes('fetch failed') || err.message.includes('network'))) {
+      markSupabaseFailed(err);
+    }
     const existingIdx = fallbackStore.studySessions.findIndex(s => s.id === id);
     if (existingIdx !== -1) {
       fallbackStore.studySessions[existingIdx] = sessionData;
     } else {
       fallbackStore.studySessions.unshift(sessionData);
     }
+    saveFallbackStore();
     return res.json({ success: true, source: 'fallback_error', session: sessionData, warning: err.message });
   }
 });
@@ -947,6 +1172,7 @@ apiRouter.delete('/study-sessions/:id', requireAuth, async (req, res) => {
 
   if (!supabase) {
     fallbackStore.studySessions = fallbackStore.studySessions.filter(s => s.id !== id);
+    saveFallbackStore();
     return res.json({ success: true, source: 'fallback' });
   }
 
@@ -962,9 +1188,14 @@ apiRouter.delete('/study-sessions/:id', requireAuth, async (req, res) => {
       if (error) throw error;
     }
     fallbackStore.studySessions = fallbackStore.studySessions.filter(s => s.id !== id);
+    saveFallbackStore();
     return res.json({ success: true });
   } catch (err) {
-    console.error('Error deleting study session:', err.message);
-    return res.status(500).json({ error: 'ไม่สามารถลบประวัติการเรียนได้' });
+    if (err.message && (err.message.includes('fetch failed') || err.message.includes('network'))) {
+      markSupabaseFailed(err);
+    }
+    fallbackStore.studySessions = fallbackStore.studySessions.filter(s => s.id !== id);
+    saveFallbackStore();
+    return res.json({ success: true, source: 'fallback' });
   }
 });
