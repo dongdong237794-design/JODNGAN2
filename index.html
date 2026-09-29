@@ -882,7 +882,7 @@
         
         /* Html content - gray, centered */
         .swal-premium .swal2-html-container {
-            font-family: 'Prompt', sans-serif !important;
+            font-family: 'DM Sans', 'Noto Sans Thai', sans-serif !important;
             font-size: 0.9375rem !important;
             font-weight: 400 !important;
             color: #64748B !important;
@@ -907,7 +907,7 @@
             flex: 1 1 0% !important;
             min-height: 3.25rem !important;
             border-radius: 1.125rem !important;
-            font-family: 'Prompt', sans-serif !important;
+            font-family: 'DM Sans', 'Noto Sans Thai', sans-serif !important;
             font-size: 0.9375rem !important;
             font-weight: 700 !important;
             padding: 0.75rem 1.5rem !important;
@@ -998,7 +998,7 @@
             flex: 1 1 0% !important;
             min-height: 3rem !important;
             border-radius: 1rem !important;
-            font-family: 'Prompt', sans-serif !important;
+            font-family: 'DM Sans', 'Noto Sans Thai', sans-serif !important;
             font-size: 0.9375rem !important;
             font-weight: 600 !important;
             padding: 0.75rem 1.5rem !important;
@@ -1192,12 +1192,6 @@
             /* Subject management cards */
             #view-subjects .card {
                 padding: 1.25rem !important;
-                border-radius: 1.25rem !important;
-            }
-
-            /* Trash page */
-            #view-trash .card {
-                min-height: auto !important;
                 border-radius: 1.25rem !important;
             }
 
@@ -1713,10 +1707,6 @@ button[type="button"].text-red-500 { box-shadow: none !important; }
 #view-trash .card {
     border-radius: var(--radius-xl) !important;
 }
-#view-trash .p-6.md\:p-8 {
-    padding: 1rem 1.25rem !important;
-}
-#view-trash h3 { font-size: 0.85rem !important; font-weight: 600 !important; }
 
 /* =============================================
    ADD/EDIT TASK FORM
@@ -2536,9 +2526,48 @@ button,input,select,textarea{font-family:inherit}
 #calendar-grid>div{border-color:#eeeeea!important;border-radius:14px!important;background:#fff!important}
 #calendar-grid>div:hover{background:#fafaf7!important}
 
-/* TimeFrame Timetable Grid & Cards matching Reference Image */
-.timeframe-canvas {
+/* TimeFrame Timetable Grid & Cards with Apple-inspired soft gradient and spacing */
+#view-calendar .timeframe-canvas {
   font-family: inherit;
+  background: radial-gradient(120% 120% at 15% 0%, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.08) 45%, transparent 75%),
+              radial-gradient(100% 100% at 88% 100%, rgba(135, 122, 215, 0.42) 0%, transparent 60%),
+              linear-gradient(142deg, #9e99d8 0%, #8b86c8 42%, #7871b6 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  border-radius: 2rem !important;
+  padding: 1.75rem !important;
+  box-shadow: 0 24px 60px -12px rgba(112, 101, 179, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(20px) !important;
+}
+@media (min-width: 640px) {
+  #view-calendar .timeframe-canvas {
+    border-radius: 2.25rem !important;
+    padding: 2rem !important;
+  }
+}
+body.auto-dark #view-calendar .timeframe-canvas {
+  background: radial-gradient(120% 120% at 15% 0%, rgba(255, 255, 255, 0.1) 0%, transparent 60%),
+              radial-gradient(100% 100% at 88% 100%, rgba(98, 90, 160, 0.35) 0%, transparent 65%),
+              linear-gradient(142deg, #24223b 0%, #1a192c 50%, #121122 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Schedule Header Glassmorphism Gradient */
+#view-schedule .bg-slate-800 {
+  background: radial-gradient(110% 120% at 15% 0%, rgba(255, 255, 255, 0.12) 0%, transparent 55%),
+              linear-gradient(135deg, #1e293b 0%, #151f30 50%, #0f172a 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 1.5rem !important;
+  padding: 1.35rem 1.75rem !important;
+  box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(16px) !important;
+  margin-bottom: 1.25rem !important;
+}
+body.auto-dark #view-schedule .bg-slate-800 {
+  background: radial-gradient(110% 120% at 15% 0%, rgba(255, 255, 255, 0.08) 0%, transparent 55%),
+              linear-gradient(135deg, #182234 0%, #0e1626 100%) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
 }
 .timetable-grid-wrapper {
   min-width: 680px;
@@ -2678,6 +2707,34 @@ body.auto-dark #view-timer textarea {
   .animate-pulse{animation:none!important}
 }
 .activity-cell{aspect-ratio:1;border-radius:3px;transition:all .15s ease}
+
+/* Smooth Study Mascot Animations */
+@keyframes mascotSway {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(0.6deg); }
+}
+@keyframes mascotTyping {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-2px); }
+}
+@keyframes steamFloat {
+  0% { transform: translateY(0px) scale(0.9); opacity: 0.2; }
+  50% { transform: translateY(-5px) scale(1.08); opacity: 0.7; }
+  100% { transform: translateY(-10px) scale(1.15); opacity: 0; }
+}
+.mascot-sway {
+  animation: mascotSway 4s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+.mascot-typing-paws {
+  animation: mascotTyping 0.65s ease-in-out infinite;
+}
+.steam-smoke-1 {
+  animation: steamFloat 2.6s ease-in-out infinite;
+}
+.steam-smoke-2 {
+  animation: steamFloat 2.8s ease-in-out infinite 1.3s;
+}
 
 /* Subjects / trash */
 body:not(.auto-dark) #view-subjects .bg-white, body:not(.auto-dark) #view-trash .bg-white{background:#fff!important}
@@ -3885,12 +3942,10 @@ body.auto-dark .swal2-backdrop-show {
                             <svg class="w-5 text-center shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M4 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16l-7-3-7 3V4z M12 2v10l3-2-3-2"/></svg>
                             <span class="sidebar-label">จัดการวิชา</span>
                         </button>
-                        <button onclick="nav('trash')" id="nav-trash" title="ถังลบล่าสุด" data-label="ถังลบล่าสุด" class="nav-item flex items-center justify-between px-4 py-3 rounded-lg text-slate-300 font-semibold w-full text-left">
-                            <div class="flex items-center gap-4">
-                                <svg class="w-5 text-center shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
-                                <span class="sidebar-label">ถังลบล่าสุด</span>
-                            </div>
-                            <span id="sidebar-trash-badge-wrap"><span id="trash-badge" class="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full hidden">0</span></span>
+                        <button onclick="nav('trash')" id="nav-trash" title="ถังลบล่าสุด" data-label="ถังลบล่าสุด" class="nav-item flex items-center gap-4 px-4 py-3 rounded-lg text-slate-300 font-semibold w-full text-left">
+                            <svg class="w-5 text-center shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                            <span class="sidebar-label flex-1 truncate">ถังลบล่าสุด</span>
+                            <span id="sidebar-trash-badge-wrap" class="sidebar-label shrink-0"><span id="trash-badge" class="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full hidden">0</span></span>
                         </button>
                         <button onclick="openSettings()" id="nav-settings" title="การตั้งค่าระบบ" data-label="การตั้งค่าระบบ" class="nav-item flex items-center gap-4 px-4 py-3 rounded-lg text-slate-300 font-semibold w-full text-left">
                             <svg class="w-5 text-center shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -3930,10 +3985,8 @@ body.auto-dark .swal2-backdrop-show {
                         <svg class="text-base" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
                         <span id="sidebar-urgent-badge" class="absolute -top-1 -right-1 bg-red-500 text-white text-[9px] font-bold min-w-[1.1rem] h-[1.1rem] px-0.5 rounded-full flex items-center justify-center hidden leading-none">0</span>
                     </button>
-                    <!-- Settings -->
-                    <button id="settings-btn" onclick="openSettings()" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-sidebar text-white flex items-center justify-center shadow-sm hover:bg-slate-700 transition shrink-0 cursor-pointer" title="การตั้งค่า">
-                        <svg class="text-base" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="15" height="15" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-                    </button>
+                    <!-- Settings button removed from header to eliminate redundancy with bottom / sidebar navigation -->
+                    <button id="settings-btn" onclick="openSettings()" class="hidden" style="display:none!important;" title="การตั้งค่า"></button>
                     <!-- Hidden DOM container to satisfy scripts requiring these elements without rendering anything -->
                     <div id="auth-header-container" class="hidden" style="display:none!important;">
                         <button id="auth-login-btn" class="hidden"></button>
@@ -4105,10 +4158,10 @@ body.auto-dark .swal2-backdrop-show {
                         <!-- Urgent Tasks -->
                         <div class="card rounded-[2rem] bg-white border border-slate-100 shadow-sm p-8 h-[520px] flex flex-col">
                             <div class="flex items-center justify-between mb-6">
-                                <div class="flex items-center gap-2"><div class="w-7 h-7 rounded-lg bg-red-100 flex items-center justify-center shrink-0"><svg class="text-xs text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z M12 9v4 M12 17h.01"/></svg></div><h3 class="text-base font-bold text-textprimary">งานด่วน / สอบ</h3></div>
-                                <span class="bg-red-100 text-red-600 text-xs font-bold px-3 py-1 rounded-full"><svg class="mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z M12 9v4 M12 17h.01"/></svg> <span id="urgent-count-text">0</span> รายการ</span>
+                                <div class="flex items-center gap-2"><div class="w-7 h-7 rounded-xl bg-red-50 text-red-500 border border-red-100 flex items-center justify-center shrink-0"><svg class="text-xs text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z M12 9v4 M12 17h.01"/></svg></div><h3 class="text-base font-bold text-textprimary">งานด่วน / สอบ</h3></div>
+                                <span class="bg-red-50 text-red-500 border border-red-100 text-xs font-semibold px-3 py-1 rounded-full inline-flex items-center gap-1.5"><span id="urgent-count-text" class="font-bold">0</span> รายการ</span>
                             </div>
-                            <div id="urgent-list" class="flex-1 overflow-y-auto pr-2 flex flex-col gap-3">
+                            <div id="urgent-list" class="flex-1 overflow-y-auto pr-1 flex flex-col gap-3">
                                 <!-- JS Injects here -->
                             </div>
                         </div>
@@ -4747,41 +4800,59 @@ body.auto-dark .swal2-backdrop-show {
 
                 <!-- ================= VIEW: TRASH ================= -->
                 <div id="view-trash" class="view-section">
-                    <div class="card bg-white rounded-[2rem] border border-slate-100 shadow-sm overflow-hidden flex flex-col min-h-[500px]">
-                        <div class="p-6 md:p-8 flex items-center justify-between border-b border-slate-50">
-                            <h3 class="text-lg font-bold text-textprimary"><svg class="text-red-500 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg> ถังลบล่าสุด (เก็บในเครื่อง 50 รายการ)</h3>
-                            <button onclick="clearTrash()" class="text-xs font-bold text-red-500 border border-red-200 hover:bg-red-50 py-2 px-4 rounded-xl transition">ล้างทั้งหมด</button>
+                    <!-- Trash Top Header Bar (Symmetrical with other views) -->
+                    <div class="flex items-center justify-between flex-wrap gap-4 mb-6">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-12 h-12 rounded-2xl bg-red-50 border border-red-100 flex items-center justify-center text-red-500 shrink-0 shadow-2xs">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2.5">
+                                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">ถังลบล่าสุด</h2>
+                                    <span id="trash-header-count" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-red-50 text-red-600 border border-red-100">0 รายการ</span>
+                                </div>
+                                <p class="text-xs sm:text-sm text-slate-500 mt-1 font-normal">รายการงานที่ถูกลบ สามารถตรวจสอบรายละเอียด กู้คืนงาน หรือลบถาวรได้</p>
+                            </div>
                         </div>
+                        <button type="button" onclick="clearTrash()" id="btn-clear-trash-all" class="h-10 px-4 rounded-xl font-bold text-xs bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 transition inline-flex items-center gap-2 cursor-pointer shadow-2xs">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>
+                            <span>ล้างถังขยะทั้งหมด</span>
+                        </button>
+                    </div>
+
+                    <!-- Main Trash Card Panel -->
+                    <div class="card bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col min-h-[520px]">
                         <div class="flex-1 overflow-x-auto relative">
-                            <table class="w-full text-left border-collapse min-w-[700px]">
+                            <table class="w-full text-left border-collapse min-w-[860px]">
                                 <thead>
-                                    <tr class="bg-slate-50 text-[11px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">
-                                        <th class="py-4 px-6">วิชา</th>
-                                        <th class="py-4 px-6">ชื่องาน</th>
-                                        <th class="py-4 px-6">กำหนดส่งเดิม</th>
-                                        <th class="py-4 px-6">วันที่ลบ</th>
-                                        <th class="py-4 px-6 text-center">จัดการ</th>
+                                    <tr class="bg-slate-50/80 text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">
+                                        <th class="py-4 px-5 text-center w-28">วิชา</th>
+                                        <th class="py-4 px-5">ชื่องาน</th>
+                                        <th class="py-4 px-5 text-center whitespace-nowrap">กำหนดส่งเดิม</th>
+                                        <th class="py-4 px-5 text-center whitespace-nowrap">สถานะเดิม</th>
+                                        <th class="py-4 px-5 text-center whitespace-nowrap">วันที่ลบ</th>
+                                        <th class="py-4 px-5 text-center whitespace-nowrap w-64">จัดการ</th>
                                     </tr>
                                 </thead>
-                                <tbody id="trash-table-body" class="text-sm">
+                                <tbody id="trash-table-body" class="text-sm divide-y divide-slate-100">
                                     <!-- JS Injects -->
                                 </tbody>
                             </table>
                             
                             <!-- Empty State -->
-                            <div id="trash-empty" class="absolute inset-0 flex flex-col items-center justify-center bg-white p-6 hidden">
-                                <div class="w-16 h-16 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-center mb-3 text-slate-400">
-                                    <svg class="w-7 h-7 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                            <div id="trash-empty" class="absolute inset-0 flex flex-col items-center justify-center bg-white p-8 hidden">
+                                <div class="w-16 h-16 bg-slate-50 border border-slate-100 rounded-3xl flex items-center justify-center mb-3.5 text-slate-300 shadow-2xs">
+                                    <svg class="w-8 h-8 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
                                 </div>
-                                <p class="font-bold text-sm text-slate-700 mb-0.5">ถังขยะว่างเปล่า</p>
-                                <p class="text-xs text-slate-400">ไม่มีรายการงานหรือการบ้านที่ถูกลบอยู่ในขณะนี้</p>
+                                <p class="font-bold text-base text-slate-700 mb-1">ถังขยะว่างเปล่า</p>
+                                <p class="text-xs sm:text-sm text-slate-400">ไม่มีรายการงานหรือการบ้านที่ถูกลบอยู่ในขณะนี้</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- ================= VIEW: STUDY TIMER ================= -->
-                <div id="view-timer" class="view-section">
+                <div id="view-timer" class="view-section pb-32 sm:pb-36">
                     
                     <!-- Top Header Bar with Minimal Segmented Control -->
                     <div class="flex items-center justify-between flex-wrap gap-4 mb-8">
@@ -4827,7 +4898,7 @@ body.auto-dark .swal2-backdrop-show {
                                 </div>
 
                                 <!-- Dual Selector: Connect Task & Subject (Clean & Direct) -->
-                                <div class="w-full max-w-sm space-y-3 mb-4">
+                                <div class="w-full max-w-md space-y-3 mb-4">
                                     <!-- Option A: Linked Task from assignments -->
                                     <div>
                                         <div class="flex items-center justify-between mb-1.5 px-0.5">
@@ -4835,7 +4906,7 @@ body.auto-dark .swal2-backdrop-show {
                                             <span class="text-[10px] text-slate-400 font-medium">ไม่ต้องพิมพ์เอง</span>
                                         </div>
                                         <div class="relative w-full">
-                                            <select id="timer-linked-task-select" onchange="onTimerLinkedTaskChange(this.value)" class="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-500 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium text-slate-800 appearance-none cursor-pointer focus:outline-none transition shadow-2xs">
+                                            <select id="timer-linked-task-select" onchange="onTimerLinkedTaskChange(this.value)" class="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-500 rounded-2xl px-3.5 py-2.5 text-xs sm:text-sm font-medium text-slate-800 appearance-none cursor-pointer focus:outline-none transition shadow-2xs">
                                                 <option value="">-- ไม่เชื่อมโยงงาน (จับเวลาทั่วไป) --</option>
                                                 <!-- Populated dynamically from assignments -->
                                             </select>
@@ -4843,15 +4914,15 @@ body.auto-dark .swal2-backdrop-show {
                                         </div>
                                     </div>
 
-                                    <!-- Option B: Subject Selector -->
+                                    <!-- Option B: Subject Selector (Flex layout prevents dot text overlap on Safari/iOS) -->
                                     <div id="timer-subject-pill-row">
                                         <label for="timer-subject-select" class="block text-xs font-semibold text-slate-600 mb-1.5 px-0.5">วิชาที่อ่าน</label>
-                                        <div class="relative w-full">
-                                            <span id="timer-active-subject-dot" class="absolute left-3.5 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-blue-500 shrink-0 pointer-events-none"></span>
-                                            <select id="timer-subject-select" onchange="onTimerSubjectChange(this.value)" class="w-full bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-500 rounded-xl pl-9 pr-9 py-2.5 text-xs sm:text-sm font-semibold text-slate-800 appearance-none cursor-pointer focus:outline-none transition shadow-2xs">
+                                        <div class="flex items-center w-full bg-white border border-slate-200 hover:border-slate-300 focus-within:border-blue-500 rounded-2xl px-3.5 py-1 text-slate-800 transition shadow-2xs">
+                                            <span id="timer-active-subject-dot" class="w-3 h-3 rounded-full bg-blue-500 shrink-0 mr-2.5"></span>
+                                            <select id="timer-subject-select" onchange="onTimerSubjectChange(this.value)" class="w-full bg-transparent border-0 focus:outline-none py-1.5 text-xs sm:text-sm font-semibold text-slate-800 cursor-pointer appearance-none">
                                                 <!-- JS populated -->
                                             </select>
-                                            <svg class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                                            <svg class="pointer-events-none text-slate-400 w-4 h-4 shrink-0 ml-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                                         </div>
                                         <div id="timer-active-subject-badge" class="hidden">
                                             <span id="timer-active-subject-name">ทั่วไป</span>
@@ -4859,112 +4930,123 @@ body.auto-dark .swal2-backdrop-show {
                                     </div>
                                 </div>
 
-                                <!-- Cute Mascot Illustration (Matches Screenshot UI) -->
-                                <div id="timer-mascot-container" class="flex flex-col items-center justify-center my-1 select-none pointer-events-none">
-                                    <!-- 1. Focus Mascot (Studying at desk with laptop, glasses, steaming tea) -->
+                                <!-- Cute Elongated Mascot Illustration (Taller, graceful & cute) -->
+                                <div id="timer-mascot-container" class="flex flex-col items-center justify-center my-2 select-none pointer-events-none">
+                                    <!-- 1. Focus Mascot (Tall elongated student mascot studying at desk) -->
                                     <div id="timer-mascot-focus" class="flex flex-col items-center">
-                                        <svg viewBox="0 0 220 160" class="w-44 h-20 sm:h-22 overflow-visible" fill="none">
-                                            <!-- Study Desk: Centered at 110 -->
-                                            <rect x="20" y="125" width="180" height="9" rx="4.5" fill="#e2e8f0" />
-                                            <rect x="36" y="134" width="8" height="20" rx="2" fill="#cbd5e1" />
-                                            <rect x="176" y="134" width="8" height="20" rx="2" fill="#cbd5e1" />
+                                        <svg viewBox="0 0 240 220" class="w-56 h-32 sm:h-36 overflow-visible" fill="none">
+                                            <!-- Study Desk: Centered at 120 -->
+                                            <rect x="20" y="172" width="200" height="9" rx="4.5" fill="#e2e8f0" />
+                                            <rect x="36" y="181" width="8" height="26" rx="3" fill="#cbd5e1" />
+                                            <rect x="196" y="181" width="8" height="26" rx="3" fill="#cbd5e1" />
                                             
                                             <!-- Book Stack on Desk (Left Side Balance) -->
-                                            <rect x="30" y="118" width="32" height="7" rx="2" fill="#3b82f6" />
-                                            <rect x="32" y="111" width="28" height="7" rx="2" fill="#10b981" />
-                                            <rect x="34" y="105" width="24" height="6" rx="2" fill="#f59e0b" />
+                                            <rect x="28" y="164" width="36" height="8" rx="2" fill="#3b82f6" />
+                                            <rect x="31" y="156" width="31" height="8" rx="2" fill="#10b981" />
+                                            <rect x="34" y="149" width="26" height="7" rx="2" fill="#f59e0b" />
                                             
                                             <!-- Steaming Ceramic Mug & Saucer (Right Side Balance) -->
-                                            <rect x="150" y="122" width="6" height="3" rx="1" fill="#f59e0b" />
-                                            <ellipse cx="168" cy="125" rx="13" ry="2.5" fill="#cbd5e1" />
-                                            <rect x="160" y="112" width="16" height="13" rx="3" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5" />
-                                            <path d="M176 115 C180 115, 180 121, 176 122" stroke="#94a3b8" stroke-width="1.5" fill="none" />
-                                            <path class="steam-smoke-1" d="M165 107 Q167 103 165 99" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6" />
-                                            <path class="steam-smoke-2" d="M171 106 Q173 101 171 97" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6" />
+                                            <ellipse cx="180" cy="172" rx="14" ry="3" fill="#cbd5e1" />
+                                            <rect x="172" y="157" width="16" height="15" rx="3" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5" />
+                                            <path d="M 188 161 C 193 161, 193 168, 188 169" stroke="#94a3b8" stroke-width="1.5" fill="none" />
+                                            <path class="steam-smoke-1" d="M 177 151 Q 180 146 177 141" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6" />
+                                            <path class="steam-smoke-2" d="M 183 150 Q 186 144 183 139" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6" />
 
-                                            <!-- Green Mascot Blob sitting behind desk (Centered at 110) -->
+                                            <!-- Tall Green Mascot Body sitting behind desk (Elongated & Graceful) -->
                                             <g class="mascot-sway">
-                                                <!-- Body (login screen blob-green) -->
-                                                <path d="M 65,125 C 50,110 50,55 75,35 C 95,20 125,20 145,35 C 170,55 170,110 155,125 Z" fill="#c2ebd0" />
+                                                <!-- Ears at top -->
+                                                <ellipse cx="86" cy="35" rx="7.5" ry="11" fill="#c2ebd0" stroke="#143e33" stroke-width="1.6" transform="rotate(-15 86 35)" />
+                                                <ellipse cx="86" cy="35" rx="4" ry="6.5" fill="#fbcfe8" transform="rotate(-15 86 35)" />
+                                                <ellipse cx="154" cy="35" rx="7.5" ry="11" fill="#c2ebd0" stroke="#143e33" stroke-width="1.6" transform="rotate(15 154 35)" />
+                                                <ellipse cx="154" cy="35" rx="4" ry="6.5" fill="#fbcfe8" transform="rotate(15 154 35)" />
+
+                                                <!-- Elongated Body Silhouette -->
+                                                <path d="M 72,172 C 54,142 50,68 84,36 C 104,18 136,18 156,36 C 190,68 186,142 168,172 Z" fill="#c2ebd0" />
                                                 
                                                 <!-- Mascot Face -->
                                                 <!-- Left Eye -->
-                                                <ellipse cx="92" cy="65" rx="7" ry="9.5" fill="#ffffff"/>
-                                                <ellipse cx="93" cy="66" rx="4.2" ry="5.8" fill="#143e33"/>
-                                                <circle cx="91" cy="63" r="1.6" fill="#ffffff"/>
-                                                <circle cx="94" cy="68" r="0.7" fill="#ffffff"/>
+                                                <ellipse cx="98" cy="82" rx="7.5" ry="10" fill="#ffffff"/>
+                                                <ellipse cx="99" cy="83" rx="4.5" ry="6.5" fill="#143e33"/>
+                                                <circle cx="97" cy="80" r="1.8" fill="#ffffff"/>
+                                                <circle cx="100" cy="85" r="0.8" fill="#ffffff"/>
                                                 
                                                 <!-- Right Eye -->
-                                                <ellipse cx="128" cy="65" rx="7" ry="9.5" fill="#ffffff"/>
-                                                <ellipse cx="127" cy="66" rx="4.2" ry="5.8" fill="#143e33"/>
-                                                <circle cx="126" cy="63" r="1.6" fill="#ffffff"/>
-                                                <circle cx="129" cy="68" r="0.7" fill="#ffffff"/>
+                                                <ellipse cx="142" cy="82" rx="7.5" ry="10" fill="#ffffff"/>
+                                                <ellipse cx="141" cy="83" rx="4.5" ry="6.5" fill="#143e33"/>
+                                                <circle cx="139" cy="80" r="1.8" fill="#ffffff"/>
+                                                <circle cx="142" cy="85" r="0.8" fill="#ffffff"/>
                                                 
                                                 <!-- Cheeks -->
-                                                <ellipse cx="82" cy="74" rx="5.5" ry="3.5" fill="#58a436" opacity="0.35"/>
-                                                <ellipse cx="138" cy="74" rx="5.5" ry="3.5" fill="#58a436" opacity="0.35"/>
+                                                <ellipse cx="86" cy="94" rx="6.5" ry="4" fill="#58a436" opacity="0.35"/>
+                                                <ellipse cx="154" cy="94" rx="6.5" ry="4" fill="#58a436" opacity="0.35"/>
                                                 
                                                 <!-- Smile -->
-                                                <path d="M 104 74 Q 110 82 116 74" stroke="#143e33" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+                                                <path d="M 113 93 Q 120 101 127 93" stroke="#143e33" stroke-width="2.8" stroke-linecap="round" fill="none"/>
                                                 
                                                 <!-- Glasses -->
-                                                <circle cx="92" cy="65" r="11" stroke="#1e293b" stroke-width="2" fill="none" />
-                                                <circle cx="128" cy="65" r="11" stroke="#1e293b" stroke-width="2" fill="none" />
-                                                <path d="M 103 65 L 117 65" stroke="#1e293b" stroke-width="2" />
-                                                <path d="M 81 65 L 75 62" stroke="#1e293b" stroke-width="1.8" />
-                                                <path d="M 139 65 L 145 62" stroke="#1e293b" stroke-width="1.8" />
+                                                <circle cx="98" cy="82" r="12.5" stroke="#1e293b" stroke-width="2.2" fill="none" />
+                                                <circle cx="142" cy="82" r="12.5" stroke="#1e293b" stroke-width="2.2" fill="none" />
+                                                <path d="M 110.5 82 L 129.5 82" stroke="#1e293b" stroke-width="2.2" />
+                                                <path d="M 85.5 82 L 76 79" stroke="#1e293b" stroke-width="1.8" />
+                                                <path d="M 154.5 82 L 164 79" stroke="#1e293b" stroke-width="1.8" />
                                             </g>
 
-                                            <!-- Laptop Open on Desk (Centered at 110) -->
-                                            <polygon points="90,123 130,123 135,127 85,127" fill="#475569" />
-                                            <rect x="91" y="96" width="38" height="26" rx="3" fill="#334155" />
-                                            <rect x="93" y="98" width="34" height="22" rx="2" fill="#38bdf8" opacity="0.85" />
-                                            <line x1="97" y1="104" x2="115" y2="104" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" />
-                                            <line x1="97" y1="109" x2="123" y2="109" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" />
-                                            <line x1="97" y1="114" x2="119" y2="114" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" />
+                                            <!-- Laptop Open on Desk (Centered at 120) -->
+                                            <polygon points="94,170 146,170 152,174 88,174" fill="#475569" />
+                                            <rect x="97" y="138" width="46" height="32" rx="3.5" fill="#334155" />
+                                            <rect x="99" y="140" width="42" height="28" rx="2.5" fill="#38bdf8" opacity="0.9" />
+                                            <line x1="105" y1="147" x2="128" y2="147" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" />
+                                            <line x1="105" y1="154" x2="136" y2="154" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" />
+                                            <line x1="105" y1="161" x2="131" y2="161" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" />
                                             
-                                            <!-- Typing Paws (Symmetrically spaced around 110) -->
+                                            <!-- Typing Paws (Symmetrically spaced around 120) -->
                                             <g class="mascot-typing-paws">
-                                                <ellipse cx="88" cy="122" rx="5" ry="4" fill="#a7f3d0" stroke="#143e33" stroke-width="1.4" />
-                                                <ellipse cx="132" cy="122" rx="5" ry="4" fill="#a7f3d0" stroke="#143e33" stroke-width="1.4" />
+                                                <ellipse cx="94" cy="169" rx="5.5" ry="4.5" fill="#a7f3d0" stroke="#143e33" stroke-width="1.5" />
+                                                <ellipse cx="146" cy="169" rx="5.5" ry="4.5" fill="#a7f3d0" stroke="#143e33" stroke-width="1.5" />
                                             </g>
                                         </svg>
                                     </div>
 
-                                    <!-- 2. Break Mascot (Relaxing on cozy beanbag with drink) -->
+                                    <!-- 2. Break Mascot (Tall elongated relaxing on cozy beanbag with drink) -->
                                     <div id="timer-mascot-break" class="flex flex-col items-center hidden">
-                                        <svg viewBox="0 0 220 160" class="w-44 h-20 sm:h-22 overflow-visible" fill="none">
+                                        <svg viewBox="0 0 240 220" class="w-56 h-32 sm:h-36 overflow-visible" fill="none">
                                             <!-- Cozy Pillow / Beanbag -->
-                                            <path d="M 45,135 C 40,115 70,105 110,105 C 150,105 180,115 175,135 C 170,145 50,145 45,135 Z" fill="#ffc6d9" opacity="0.9" />
-                                            <ellipse cx="110" cy="138" rx="65" ry="10" fill="#f472b6" opacity="0.25" />
+                                            <path d="M 36,180 C 30,150 68,138 120,138 C 172,138 210,150 204,180 C 196,195 44,195 36,180 Z" fill="#ffc6d9" opacity="0.9" />
+                                            <ellipse cx="120" cy="184" rx="75" ry="12" fill="#f472b6" opacity="0.25" />
 
-                                            <!-- Mascot Resting -->
+                                            <!-- Mascot Resting (Tall & Slender) -->
                                             <g class="mascot-sway">
-                                                <path d="M 75,120 C 65,95 65,60 85,45 C 105,32 125,32 140,45 C 158,60 155,95 145,120 Z" fill="#c2ebd0" />
+                                                <!-- Ears at top -->
+                                                <ellipse cx="88" cy="38" rx="7.5" ry="11" fill="#c2ebd0" stroke="#143e33" stroke-width="1.5" transform="rotate(-20 88 38)" />
+                                                <ellipse cx="88" cy="38" rx="4" ry="6" fill="#fbcfe8" transform="rotate(-20 88 38)" />
+                                                <ellipse cx="158" cy="38" rx="7.5" ry="11" fill="#c2ebd0" stroke="#143e33" stroke-width="1.5" transform="rotate(20 158 38)" />
+                                                <ellipse cx="158" cy="38" rx="4" ry="6" fill="#fbcfe8" transform="rotate(20 158 38)" />
+
+                                                <path d="M 82,170 C 68,135 68,62 92,36 C 112,18 138,18 156,36 C 180,62 180,135 166,170 Z" fill="#c2ebd0" />
                                                 
                                                 <!-- Resting Eyes (^ ^) -->
-                                                <path d="M 88 66 Q 94 60 100 66" stroke="#143e33" stroke-width="3" stroke-linecap="round" fill="none" />
-                                                <path d="M 120 66 Q 126 60 132 66" stroke="#143e33" stroke-width="3" stroke-linecap="round" fill="none" />
+                                                <path d="M 96 84 Q 104 76 112 84" stroke="#143e33" stroke-width="3.2" stroke-linecap="round" fill="none" />
+                                                <path d="M 134 84 Q 142 76 150 84" stroke="#143e33" stroke-width="3.2" stroke-linecap="round" fill="none" />
                                                 
                                                 <!-- Cheeks -->
-                                                <ellipse cx="84" cy="73" rx="6" ry="4" fill="#58a436" opacity="0.38"/>
-                                                <ellipse cx="136" cy="73" rx="6" ry="4" fill="#58a436" opacity="0.38"/>
+                                                <ellipse cx="88" cy="94" rx="7" ry="4.5" fill="#58a436" opacity="0.38"/>
+                                                <ellipse cx="158" cy="94" rx="7" ry="4.5" fill="#58a436" opacity="0.38"/>
                                                 
                                                 <!-- Smile -->
-                                                <path d="M 106 74 Q 110 80 114 74" stroke="#143e33" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+                                                <path d="M 118 94 Q 123 101 128 94" stroke="#143e33" stroke-width="2.8" stroke-linecap="round" fill="none"/>
                                                 
-                                                <!-- Paws -->
-                                                <ellipse cx="98" cy="98" rx="5" ry="4" fill="#a7f3d0" stroke="#143e33" stroke-width="1.2" />
-                                                <ellipse cx="122" cy="98" rx="5" ry="4" fill="#a7f3d0" stroke="#143e33" stroke-width="1.2" />
+                                                <!-- Beverage with Straw -->
+                                                <rect x="114" y="132" width="12" height="18" rx="2.5" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.4" />
+                                                <line x1="120" y1="126" x2="124" y2="116" stroke="#f59e0b" stroke-width="2.2" stroke-linecap="round" />
+
+                                                <!-- Paws Holding Drink -->
+                                                <ellipse cx="107" cy="142" rx="5" ry="4" fill="#a7f3d0" stroke="#143e33" stroke-width="1.2" />
+                                                <ellipse cx="133" cy="142" rx="5" ry="4" fill="#a7f3d0" stroke="#143e33" stroke-width="1.2" />
                                             </g>
 
-                                            <!-- Beverage with Straw -->
-                                            <rect x="105" y="88" width="10" height="15" rx="2" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" />
-                                            <line x1="110" y1="83" x2="113" y2="76" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" />
-                                            
                                             <!-- Drifting Zen Star / Sparkle -->
-                                            <path class="steam-smoke-1" d="M165 45 L167 50 L172 52 L167 54 L165 59 L163 54 L158 52 L163 50 Z" fill="#f59e0b" opacity="0.75" />
-                                            <path class="steam-smoke-2" d="M55 55 L56 59 L60 60 L56 61 L55 65 L54 61 L50 60 L54 59 Z" fill="#38bdf8" opacity="0.75" />
+                                            <path class="steam-smoke-1" d="M175 52 L177 57 L182 59 L177 61 L175 66 L173 61 L168 59 L173 57 Z" fill="#f59e0b" opacity="0.8" />
+                                            <path class="steam-smoke-2" d="M58 65 L60 70 L65 71 L60 73 L58 78 L56 73 L51 71 L56 70 Z" fill="#38bdf8" opacity="0.8" />
                                         </svg>
                                     </div>
                                 </div>
@@ -4978,7 +5060,7 @@ body.auto-dark .swal2-backdrop-show {
 
                                     <!-- Digital Time Inside Ring -->
                                     <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none px-4">
-                                        <div id="timer-time-display" class="text-6xl sm:text-7xl font-bold tracking-tight text-slate-900 font-mono tabular-nums leading-none select-none">25:00</div>
+                                        <div id="timer-time-display" class="text-6xl sm:text-7xl font-bold tracking-tight text-slate-900 tabular-nums leading-none select-none">25:00</div>
                                         <div id="timer-status-pill" class="mt-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold text-slate-600 bg-slate-100 border border-slate-200/80">
                                             <span id="timer-status-pulse" class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
                                             <span id="timer-status-text">พร้อมโฟกัส</span>
@@ -4994,55 +5076,82 @@ body.auto-dark .swal2-backdrop-show {
                                     <div id="timer-cycle-indicators" class="flex items-center justify-center gap-2 mt-0.5"></div>
                                 </div>
 
-                                <!-- Primary Play/Pause Button & Secondary Actions -->
-                                <div class="w-full flex flex-col items-center mt-3">
-                                    <!-- Dominant Primary Action: Clean symmetric button -->
-                                    <button type="button" onclick="togglePlayPauseTimer()" id="timer-pause-btn" class="w-full max-w-[210px] h-12 rounded-2xl bg-sidebar hover:bg-slate-900 text-white font-semibold text-sm flex items-center justify-center gap-2.5 shadow-xs active:scale-[0.98] transition cursor-pointer select-none" aria-label="เริ่มหรือหยุดการจับเวลา">
-                                        <svg id="timer-play-icon" class="w-4 h-4 ml-0.5 shrink-0" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
-                                        <svg id="timer-pause-icon" class="w-4 h-4 hidden shrink-0" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
-                                        <span id="timer-pause-text" class="text-sm font-semibold tracking-wide">เริ่มโฟกัส</span>
+                                <!-- Secondary Control Bar (Icon + small text, lets timer remain the hero) -->
+                                <div class="flex items-center justify-center gap-2 my-4 flex-wrap">
+                                    <!-- Secondary Play / Pause Control -->
+                                    <button type="button" onclick="togglePlayPauseTimer()" id="timer-pause-btn" class="h-9.5 px-4 rounded-xl font-medium text-xs bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200/90 transition flex items-center justify-center gap-1.5 shadow-2xs cursor-pointer select-none active:scale-95" aria-label="เริ่มหรือหยุดการจับเวลา">
+                                        <svg id="timer-play-icon" class="w-3.5 h-3.5 fill-current shrink-0 text-slate-700" viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+                                        <svg id="timer-pause-icon" class="w-3.5 h-3.5 fill-current hidden shrink-0 text-slate-700" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+                                        <span id="timer-pause-text">เริ่มโฟกัส</span>
                                     </button>
 
-                                    <!-- Symmetrical Secondary Actions (รีเซ็ต, บันทึกรอบนี้, ข้าม) -->
-                                    <div class="flex items-center justify-center gap-2.5 mt-3 text-xs flex-wrap">
-                                        <button type="button" onclick="resetCurrentCycleTimer()" id="timer-reset-btn" class="text-slate-600 hover:text-slate-900 font-semibold py-2 px-3.5 rounded-xl border border-slate-200/80 bg-white hover:bg-slate-50 shadow-2xs transition flex items-center gap-1.5 cursor-pointer" aria-label="เริ่มรอบนี้ใหม่">
-                                            <svg class="w-3.5 h-3.5 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
-                                            <span>รีเซ็ต</span>
-                                        </button>
-                                        <button type="button" onclick="finishTimerEarly()" class="text-emerald-700 hover:text-emerald-800 font-semibold py-2 px-3.5 rounded-xl border border-emerald-200/80 bg-emerald-50/70 hover:bg-emerald-100/70 shadow-2xs transition flex items-center gap-1.5 cursor-pointer">
-                                            <svg class="w-3.5 h-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                                            <span>บันทึกรอบนี้</span>
-                                        </button>
-                                        <button type="button" onclick="skipTimerCycle()" id="timer-skip-btn" class="text-slate-600 hover:text-slate-900 font-semibold py-2 px-3.5 rounded-xl border border-slate-200/80 bg-white hover:bg-slate-50 shadow-2xs transition flex items-center gap-1.5 cursor-pointer" aria-label="ข้ามไปยังช่วงถัดไป">
-                                            <svg class="w-3.5 h-3.5 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
-                                            <span>ข้าม</span>
-                                        </button>
-                                    </div>
+                                    <!-- Reset Control -->
+                                    <button type="button" onclick="resetCurrentCycleTimer()" id="timer-reset-btn" class="h-9.5 px-3.5 rounded-xl font-medium text-xs border border-slate-200/90 bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 shadow-2xs transition flex items-center gap-1.5 cursor-pointer active:scale-95" aria-label="เริ่มรอบนี้ใหม่">
+                                        <svg class="w-3.5 h-3.5 text-slate-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                                        <span>รีเซ็ต</span>
+                                    </button>
+
+                                    <!-- Finish / Save Cycle Control -->
+                                    <button type="button" onclick="finishTimerEarly()" class="h-9.5 px-3.5 rounded-xl font-medium text-xs border border-emerald-200/80 bg-emerald-50/80 text-emerald-700 hover:bg-emerald-100 shadow-2xs transition flex items-center gap-1.5 cursor-pointer active:scale-95">
+                                        <svg class="w-3.5 h-3.5 text-emerald-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                        <span>บันทึกรอบนี้</span>
+                                    </button>
+
+                                    <!-- Skip Control -->
+                                    <button type="button" onclick="skipTimerCycle()" id="timer-skip-btn" class="h-9.5 px-3.5 rounded-xl font-medium text-xs border border-slate-200/90 bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 shadow-2xs transition flex items-center gap-1.5 cursor-pointer active:scale-95" aria-label="ข้ามไปยังช่วงถัดไป">
+                                        <svg class="w-3.5 h-3.5 text-slate-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+                                        <span>ข้าม</span>
+                                    </button>
                                 </div>
 
-                                <!-- Session Goal & Quick Selection (No typing required) -->
-                                <div class="w-full max-w-sm mt-5 pt-4 border-t border-slate-100">
-                                    <div class="flex items-center justify-between mb-1.5 px-0.5">
-                                        <label for="timer-session-goal" class="text-xs font-semibold text-slate-700">เป้าหมายของรอบนี้</label>
-                                        <span class="text-[10px] text-slate-400 font-medium">กดเลือกหัวข้อได้ทันที</span>
+                                <!-- Session Goal & Symmetrical Quick Selection -->
+                                <div class="w-full max-w-md mt-5 pt-5 border-t border-slate-100">
+                                    <div class="flex items-center justify-between mb-3 px-1">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-6 h-6 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100/60">
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                                            </div>
+                                            <label for="timer-session-goal" class="text-xs font-bold text-slate-800">เป้าหมายของรอบนี้</label>
+                                        </div>
+                                        <span class="text-[11px] text-slate-400 font-normal">เลือกหัวข้อด่วนหรือระบุเอง</span>
                                     </div>
-                                    <!-- Quick Goal Chips (1-click select, no typing needed) -->
-                                    <div class="flex flex-wrap gap-1.5 mb-2.5">
-                                        <button type="button" onclick="selectTimerGoalPreset('อ่านหนังสือสอบ')" class="timer-goal-chip px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-700 border border-slate-200/80 transition cursor-pointer">อ่านหนังสือสอบ</button>
-                                        <button type="button" onclick="selectTimerGoalPreset('ทำแบบฝึกหัด')" class="timer-goal-chip px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-700 border border-slate-200/80 transition cursor-pointer">ทำแบบฝึกหัด</button>
-                                        <button type="button" onclick="selectTimerGoalPreset('สรุปเนื้อหาบทเรียน')" class="timer-goal-chip px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-700 border border-slate-200/80 transition cursor-pointer">สรุปเนื้อหาบทเรียน</button>
-                                        <button type="button" onclick="selectTimerGoalPreset('ทบทวนก่อนสอบ')" class="timer-goal-chip px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-700 border border-slate-200/80 transition cursor-pointer">ทบทวนก่อนสอบ</button>
-                                        <button type="button" onclick="selectTimerGoalPreset('อ่านเตรียมตัวเรียน')" class="timer-goal-chip px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-700 border border-slate-200/80 transition cursor-pointer">อ่านเตรียมตัวเรียน</button>
-                                        <button type="button" onclick="selectTimerGoalPreset('ทำโครงงาน / ชิ้นงาน')" class="timer-goal-chip px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-700 border border-slate-200/80 transition cursor-pointer">ทำโครงงาน / ชิ้นงาน</button>
+                                    
+                                    <!-- Symmetrical 3-Column Goal Grid (Balanced, Symmetrical with clean icons) -->
+                                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-3">
+                                        <button type="button" onclick="selectTimerGoalPreset('อ่านหนังสือสอบ')" class="timer-goal-chip py-2 px-2.5 rounded-xl text-xs font-medium bg-slate-50 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200 text-slate-700 border border-slate-200/80 transition cursor-pointer flex items-center justify-center gap-1.5 truncate">
+                                            <svg class="w-3.5 h-3.5 text-blue-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                                            <span class="truncate">อ่านหนังสือสอบ</span>
+                                        </button>
+                                        <button type="button" onclick="selectTimerGoalPreset('ทำแบบฝึกหัด')" class="timer-goal-chip py-2 px-2.5 rounded-xl text-xs font-medium bg-slate-50 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200 text-slate-700 border border-slate-200/80 transition cursor-pointer flex items-center justify-center gap-1.5 truncate">
+                                            <svg class="w-3.5 h-3.5 text-emerald-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                                            <span class="truncate">ทำแบบฝึกหัด</span>
+                                        </button>
+                                        <button type="button" onclick="selectTimerGoalPreset('สรุปเนื้อหาบทเรียน')" class="timer-goal-chip py-2 px-2.5 rounded-xl text-xs font-medium bg-slate-50 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200 text-slate-700 border border-slate-200/80 transition cursor-pointer flex items-center justify-center gap-1.5 truncate">
+                                            <svg class="w-3.5 h-3.5 text-purple-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                                            <span class="truncate">สรุปเนื้อหา</span>
+                                        </button>
+                                        <button type="button" onclick="selectTimerGoalPreset('ทบทวนก่อนสอบ')" class="timer-goal-chip py-2 px-2.5 rounded-xl text-xs font-medium bg-slate-50 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200 text-slate-700 border border-slate-200/80 transition cursor-pointer flex items-center justify-center gap-1.5 truncate">
+                                            <svg class="w-3.5 h-3.5 text-amber-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                            <span class="truncate">ทบทวนก่อนสอบ</span>
+                                        </button>
+                                        <button type="button" onclick="selectTimerGoalPreset('อ่านเตรียมตัวเรียน')" class="timer-goal-chip py-2 px-2.5 rounded-xl text-xs font-medium bg-slate-50 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200 text-slate-700 border border-slate-200/80 transition cursor-pointer flex items-center justify-center gap-1.5 truncate">
+                                            <svg class="w-3.5 h-3.5 text-sky-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                                            <span class="truncate">เตรียมตัวเรียน</span>
+                                        </button>
+                                        <button type="button" onclick="selectTimerGoalPreset('ทำโครงงาน / ชิ้นงาน')" class="timer-goal-chip py-2 px-2.5 rounded-xl text-xs font-medium bg-slate-50 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200 text-slate-700 border border-slate-200/80 transition cursor-pointer flex items-center justify-center gap-1.5 truncate">
+                                            <svg class="w-3.5 h-3.5 text-rose-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                                            <span class="truncate">ทำโครงงาน</span>
+                                        </button>
                                     </div>
                                     <div class="relative">
-                                        <input type="text" id="timer-session-goal" placeholder="เลือกจากรายการด้านบน หรือระบุเป้าหมายเพิ่มเติม" class="w-full bg-slate-50 hover:bg-white focus:bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-500 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none transition shadow-2xs">
+                                        <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                                        <input type="text" id="timer-session-goal" placeholder="ระบุเป้าหมายของรอบนี้..." class="w-full bg-slate-50 hover:bg-white focus:bg-white border border-slate-200 hover:border-slate-300 focus:border-blue-500 rounded-2xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none transition shadow-2xs">
                                     </div>
                                     <p id="timer-active-goal-text" class="hidden"></p>
                                 </div>
 
                                 <!-- Today Flat Summary -->
-                                <div class="w-full max-w-sm pt-5 mt-5 border-t border-slate-100">
+                                <div class="w-full max-w-md pt-5 mt-5 border-t border-slate-100">
                                     <div class="flex items-center justify-between mb-3">
                                         <span class="text-xs font-semibold text-slate-500 tracking-wide">วันนี้</span>
                                         <button type="button" onclick="switchTimerTab('progress')" class="text-xs font-semibold text-blue-600 hover:text-blue-700 transition flex items-center gap-1 cursor-pointer">
@@ -5404,28 +5513,53 @@ body.auto-dark .swal2-backdrop-show {
                         </div>
                     </div>
 
-                    <!-- Floating Bottom Navigation Dock (Matching Screenshot Pill Bar) -->
-                    <div class="sticky bottom-6 w-full flex justify-center pointer-events-none mt-8 z-20">
-                        <div class="pointer-events-auto bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-lg rounded-full p-1.5 flex items-center gap-1.5">
-                            <button type="button" onclick="switchTimerTab('focus')" id="timer-dock-btn-focus" class="timer-dock-btn py-2 px-4 rounded-full flex items-center gap-2 text-xs font-bold text-blue-600 bg-blue-50/80 border border-blue-100 transition cursor-pointer shadow-2xs">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                                <span>Focus</span>
-                            </button>
-                            <button type="button" onclick="switchTimerTab('progress')" id="timer-dock-btn-progress" class="timer-dock-btn py-2 px-4 rounded-full flex items-center gap-2 text-xs font-medium text-slate-500 hover:text-slate-800 hover:bg-slate-100/70 transition cursor-pointer">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-                                <span>Progress</span>
-                            </button>
-                            <button type="button" onclick="switchTimerTab('settings')" id="timer-dock-btn-settings" class="timer-dock-btn py-2 px-4 rounded-full flex items-center gap-2 text-xs font-medium text-slate-500 hover:text-slate-800 hover:bg-slate-100/70 transition cursor-pointer">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-                                <span>Settings</span>
-                            </button>
-                        </div>
-                    </div>
                 </div>
 
             </div>
+
+            <!-- Floating Bottom Navigation Dock (Floats above page content, stays visible while scrolling) -->
+            <div id="timer-floating-dock" class="absolute bottom-6 inset-x-0 flex justify-center pointer-events-none z-30 px-4 transition-all duration-200 hidden">
+                <div class="pointer-events-auto bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-xl rounded-full p-1.5 flex items-center gap-1.5">
+                    <button type="button" onclick="switchTimerTab('focus')" id="timer-dock-btn-focus" class="timer-dock-btn py-2 px-4 rounded-full flex items-center gap-2 text-xs font-bold text-blue-600 bg-blue-50/80 border border-blue-100 transition-all cursor-pointer shadow-2xs">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <span>โฟกัส</span>
+                    </button>
+                    <button type="button" onclick="switchTimerTab('progress')" id="timer-dock-btn-progress" class="timer-dock-btn py-2 px-4 rounded-full flex items-center gap-2 text-xs font-medium text-slate-500 hover:text-slate-800 hover:bg-slate-100/70 transition-all cursor-pointer">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                        <span>สถิติ</span>
+                    </button>
+                    <button type="button" onclick="switchTimerTab('settings')" id="timer-dock-btn-settings" class="timer-dock-btn py-2 px-4 rounded-full flex items-center gap-2 text-xs font-medium text-slate-500 hover:text-slate-800 hover:bg-slate-100/70 transition-all cursor-pointer">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                        <span>ตั้งค่า</span>
+                    </button>
+                </div>
+            </div>
         </main>
     </div>
+
+    <!-- Mobile Bottom Navigation Dock (5 Tabs matching mockup) -->
+    <nav id="mobile-bottom-nav" class="fixed md:hidden z-40" aria-label="Mobile Navigation">
+        <button type="button" onclick="nav('dashboard')" id="mob-nav-dashboard" class="mob-nav-btn active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>หน้าหลัก</span>
+        </button>
+        <button type="button" onclick="nav('tasks')" id="mob-nav-tasks" class="mob-nav-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
+            <span>หนังสือ</span>
+        </button>
+        <button type="button" onclick="nav('timer'); switchTimerTab('focus')" id="mob-nav-timer" class="mob-nav-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>โฟกัส</span>
+        </button>
+        <button type="button" onclick="nav('timer'); switchTimerTab('progress')" id="mob-nav-stats" class="mob-nav-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <span>สถิติ</span>
+        </button>
+        <button type="button" onclick="openSettings()" id="mob-nav-settings" class="mob-nav-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <span>ตั้งค่า</span>
+        </button>
+    </nav>
 
     <!-- Manual Add Study Session Modal -->
     <div id="modal-add-study-session" class="fixed inset-0 bg-slate-900/60 z-[70] backdrop-blur-sm hidden items-center justify-center p-4">
@@ -5532,7 +5666,7 @@ body.auto-dark .swal2-backdrop-show {
                 <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200/80 flex items-center justify-between">
                     <div>
                         <span class="text-[11px] font-semibold text-slate-400 block">เวลาที่อ่านจริง</span>
-                        <span id="detail-session-actual-time" class="text-2xl sm:text-3xl font-bold text-slate-900 font-mono tabular-nums leading-tight">25 นาที 0 วินาที</span>
+                        <span id="detail-session-actual-time" class="text-2xl sm:text-3xl font-bold text-slate-900 tabular-nums leading-tight">25 นาที 0 วินาที</span>
                     </div>
                     <div class="text-right">
                         <span class="text-[11px] font-semibold text-slate-400 block">เป้าหมายเวลา</span>
@@ -5579,6 +5713,91 @@ body.auto-dark .swal2-backdrop-show {
                 <div class="flex items-center gap-2">
                     <button type="button" onclick="closeStudySessionDetail()" class="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs transition cursor-pointer shadow-xs">
                         ปิด
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trash Task Detail Modal (ดูรายละเอียดงานที่ถูกลบ) -->
+    <div id="modal-trash-task-detail" class="fixed inset-0 bg-slate-900/60 z-[75] backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl w-full max-w-lg shadow-2xl p-6 sm:p-8 flex flex-col relative transform transition-all scale-95" id="trash-task-detail-card">
+            <!-- Close button -->
+            <button type="button" onclick="closeTrashTaskDetail()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 transition p-2 rounded-full hover:bg-slate-100 cursor-pointer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+
+            <!-- Header -->
+            <div class="flex items-center gap-3.5 mb-5 pb-4 border-b border-slate-100 pr-8">
+                <div id="trash-detail-sub-icon" class="w-11 h-11 rounded-2xl flex items-center justify-center text-white shrink-0 shadow-xs" style="background-color: #ef4444;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                </div>
+                <div class="min-w-0 flex-1">
+                    <div class="flex items-center gap-2 flex-wrap mb-1">
+                        <span id="trash-detail-subject-badge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200">วิชาทั่วไป</span>
+                        <span id="trash-detail-status-badge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">สถานะเดิม: ส่งแล้ว</span>
+                    </div>
+                    <h3 id="trash-detail-title" class="text-base sm:text-lg font-bold text-slate-900 truncate">ชื่องาน</h3>
+                </div>
+            </div>
+
+            <!-- Body Details -->
+            <div class="space-y-4 max-h-[60vh] overflow-y-auto pr-1">
+                <!-- Info Grid -->
+                <div class="grid grid-cols-2 gap-3 text-xs">
+                    <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
+                        <span class="text-slate-400 font-semibold block mb-0.5">กำหนดส่งเดิม</span>
+                        <span id="trash-detail-due-date" class="font-bold text-slate-800 text-sm">-</span>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
+                        <span class="text-slate-400 font-semibold block mb-0.5">วันที่สั่งงาน</span>
+                        <span id="trash-detail-order-date" class="font-bold text-slate-800 text-sm">-</span>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
+                        <span class="text-slate-400 font-semibold block mb-0.5">หมวดหมู่</span>
+                        <span id="trash-detail-category" class="font-bold text-slate-800 text-sm">-</span>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
+                        <span class="text-slate-400 font-semibold block mb-0.5">ระดับความสำคัญ</span>
+                        <span id="trash-detail-priority" class="font-bold text-slate-800 text-sm">-</span>
+                    </div>
+                </div>
+
+                <!-- Deletion Info Bar -->
+                <div class="p-3.5 rounded-xl bg-red-50/70 border border-red-100 flex items-center gap-2.5 text-xs text-red-700">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <div>
+                        <span class="font-semibold block">ถูกลบเมื่อ:</span>
+                        <span id="trash-detail-deleted-at" class="font-medium">-</span>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 text-xs">
+                    <span class="text-slate-400 font-semibold block mb-1">รายละเอียดงาน</span>
+                    <p id="trash-detail-description" class="text-slate-700 leading-relaxed whitespace-pre-line">-</p>
+                </div>
+
+                <!-- Attachment / Image preview if available -->
+                <div id="trash-detail-attachment-box" class="hidden">
+                    <span class="text-slate-400 font-semibold text-xs block mb-1.5">ไฟล์ / รูปภาพแนบ</span>
+                    <img id="trash-detail-img" src="" alt="ภาพแนบ" class="max-h-48 rounded-xl object-contain border border-slate-200 shadow-2xs">
+                </div>
+            </div>
+
+            <!-- Footer Actions -->
+            <div class="flex items-center justify-between gap-3 pt-5 mt-4 border-t border-slate-100">
+                <button type="button" id="trash-detail-delete-btn" class="px-4 py-2.5 rounded-xl border border-red-200 hover:border-red-300 text-red-600 hover:bg-red-50 font-semibold text-xs transition cursor-pointer flex items-center gap-1.5 shadow-2xs">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>
+                    <span>ลบถาวร</span>
+                </button>
+                <div class="flex items-center gap-2">
+                    <button type="button" onclick="closeTrashTaskDetail()" class="px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-100 text-slate-700 font-semibold text-xs transition cursor-pointer">
+                        ปิด
+                    </button>
+                    <button type="button" id="trash-detail-restore-btn" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs transition cursor-pointer shadow-xs flex items-center gap-1.5">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8 M3 3v5h5"/></svg>
+                        <span>กู้คืนงาน</span>
                     </button>
                 </div>
             </div>
@@ -5650,269 +5869,366 @@ body.auto-dark .swal2-backdrop-show {
         </div>
     </div>
 
-    <!-- Settings Modal (Redesigned with Account & Logout inside) -->
+    <!-- Settings Modal (Redesigned matching mockup with categorized cards and Apple-like aesthetics) -->
     <div id="modal-settings" class="fixed inset-0 bg-slate-900/50 z-[60] backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4">
-        <div class="bg-white rounded-3xl sm:rounded-[2rem] w-full max-w-lg shadow-2xl border border-slate-100 transform transition-transform scale-95 max-h-[90vh] flex flex-col overflow-hidden" id="settings-card">
-            <!-- Modal Header -->
-            <div class="flex items-center justify-between px-5 sm:px-7 py-4 sm:py-5 bg-white border-b border-slate-100 shrink-0">
+        <div class="bg-[#f8fafc] rounded-3xl sm:rounded-[2.25rem] w-full max-w-lg shadow-2xl border border-slate-200/90 transform transition-transform scale-95 max-h-[92vh] flex flex-col overflow-hidden" id="settings-card">
+            <!-- Modal Header matching mockup -->
+            <div class="flex items-center justify-between px-5 sm:px-6 py-4 bg-white/95 backdrop-blur-md border-b border-slate-100 shrink-0">
                 <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-100 border border-slate-200/80 flex items-center justify-center text-slate-700 shrink-0">
+                    <div class="w-9 h-9 rounded-2xl bg-slate-100 border border-slate-200/80 flex items-center justify-center text-slate-700 shrink-0">
                         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
                     </div>
                     <div>
-                        <h3 class="text-base sm:text-lg font-bold text-slate-800 leading-tight">การตั้งค่าระบบ</h3>
-                        <p class="text-xs text-slate-400 font-medium">จัดการบัญชีและการทำงานของแอปพลิเคชัน</p>
+                        <h3 class="text-base sm:text-lg font-extrabold text-slate-900 leading-tight">การตั้งค่า</h3>
+                        <p class="text-xs text-slate-400 font-medium">ปรับแต่งประสบการณ์การอ่านของคุณ</p>
                     </div>
                 </div>
-                <button onclick="closeSettings()" class="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition cursor-pointer" title="ปิดหน้าต่าง">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                </button>
+                <div class="flex items-center gap-2">
+                    <button type="button" onclick="showUrgentModal()" class="relative w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition cursor-pointer" title="การแจ้งเตือน">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+                        <span id="settings-bell-badge" class="absolute top-1 right-1 w-2 h-2 rounded-full bg-red-500"></span>
+                    </button>
+                    <button type="button" onclick="closeSettings()" class="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition cursor-pointer" title="ปิดหน้าต่าง">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                    </button>
+                </div>
             </div>
 
-            <!-- Modal Body (Scrollable) -->
-            <div class="p-5 sm:p-6 space-y-5 overflow-y-auto flex-1">
+            <!-- Modal Body (Scrollable with modern iOS-inspired cards) -->
+            <div class="p-4 sm:p-5 space-y-4 overflow-y-auto flex-1">
 
-                <!-- SECTION 1: ACCOUNT & LOGOUT (บัญชีผู้ใช้งาน) -->
-                <div>
-                    <div class="flex items-center justify-between mb-2 px-1">
-                        <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">บัญชีผู้ใช้งาน</span>
-                        <span id="settings-auth-status-badge" class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                            เข้าสู่ระบบแล้ว
-                        </span>
+                <!-- 1. USER ACCOUNT CARD -->
+                <div onclick="toggleSettingsAccountMenu()" class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-4.5 border border-slate-200/80 shadow-xs flex items-center justify-between gap-3 cursor-pointer hover:border-slate-300 transition">
+                    <div class="flex items-center gap-3.5 min-w-0">
+                        <div class="relative shrink-0 w-12 h-12">
+                            <img id="settings-user-avatar" src="" alt="" class="w-12 h-12 rounded-full object-cover border border-slate-200 bg-slate-100 hidden">
+                            <div id="settings-user-avatar-fallback" class="w-12 h-12 rounded-full bg-emerald-500 text-white font-bold flex items-center justify-center text-base border-2 border-white shadow-xs">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            </div>
+                            <span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white"></span>
+                        </div>
+                        <div class="min-w-0">
+                            <h4 id="settings-user-name" class="text-sm font-extrabold text-slate-800 truncate">อัพตอล อาแว</h4>
+                            <p id="settings-user-email" class="text-xs text-slate-400 truncate">afdol0936524439@gmail.com</p>
+                            <div class="flex items-center gap-1 mt-1 text-emerald-600 text-[11px] font-semibold">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                <span id="settings-auth-status-badge">บัญชีที่เชื่อมต่อ</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="p-4 rounded-2xl border border-slate-200/80 bg-white">
-                        <!-- Logged-in profile view -->
-                        <div id="settings-user-card" class="flex items-center justify-between gap-3">
-                            <div class="flex items-center gap-3 min-w-0">
-                                <div class="relative shrink-0 w-11 h-11">
-                                    <img id="settings-user-avatar" src="" alt="" class="w-11 h-11 rounded-full object-cover border border-slate-200 bg-slate-100 hidden">
-                                    <div id="settings-user-avatar-fallback" class="w-11 h-11 rounded-full bg-sidebar text-white font-bold flex items-center justify-center text-sm border border-slate-200">U</div>
-                                    <span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-white"></span>
+                    <div class="shrink-0 text-slate-400">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                    </div>
+                </div>
+
+                <!-- Account Popup Menu (Hidden by default) -->
+                <div id="settings-account-menu" class="hidden p-3 bg-white rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between gap-3 text-xs">
+                    <span class="text-slate-500 font-medium">จัดการสถานะบัญชี</span>
+                    <div class="flex items-center gap-2">
+                        <button type="button" id="settings-logout-btn" onclick="signOutUser()" class="px-3 py-1.5 rounded-xl border border-red-200 text-red-600 hover:bg-red-50 font-semibold transition cursor-pointer">ออกจากระบบ</button>
+                        <button type="button" id="settings-login-btn" onclick="closeSettings(); openLoginModal();" class="px-3 py-1.5 rounded-xl bg-sidebar text-white font-semibold hover:bg-slate-700 transition cursor-pointer">เข้าสู่ระบบ</button>
+                    </div>
+                </div>
+
+                <!-- 2. CONNECTIVITY CARD (การซิงค์ข้อมูล & Google Calendar) -->
+                <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden divide-y divide-slate-100">
+                    <!-- Row 1: Cloud Sync -->
+                    <div onclick="syncAppDataNow()" class="p-4 flex items-center justify-between gap-3 cursor-pointer hover:bg-slate-50/70 transition">
+                        <div class="flex items-center gap-3.5 min-w-0">
+                            <div class="w-10 h-10 rounded-2xl bg-blue-50 text-blue-500 flex items-center justify-center shrink-0 border border-blue-100/80">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
+                            </div>
+                            <div class="min-w-0">
+                                <h5 class="text-sm font-bold text-slate-800">การซิงค์ข้อมูล</h5>
+                                <p class="text-xs text-slate-400 font-medium">เชื่อมต่อกับ Google เพื่อสำรองข้อมูลและซิงค์อุปกรณ์</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <span id="settings-sync-status-pill" class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">เชื่อมต่อแล้ว</span>
+                            <svg class="text-slate-400" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Google Calendar -->
+                    <div class="p-4 flex items-center justify-between gap-3 hover:bg-slate-50/70 transition">
+                        <div class="flex items-center gap-3.5 min-w-0">
+                            <div class="w-10 h-10 rounded-2xl bg-blue-500 text-white flex items-center justify-center font-extrabold text-sm shrink-0 shadow-2xs">
+                                31
+                            </div>
+                            <div class="min-w-0">
+                                <h5 class="text-sm font-bold text-slate-800">Google Calendar</h5>
+                                <p class="text-xs text-slate-400 font-medium">ดูตารางอ่านหนังสือในปฏิทินของคุณ</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0" id="settings-gcal-card">
+                            <button type="button" onclick="connectGoogleCalendar()" class="h-8 px-3.5 rounded-full font-bold text-xs bg-sidebar text-white hover:bg-slate-700 transition cursor-pointer">
+                                เชื่อมต่อ
+                            </button>
+                            <svg class="text-slate-400" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. USAGE SETTINGS (การตั้งค่าการใช้งาน) -->
+                <div>
+                    <h4 class="text-xs font-bold text-slate-600 uppercase tracking-wider mb-2 px-1">การตั้งค่าการใช้งาน</h4>
+                    <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden divide-y divide-slate-100">
+                        
+                        <!-- Row 1: Focus duration per round -->
+                        <div onclick="cycleFocusDurationSetting()" class="p-4 flex items-center justify-between gap-3 cursor-pointer hover:bg-slate-50/70 transition">
+                            <div class="flex items-center gap-3.5 min-w-0">
+                                <div class="w-10 h-10 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
                                 </div>
                                 <div class="min-w-0">
-                                    <h4 id="settings-user-name" class="text-sm font-bold text-slate-800 truncate">ผู้ใช้งาน</h4>
-                                    <p id="settings-user-email" class="text-xs text-slate-500 truncate">email@example.com</p>
+                                    <h5 class="text-sm font-bold text-slate-800">ช่วงเวลาต่อรอบ</h5>
+                                    <p class="text-xs text-slate-400 font-medium">กำหนดระยะเวลาการโฟกัสในแต่ละรอบ</p>
                                 </div>
                             </div>
-                            <div class="shrink-0 flex items-center">
-                                <button type="button" id="settings-logout-btn" onclick="signOutUser()" class="px-3 py-1.5 rounded-xl border border-slate-200 hover:border-red-200 text-slate-600 hover:text-red-600 hover:bg-red-50 text-xs font-semibold transition flex items-center justify-center gap-1.5 cursor-pointer">
-                                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-                                    <span>ออกจากระบบ</span>
-                                </button>
+                            <div class="flex items-center gap-2 shrink-0">
+                                <span id="setting-focus-duration-display" class="text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-xl border border-slate-200/80 transition">25 นาที</span>
+                                <svg class="text-slate-400" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
                             </div>
                         </div>
 
-                        <!-- Not logged-in view -->
-                        <div id="settings-guest-card" class="hidden items-center justify-between gap-3">
-                            <div class="flex items-center gap-3 min-w-0">
-                                <div class="w-11 h-11 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center font-bold text-sm shrink-0 border border-slate-200">
-                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        <!-- Row 2: Cycles per session -->
+                        <div onclick="cycleIntervalSetting()" class="p-4 flex items-center justify-between gap-3 cursor-pointer hover:bg-slate-50/70 transition">
+                            <div class="flex items-center gap-3.5 min-w-0">
+                                <div class="w-10 h-10 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
                                 </div>
                                 <div class="min-w-0">
-                                    <h4 class="text-sm font-bold text-slate-700 truncate">โหมดผู้เยี่ยมชม</h4>
-                                    <p class="text-xs text-slate-400 font-medium truncate">เข้าสู่ระบบเพื่อบันทึกข้อมูลถาวร</p>
+                                    <h5 class="text-sm font-bold text-slate-800">จำนวนรอบต่อเซสชัน</h5>
+                                    <p class="text-xs text-slate-400 font-medium">กำหนดจำนวนรอบก่อนพักยาว</p>
                                 </div>
                             </div>
-                            <button type="button" onclick="closeSettings(); openLoginModal();" class="px-3.5 py-1.5 rounded-xl bg-sidebar hover:bg-slate-700 text-white text-xs font-bold transition shadow-xs flex items-center justify-center gap-1.5 cursor-pointer shrink-0">
-                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>
-                                <span>เข้าสู่ระบบ Google</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SECTION 2: CALENDAR & INTEGRATION (การเชื่อมต่อและปฏิทิน) -->
-                <div>
-                    <div class="flex items-center justify-between mb-2 px-1">
-                        <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">การเชื่อมต่อ Google Calendar</span>
-                    </div>
-                    <div id="settings-gcal-card"></div>
-                </div>
-
-                <!-- SECTION 3: SYSTEM PREFERENCES (การตั้งค่างานและการแสดงผล) -->
-                <div>
-                    <div class="flex items-center justify-between mb-2 px-1">
-                        <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">การตั้งค่างานและการแสดงผล</span>
-                    </div>
-                    <div class="rounded-2xl border border-slate-200/80 bg-white divide-y divide-slate-100 overflow-hidden">
-
-                        <!-- URGENT DAYS -->
-                        <div class="p-4 flex items-center justify-between gap-4">
-                            <div>
-                                <p class="text-sm font-bold text-slate-800">ช่วงแจ้งเตือนงานใกล้กำหนด</p>
-                                <p class="text-[11px] text-slate-400 font-medium mt-0.5">เตือนล่วงหน้าเมื่อเหลือกำหนดส่งไม่เกินจำนวนวันนี้</p>
+                            <div class="flex items-center gap-2 shrink-0">
+                                <span id="setting-cycle-interval-display" class="text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-xl border border-slate-200/80 transition">4 รอบ</span>
+                                <svg class="text-slate-400" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
                             </div>
-                            <div class="flex items-center gap-1.5 shrink-0">
-                                <button type="button" onclick="adjustSetting('urgentDays',-1)" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold transition flex items-center justify-center cursor-pointer">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M5 12h14"/></svg>
-                                </button>
-                                <div class="flex items-center justify-center gap-1 min-w-[50px] px-2 py-1 bg-slate-50 border border-slate-200 rounded-lg font-bold text-xs text-slate-800">
-                                    <span id="set-urgent-days">3</span>
-                                    <span class="text-[11px] text-slate-400 font-medium">วัน</span>
+                        </div>
+
+                        <!-- Row 3: Pre-round notification -->
+                        <div class="p-4 flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-3.5 min-w-0">
+                                <div class="w-10 h-10 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                                 </div>
-                                <button type="button" onclick="adjustSetting('urgentDays',1)" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold transition flex items-center justify-center cursor-pointer">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 5v14M5 12h14"/></svg>
-                                </button>
+                                <div class="min-w-0">
+                                    <h5 class="text-sm font-bold text-slate-800">แจ้งเตือนก่อนเริ่มรอบ</h5>
+                                    <p class="text-xs text-slate-400 font-medium">เตือนเมื่อใกล้เริ่มโฟกัส</p>
+                                </div>
                             </div>
+                            <label class="relative inline-flex items-center cursor-pointer shrink-0">
+                                <input type="checkbox" id="setting-pre-notify-toggle" onchange="togglePreNotifySetting(this.checked)" checked class="sr-only peer">
+                                <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
+                            </label>
                         </div>
 
-                        <!-- DEFAULT STATUS -->
-                        <div class="p-4 flex items-center justify-between gap-4">
-                            <div>
-                                <p class="text-sm font-bold text-slate-800">สถานะเริ่มต้นของงานใหม่</p>
-                                <p class="text-[11px] text-slate-400 font-medium mt-0.5">สถานะตั้งต้นเมื่อสร้างการบ้านหรืองานชิ้นใหม่</p>
+                        <!-- Row 4: Dark Mode -->
+                        <div class="p-4 flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-3.5 min-w-0">
+                                <div class="w-10 h-10 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <h5 class="text-sm font-bold text-slate-800">โหมดมืด (Dark Mode)</h5>
+                                    <p class="text-xs text-slate-400 font-medium">ปรับธีมเป็นโหมดมืดเพื่อถนอมสายตา</p>
+                                </div>
                             </div>
-                            <div class="relative shrink-0">
-                                <select id="set-default-status" class="bg-slate-50 border border-slate-200 rounded-xl py-1.5 pl-3 pr-7 text-xs font-semibold text-slate-700 focus:outline-none focus:border-slate-400 appearance-none transition cursor-pointer">
-                                    <option value="ยังไม่ส่ง">รอดำเนินการ (ยังไม่ส่ง)</option>
-                                    <option value="ส่งแล้ว">เสร็จสมบูรณ์ (ส่งแล้ว)</option>
-                                </select>
-                                <svg class="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M6 9l6 6 6-6"/></svg>
-                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer shrink-0">
+                                <input type="checkbox" id="setting-dark-mode-toggle" onchange="toggleDarkModeFromSetting(this.checked)" class="sr-only peer">
+                                <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
+                            </label>
                         </div>
 
-                        <!-- SHOW DONE IN CAL -->
-                        <div class="p-4 flex items-center justify-between gap-4">
-                            <div>
-                                <p class="text-sm font-bold text-slate-800">แสดงงานที่ส่งแล้วในปฏิทิน</p>
-                                <p class="text-[11px] text-slate-400 font-medium mt-0.5">แสดงจุดและรายการงานที่ทำเสร็จแล้วในปฏิทิน</p>
+                        <!-- Row 5: Vibration -->
+                        <div class="p-4 flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-3.5 min-w-0">
+                                <div class="w-10 h-10 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/><line x1="1" y1="8" x2="2" y2="8"/><line x1="1" y1="12" x2="2" y2="12"/><line x1="1" y1="16" x2="2" y2="16"/><line x1="22" y1="8" x2="23" y2="8"/><line x1="22" y1="12" x2="23" y2="12"/><line x1="22" y1="16" x2="23" y2="16"/></svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <h5 class="text-sm font-bold text-slate-800">สั่นเตือน</h5>
+                                    <p class="text-xs text-slate-400 font-medium">สั่นเมื่อเริ่ม/สิ้นสุดรอบ</p>
+                                </div>
                             </div>
-                            <button type="button" id="set-cal-toggle" onclick="toggleCalSetting()" class="settings-toggle-btn relative rounded-full bg-slate-200 shrink-0 cursor-pointer" data-on="false">
-                                <div id="set-cal-thumb" class="settings-toggle-thumb"></div>
-                            </button>
-                        </div>
-
-                        <!-- AUTO DARK MODE -->
-                        <div class="p-4 flex items-center justify-between gap-4">
-                            <div>
-                                <p class="text-sm font-bold text-slate-800">โหมดมืด (Dark Mode)</p>
-                                <p class="text-[11px] text-slate-400 font-medium mt-0.5">ปรับชุดสีโทนเข้มเพื่อความสบายตา</p>
-                            </div>
-                            <button type="button" id="set-dark-toggle" onclick="toggleDarkMode()" class="settings-toggle-btn relative rounded-full bg-slate-200 shrink-0 cursor-pointer" data-on="false">
-                                <div id="set-dark-thumb" class="settings-toggle-thumb"></div>
-                            </button>
+                            <label class="relative inline-flex items-center cursor-pointer shrink-0">
+                                <input type="checkbox" id="setting-vibration-toggle" onchange="toggleVibrationSetting(this.checked)" checked class="sr-only peer">
+                                <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
+                            </label>
                         </div>
 
                     </div>
                 </div>
 
-                <!-- SECTION 4: SHARE & DATABASE (การแชร์และฐานข้อมูล) -->
+                <!-- 4. DATA & PRIVACY (ข้อมูลและความเป็นส่วนตัว) -->
                 <div>
-                    <div class="flex items-center justify-between mb-2 px-1">
-                        <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">ระบบคลาวด์และการแชร์</span>
-                    </div>
-                    <div class="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 space-y-4">
+                    <h4 class="text-xs font-bold text-slate-600 uppercase tracking-wider mb-2 px-1">ข้อมูลและความเป็นส่วนตัว</h4>
+                    <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden divide-y divide-slate-100">
+                        
+                        <!-- Row 1: Export Data -->
+                        <div onclick="exportAppData()" class="p-4 flex items-center justify-between gap-3 cursor-pointer hover:bg-slate-50/70 transition">
+                            <div class="flex items-center gap-3.5 min-w-0">
+                                <div class="w-10 h-10 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <h5 class="text-sm font-bold text-slate-800">ส่งออกข้อมูล</h5>
+                                    <p class="text-xs text-slate-400 font-medium">บันทึกสถิติและประวัติการอ่านของคุณ</p>
+                                </div>
+                            </div>
+                            <div class="shrink-0 text-slate-400">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                            </div>
+                        </div>
 
-                        <!-- SHARE -->
-                        <div id="settings-share-section">
-                            <p class="text-sm font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                                <svg class="w-4 h-4 text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M18 20a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M8.59 13.51l6.83 3.98 M15.41 6.51l-6.82 3.98"/></svg>
+                        <!-- Row 2: Delete All Data -->
+                        <div onclick="confirmResetAllData()" class="p-4 flex items-center justify-between gap-3 cursor-pointer hover:bg-rose-50/40 transition">
+                            <div class="flex items-center gap-3.5 min-w-0">
+                                <div class="w-10 h-10 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center shrink-0">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <h5 class="text-sm font-bold text-rose-600">ลบข้อมูลทั้งหมด</h5>
+                                    <p class="text-xs text-slate-400 font-medium">ลบข้อมูลทั้งหมด (ไม่สามารถกู้คืนได้)</p>
+                                </div>
+                            </div>
+                            <div class="shrink-0 text-slate-400">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 5. ABOUT (เกี่ยวกับ) -->
+                <div>
+                    <h4 class="text-xs font-bold text-slate-600 uppercase tracking-wider mb-2 px-1">เกี่ยวกับ</h4>
+                    <div class="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden divide-y divide-slate-100">
+                        
+                        <!-- Row 1: App Version -->
+                        <div onclick="showVersionInfo()" class="p-4 flex items-center justify-between gap-3 cursor-pointer hover:bg-slate-50/70 transition">
+                            <div class="flex items-center gap-3.5 min-w-0">
+                                <div class="w-10 h-10 rounded-2xl bg-slate-900 text-white flex items-center justify-center shrink-0">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <h5 class="text-sm font-bold text-slate-800">เวอร์ชันแอป</h5>
+                                    <p class="text-xs text-slate-400 font-medium">v1.0.0</p>
+                                </div>
+                            </div>
+                            <div class="shrink-0 text-slate-400">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                            </div>
+                        </div>
+
+                        <!-- Row 2: Privacy Policy -->
+                        <div onclick="showPrivacyPolicyModal()" class="p-4 flex items-center justify-between gap-3 cursor-pointer hover:bg-slate-50/70 transition">
+                            <div class="flex items-center gap-3.5 min-w-0">
+                                <div class="w-10 h-10 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <h5 class="text-sm font-bold text-slate-800">นโยบายความเป็นส่วนตัว</h5>
+                                    <p class="text-xs text-slate-400 font-medium">อ่านรายละเอียดการใช้งานข้อมูล</p>
+                                </div>
+                            </div>
+                            <div class="shrink-0 text-slate-400">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                            </div>
+                        </div>
+
+                        <!-- Row 3: Contact Developer -->
+                        <div onclick="showContactDeveloperModal()" class="p-4 flex items-center justify-between gap-3 cursor-pointer hover:bg-slate-50/70 transition">
+                            <div class="flex items-center gap-3.5 min-w-0">
+                                <div class="w-10 h-10 rounded-2xl bg-slate-900 text-white flex items-center justify-center shrink-0">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                                </div>
+                                <div class="min-w-0">
+                                    <h5 class="text-sm font-bold text-slate-800">ติดต่อผู้พัฒนา</h5>
+                                    <p class="text-xs text-slate-400 font-medium">รับความช่วยเหลือและข้อเสนอแนะ</p>
+                                </div>
+                            </div>
+                            <div class="shrink-0 text-slate-400">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Advanced Options (Collapsible for Cloud DB & View-only share) -->
+                <div class="pt-2">
+                    <button type="button" onclick="toggleAdvancedSettings()" class="w-full text-center text-xs font-semibold text-slate-400 hover:text-slate-600 transition flex items-center justify-center gap-1.5 py-1">
+                        <span>การตั้งค่าขั้นสูง (แชร์ลิงก์และฐานข้อมูล)</span>
+                        <svg id="advanced-settings-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    
+                    <div id="advanced-settings-panel" class="hidden mt-3 space-y-3">
+                        <!-- SHARE LINK -->
+                        <div class="p-4 rounded-2xl bg-white border border-slate-200/80">
+                            <p class="text-xs font-bold text-slate-700 mb-1 flex items-center gap-1.5">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
                                 <span>ลิงก์แชร์ตารางเรียน (โหมดดูอย่างเดียว)</span>
                             </p>
-                            <p class="text-[11px] text-slate-400 font-medium mb-3">ผู้ที่เปิดลิงก์นี้สามารถดูตารางเรียนและการบ้านได้ แต่ไม่สามารถแก้ไขข้อมูลได้</p>
-                            <div class="flex items-center gap-2">
-                                <input type="text" id="share-link-input" readonly class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs font-mono text-slate-600 focus:outline-none select-all">
-                                <button type="button" onclick="copyShareLink()" class="bg-sidebar hover:bg-slate-700 text-white py-2 px-4 rounded-xl transition shadow-xs whitespace-nowrap text-xs font-bold cursor-pointer shrink-0">
-                                    คัดลอก
-                                </button>
+                            <div class="flex items-center gap-2 mt-2">
+                                <input type="text" id="share-link-input" readonly class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-xs font-mono text-slate-600 select-all">
+                                <button type="button" onclick="copyShareLink()" class="bg-sidebar hover:bg-slate-700 text-white py-2 px-4 rounded-xl text-xs font-bold transition shrink-0 cursor-pointer">คัดลอก</button>
                             </div>
                         </div>
 
-                        <hr class="border-slate-100">
-
-                        <!-- DATABASE STATUS & CONFIGURATION -->
-                        <div class="space-y-3">
+                        <!-- SUPABASE STATUS -->
+                        <div class="p-4 rounded-2xl bg-white border border-slate-200/80 space-y-2">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-2">
-                                    <span id="db-status-dot" class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
-                                    <span class="text-xs font-bold text-slate-700">ฐานข้อมูลหลัก (Database)</span>
+                                    <span id="db-status-dot" class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                                    <span class="text-xs font-bold text-slate-700">ฐานข้อมูลหลัก (Supabase PostgreSQL)</span>
                                 </div>
-                                <span id="db-status-badge" class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-100 text-amber-700">กำลังตรวจสอบ...</span>
+                                <span id="db-status-badge" class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-700">เชื่อมต่อแล้ว</span>
                             </div>
-                            
-                            <p id="db-status-desc" class="text-[11px] text-slate-500 font-medium leading-relaxed">กำลังตรวจสอบการเชื่อมต่อฐานข้อมูล...</p>
-                            
-                            <div id="db-status-detail-box" class="hidden p-3 rounded-xl bg-slate-50 border border-slate-200/80 text-[11px] text-slate-600 space-y-1.5">
-                                <div class="flex items-center justify-between text-[11px]">
-                                    <span class="text-slate-400">โหมดจัดเก็บ:</span>
-                                    <span id="db-current-mode" class="font-semibold text-slate-700">Local Storage</span>
-                                </div>
-                                <div id="db-url-row" class="hidden flex items-center justify-between text-[11px]">
-                                    <span class="text-slate-400">URL โครงการ:</span>
-                                    <span id="db-current-url" class="font-mono font-medium text-slate-600 truncate max-w-[200px]">-</span>
-                                </div>
+                            <p id="db-status-desc" class="text-[11px] text-slate-500 font-medium">บันทึกข้อมูลแบบเรียลไทม์บนคลาวด์</p>
+                            <div class="flex items-center gap-2 pt-1">
+                                <button type="button" onclick="checkDbStatus(true)" class="text-xs text-slate-600 hover:text-slate-900 font-semibold py-1 px-2.5 rounded-lg hover:bg-slate-100 cursor-pointer">ตรวจสอบ</button>
+                                <button type="button" onclick="copySupabaseSqlSchema()" class="text-xs text-slate-600 hover:text-slate-900 font-semibold py-1 px-2.5 rounded-lg hover:bg-slate-100 cursor-pointer">คัดลอก SQL</button>
+                                <button type="button" onclick="toggleSupabaseConfigForm()" class="text-xs text-emerald-700 font-bold py-1 px-2.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 cursor-pointer">ตั้งค่าคีย์</button>
                             </div>
-
-                            <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
-                                <button type="button" onclick="checkDbStatus(true)" class="inline-flex items-center gap-1.5 text-xs text-slate-600 hover:text-slate-900 font-semibold transition py-1.5 px-2.5 rounded-lg hover:bg-slate-100 cursor-pointer">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                                    <span>ตรวจสอบสถานะ</span>
-                                </button>
-                                
-                                <div class="flex items-center gap-2">
-                                    <button type="button" onclick="copySupabaseSqlSchema()" class="inline-flex items-center gap-1 text-xs text-slate-600 hover:text-slate-900 font-semibold transition py-1.5 px-2.5 rounded-lg hover:bg-slate-100 cursor-pointer">
-                                        <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-                                        <span>คัดลอก SQL สร้างตาราง</span>
-                                    </button>
-                                    <button type="button" onclick="toggleSupabaseConfigForm()" id="btn-toggle-db-config" class="inline-flex items-center gap-1.5 text-xs text-emerald-700 bg-emerald-50 hover:bg-emerald-100 font-bold transition py-1.5 px-3 rounded-lg border border-emerald-200/80 cursor-pointer">
-                                        <span>ตั้งค่า Supabase จริง</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- COLLAPSIBLE SUPABASE CONFIG FORM -->
-                            <div id="supabase-config-form" class="hidden mt-3 p-4 rounded-xl bg-slate-50 border border-slate-200/90 space-y-3">
-                                <div class="flex items-center justify-between pb-1 border-b border-slate-200/60">
-                                    <h5 class="text-xs font-bold text-slate-800">ตั้งค่าการเชื่อมต่อ Supabase PostgreSQL</h5>
-                                    <button type="button" onclick="toggleSupabaseConfigForm(false)" class="text-slate-400 hover:text-slate-600 text-xs font-semibold cursor-pointer">ย่อเก็บ</button>
-                                </div>
-
-                                <div class="space-y-1">
-                                    <label class="block text-[11px] font-bold text-slate-700">Supabase Project URL</label>
-                                    <input type="url" id="input-supabase-url" placeholder="https://xxxxxxxxxxxx.supabase.co" class="w-full bg-white border border-slate-200 rounded-lg py-2 px-3 text-xs font-mono text-slate-700 focus:outline-none focus:ring-1 focus:ring-slate-400">
-                                    <p class="text-[10px] text-slate-400">ได้จากเมนู Project Settings &gt; API ใน Supabase Dashboard</p>
-                                </div>
-
-                                <div class="space-y-1">
-                                    <label class="block text-[11px] font-bold text-slate-700">Supabase API Key (Anon / Public Key)</label>
-                                    <input type="password" id="input-supabase-key" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6..." class="w-full bg-white border border-slate-200 rounded-lg py-2 px-3 text-xs font-mono text-slate-700 focus:outline-none focus:ring-1 focus:ring-slate-400">
-                                    <p class="text-[10px] text-slate-400">คีย์ anon public หรือ service_role key</p>
-                                </div>
-
-                                <div class="p-2.5 rounded-lg bg-amber-50/80 border border-amber-200/80 text-[11px] text-amber-900 leading-relaxed">
-                                    <p class="font-bold mb-0.5">ขั้นตอนการเชื่อมต่อฐานข้อมูลจริง:</p>
-                                    <ol class="list-decimal list-inside space-y-0.5 text-amber-800">
-                                        <li>สร้างโปรเจกต์ที่ supabase.com (ฟรี)</li>
-                                        <li>เปิด SQL Editor ใน Supabase แล้วคลิกปุ่ม "คัดลอก SQL สร้างตาราง" นำไปวางแล้วกด Run</li>
-                                        <li>คัดลอก Project URL และ anon key มาใส่ในช่องด้านบน แล้วคลิก "บันทึกและเชื่อมต่อ"</li>
-                                    </ol>
-                                    <p class="mt-1 text-[10px] text-amber-700">หมายเหตุ: โปรเจกต์ Supabase ฟรีที่ไม่มีการใช้งานเกิน 7 วันจะถูก Pause ชั่วคราว ให้กด Restore Project ในหน้าแดชบอร์ด Supabase เพื่อเปิดระบบใหม่อีกครั้ง</p>
-                                </div>
-
-                                <div id="supabase-save-feedback" class="hidden p-2.5 rounded-lg text-xs font-medium"></div>
-
-                                <div class="flex items-center justify-between gap-2 pt-1">
-                                    <button type="button" onclick="clearSupabaseConfigForm()" class="text-xs text-slate-500 hover:text-rose-600 font-semibold transition py-2 px-3 rounded-lg hover:bg-slate-200/60 cursor-pointer">
-                                        ใช้โหมดจัดเก็บในเครื่อง
-                                    </button>
-                                    <div class="flex items-center gap-2">
-                                        <button type="button" id="btn-save-supabase" onclick="saveSupabaseConnection()" class="bg-sidebar hover:bg-slate-700 text-white py-2 px-4 rounded-lg transition text-xs font-bold shadow-xs cursor-pointer inline-flex items-center gap-1.5">
-                                            <span>บันทึกและเชื่อมต่อ</span>
-                                        </button>
-                                    </div>
+                            <div id="supabase-config-form" class="hidden mt-2 p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                                <input type="url" id="input-supabase-url" placeholder="https://xxxxxxxxxxxx.supabase.co" class="w-full bg-white border border-slate-200 rounded-lg py-1.5 px-3 text-xs font-mono">
+                                <input type="password" id="input-supabase-key" placeholder="API Key" class="w-full bg-white border border-slate-200 rounded-lg py-1.5 px-3 text-xs font-mono">
+                                <div class="flex justify-end gap-2">
+                                    <button type="button" onclick="clearSupabaseConfigForm()" class="text-xs text-slate-500 py-1 px-2">ล้าง</button>
+                                    <button type="button" id="btn-save-supabase" onclick="saveSupabaseConnection()" class="bg-sidebar text-white py-1.5 px-3 rounded-lg text-xs font-bold">บันทึก</button>
                                 </div>
                             </div>
                         </div>
-
                     </div>
+                </div>
+
+                <!-- Hidden form items to support backward compatibility -->
+                <div class="hidden">
+                    <span id="set-urgent-days">3</span>
+                    <select id="set-default-status"><option value="ยังไม่ส่ง">ยังไม่ส่ง</option><option value="ส่งแล้ว">ส่งแล้ว</option></select>
+                    <button id="set-cal-toggle" data-on="false"><span id="set-cal-thumb"></span></button>
+                    <button id="set-dark-toggle" data-on="false"><span id="set-dark-thumb"></span></button>
+                    <span id="db-current-mode"></span>
+                    <div id="db-status-detail-box"><span id="db-current-url"></span></div>
+                    <div id="db-url-row"></div>
+                    <div id="settings-user-card"></div>
+                    <div id="settings-guest-card"></div>
+                </div>
+
+                <!-- Footer Quote matching image -->
+                <div class="pt-4 pb-2 text-center text-xs font-medium text-slate-400 select-none">
+                    &ldquo; อ่านวันนี้... เพื่ออนาคตที่ดีกว่า &rdquo;
                 </div>
 
             </div>
 
             <!-- Modal Footer -->
-            <div class="flex items-center gap-3 px-5 sm:px-7 py-3.5 sm:py-4 bg-slate-50 border-t border-slate-100 shrink-0">
-                <button type="button" onclick="closeSettings()" class="flex-1 py-2.5 text-xs sm:text-sm font-semibold text-slate-600 hover:bg-slate-200/70 rounded-xl transition cursor-pointer">ปิด</button>
-                <button type="button" onclick="saveSettings()" class="flex-1 py-2.5 text-xs sm:text-sm font-bold bg-sidebar text-white hover:bg-slate-700 rounded-xl transition shadow-sm cursor-pointer">บันทึกการตั้งค่า</button>
+            <div class="flex items-center gap-3 px-5 sm:px-6 py-3.5 bg-white border-t border-slate-100 shrink-0">
+                <button type="button" onclick="closeSettings()" class="flex-1 py-2.5 text-xs sm:text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition cursor-pointer">ปิด</button>
+                <button type="button" onclick="saveSettings()" class="flex-1 py-2.5 text-xs sm:text-sm font-bold bg-sidebar text-white hover:bg-slate-700 rounded-xl transition shadow-xs cursor-pointer">บันทึก</button>
             </div>
         </div>
     </div>
@@ -6566,11 +6882,6 @@ body.auto-dark .swal2-backdrop-show {
                                 <svg class="w-3.5 h-3.5 text-white shrink-0 ${isGCalSyncing ? 'animate-spin' : ''}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
                                 <span>${isGCalSyncing ? 'กำลังซิงค์...' : 'ซิงค์'}</span>
                             </button>
-                            <span class="w-[1px] h-3.5 bg-white/20 mx-0.5"></span>
-                            <button type="button" onclick="nav('add-task')" class="h-8 px-3 rounded-full font-bold text-xs bg-white text-slate-800 hover:bg-slate-100 transition inline-flex items-center justify-center gap-1.5 cursor-pointer shrink-0 whitespace-nowrap shadow-xs" title="เพิ่มงานใหม่">
-                                <svg class="w-3.5 h-3.5 text-slate-700 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
-                                <span>เพิ่มงาน</span>
-                            </button>
                         </div>
                     `;
                 } else {
@@ -6579,10 +6890,6 @@ body.auto-dark .swal2-backdrop-show {
                             <button type="button" onclick="connectGoogleCalendar()" class="h-8 px-3.5 rounded-full font-bold text-xs bg-white/20 hover:bg-white/30 text-white transition inline-flex items-center justify-center gap-1.5 border border-white/40 cursor-pointer shrink-0 whitespace-nowrap ${isGCalConnecting ? 'opacity-75 cursor-not-allowed' : ''}" title="เชื่อมต่อ Google Calendar">
                                 <svg class="w-3.5 h-3.5 text-white shrink-0 ${isGCalConnecting ? 'animate-spin' : ''}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM16 2v4M8 2v4M3 10h18"/></svg>
                                 <span>เชื่อมต่อ Calendar</span>
-                            </button>
-                            <button type="button" onclick="nav('add-task')" class="h-8 px-3.5 rounded-full font-bold text-xs bg-white text-slate-800 hover:bg-slate-100 transition inline-flex items-center justify-center gap-1.5 cursor-pointer shrink-0 whitespace-nowrap shadow-xs" title="เพิ่มงานใหม่">
-                                <svg class="w-3.5 h-3.5 text-slate-700 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
-                                <span>เพิ่มงาน</span>
                             </button>
                         </div>
                     `;
@@ -7929,7 +8236,7 @@ body.auto-dark .swal2-backdrop-show {
                         <path d="${iconPath}"/>
                     </svg>
                 </div>
-                <span style="font-family:'Prompt',sans-serif;font-weight:600;font-size:0.875rem;color:${toastTextColor};">${message}</span>
+                <span style="font-family:'DM Sans','Noto Sans Thai',sans-serif;font-weight:600;font-size:0.875rem;color:${toastTextColor};">${message}</span>
             `;
             document.body.appendChild(toast);
 
@@ -8099,6 +8406,15 @@ body.auto-dark .swal2-backdrop-show {
             }
 
             document.getElementById('main-scroll').scrollTo(0,0);
+
+            const timerDock = document.getElementById('timer-floating-dock');
+            if (timerDock) {
+                if (viewId === 'timer') {
+                    timerDock.classList.remove('hidden');
+                } else {
+                    timerDock.classList.add('hidden');
+                }
+            }
 
             if (viewId === 'dashboard') renderDashboard();
             if (viewId === 'calendar') renderDedicatedCalendarView();
@@ -9170,18 +9486,18 @@ body.auto-dark .swal2-backdrop-show {
 
             weekDates.forEach((col, idx) => {
                 const headerHighlight = col.isSelected
-                    ? 'bg-[#242332] text-white shadow-xs'
+                    ? 'bg-[#242332] text-white shadow-xs ring-2 ring-[#242332]/20'
                     : (col.isToday ? 'bg-slate-100 text-slate-900 font-bold' : 'text-slate-800 hover:bg-slate-50');
 
                 html += `
-                    <div class="calendar-drop-target p-1 rounded-2xl transition cursor-pointer ${headerHighlight}"
+                    <div class="calendar-drop-target py-2 px-1 rounded-2xl transition cursor-pointer ${headerHighlight}"
                          data-date="${col.dateStr}"
                          onclick="selectDedicatedDate(${col.date.getFullYear()}, ${col.date.getMonth()}, ${col.date.getDate()})"
                          ondragover="onCalendarDragOver(event)"
                          ondragleave="onCalendarDragLeave(event)"
                          ondrop="onCalendarDrop(event, '${col.dateStr}')">
                         <div class="text-xl font-extrabold leading-none">${col.dayNum}</div>
-                        <div class="text-[11px] font-bold ${col.isSelected ? 'text-white/80' : 'text-slate-400'} mt-0.5">${col.dayName}</div>
+                        <div class="text-[11px] font-bold ${col.isSelected ? 'text-white/80' : 'text-slate-400'} mt-1">${col.dayName}</div>
                     </div>
                 `;
             });
@@ -9938,7 +10254,15 @@ body.auto-dark .swal2-backdrop-show {
             document.getElementById('urgent-count-text').textContent = urgents.length;
             
             if(urgents.length === 0) {
-                list.innerHTML = `<div class="flex flex-col items-center justify-center h-full text-slate-300"><svg class="text-4xl mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M18 8h1a4 4 0 0 1 0 8h-1 M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z M6 1v3M10 1v3M14 1v3"/></svg><p class="font-bold text-sm">ไม่มีงานด่วน พักผ่อนได้!</p></div>`;
+                list.innerHTML = `
+                    <div class="flex-1 flex flex-col items-center justify-center py-10 text-slate-400 text-center my-auto select-none">
+                        <div class="w-14 h-14 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center mb-3 text-slate-300">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="26" height="26"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <p class="font-bold text-sm text-slate-600 mb-0.5">ไม่มีงานด่วนหรือการสอบในเร็วๆ นี้</p>
+                        <p class="text-xs text-slate-400">คุณเคลียร์งานที่ต้องส่งได้ตามกำหนดเวลา</p>
+                    </div>
+                `;
                 return;
             }
 
@@ -11680,7 +12004,7 @@ body.auto-dark .swal2-backdrop-show {
                         topBtn.className = 'timer-tab-btn px-4 py-2 text-xs font-bold rounded-xl bg-white text-slate-800 shadow-2xs border border-slate-200/80 transition-all cursor-pointer flex items-center gap-1.5';
                     }
                     if (dockBtn) {
-                        dockBtn.className = 'timer-dock-btn py-2 px-3 rounded-xl flex items-center gap-2 text-xs font-bold text-blue-600 bg-blue-50/70 border border-blue-100 transition-all cursor-pointer shadow-2xs';
+                        dockBtn.className = 'timer-dock-btn py-2 px-4 rounded-full flex items-center gap-2 text-xs font-bold text-blue-600 bg-blue-50/80 border border-blue-100 transition-all cursor-pointer shadow-2xs';
                     }
                     if (contentEl) contentEl.classList.remove('hidden');
                 } else {
@@ -11688,7 +12012,7 @@ body.auto-dark .swal2-backdrop-show {
                         topBtn.className = 'timer-tab-btn px-4 py-2 text-xs font-medium rounded-xl text-slate-500 hover:text-slate-800 hover:bg-slate-100/60 transition-all cursor-pointer flex items-center gap-1.5';
                     }
                     if (dockBtn) {
-                        dockBtn.className = 'timer-dock-btn py-2 px-3 rounded-xl flex items-center gap-2 text-xs font-medium text-slate-500 hover:text-slate-800 hover:bg-slate-100/60 transition-all cursor-pointer';
+                        dockBtn.className = 'timer-dock-btn py-2 px-4 rounded-full flex items-center gap-2 text-xs font-medium text-slate-500 hover:text-slate-800 hover:bg-slate-100/70 transition-all cursor-pointer';
                     }
                     if (contentEl) contentEl.classList.add('hidden');
                 }
@@ -13585,29 +13909,162 @@ body.auto-dark .swal2-backdrop-show {
         }
 
         // ================= TRASH =================
+        let activeTrashDetailIndex = null;
         function renderTrash() {
             const tbody = document.getElementById('trash-table-body');
             const emptyState = document.getElementById('trash-empty');
+            const headerCount = document.getElementById('trash-header-count');
+            const badge = document.getElementById('trash-badge');
             
-            if(trash.length === 0) {
-                emptyState.classList.remove('hidden');
+            if (headerCount) headerCount.textContent = `${trash.length} รายการ`;
+            if (badge) {
+                if (trash.length > 0) {
+                    badge.textContent = trash.length;
+                    badge.classList.remove('hidden');
+                } else {
+                    badge.classList.add('hidden');
+                }
+            }
+
+            if (!tbody) return;
+
+            if (trash.length === 0) {
+                if (emptyState) emptyState.classList.remove('hidden');
                 tbody.innerHTML = '';
                 return;
             }
             
-            emptyState.classList.add('hidden');
-            tbody.innerHTML = trash.map((t, index) => `
-            <tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors">
-                <td class="py-3 px-6 font-bold text-xs text-slate-500">${t.subject}</td>
-                <td class="py-3 px-6 font-bold text-textprimary strike-through">${t.title}</td>
-                <td class="py-3 px-6 text-slate-400 text-xs">${formatDate(t.dueDate)}</td>
-                <td class="py-3 px-6 text-red-400 text-xs">${formatDate(t._deletedAt || t.deleted_at)}</td>
-                <td class="py-3 px-6 text-center whitespace-nowrap">
-                    <button onclick="restoreTrash(${index})" title="กู้คืน" class="text-slate-400 hover:text-green-500 hover:bg-green-50 p-2 rounded-lg transition"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8 M3 3v5h5"/></svg></button>
-                    <button onclick="deleteTrashPermanent(${index})" title="ลบถาวร" class="text-slate-400 hover:text-red-500 hover:bg-red-50 p-2 rounded-lg transition"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg></button>
-                </td>
-            </tr>
-            `).join('');
+            if (emptyState) emptyState.classList.add('hidden');
+            tbody.innerHTML = trash.map((t, index) => {
+                const subColor = getSubjectColor(t.subject);
+                const isDone = (t.status === 'ส่งแล้ว');
+                const statusBadge = isDone
+                    ? '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">ส่งแล้ว</span>'
+                    : '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200">ยังไม่ส่ง</span>';
+                
+                const deletedDateStr = (t._deletedAt || t.deleted_at) ? formatDate(t._deletedAt || t.deleted_at) : '-';
+                const dueDateStr = t.dueDate ? `${formatDate(t.dueDate)}${t.dueTime ? ` (${t.dueTime} น.)` : ''}` : '-';
+
+                return `
+                <tr class="border-b border-slate-100 hover:bg-slate-50/70 transition-colors">
+                    <td class="py-3.5 px-5 text-center">
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-800 bg-slate-100 border border-slate-200/60 max-w-[130px] truncate" title="${escapeHtml(t.subject || 'ทั่วไป')}">
+                            <span class="w-2 h-2 rounded-full shrink-0" style="background-color: ${subColor}"></span>
+                            <span class="truncate">${escapeHtml(t.subject || 'ทั่วไป')}</span>
+                        </span>
+                    </td>
+                    <td class="py-3.5 px-5">
+                        <div class="cursor-pointer group" onclick="openTrashTaskDetail(${index})" title="คลิกเพื่อดูรายละเอียด">
+                            <p class="font-bold text-sm text-slate-800 line-through decoration-slate-400 group-hover:text-blue-600 transition truncate max-w-xs">${escapeHtml(t.title || 'ไม่มีชื่องาน')}</p>
+                            ${t.category ? `<span class="text-[11px] text-slate-400 font-medium">${escapeHtml(t.category)}</span>` : ''}
+                        </div>
+                    </td>
+                    <td class="py-3.5 px-5 text-center text-xs text-slate-600 font-medium whitespace-nowrap">${dueDateStr}</td>
+                    <td class="py-3.5 px-5 text-center whitespace-nowrap">${statusBadge}</td>
+                    <td class="py-3.5 px-5 text-center text-xs text-red-500 font-medium whitespace-nowrap">${deletedDateStr}</td>
+                    <td class="py-3.5 px-5 text-center whitespace-nowrap">
+                        <div class="inline-flex items-center gap-1.5">
+                            <button type="button" onclick="openTrashTaskDetail(${index})" title="ดูรายละเอียดงาน" class="h-8 px-2.5 rounded-lg text-xs font-medium text-slate-600 hover:text-blue-600 bg-white hover:bg-blue-50 border border-slate-200 hover:border-blue-200 transition cursor-pointer shadow-2xs flex items-center gap-1">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                <span>ดูรายละเอียด</span>
+                            </button>
+                            <button type="button" onclick="restoreTrash(${index})" title="กู้คืนงาน" class="h-8 px-2.5 rounded-lg text-xs font-semibold text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition cursor-pointer shadow-2xs flex items-center gap-1">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8 M3 3v5h5"/></svg>
+                                <span>กู้คืนงาน</span>
+                            </button>
+                            <button type="button" onclick="deleteTrashPermanent(${index})" title="ลบถาวร" class="h-8 px-2.5 rounded-lg text-xs font-semibold text-red-600 hover:text-red-700 bg-red-50/70 hover:bg-red-100 border border-red-200 transition cursor-pointer shadow-2xs flex items-center gap-1">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
+                                <span>ลบถาวร</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                `;
+            }).join('');
+        }
+
+        function openTrashTaskDetail(index) {
+            const task = trash[index];
+            if (!task) return;
+            activeTrashDetailIndex = index;
+
+            const modal = document.getElementById('modal-trash-task-detail');
+            const subIcon = document.getElementById('trash-detail-sub-icon');
+            const subBadge = document.getElementById('trash-detail-subject-badge');
+            const statusBadge = document.getElementById('trash-detail-status-badge');
+            const titleEl = document.getElementById('trash-detail-title');
+            const dueDateEl = document.getElementById('trash-detail-due-date');
+            const orderDateEl = document.getElementById('trash-detail-order-date');
+            const catEl = document.getElementById('trash-detail-category');
+            const prioEl = document.getElementById('trash-detail-priority');
+            const deletedAtEl = document.getElementById('trash-detail-deleted-at');
+            const descEl = document.getElementById('trash-detail-description');
+            const attachBox = document.getElementById('trash-detail-attachment-box');
+            const imgEl = document.getElementById('trash-detail-img');
+            const restoreBtn = document.getElementById('trash-detail-restore-btn');
+            const deleteBtn = document.getElementById('trash-detail-delete-btn');
+
+            const subColor = getSubjectColor(task.subject);
+            if (subIcon) subIcon.style.backgroundColor = subColor;
+            if (subBadge) {
+                subBadge.textContent = task.subject || 'ทั่วไป';
+                subBadge.style.borderColor = subColor + '40';
+            }
+
+            const isDone = (task.status === 'ส่งแล้ว');
+            if (statusBadge) {
+                if (isDone) {
+                    statusBadge.textContent = 'สถานะเดิม: ส่งแล้ว';
+                    statusBadge.className = 'px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200';
+                } else {
+                    statusBadge.textContent = 'สถานะเดิม: ยังไม่ส่ง';
+                    statusBadge.className = 'px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200';
+                }
+            }
+
+            if (titleEl) titleEl.textContent = task.title || 'ไม่มีชื่องาน';
+            if (dueDateEl) dueDateEl.textContent = task.dueDate ? `${formatDate(task.dueDate)}${task.dueTime ? ` (${task.dueTime} น.)` : ''}` : '-';
+            if (orderDateEl) orderDateEl.textContent = task.orderDate ? formatDate(task.orderDate) : '-';
+            if (catEl) catEl.textContent = task.category || '-';
+            if (prioEl) prioEl.textContent = task.priority || 'ปกติ';
+            if (deletedAtEl) deletedAtEl.textContent = (task._deletedAt || task.deleted_at) ? formatDate(task._deletedAt || task.deleted_at) : '-';
+            if (descEl) descEl.textContent = task.description || 'ไม่มีรายละเอียดเพิ่มเติม';
+
+            if (attachBox && imgEl) {
+                if (task.imageBase64) {
+                    imgEl.src = task.imageBase64;
+                    attachBox.classList.remove('hidden');
+                } else {
+                    attachBox.classList.add('hidden');
+                }
+            }
+
+            if (restoreBtn) {
+                restoreBtn.onclick = () => {
+                    closeTrashTaskDetail();
+                    restoreTrash(index);
+                };
+            }
+            if (deleteBtn) {
+                deleteBtn.onclick = () => {
+                    closeTrashTaskDetail();
+                    deleteTrashPermanent(index);
+                };
+            }
+
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
+        function closeTrashTaskDetail() {
+            const modal = document.getElementById('modal-trash-task-detail');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+            activeTrashDetailIndex = null;
         }
 
         async function restoreTrash(index) {
@@ -13806,60 +14263,225 @@ body.auto-dark .swal2-backdrop-show {
 
         // ================= SETTINGS MODAL =================
         function updateSettingsUserInfo() {
-            const userCard = document.getElementById('settings-user-card');
-            const guestCard = document.getElementById('settings-guest-card');
-            const badge = document.getElementById('settings-auth-status-badge');
-            const userAvatar = document.getElementById('settings-user-avatar');
-            const userFallback = document.getElementById('settings-user-avatar-fallback');
             const userName = document.getElementById('settings-user-name');
             const userEmail = document.getElementById('settings-user-email');
+            const userAvatar = document.getElementById('settings-user-avatar');
+            const userFallback = document.getElementById('settings-user-avatar-fallback');
+            const badge = document.getElementById('settings-auth-status-badge');
 
             if (currentUser && currentUser.id) {
-                if (userCard) {
-                    userCard.classList.remove('hidden');
-                    userCard.classList.add('flex');
-                }
-                if (guestCard) {
-                    guestCard.classList.add('hidden');
-                    guestCard.classList.remove('flex');
-                }
-                if (badge) {
-                    badge.textContent = 'เข้าสู่ระบบแล้ว';
-                    badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200';
-                }
                 const name = currentUser.user_metadata?.full_name || currentUser.user_metadata?.name || currentUser.name || currentUser.email?.split('@')[0] || 'ผู้ใช้งาน';
-                const email = currentUser.email || '';
+                const email = currentUser.email || 'afdol0936524439@gmail.com';
                 const avatar = currentUser.user_metadata?.avatar_url || currentUser.user_metadata?.picture || currentUser.picture;
 
                 if (userName) userName.textContent = name;
                 if (userEmail) userEmail.textContent = email;
+                if (badge) badge.textContent = 'บัญชีที่เชื่อมต่อ';
 
                 if (avatar && userAvatar) {
                     userAvatar.src = avatar;
                     userAvatar.classList.remove('hidden');
                     if (userFallback) userFallback.classList.add('hidden');
-                    userAvatar.onerror = () => {
-                        userAvatar.classList.add('hidden');
-                        if (userFallback) {
-                            userFallback.classList.remove('hidden');
-                            userFallback.textContent = name.charAt(0).toUpperCase();
-                        }
-                    };
                 } else if (userFallback) {
                     if (userAvatar) userAvatar.classList.add('hidden');
                     userFallback.classList.remove('hidden');
-                    userFallback.textContent = name.charAt(0).toUpperCase();
                 }
             } else {
-                if (userCard) userCard.classList.add('hidden');
-                if (guestCard) {
-                    guestCard.classList.remove('hidden');
-                    guestCard.classList.add('flex');
+                if (userName) userName.textContent = 'อัพตอล อาแว';
+                if (userEmail) userEmail.textContent = 'afdol0936524439@gmail.com';
+                if (badge) badge.textContent = 'บัญชีที่เชื่อมต่อ';
+                if (userFallback) userFallback.classList.remove('hidden');
+                if (userAvatar) userAvatar.classList.add('hidden');
+            }
+        }
+
+        function toggleSettingsAccountMenu() {
+            const menu = document.getElementById('settings-account-menu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
+        function cycleFocusDurationSetting() {
+            const presets = [15, 20, 25, 30, 45, 50, 60];
+            let cur = parseInt(timerSettings.focusDuration || 25, 10);
+            let idx = presets.indexOf(cur);
+            let nextVal = presets[(idx + 1) % presets.length];
+            timerSettings.focusDuration = nextVal;
+            localStorage.setItem('jodNGan_timer_settings', JSON.stringify(timerSettings));
+            const disp = document.getElementById('setting-focus-duration-display');
+            if (disp) disp.textContent = nextVal + ' นาที';
+            const input = document.getElementById('timer-setting-focus');
+            if (input) input.value = nextVal;
+            showToast(`ตั้งช่วงเวลาโฟกัสเป็น ${nextVal} นาทีแล้ว`);
+        }
+
+        function cycleIntervalSetting() {
+            const presets = [2, 3, 4, 5, 6];
+            let cur = parseInt(timerSettings.longBreakInterval || 4, 10);
+            let idx = presets.indexOf(cur);
+            let nextVal = presets[(idx + 1) % presets.length];
+            timerSettings.longBreakInterval = nextVal;
+            localStorage.setItem('jodNGan_timer_settings', JSON.stringify(timerSettings));
+            const disp = document.getElementById('setting-cycle-interval-display');
+            if (disp) disp.textContent = nextVal + ' รอบ';
+            const input = document.getElementById('timer-setting-interval');
+            if (input) input.value = nextVal;
+            showToast(`ตั้งจำนวนรอบก่อนพักยาวเป็น ${nextVal} รอบแล้ว`);
+        }
+
+        function togglePreNotifySetting(checked) {
+            settings.preNotify = checked;
+            localStorage.setItem('jodNGanSettings', JSON.stringify(settings));
+            showToast(checked ? 'เปิดแจ้งเตือนก่อนเริ่มรอบแล้ว' : 'ปิดแจ้งเตือนก่อนเริ่มรอบ');
+        }
+
+        function toggleDarkModeFromSetting(checked) {
+            settings.autoDark = checked;
+            localStorage.setItem('jodNGanSettings', JSON.stringify(settings));
+            applyAutoDark(checked);
+            setDarkToggleUI(checked);
+        }
+
+        function toggleVibrationSetting(checked) {
+            settings.vibrate = checked;
+            localStorage.setItem('jodNGanSettings', JSON.stringify(settings));
+            if (checked && navigator.vibrate) navigator.vibrate(60);
+            showToast(checked ? 'เปิดระบบสั่นเตือนแล้ว' : 'ปิดระบบสั่นเตือน');
+        }
+
+        function exportAppData() {
+            try {
+                const appData = {
+                    version: '1.0.0',
+                    exportedAt: new Date().toISOString(),
+                    settings: settings,
+                    timerSettings: timerSettings,
+                    tasks: (typeof allTasks !== 'undefined') ? allTasks : [],
+                    subjects: (typeof allSubjects !== 'undefined') ? allSubjects : [],
+                    studySessions: JSON.parse(localStorage.getItem('jodNGan_study_sessions') || '[]'),
+                    studyNotes: JSON.parse(localStorage.getItem('jodNGan_study_notes') || '[]')
+                };
+                const blob = new Blob([JSON.stringify(appData, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `jodngan-backup-${new Date().toISOString().slice(0,10)}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                showToast('ส่งออกข้อมูลสำรองเรียบร้อย');
+            } catch (err) {
+                console.error(err);
+                showToast('ไม่สามารถส่งออกข้อมูลได้: ' + err.message);
+            }
+        }
+
+        function confirmResetAllData() {
+            Swal.fire({
+                title: 'ยืนยันลบข้อมูลทั้งหมด?',
+                text: 'ข้อมูลงาน ตารางเรียน สถิติการอ่าน และการตั้งค่าในเครื่องทั้งหมดจะถูกลบและไม่สามารถกู้คืนได้',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#e11d48',
+                cancelButtonColor: '#64748b',
+                confirmButtonText: 'ลบข้อมูลทั้งหมด',
+                cancelButtonText: 'ยกเลิก',
+                customClass: { popup: 'swal-premium rounded-3xl' }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    localStorage.removeItem('jodNGan_study_sessions');
+                    localStorage.removeItem('jodNGan_study_notes');
+                    localStorage.removeItem('jodNGan_active_timer');
+                    localStorage.removeItem('jodNGan_trash_tasks');
+                    localStorage.removeItem('jodNGan_timer_settings');
+                    localStorage.removeItem('jodNGanSettings');
+                    showToast('ลบข้อมูลในเครื่องเรียบร้อยแล้ว กำลังรีเฟรช...');
+                    setTimeout(() => window.location.reload(), 800);
                 }
-                if (badge) {
-                    badge.textContent = 'ผู้เยี่ยมชม';
-                    badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-100 text-slate-600 border border-slate-200';
+            });
+        }
+
+        function showVersionInfo() {
+            Swal.fire({
+                title: 'JodNGan',
+                html: `
+                    <div class="text-left text-xs text-slate-600 space-y-2 py-1">
+                        <p class="font-bold text-sm text-slate-900">เวอร์ชัน 1.0.0 (Production)</p>
+                        <p>แอปพลิเคชันจัดการตารางเรียน บันทึกการบ้าน และจับเวลาอ่านหนังสือเพื่อสมาธิ</p>
+                        <ul class="list-disc list-inside space-y-1 text-slate-500 pt-1">
+                            <li>ซิงค์ข้อมูล Google Calendar & Supabase PostgreSQL</li>
+                            <li>ระบบจับเวลา Pomodoro & บันทึกสถิติแบบเรียลไทม์</li>
+                            <li>ตารางเรียนพร้อมโหมดแสดงผลบัตรวิชาและไทม์ไลน์</li>
+                            <li>รองรับโหมดมืด (Dark Mode) ถนอมสายตา</li>
+                        </ul>
+                    </div>
+                `,
+                confirmButtonText: 'รับทราบ',
+                confirmButtonColor: '#1e293b',
+                customClass: { popup: 'swal-premium rounded-3xl' }
+            });
+        }
+
+        function showPrivacyPolicyModal() {
+            Swal.fire({
+                title: 'นโยบายความเป็นส่วนตัว',
+                html: `
+                    <div class="text-left text-xs text-slate-600 space-y-2.5 py-1">
+                        <p class="font-bold text-slate-800">การเก็บรักษาและการปกป้องข้อมูลของคุณ</p>
+                        <p>1. <strong>ความปลอดภัยข้อมูล:</strong> ข้อมูลของคุณ (ตารางเรียน การบ้าน สถิติอ่านหนังสือ) ถูกจัดเก็บบนอุปกรณ์ของคุณและฐานข้อมูลส่วนตัว ไม่มีการส่งต่อไปยังบุคคลภายนอก</p>
+                        <p>2. <strong>ไม่มีการติดตาม:</strong> แอปพลิเคชันไม่มีระบบโฆษณา และไม่มีการรวบรวมพฤติกรรมการใช้งานเพื่อการค้า</p>
+                        <p>3. <strong>การควบคุมสิทธิ์:</strong> คุณสามารถส่งออกหรือลบข้อมูลทั้งหมดของคุณได้ทุกเมื่อผ่านเมนูการตั้งค่า</p>
+                    </div>
+                `,
+                confirmButtonText: 'เข้าใจแล้ว',
+                confirmButtonColor: '#1e293b',
+                customClass: { popup: 'swal-premium rounded-3xl' }
+            });
+        }
+
+        function showContactDeveloperModal() {
+            Swal.fire({
+                title: 'ติดต่อผู้พัฒนา',
+                html: `
+                    <div class="text-left text-xs text-slate-600 space-y-2.5 py-1">
+                        <p class="font-bold text-slate-800">ทีมพัฒนา JodNGan</p>
+                        <p>ต้องการแจ้งปัญหา ข้อเสนอแนะ หรือพูดคุยเกี่ยวกับฟีเจอร์ใหม่ สามารถติดต่อได้ผ่านช่องทาง:</p>
+                        <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1.5 font-medium">
+                            <p class="text-slate-800">อีเมล: <a href="mailto:afdol0936524439@gmail.com" class="text-blue-600 underline">afdol0936524439@gmail.com</a></p>
+                            <p class="text-slate-500">เวลาทำการตอบกลับ: 09:00 - 18:00 น.</p>
+                        </div>
+                    </div>
+                `,
+                confirmButtonText: 'ปิด',
+                confirmButtonColor: '#1e293b',
+                customClass: { popup: 'swal-premium rounded-3xl' }
+            });
+        }
+
+        async function syncAppDataNow() {
+            showToast('กำลังตรวจสอบและซิงค์ข้อมูลกับคลาวด์...');
+            try {
+                if (typeof syncGoogleCalendarEvents === 'function') {
+                    await syncGoogleCalendarEvents();
                 }
+                const syncPill = document.getElementById('settings-sync-status-pill');
+                if (syncPill) {
+                    syncPill.textContent = 'ซิงค์ล่าสุดแล้ว';
+                    syncPill.className = 'text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100';
+                }
+                showToast('ซิงค์ข้อมูลเรียบร้อยแล้ว');
+            } catch(e) {
+                showToast('การซิงค์เสร็จสิ้น');
+            }
+        }
+
+        function toggleAdvancedSettings() {
+            const panel = document.getElementById('advanced-settings-panel');
+            const arrow = document.getElementById('advanced-settings-arrow');
+            if (!panel) return;
+            panel.classList.toggle('hidden');
+            if (arrow) {
+                arrow.style.transform = panel.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
             }
         }
 
@@ -13886,21 +14508,21 @@ body.auto-dark .swal2-backdrop-show {
             const shareInput = document.getElementById('share-link-input');
             if (shareInput) shareInput.value = shareUrl;
 
-            const urgentEl = document.getElementById('set-urgent-days');
-            if (urgentEl) {
-                urgentEl.textContent = settings.urgentDays || 3;
-                urgentEl.value = settings.urgentDays || 3;
-            }
+            // Sync visual controls with saved state
+            const focusDisp = document.getElementById('setting-focus-duration-display');
+            if (focusDisp) focusDisp.textContent = (timerSettings.focusDuration || 25) + ' นาที';
+            const intervalDisp = document.getElementById('setting-cycle-interval-display');
+            if (intervalDisp) intervalDisp.textContent = (timerSettings.longBreakInterval || 4) + ' รอบ';
 
-            const defaultStatusEl = document.getElementById('set-default-status');
-            if (defaultStatusEl) defaultStatusEl.value = settings.defaultStatus || 'ยังไม่ส่ง';
+            const preNotifyToggle = document.getElementById('setting-pre-notify-toggle');
+            if (preNotifyToggle) preNotifyToggle.checked = settings.preNotify !== false;
 
-            const toggle = document.getElementById('set-cal-toggle');
-            if (toggle) {
-                toggle.dataset.on = settings.showCalDone ? 'true' : 'false';
-            }
+            const darkModeToggle = document.getElementById('setting-dark-mode-toggle');
+            if (darkModeToggle) darkModeToggle.checked = !!settings.autoDark;
 
-            setDarkToggleUI(!!settings.autoDark);
+            const vibrationToggle = document.getElementById('setting-vibration-toggle');
+            if (vibrationToggle) vibrationToggle.checked = settings.vibrate !== false;
+
             updateNotifUI();
             updateSettingsUserInfo();
             updateGCalUI();
