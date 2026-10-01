@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -2777,27 +2777,30 @@ img,svg,video,canvas{max-width:100%}
   #main-scroll{padding-left:24px!important;padding-right:24px!important}
 }
 @media(max-width:767px){
-  #app-sidebar{background:#fff!important;border-right:0!important;box-shadow:18px 0 50px rgba(0,0,0,.12)!important}
-  .app-container main>header{height:68px!important;padding:0 16px!important}
-  #main-scroll{padding:16px 14px 120px!important}
-  #page-title{font-size:19px!important}
+  #app-sidebar{background:#1e293b!important;color:#ffffff!important;border-right:0!important;box-shadow:18px 0 50px rgba(0,0,0,.55)!important}
+  #app-sidebar .sidebar-label{color:#ffffff!important}
+  #timer-floating-dock{display:none!important}
+  .app-container main>header{height:60px!important;padding:0 14px!important}
+  #main-scroll{padding:14px 12px 105px!important}
+  #page-title{font-size:18px!important}
   .app-container main>header .w-px{display:none!important}
-  #auth-login-btn{padding:9px 11px!important}
+  #auth-login-btn{padding:8px 10px!important}
   #auth-login-btn span{font-size:10px!important}
-  .card,#view-calendar>.bg-white,#view-calendar .bg-white.rounded-3xl,#view-tasks>.bg-white{border-radius:22px!important}
+  .card,#view-calendar>.bg-white,#view-calendar .bg-white.rounded-3xl,#view-tasks>.bg-white{border-radius:20px!important}
   #view-dashboard .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
   #view-dashboard .stats-grid>div{min-height:90px!important}
   #view-calendar .flex.flex-wrap{gap:6px!important}
+  .timetable-grid-wrapper{-webkit-overflow-scrolling:touch}
 }
 @media(max-width:430px){
-  #main-scroll{padding-left:11px!important;padding-right:11px!important}
+  #main-scroll{padding-left:10px!important;padding-right:10px!important;padding-bottom:100px!important}
   #view-dashboard .stats-grid{gap:8px!important}
   #view-dashboard .stats-grid>div{padding:12px!important;border-radius:17px!important}
   #view-dashboard .stats-grid p:last-child{font-size:1.45rem!important}
-  #mobile-bottom-nav{width:calc(100% - 12px)!important;height:60px!important;bottom:max(8px,env(safe-area-inset-bottom))!important;border-radius:22px!important;padding:3px 3px!important}
-  .mob-nav-btn{min-width:0!important;flex:1 1 0!important;height:52px!important;border-radius:15px!important;padding:3px 1px!important}
+  #mobile-bottom-nav{width:calc(100% - 12px)!important;height:60px!important;bottom:max(8px,env(safe-area-inset-bottom))!important;border-radius:22px!important;padding:3px 2px!important}
+  .mob-nav-btn{min-width:0!important;flex:1 1 0!important;height:52px!important;border-radius:14px!important;padding:2px 1px!important}
   .mob-nav-btn svg{width:18px!important;height:18px!important}
-  .mob-nav-btn span{font-size:9.5px!important}
+  .mob-nav-btn span{font-size:9px!important}
 }
 @media(min-width:768px){#mobile-bottom-nav{display:none!important}}
 
@@ -4146,68 +4149,70 @@ body.auto-dark .swal2-backdrop-show {
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8 mb-8">
                         <!-- Calendar -->
-                        <div class="card rounded-[2rem] bg-white border border-slate-100 shadow-sm p-8 h-[520px] flex flex-col">
-                            <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
-                                <div class="flex items-center gap-2">
+                        <div class="card rounded-2xl sm:rounded-[2rem] bg-white border border-slate-100 shadow-sm p-4 sm:p-6 md:p-8 h-auto lg:h-[520px] flex flex-col">
+                            <div class="flex items-center justify-between gap-3 mb-4 sm:mb-6 flex-wrap">
+                                <div class="flex items-center gap-2 sm:gap-2.5 min-w-0 flex-wrap">
                                     <div class="w-7 h-7 rounded-lg bg-primary/15 flex items-center justify-center shrink-0">
                                         <svg class="text-xs" style="color:var(--theme-primary)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M8 2v3M16 2v3M3 7h18M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
                                     </div>
-                                    <h3 class="text-base font-bold text-textprimary">ปฏิทินงาน</h3>
+                                    <h3 class="text-sm sm:text-base font-bold text-textprimary whitespace-nowrap">ปฏิทินงาน</h3>
+                                    <!-- Month selector placed right beside ปฏิทินงาน on the same axis -->
+                                    <div class="inline-flex items-center justify-between gap-1 bg-slate-100/90 rounded-full p-0.5 border border-slate-200/60 shadow-2xs">
+                                        <button type="button" onclick="changeCalMonth(-1)" class="w-6 h-6 rounded-full hover:bg-white text-slate-600 hover:text-slate-900 flex items-center justify-center transition shadow-2xs cursor-pointer shrink-0" title="เดือนก่อนหน้า"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="11" height="11"><path d="M15 18l-6-6 6-6"/></svg></button>
+                                        <span id="cal-month-year" class="font-bold text-xs text-slate-800 px-2 text-center whitespace-nowrap min-w-[95px]">เดือน พ.ศ.</span>
+                                        <button type="button" onclick="changeCalMonth(1)" class="w-6 h-6 rounded-full hover:bg-white text-slate-600 hover:text-slate-900 flex items-center justify-center transition shadow-2xs cursor-pointer shrink-0" title="เดือนถัดไป"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="11" height="11"><path d="M9 18l6-6-6-6"/></svg></button>
+                                    </div>
                                 </div>
-                                <div class="flex items-center gap-2">
+                                <div class="flex items-center gap-2 shrink-0">
                                     <button id="btn-sync-gcal" onclick="syncGoogleCalendarEvents()" class="hidden p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition" title="ดึงข้อมูลกิจกรรมล่าสุดจาก Google Calendar">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
                                     </button>
-                                    <div class="inline-flex items-center justify-between gap-1.5 bg-slate-100/90 rounded-full p-1 border border-slate-200/60 shadow-2xs">
-                                        <button type="button" onclick="changeCalMonth(-1)" class="w-7 h-7 rounded-full hover:bg-white text-slate-600 hover:text-slate-900 flex items-center justify-center transition shadow-2xs cursor-pointer shrink-0" title="เดือนก่อนหน้า"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M15 18l-6-6 6-6"/></svg></button>
-                                        <span id="cal-month-year" class="font-bold text-xs sm:text-sm text-slate-800 px-2 sm:px-3 text-center whitespace-nowrap min-w-[110px]">เดือน พ.ศ.</span>
-                                        <button type="button" onclick="changeCalMonth(1)" class="w-7 h-7 rounded-full hover:bg-white text-slate-600 hover:text-slate-900 flex items-center justify-center transition shadow-2xs cursor-pointer shrink-0" title="เดือนถัดไป"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M9 18l6-6-6-6"/></svg></button>
-                                    </div>
                                 </div>
                             </div>
                             <!-- Days Header -->
-                            <div class="grid grid-cols-7 text-center text-xs font-bold text-slate-400 mb-4">
+                            <div class="grid grid-cols-7 text-center text-[11px] sm:text-xs font-bold text-slate-400 mb-2 sm:mb-4">
                                 <div>อา</div><div>จ</div><div>อ</div><div>พ</div><div>พฤ</div><div>ศ</div><div>ส</div>
                             </div>
                             <!-- Days Grid -->
-                            <div id="calendar-grid" class="grid grid-cols-7 flex-1 gap-1">
+                            <div id="calendar-grid" class="grid grid-cols-7 flex-1 gap-1 min-h-[220px]">
                                 <!-- JS Injects here -->
                             </div>
                         </div>
 
                         <!-- Urgent Tasks -->
-                        <div class="card rounded-[2rem] bg-white border border-slate-100 shadow-sm p-8 h-[520px] flex flex-col">
-                            <div class="flex items-center justify-between mb-6">
-                                <div class="flex items-center gap-2"><div class="w-7 h-7 rounded-xl bg-red-50 text-red-500 border border-red-100 flex items-center justify-center shrink-0"><svg class="text-xs text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z M12 9v4 M12 17h.01"/></svg></div><h3 class="text-base font-bold text-textprimary">งานด่วน / สอบ</h3></div>
+                        <div class="card rounded-2xl sm:rounded-[2rem] bg-white border border-slate-100 shadow-sm p-4 sm:p-6 md:p-8 h-auto lg:h-[520px] flex flex-col">
+                            <div class="flex items-center justify-between mb-4 sm:mb-6">
+                                <div class="flex items-center gap-2"><div class="w-7 h-7 rounded-xl bg-red-50 text-red-500 border border-red-100 flex items-center justify-center shrink-0"><svg class="text-xs text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z M12 9v4 M12 17h.01"/></svg></div><h3 class="text-sm sm:text-base font-bold text-textprimary">งานด่วน / สอบ</h3></div>
                                 <span class="bg-red-50 text-red-500 border border-red-100 text-xs font-semibold px-3 py-1 rounded-full inline-flex items-center gap-1.5"><span id="urgent-count-text" class="font-bold">0</span> รายการ</span>
                             </div>
-                            <div id="urgent-list" class="flex-1 overflow-y-auto pr-1 flex flex-col gap-3">
+                            <div id="urgent-list" class="flex-1 overflow-y-auto pr-1 flex flex-col gap-3 max-h-[360px] lg:max-h-none">
                                 <!-- JS Injects here -->
                             </div>
                         </div>
                     </div>
 
-                    <!-- Recent Tasks Table -->
-                    <div class="card rounded-[2rem] bg-white border border-slate-100 shadow-sm overflow-hidden flex flex-col">
-                        <div class="p-6 md:p-8 flex items-center justify-between border-b border-slate-50">
-                            <div class="flex items-center gap-3">
+                    <!-- Recent Tasks Section: Dual Mode (Desktop Table + Mobile Cards) -->
+                    <div class="card rounded-2xl sm:rounded-[2rem] bg-white border border-slate-100 shadow-sm overflow-hidden flex flex-col">
+                        <div class="p-4 sm:p-6 md:p-8 flex items-center justify-between border-b border-slate-50">
+                            <div class="flex items-center gap-2.5 sm:gap-3">
                                 <div class="w-8 h-8 rounded-xl bg-primary/15 flex items-center justify-center shrink-0">
                                     <svg class="text-sm" style="color: var(--theme-primary)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8 M3 3v5h5 M12 7v5l3 3"/></svg>
                                 </div>
                                 <div>
-                                    <h3 class="text-base font-bold text-textprimary leading-tight">อัปเดตล่าสุด</h3>
+                                    <h3 class="text-sm sm:text-base font-bold text-textprimary leading-tight">อัปเดตล่าสุด</h3>
                                     <p class="text-[11px] text-slate-400 font-medium mt-0.5">แสดง 3 รายการล่าสุด</p>
                                 </div>
                             </div>
-                            <button onclick="nav('tasks')" class="flex items-center gap-2 text-xs font-semibold text-slate-500 hover:text-textprimary bg-slate-50 hover:bg-slate-100 border border-slate-200 px-3.5 py-2 rounded-xl transition-all duration-150">
+                            <button onclick="nav('tasks')" class="flex items-center gap-1.5 sm:gap-2 text-xs font-semibold text-slate-500 hover:text-textprimary bg-slate-50 hover:bg-slate-100 border border-slate-200 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl transition-all duration-150">
                                 <svg class="text-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
                                 <span>ดูทั้งหมด</span>
                                 <svg class="text-xs opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                             </button>
                         </div>
-                        <div class="overflow-x-auto">
+                        <!-- Desktop Table View -->
+                        <div class="hidden lg:block overflow-x-auto">
                             <table class="w-full text-left border-collapse min-w-[960px]">
                                 <colgroup>
                                     <col style="width:130px">
@@ -4235,6 +4240,10 @@ body.auto-dark .swal2-backdrop-show {
                                     <!-- JS Injects here -->
                                 </tbody>
                             </table>
+                        </div>
+                        <!-- Mobile & Tablet Responsive Cards -->
+                        <div id="recent-cards-mobile" class="block lg:hidden divide-y divide-slate-100 p-3 sm:p-4 space-y-3">
+                            <!-- JS Injects mobile cards here -->
                         </div>
                     </div>
                 </div>
@@ -4306,15 +4315,15 @@ body.auto-dark .swal2-backdrop-show {
                             </div>
                         </div>
 
-                        <!-- Two-Column Body Layout matching reference image -->
-                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                        <!-- Two-Column Body Layout matching reference image (Timetable first on mobile) -->
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6">
                             
-                            <!-- Left Column: Mini Month Calendar + My Calendar Checklist + Other Calendar -->
-                            <div class="lg:col-span-4 space-y-5">
+                            <!-- Left Column: Mini Month Calendar + My Calendar Checklist + Other Calendar (order-2 on mobile) -->
+                            <div class="lg:col-span-4 space-y-4 sm:space-y-5 order-2 lg:order-1">
                                 
                                 <!-- Card 1: Mini Month Calendar -->
-                                <div class="rounded-[26px] p-4.5 sm:p-5 text-white border border-white/25 shadow-sm" style="background: rgba(133, 128, 186, 0.78); backdrop-filter: blur(12px);">
-                                    <div class="flex items-center justify-between gap-2 mb-3.5 px-0.5">
+                                <div class="rounded-2xl sm:rounded-[26px] p-4 sm:p-5 text-white border border-white/25 shadow-sm" style="background: rgba(133, 128, 186, 0.78); backdrop-filter: blur(12px);">
+                                    <div class="flex items-center justify-between gap-2 mb-3 px-0.5">
                                         <button type="button" onclick="navigateMiniCal(-1)" class="mini-cal-nav-btn w-7 h-7 min-w-[28px] max-w-[28px] min-h-[28px] max-h-[28px] rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition shrink-0 cursor-pointer shadow-2xs" title="เดือนก่อนหน้า">
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12"><path d="M15 18l-6-6 6-6"/></svg>
                                         </button>
@@ -4334,7 +4343,7 @@ body.auto-dark .swal2-backdrop-show {
                                 </div>
 
                                 <!-- Card 2: My Calendar (Checklist of draggable tasks) -->
-                                <div class="bg-white rounded-[26px] p-4.5 sm:p-5 text-slate-800 shadow-sm border border-slate-100 flex flex-col">
+                                <div class="bg-white rounded-2xl sm:rounded-[26px] p-4 sm:p-5 text-slate-800 shadow-sm border border-slate-100 flex flex-col">
                                     <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
                                         <div class="flex items-center gap-1.5">
                                             <h3 class="text-sm font-extrabold text-slate-900">My Calendar</h3>
@@ -4352,7 +4361,7 @@ body.auto-dark .swal2-backdrop-show {
                                 </div>
 
                                 <!-- Card 3: Other Calendar (Google Calendar Feeds) -->
-                                <div class="bg-white rounded-[26px] p-4.5 sm:p-5 text-slate-800 shadow-sm border border-slate-100">
+                                <div class="bg-white rounded-2xl sm:rounded-[26px] p-4 sm:p-5 text-slate-800 shadow-sm border border-slate-100">
                                     <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
                                         <h3 class="text-sm font-extrabold text-slate-900">Other Calendar</h3>
                                         <button type="button" onclick="showAllGoogleCalendarEventsModal()" class="inline-flex items-center gap-1 text-[11px] font-bold text-blue-600 hover:text-blue-800 bg-blue-50 px-2 py-0.5 rounded-lg border border-blue-200 transition">
@@ -4368,22 +4377,29 @@ body.auto-dark .swal2-backdrop-show {
 
                             </div>
 
-                            <!-- Right Column: Timetable Grid Board in crisp white card -->
-                            <div class="lg:col-span-8 bg-white rounded-[28px] p-4.5 sm:p-6 text-slate-800 shadow-sm border border-slate-100 flex flex-col flex-1">
+                            <!-- Right Column: Timetable Grid Board (order-1 on mobile so timetable is immediately seen) -->
+                            <div class="lg:col-span-8 bg-white rounded-2xl sm:rounded-[28px] p-3.5 sm:p-6 text-slate-800 shadow-sm border border-slate-100 flex flex-col flex-1 order-1 lg:order-2">
                                 
                                 <!-- Timetable Header: Selected Date & Navigation -->
                                 <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100 flex-wrap gap-2.5">
-                                    <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
-                                        <div class="inline-flex items-center gap-1 bg-slate-100/90 rounded-full p-1 border border-slate-200/60 shadow-2xs">
+                                    <div class="flex items-center gap-2 sm:gap-2.5 flex-wrap">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-6 h-6 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
+                                                <svg class="w-3.5 h-3.5" style="color:var(--theme-primary)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                            </div>
+                                            <h3 class="text-sm sm:text-base font-bold text-slate-900 whitespace-nowrap">ปฏิทินงาน</h3>
+                                        </div>
+                                        <!-- Month selector placed right beside ปฏิทินงาน on the same axis -->
+                                        <div class="inline-flex items-center gap-1 bg-slate-100/90 rounded-full p-0.5 sm:p-1 border border-slate-200/60 shadow-2xs">
                                             <button type="button" onclick="navigateDedicatedCal(-1)" class="w-6 h-6 rounded-full hover:bg-white text-slate-700 flex items-center justify-center transition shadow-2xs cursor-pointer" title="ก่อนหน้า">
                                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="11" height="11"><path d="M15 18l-6-6 6-6"/></svg>
                                             </button>
-                                            <span id="dedicated-cal-month-display" class="text-xs sm:text-sm font-bold text-slate-900 px-2 select-none">January 05 - 2024</span>
+                                            <span id="dedicated-cal-month-display" class="text-xs sm:text-sm font-bold text-slate-900 px-1 sm:px-2 select-none whitespace-nowrap truncate max-w-[130px] sm:max-w-none">January 05 - 2024</span>
                                             <button type="button" onclick="navigateDedicatedCal(1)" class="w-6 h-6 rounded-full hover:bg-white text-slate-700 flex items-center justify-center transition shadow-2xs cursor-pointer" title="ถัดไป">
                                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="11" height="11"><path d="M9 18l6-6-6-6"/></svg>
                                             </button>
                                         </div>
-                                        <button type="button" onclick="jumpDedicatedCalToToday()" class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 transition cursor-pointer border border-slate-200/60 shadow-2xs">Today</button>
+                                        <button type="button" onclick="jumpDedicatedCalToToday()" class="px-2.5 sm:px-3 py-1 rounded-full text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 transition cursor-pointer border border-slate-200/60 shadow-2xs">Today</button>
                                     </div>
                                     <span id="timetable-subtitle" class="text-xs text-slate-400 font-medium hidden sm:inline-block">ลากการ์ดงานมาวางในช่องเวลาได้</span>
                                 </div>
@@ -4403,9 +4419,20 @@ body.auto-dark .swal2-backdrop-show {
                                     </div>
                                 </div>
 
-                                <!-- Dedicated Selected Day Agenda (Bottom section of calendar) -->
-                                <div id="dedicated-cal-selected-agenda" class="mt-6 pt-5 border-t border-slate-100">
-                                    <!-- JS Injects selected day tasks and events with refined empty state -->
+                                <!-- Dedicated Selected Day Agenda (Bottom section: ปฏิทินและกำหนดส่ง) -->
+                                <div class="mt-7 pt-6 border-t border-slate-100">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-6 h-6 rounded-lg bg-sidebar text-white flex items-center justify-center text-xs">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                            </div>
+                                            <h4 class="text-sm font-bold text-slate-900">ปฏิทินและกำหนดส่ง</h4>
+                                        </div>
+                                        <span id="dedicated-cal-tasks-count-badge" class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600">0 รายการ</span>
+                                    </div>
+                                    <div id="dedicated-cal-selected-agenda" class="w-full">
+                                        <!-- JS Injects selected day tasks with clean centered balanced layout -->
+                                    </div>
                                 </div>
 
                                 <!-- Bottom Status / Legend Bar -->
@@ -4521,36 +4548,38 @@ body.auto-dark .swal2-backdrop-show {
                         </button>
                     </div>
 
-                    <!-- Filter Bar -->
-                    <div class="flex flex-col md:flex-row gap-3 mb-6">
+                    <!-- Filter Bar (Secondary Utility Controls) -->
+                    <div class="flex flex-col md:flex-row gap-2.5 mb-5">
                         <div class="relative flex-1">
-                            <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
-                            <input type="text" id="filter-search" placeholder="ค้นหาตามชื่องาน..." class="w-full h-10 bg-white border border-slate-200 rounded-xl pl-10 pr-4 text-xs sm:text-sm font-medium focus:outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-100 transition shadow-2xs">
+                            <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
+                            <input type="text" id="filter-search" placeholder="ค้นหาตามชื่องาน..." class="w-full h-9 bg-white border border-slate-200/90 rounded-xl pl-9 pr-3 text-xs font-normal text-slate-600 placeholder:text-slate-400 focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-100 transition shadow-2xs">
                         </div>
-                        <div class="relative w-full md:w-36 shrink-0">
-                            <select id="filter-priority" class="w-full h-10 bg-white border border-slate-200 rounded-xl pl-3.5 pr-8 text-xs sm:text-sm font-medium text-slate-600 focus:outline-none focus:border-slate-400 appearance-none shadow-2xs cursor-pointer">
-                                <option value="all">ทุกความสำคัญ</option>
-                                <option value="ทั่วไป">ทั่วไป</option>
-                                <option value="ด่วน">ด่วน</option>
-                                <option value="สอบ">สอบ</option>
-                                <option value="ข่าว">ข่าว</option>
-                            </select>
-                            <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M6 9l6 6 6-6"/></svg>
-                        </div>
-                        <div class="relative w-full md:w-44 shrink-0">
-                            <select id="filter-subject" class="w-full h-10 bg-white border border-slate-200 rounded-xl pl-3.5 pr-8 text-xs sm:text-sm font-medium text-slate-600 focus:outline-none focus:border-slate-400 appearance-none shadow-2xs cursor-pointer">
-                                <option value="all">ทุกวิชา</option>
-                                <!-- JS Injects -->
-                            </select>
-                            <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M6 9l6 6 6-6"/></svg>
-                        </div>
-                        <div class="relative w-full md:w-36 shrink-0">
-                            <select id="filter-status" class="w-full h-10 bg-white border border-slate-200 rounded-xl pl-3.5 pr-8 text-xs sm:text-sm font-medium text-slate-600 focus:outline-none focus:border-slate-400 appearance-none shadow-2xs cursor-pointer">
-                                <option value="all">ทุกสถานะ</option>
-                                <option value="ยังไม่ส่ง">ยังไม่ส่ง</option>
-                                <option value="ส่งแล้ว">ส่งแล้ว</option>
-                            </select>
-                            <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M6 9l6 6 6-6"/></svg>
+                        <div class="grid grid-cols-3 gap-2 md:flex md:items-center shrink-0">
+                            <div class="relative min-w-0 md:w-36">
+                                <select id="filter-priority" class="w-full h-9 bg-white border border-slate-200/90 rounded-xl pl-2.5 pr-6 text-xs font-normal text-slate-600 focus:outline-none focus:border-slate-400 appearance-none shadow-2xs cursor-pointer truncate">
+                                    <option value="all">ทุกความสำคัญ</option>
+                                    <option value="ทั่วไป">ทั่วไป</option>
+                                    <option value="ด่วน">ด่วน</option>
+                                    <option value="สอบ">สอบ</option>
+                                    <option value="ข่าว">ข่าว</option>
+                                </select>
+                                <svg class="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M6 9l6 6 6-6"/></svg>
+                            </div>
+                            <div class="relative min-w-0 md:w-44">
+                                <select id="filter-subject" class="w-full h-9 bg-white border border-slate-200/90 rounded-xl pl-2.5 pr-6 text-xs font-normal text-slate-600 focus:outline-none focus:border-slate-400 appearance-none shadow-2xs cursor-pointer truncate">
+                                    <option value="all">ทุกวิชา</option>
+                                    <!-- JS Injects -->
+                                </select>
+                                <svg class="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M6 9l6 6 6-6"/></svg>
+                            </div>
+                            <div class="relative min-w-0 md:w-36">
+                                <select id="filter-status" class="w-full h-9 bg-white border border-slate-200/90 rounded-xl pl-2.5 pr-6 text-xs font-normal text-slate-600 focus:outline-none focus:border-slate-400 appearance-none shadow-2xs cursor-pointer truncate">
+                                    <option value="all">ทุกสถานะ</option>
+                                    <option value="ยังไม่ส่ง">ยังไม่ส่ง</option>
+                                    <option value="ส่งแล้ว">ส่งแล้ว</option>
+                                </select>
+                                <svg class="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M6 9l6 6 6-6"/></svg>
+                            </div>
                         </div>
                     </div>
 
@@ -4596,29 +4625,29 @@ body.auto-dark .swal2-backdrop-show {
 
                 <!-- ================= VIEW: ADD/EDIT TASK ================= -->
                 <div id="view-add-task" class="view-section">
-                    <div class="card max-w-3xl mx-auto bg-white rounded-[2.5rem] p-8 md:p-10 border border-slate-100 shadow-sm">
-                        <h3 id="form-title" class="text-2xl font-bold text-textprimary mb-8 border-b border-slate-100 pb-4">เพิ่มรายการใหม่</h3>
+                    <div class="card max-w-3xl mx-auto bg-white rounded-2xl sm:rounded-[2.5rem] p-4 sm:p-8 md:p-10 border border-slate-100 shadow-sm">
+                        <h3 id="form-title" class="text-xl sm:text-2xl font-bold text-textprimary mb-5 sm:mb-8 border-b border-slate-100 pb-3 sm:pb-4">เพิ่มรายการใหม่</h3>
                         
                         <form id="task-form" onsubmit="saveTask(event)">
                             <input type="hidden" id="task-id">
                             <input type="hidden" id="task-calendar-event-id">
                             <input type="hidden" id="task-category">
                             
-                            <div class="task-form-grid grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5 mb-8" style="display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 1.5rem !important; row-gap: 1.25rem !important;">
+                            <div class="task-form-grid grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-x-6 sm:gap-y-5 mb-6 sm:mb-8">
                                 <!-- Title -->
-                                <div class="col-span-full col-span-1 md:col-span-2">
+                                <div class="col-span-1 md:col-span-2">
                                     <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">ชื่องาน / สอบ <span class="text-red-500">*</span></label>
                                     <input type="text" id="task-title" required class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-sm font-semibold text-textprimary focus:outline-none focus:border-primary focus:bg-white transition">
                                 </div>
 
                                 <!-- Description -->
-                                <div class="col-span-full col-span-1 md:col-span-2">
+                                <div class="col-span-1 md:col-span-2">
                                     <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">รายละเอียดเพิ่มเติม</label>
                                     <textarea id="task-desc" rows="3" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-sm font-medium text-slate-600 focus:outline-none focus:border-primary focus:bg-white transition resize-none"></textarea>
                                 </div>
 
                                 <!-- Step 1: Select Category First -->
-                                <div class="col-span-half col-span-1 w-full">
+                                <div class="col-span-1 w-full">
                                     <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">เลือกหมวดหมู่ก่อน <span class="text-red-500">*</span></label>
                                     <select id="task-category-select" required onchange="filterTaskSubjectsByCategory()" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-sm font-semibold text-textprimary focus:outline-none focus:border-primary focus:bg-white transition appearance-none">
                                         <option value="" disabled selected>เลือกหมวดหมู่...</option>
@@ -4628,7 +4657,7 @@ body.auto-dark .swal2-backdrop-show {
                                 </div>
 
                                 <!-- Step 2: Subject Dropdown based on Category -->
-                                <div class="col-span-half col-span-1 w-full">
+                                <div class="col-span-1 w-full">
                                     <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">รายวิชา <span class="text-red-500">*</span></label>
                                     <select id="task-subject" required disabled onchange="updateCategoryField()" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-sm font-semibold text-textprimary focus:outline-none focus:border-primary focus:bg-white transition appearance-none disabled:opacity-50 disabled:cursor-not-allowed">
                                         <option value="" disabled selected>กรุณาเลือกหมวดหมู่ก่อน...</option>
@@ -4637,19 +4666,19 @@ body.auto-dark .swal2-backdrop-show {
                                 </div>
 
                                 <!-- Order Date -->
-                                <div class="col-span-half col-span-1 w-full">
+                                <div class="col-span-1 w-full">
                                     <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">วันที่สั่งงาน / ประกาศ <span class="text-red-500">*</span></label>
-                                    <input type="date" id="task-order-date" required class="w-full block bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-sm font-semibold text-textprimary focus:outline-none focus:border-primary focus:bg-white transition" style="margin: 0 !important; width: 100% !important; box-sizing: border-box !important;">
+                                    <input type="date" id="task-order-date" required class="w-full block bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-sm font-semibold text-textprimary focus:outline-none focus:border-primary focus:bg-white transition">
                                 </div>
 
                                 <!-- Due Date -->
-                                <div class="col-span-half col-span-1 w-full">
+                                <div class="col-span-1 w-full">
                                     <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">กำหนดส่งงาน / สอบ <span class="text-red-500">*</span></label>
-                                    <input type="date" id="task-due-date" required class="w-full block bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-sm font-semibold text-textprimary focus:outline-none focus:border-primary focus:bg-white transition" style="margin: 0 !important; width: 100% !important; box-sizing: border-box !important;">
+                                    <input type="date" id="task-due-date" required class="w-full block bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-sm font-semibold text-textprimary focus:outline-none focus:border-primary focus:bg-white transition">
                                 </div>
 
                                 <!-- Priority -->
-                                <div class="col-span-half col-span-1 w-full">
+                                <div class="col-span-1 w-full">
                                     <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">ระดับความสำคัญ</label>
                                     <select id="task-priority" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-sm font-semibold text-textprimary focus:outline-none focus:border-primary focus:bg-white transition appearance-none">
                                         <option value="ทั่วไป">ทั่วไป</option>
@@ -4660,7 +4689,7 @@ body.auto-dark .swal2-backdrop-show {
                                 </div>
 
                                 <!-- Status -->
-                                <div class="col-span-half col-span-1 w-full">
+                                <div class="col-span-1 w-full">
                                     <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">สถานะเริ่มต้น</label>
                                     <select id="task-status" class="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 text-sm font-semibold text-textprimary focus:outline-none focus:border-primary focus:bg-white transition appearance-none">
                                         <option value="ยังไม่ส่ง">รอดำเนินการ (ยังไม่ส่ง/ยังไม่สอบ)</option>
@@ -4669,7 +4698,7 @@ body.auto-dark .swal2-backdrop-show {
                                 </div>
 
                                 <!-- File Upload -->
-                                <div class="col-span-full col-span-1 md:col-span-2 mt-2">
+                                <div class="col-span-1 md:col-span-2 mt-2">
                                     <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">อัปโหลดไฟล์ (รูปภาพ, เอกสาร, PDF)</label>
                                     
                                     <!-- Existing File (For Edit) -->
@@ -4845,8 +4874,9 @@ body.auto-dark .swal2-backdrop-show {
                     </div>
 
                     <!-- Main Trash Card Panel -->
-                    <div class="card bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col min-h-[520px]">
-                        <div class="flex-1 overflow-x-auto relative">
+                    <div class="card bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col min-h-[420px]">
+                        <!-- Desktop Table View -->
+                        <div class="hidden lg:block overflow-x-auto relative">
                             <table class="w-full text-left border-collapse min-w-[860px]">
                                 <thead>
                                     <tr class="bg-slate-50/80 text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">
@@ -4862,15 +4892,20 @@ body.auto-dark .swal2-backdrop-show {
                                     <!-- JS Injects -->
                                 </tbody>
                             </table>
-                            
-                            <!-- Empty State -->
-                            <div id="trash-empty" class="absolute inset-0 flex flex-col items-center justify-center bg-white p-8 hidden">
-                                <div class="w-16 h-16 bg-slate-50 border border-slate-100 rounded-3xl flex items-center justify-center mb-3.5 text-slate-300 shadow-2xs">
-                                    <svg class="w-8 h-8 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
-                                </div>
-                                <p class="font-bold text-base text-slate-700 mb-1">ถังขยะว่างเปล่า</p>
-                                <p class="text-xs sm:text-sm text-slate-400">ไม่มีรายการงานหรือการบ้านที่ถูกลบอยู่ในขณะนี้</p>
+                        </div>
+
+                        <!-- Mobile & Tablet Responsive Cards -->
+                        <div id="trash-cards-mobile" class="block lg:hidden p-3 sm:p-4 space-y-3">
+                            <!-- JS Injects mobile cards here -->
+                        </div>
+
+                        <!-- Empty State -->
+                        <div id="trash-empty" class="flex-1 flex flex-col items-center justify-center bg-white p-8 hidden min-h-[300px]">
+                            <div class="w-16 h-16 bg-slate-50 border border-slate-100 rounded-3xl flex items-center justify-center mb-3.5 text-slate-300 shadow-2xs">
+                                <svg class="w-8 h-8 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
                             </div>
+                            <p class="font-bold text-base text-slate-700 mb-1">ถังขยะว่างเปล่า</p>
+                            <p class="text-xs sm:text-sm text-slate-400">ไม่มีรายการงานหรือการบ้านที่ถูกลบอยู่ในขณะนี้</p>
                         </div>
                     </div>
                 </div>
@@ -5204,55 +5239,96 @@ body.auto-dark .swal2-backdrop-show {
                             <div id="timer-setup-panel" class="hidden"></div>
                             <div id="timer-custom-minutes" class="hidden"></div>
 
-                            <!-- Mode 3: COMPLETED / REVIEW PANEL (Apple-like session review) -->
-                            <div id="timer-completed-panel" class="w-full max-w-sm flex flex-col items-center gap-5 hidden py-4">
-                                <div class="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-200">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                                </div>
-                                <div class="text-center">
-                                    <h3 class="text-lg font-bold text-slate-900">เสร็จสิ้นรอบการเรียน</h3>
-                                    <p class="text-xs text-slate-500 mt-0.5">บันทึกเวลาเรียนเพื่อสะสมสถิติ</p>
-                                </div>
-
-                                <!-- Summary breakdown -->
-                                <div class="w-full bg-slate-50/90 rounded-2xl p-4 border border-slate-200/80 flex flex-col gap-2.5 text-xs">
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-slate-500">วิชา:</span>
-                                        <span id="timer-review-subject" class="font-semibold text-slate-900"></span>
+                            <!-- Mode 3: COMPLETED / REVIEW PANEL (Balanced, Symmetrical Reflection) -->
+                            <div id="timer-completed-panel" class="w-full max-w-2xl mx-auto flex flex-col gap-4 hidden py-2">
+                                <div class="flex items-center justify-between pb-3 border-b border-slate-100 flex-wrap gap-2">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-200 shrink-0">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-base font-bold text-slate-900">เสร็จสิ้นรอบการเรียน</h3>
+                                            <p class="text-xs text-slate-500">บันทึกผลลัพธ์และสิ่งที่ได้เรียนรู้เพื่อสะสมสถิติ</p>
+                                        </div>
                                     </div>
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-slate-500">เป้าหมายเวลา:</span>
-                                        <span id="timer-review-target" class="font-semibold text-slate-900">25 นาที</span>
-                                    </div>
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-slate-500">เวลาที่เรียนจริง:</span>
-                                        <span id="timer-review-actual" class="font-bold text-emerald-600 text-sm">25 นาที 0 วินาที</span>
-                                    </div>
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-slate-500">สถานะ:</span>
-                                        <span id="timer-review-status" class="font-medium text-slate-900">สำเร็จตามเป้าหมาย</span>
-                                    </div>
+                                    <span id="timer-review-status" class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">สำเร็จตามเป้าหมาย</span>
                                 </div>
 
-                                <!-- Review note with Quick Reflection Chips -->
-                                <div class="w-full flex flex-col gap-2">
-                                    <div class="flex items-center justify-between">
-                                        <label class="text-xs font-semibold text-slate-700">บันทึกสิ่งที่ได้เรียนรู้ / ผลลัพธ์</label>
-                                        <span class="text-[10px] text-slate-400">กดเลือกเพื่อบันทึกทันที</span>
+                                <!-- Twin Symmetrical Cards: ผลลัพธ์ & สิ่งที่ได้เรียนรู้ -->
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
+                                    <!-- Card 1: ผลลัพธ์ (Outcome & Mood Evaluation) -->
+                                    <div class="bg-slate-50/90 rounded-2xl p-4 border border-slate-200/80 flex flex-col justify-between gap-3.5">
+                                        <div>
+                                            <div class="flex items-center gap-2 mb-3 pb-2 border-b border-slate-200/60">
+                                                <svg class="text-slate-500" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                                <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider">ผลลัพธ์การเรียน</h4>
+                                            </div>
+                                            <div class="space-y-2 text-xs">
+                                                <div class="flex items-center justify-between">
+                                                    <span class="text-slate-500">วิชา:</span>
+                                                    <span id="timer-review-subject" class="font-bold text-slate-800">-</span>
+                                                </div>
+                                                <div class="flex items-center justify-between">
+                                                    <span class="text-slate-500">เป้าหมายเวลา:</span>
+                                                    <span id="timer-review-target" class="font-semibold text-slate-700">25 นาที</span>
+                                                </div>
+                                                <div class="flex items-center justify-between">
+                                                    <span class="text-slate-500">เวลาที่เรียนจริง:</span>
+                                                    <span id="timer-review-actual" class="font-black text-emerald-600 text-sm">25 นาที 0 วินาที</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Prominent Emoji Mood Evaluation -->
+                                        <div class="pt-2 border-t border-slate-200/60">
+                                            <span class="text-[11px] font-bold text-slate-600 block mb-2">ประเมินสมาธิและความรู้สึก</span>
+                                            <div class="grid grid-cols-4 gap-1.5" id="timer-mood-selector">
+                                                <button type="button" onclick="selectTimerMood('🤩', this)" class="timer-mood-btn active flex flex-col items-center justify-center p-2 rounded-xl bg-white border-2 border-slate-900 shadow-2xs hover:bg-slate-50 transition cursor-pointer" data-mood="🤩">
+                                                    <span class="text-2xl leading-none">🤩</span>
+                                                    <span class="text-[10px] font-bold text-slate-800 mt-1">ยอดเยี่ยม</span>
+                                                </button>
+                                                <button type="button" onclick="selectTimerMood('😊', this)" class="timer-mood-btn flex flex-col items-center justify-center p-2 rounded-xl bg-white border border-slate-200 shadow-2xs hover:bg-slate-50 transition cursor-pointer" data-mood="😊">
+                                                    <span class="text-2xl leading-none">😊</span>
+                                                    <span class="text-[10px] font-bold text-slate-600 mt-1">ดีมาก</span>
+                                                </button>
+                                                <button type="button" onclick="selectTimerMood('😐', this)" class="timer-mood-btn flex flex-col items-center justify-center p-2 rounded-xl bg-white border border-slate-200 shadow-2xs hover:bg-slate-50 transition cursor-pointer" data-mood="😐">
+                                                    <span class="text-2xl leading-none">😐</span>
+                                                    <span class="text-[10px] font-bold text-slate-600 mt-1">ปานกลาง</span>
+                                                </button>
+                                                <button type="button" onclick="selectTimerMood('🥱', this)" class="timer-mood-btn flex flex-col items-center justify-center p-2 rounded-xl bg-white border border-slate-200 shadow-2xs hover:bg-slate-50 transition cursor-pointer" data-mood="🥱">
+                                                    <span class="text-2xl leading-none">🥱</span>
+                                                    <span class="text-[10px] font-bold text-slate-600 mt-1">เหนื่อยล้า</span>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <!-- Quick Reflection Chips -->
-                                    <div class="flex flex-wrap gap-1.5">
-                                        <button type="button" onclick="selectTimerReflectionTag('เข้าใจเนื้อหาครบถ้วน')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 transition cursor-pointer">เข้าใจเนื้อหาครบถ้วน</button>
-                                        <button type="button" onclick="selectTimerReflectionTag('ทำแบบฝึกหัดเสร็จสมบูรณ์')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 transition cursor-pointer">ทำแบบฝึกหัดเสร็จ</button>
-                                        <button type="button" onclick="selectTimerReflectionTag('อ่านจบตามเป้าหมาย')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 transition cursor-pointer">อ่านจบตามเป้าหมาย</button>
-                                        <button type="button" onclick="selectTimerReflectionTag('ต้องทบทวนเพิ่มเติม')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 transition cursor-pointer">ต้องทบทวนเพิ่มเติม</button>
-                                        <button type="button" onclick="selectTimerReflectionTag('มีสมาธิต่อเนื่องดีมาก')" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 transition cursor-pointer">มีสมาธิต่อเนื่องดี</button>
+
+                                    <!-- Card 2: สิ่งที่ได้เรียนรู้ (Takeaways & Notes) -->
+                                    <div class="bg-slate-50/90 rounded-2xl p-4 border border-slate-200/80 flex flex-col justify-between gap-3">
+                                        <div>
+                                            <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-200/60">
+                                                <div class="flex items-center gap-2">
+                                                    <svg class="text-slate-500" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                                                    <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider">สิ่งที่ได้เรียนรู้</h4>
+                                                </div>
+                                                <span class="text-[10px] text-slate-400">กดเลือกเพื่อบันทึกทันที</span>
+                                            </div>
+                                            <!-- Quick Reflection Chips -->
+                                            <div class="flex flex-wrap gap-1.5 mb-2.5">
+                                                <button type="button" onclick="selectTimerReflectionTag('เข้าใจเนื้อหาครบถ้วน')" class="px-2 py-0.5 rounded-lg text-[10.5px] font-medium bg-white hover:bg-emerald-50 hover:text-emerald-700 text-slate-700 border border-slate-200 transition cursor-pointer">เข้าใจเนื้อหาครบถ้วน</button>
+                                                <button type="button" onclick="selectTimerReflectionTag('ทำแบบฝึกหัดเสร็จสมบูรณ์')" class="px-2 py-0.5 rounded-lg text-[10.5px] font-medium bg-white hover:bg-emerald-50 hover:text-emerald-700 text-slate-700 border border-slate-200 transition cursor-pointer">ทำแบบฝึกหัดเสร็จ</button>
+                                                <button type="button" onclick="selectTimerReflectionTag('อ่านจบตามเป้าหมาย')" class="px-2 py-0.5 rounded-lg text-[10.5px] font-medium bg-white hover:bg-blue-50 hover:text-blue-700 text-slate-700 border border-slate-200 transition cursor-pointer">อ่านจบตามเป้า</button>
+                                                <button type="button" onclick="selectTimerReflectionTag('ต้องทบทวนเพิ่มเติม')" class="px-2 py-0.5 rounded-lg text-[10.5px] font-medium bg-white hover:bg-amber-50 hover:text-amber-700 text-slate-700 border border-slate-200 transition cursor-pointer">ต้องทบทวนเพิ่ม</button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <textarea id="timer-review-notes" rows="3" placeholder="เลือกหัวข้อข้างบน หรือพิมพ์บันทึกสิ่งที่ได้เรียนรู้เพิ่มเติม..." class="w-full bg-white border border-slate-200 rounded-xl p-3 text-xs text-slate-800 focus:outline-none focus:border-slate-400 resize-none shadow-2xs leading-relaxed"></textarea>
+                                        </div>
                                     </div>
-                                    <textarea id="timer-review-notes" rows="2" placeholder="เลือกหัวข้อข้างบน หรือพิมพ์บันทึกเพิ่มเติม..." class="w-full bg-white border border-slate-200 rounded-xl p-3 text-xs text-slate-800 focus:outline-none focus:border-blue-500 resize-none shadow-2xs"></textarea>
                                 </div>
 
                                 <!-- Buttons: Symmetrical & Clear -->
-                                <div class="flex items-center gap-3 w-full">
+                                <div class="flex items-center gap-3 w-full pt-1">
                                     <button type="button" onclick="discardCompletedTimer()" class="flex-1 py-2.5 px-4 rounded-xl border border-slate-200 text-slate-600 hover:text-slate-800 hover:bg-slate-100 text-xs font-semibold transition cursor-pointer text-center">
                                         ไม่บันทึก
                                     </button>
@@ -5541,8 +5617,8 @@ body.auto-dark .swal2-backdrop-show {
 
             </div>
 
-            <!-- Floating Bottom Navigation Dock (Floats above page content, stays visible while scrolling) -->
-            <div id="timer-floating-dock" class="absolute bottom-6 inset-x-0 flex justify-center pointer-events-none z-30 px-4 transition-all duration-200 hidden">
+            <!-- Floating Bottom Navigation Dock (Desktop Only) -->
+            <div id="timer-floating-dock" class="absolute bottom-6 inset-x-0 hidden md:flex justify-center pointer-events-none z-30 px-4 transition-all duration-200">
                 <div class="pointer-events-auto bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-xl rounded-full p-1.5 flex items-center gap-1.5">
                     <button type="button" onclick="switchTimerTab('focus')" id="timer-dock-btn-focus" class="timer-dock-btn py-2 px-4 rounded-full flex items-center gap-2 text-xs font-bold text-blue-600 bg-blue-50/80 border border-blue-100 transition-all cursor-pointer shadow-2xs">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -5561,42 +5637,42 @@ body.auto-dark .swal2-backdrop-show {
         </main>
     </div>
 
-    <!-- Mobile Bottom Navigation Dock (5 Tabs matching mockup) -->
+    <!-- Mobile Bottom Navigation Dock (5 Core Tabs: Dashboard, Tasks, Calendar, Schedule, Timer) -->
     <nav id="mobile-bottom-nav" class="fixed md:hidden z-40" aria-label="Mobile Navigation">
         <button type="button" onclick="nav('dashboard')" id="mob-nav-dashboard" class="mob-nav-btn active">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             <span>หน้าหลัก</span>
         </button>
         <button type="button" onclick="nav('tasks')" id="mob-nav-tasks" class="mob-nav-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>
-            <span>หนังสือ</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <span>งาน</span>
         </button>
-        <button type="button" onclick="nav('timer'); switchTimerTab('focus')" id="mob-nav-timer" class="mob-nav-btn">
+        <button type="button" onclick="nav('calendar')" id="mob-nav-calendar" class="mob-nav-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span>ปฏิทิน</span>
+        </button>
+        <button type="button" onclick="nav('schedule')" id="mob-nav-schedule" class="mob-nav-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v3M16 2v3M3 7h18M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z M8 12h2v4H8z"/></svg>
+            <span>ตารางเรียน</span>
+        </button>
+        <button type="button" onclick="nav('timer')" id="mob-nav-timer" class="mob-nav-btn">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span>โฟกัส</span>
-        </button>
-        <button type="button" onclick="nav('timer'); switchTimerTab('progress')" id="mob-nav-stats" class="mob-nav-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-            <span>สถิติ</span>
-        </button>
-        <button type="button" onclick="openSettings()" id="mob-nav-settings" class="mob-nav-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-            <span>ตั้งค่า</span>
+            <span>จับเวลา</span>
         </button>
     </nav>
 
     <!-- Manual Add Study Session Modal -->
-    <div id="modal-add-study-session" class="fixed inset-0 bg-slate-900/60 z-[70] backdrop-blur-sm hidden items-center justify-center p-4">
-        <div class="bg-white rounded-3xl w-full max-w-md shadow-2xl p-6 sm:p-8 flex flex-col relative transform transition-all scale-95" id="add-study-session-card">
-            <button onclick="closeManualStudySessionModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 transition p-1.5 rounded-full hover:bg-slate-100 cursor-pointer">
+    <div id="modal-add-study-session" class="fixed inset-0 bg-slate-900/60 z-[70] backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4">
+        <div class="bg-white rounded-2xl sm:rounded-3xl w-full max-w-md shadow-2xl p-4 sm:p-7 flex flex-col relative transform transition-all scale-95 max-h-[90vh] overflow-y-auto" id="add-study-session-card">
+            <button onclick="closeManualStudySessionModal()" class="absolute top-4 sm:top-5 right-4 sm:right-5 text-slate-400 hover:text-slate-700 transition p-1.5 rounded-full hover:bg-slate-100 cursor-pointer">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M18 6L6 18M6 6l12 12"/></svg>
             </button>
-            <div class="flex items-center gap-3 mb-5">
+            <div class="flex items-center gap-3 mb-4 sm:mb-5">
                 <div class="w-10 h-10 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 </div>
                 <div>
-                    <h3 class="text-lg font-bold text-slate-900">เพิ่มบันทึกเวลาเรียน</h3>
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900">เพิ่มบันทึกเวลาเรียน</h3>
                     <p class="text-xs text-slate-500">บันทึกเวลาที่ได้อ่านหนังสือหรือทบทวนบทเรียน</p>
                 </div>
             </div>
@@ -5663,16 +5739,16 @@ body.auto-dark .swal2-backdrop-show {
     </div>
 
     <!-- Study Session Detail Modal (ดูรายละเอียดรอบการอ่านหนังสือ) -->
-    <div id="modal-study-session-detail" class="fixed inset-0 bg-slate-900/60 z-[75] backdrop-blur-sm hidden items-center justify-center p-4">
-        <div class="bg-white rounded-3xl w-full max-w-lg shadow-2xl p-6 sm:p-8 flex flex-col relative transform transition-all scale-95" id="study-session-detail-card">
+    <div id="modal-study-session-detail" class="fixed inset-0 bg-slate-900/60 z-[75] backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4">
+        <div class="bg-white rounded-2xl sm:rounded-3xl w-full max-w-lg shadow-2xl p-4 sm:p-7 flex flex-col relative transform transition-all scale-95 max-h-[90vh] overflow-y-auto" id="study-session-detail-card">
             <!-- Close button -->
-            <button type="button" onclick="closeStudySessionDetail()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 transition p-2 rounded-full hover:bg-slate-100 cursor-pointer">
+            <button type="button" onclick="closeStudySessionDetail()" class="absolute top-4 sm:top-5 right-4 sm:right-5 text-slate-400 hover:text-slate-700 transition p-2 rounded-full hover:bg-slate-100 cursor-pointer">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M18 6L6 18M6 6l12 12"/></svg>
             </button>
 
             <!-- Header -->
-            <div class="flex items-center gap-3.5 mb-5 pb-4 border-b border-slate-100 pr-8">
-                <div id="detail-session-sub-icon" class="w-11 h-11 rounded-2xl flex items-center justify-center text-white shrink-0 shadow-xs" style="background-color: #2563eb;">
+            <div class="flex items-center gap-3.5 mb-4 sm:mb-5 pb-3 sm:pb-4 border-b border-slate-100 pr-8">
+                <div id="detail-session-sub-icon" class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl flex items-center justify-center text-white shrink-0 shadow-xs" style="background-color: #2563eb;">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 </div>
                 <div>
@@ -5684,47 +5760,63 @@ body.auto-dark .swal2-backdrop-show {
                 </div>
             </div>
 
-            <!-- Body Details -->
-            <div class="space-y-4">
-                <!-- Duration Highlight Card -->
-                <div class="p-4 rounded-2xl bg-slate-50/90 border border-slate-200/80 flex items-center justify-between">
-                    <div>
-                        <span class="text-[11px] font-semibold text-slate-400 block">เวลาที่อ่านจริง</span>
-                        <span id="detail-session-actual-time" class="text-2xl sm:text-3xl font-bold text-slate-900 tabular-nums leading-tight">25 นาที 0 วินาที</span>
+            <!-- Body Details: Symmetrical Outcome & Takeaway Cards -->
+            <div class="space-y-3.5">
+                <!-- Info Grid (Date & Time Range) -->
+                <div class="grid grid-cols-2 gap-3 text-xs">
+                    <div class="p-3 rounded-xl bg-slate-50/80 border border-slate-200/80">
+                        <span class="text-slate-400 font-semibold block text-[11px] mb-0.5">วันที่อ่าน</span>
+                        <span id="detail-session-date" class="font-bold text-slate-800 text-xs sm:text-sm">-</span>
                     </div>
-                    <div class="text-right">
-                        <span class="text-[11px] font-semibold text-slate-400 block">เป้าหมายเวลา</span>
-                        <span id="detail-session-target-time" class="text-sm font-bold text-slate-700 tabular-nums">25 นาที</span>
-                    </div>
-                </div>
-
-                <!-- Info Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                    <div class="p-3.5 rounded-xl bg-white border border-slate-200/80">
-                        <span class="text-slate-400 font-semibold block mb-0.5">วันที่อ่าน</span>
-                        <span id="detail-session-date" class="font-bold text-slate-800 text-sm">-</span>
-                    </div>
-                    <div class="p-3.5 rounded-xl bg-white border border-slate-200/80">
-                        <span class="text-slate-400 font-semibold block mb-0.5">ช่วงเวลา</span>
-                        <span id="detail-session-time-range" class="font-bold text-slate-800 text-sm">-</span>
+                    <div class="p-3 rounded-xl bg-slate-50/80 border border-slate-200/80">
+                        <span class="text-slate-400 font-semibold block text-[11px] mb-0.5">ช่วงเวลา</span>
+                        <span id="detail-session-time-range" class="font-bold text-slate-800 text-xs sm:text-sm">-</span>
                     </div>
                 </div>
 
-                <!-- Linked Task / Goal -->
-                <div id="detail-session-task-container" class="p-3.5 rounded-xl bg-blue-50/60 border border-blue-100 flex items-center justify-between gap-3">
+                <!-- Linked Task / Goal (if present) -->
+                <div id="detail-session-task-container" class="p-3 rounded-xl bg-blue-50/60 border border-blue-100 flex items-center justify-between gap-3">
                     <div class="min-w-0">
-                        <span class="text-[11px] font-semibold text-blue-600 block">งาน / การบ้านที่เชื่อมโยง</span>
-                        <p id="detail-session-task-title" class="font-bold text-slate-800 text-xs sm:text-sm truncate">การบ้านบทที่ 3</p>
+                        <span class="text-[10.5px] font-semibold text-blue-600 block">งาน / การบ้านที่เชื่อมโยง</span>
+                        <p id="detail-session-task-title" class="font-bold text-slate-800 text-xs sm:text-sm truncate">การบ้าน</p>
                     </div>
                     <button type="button" id="detail-session-task-btn" onclick="openLinkedTaskFromSession()" class="px-3 py-1.5 rounded-xl bg-white text-blue-700 hover:bg-blue-100 font-semibold text-xs border border-blue-200 shrink-0 transition cursor-pointer shadow-2xs">
                         เปิดดูงาน
                     </button>
                 </div>
 
-                <!-- Notes / Reflection -->
-                <div class="p-4 rounded-xl bg-white border border-slate-200/80">
-                    <span class="text-xs font-semibold text-slate-400 block mb-1">บันทึกสิ่งที่ได้เรียนรู้ / หมายเหตุ</span>
-                    <p id="detail-session-notes" class="text-xs text-slate-700 leading-relaxed italic whitespace-pre-line">-</p>
+                <!-- Twin Symmetrical Sections: ผลลัพธ์ & สิ่งที่ได้เรียนรู้ -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-stretch">
+                    <!-- Symmetrical Box 1: ผลลัพธ์ -->
+                    <div class="p-4 rounded-xl bg-slate-50/90 border border-slate-200/80 flex flex-col justify-between gap-3">
+                        <div>
+                            <div class="flex items-center justify-between pb-2 border-b border-slate-200/60 mb-2">
+                                <span class="text-[11px] font-bold text-slate-700 uppercase tracking-wider">ผลลัพธ์</span>
+                                <span id="detail-session-mood-emoji" class="text-xl" title="ความรู้สึก / สมาธิ">🤩</span>
+                            </div>
+                            <div class="space-y-1.5 text-xs">
+                                <div>
+                                    <span class="text-[10.5px] font-semibold text-slate-400 block">เวลาที่อ่านจริง</span>
+                                    <span id="detail-session-actual-time" class="text-lg font-black text-slate-900 tabular-nums">25 นาที</span>
+                                </div>
+                                <div class="pt-1 flex items-center justify-between text-slate-500">
+                                    <span class="text-[11px]">เป้าหมาย:</span>
+                                    <span id="detail-session-target-time" class="font-bold text-slate-700 tabular-nums">25 นาที</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Symmetrical Box 2: สิ่งที่ได้เรียนรู้ -->
+                    <div class="p-4 rounded-xl bg-slate-50/90 border border-slate-200/80 flex flex-col justify-between gap-2">
+                        <div>
+                            <div class="flex items-center justify-between pb-2 border-b border-slate-200/60 mb-2">
+                                <span class="text-[11px] font-bold text-slate-700 uppercase tracking-wider">สิ่งที่ได้เรียนรู้</span>
+                                <svg class="text-slate-400" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                            </div>
+                            <p id="detail-session-notes" class="text-xs text-slate-700 leading-relaxed italic whitespace-pre-line">-</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -5744,16 +5836,16 @@ body.auto-dark .swal2-backdrop-show {
     </div>
 
     <!-- Trash Task Detail Modal (ดูรายละเอียดงานที่ถูกลบ) -->
-    <div id="modal-trash-task-detail" class="fixed inset-0 bg-slate-900/60 z-[75] backdrop-blur-sm hidden items-center justify-center p-4">
-        <div class="bg-white rounded-3xl w-full max-w-lg shadow-2xl p-6 sm:p-8 flex flex-col relative transform transition-all scale-95" id="trash-task-detail-card">
+    <div id="modal-trash-task-detail" class="fixed inset-0 bg-slate-900/60 z-[75] backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4">
+        <div class="bg-white rounded-2xl sm:rounded-3xl w-full max-w-lg shadow-2xl p-4 sm:p-7 flex flex-col relative transform transition-all scale-95 max-h-[90vh] overflow-y-auto" id="trash-task-detail-card">
             <!-- Close button -->
-            <button type="button" onclick="closeTrashTaskDetail()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 transition p-2 rounded-full hover:bg-slate-100 cursor-pointer">
+            <button type="button" onclick="closeTrashTaskDetail()" class="absolute top-4 sm:top-5 right-4 sm:right-5 text-slate-400 hover:text-slate-700 transition p-2 rounded-full hover:bg-slate-100 cursor-pointer">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M18 6L6 18M6 6l12 12"/></svg>
             </button>
 
             <!-- Header -->
-            <div class="flex items-center gap-3.5 mb-5 pb-4 border-b border-slate-100 pr-8">
-                <div id="trash-detail-sub-icon" class="w-11 h-11 rounded-2xl flex items-center justify-center text-white shrink-0 shadow-xs" style="background-color: #ef4444;">
+            <div class="flex items-center gap-3.5 mb-4 sm:mb-5 pb-3 sm:pb-4 border-b border-slate-100 pr-8">
+                <div id="trash-detail-sub-icon" class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl flex items-center justify-center text-white shrink-0 shadow-xs" style="background-color: #ef4444;">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
                 </div>
                 <div class="min-w-0 flex-1">
@@ -8388,10 +8480,7 @@ body.auto-dark .swal2-backdrop-show {
             
             // Update mobile bottom nav
             document.querySelectorAll('.mob-nav-btn').forEach(el => el.classList.remove('active'));
-            let activeMobId = 'mob-nav-' + viewId;
-            if (viewId === 'timer' && typeof currentTimerTab !== 'undefined' && currentTimerTab === 'progress') {
-                activeMobId = 'mob-nav-stats';
-            }
+            const activeMobId = 'mob-nav-' + viewId;
             const mobBtn = document.getElementById(activeMobId);
             if (mobBtn) mobBtn.classList.add('active');
             
@@ -8422,7 +8511,7 @@ body.auto-dark .swal2-backdrop-show {
 
             const timerDock = document.getElementById('timer-floating-dock');
             if (timerDock) {
-                if (viewId === 'timer') {
+                if (viewId === 'timer' && window.innerWidth >= 768) {
                     timerDock.classList.remove('hidden');
                 } else {
                     timerDock.classList.add('hidden');
@@ -8846,12 +8935,6 @@ body.auto-dark .swal2-backdrop-show {
 
                 const currentCellDateStr = `${currentCalYear}-${String(currentCalMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
                 const dayGCalEvents = (googleCalendarEvents || []).filter(ev => isGCalEventOnDate(ev, currentCellDateStr));
-                const dayHasStudy = (studySessions || []).some(s => {
-                    const dateVal = s.startedAt || s.started_at || s.completedAt || s.completed_at || s.endedAt;
-                    if (!dateVal) return false;
-                    const sd = new Date(dateVal);
-                    return sd.getDate() === day && sd.getMonth() === currentCalMonth && sd.getFullYear() === currentCalYear;
-                });
                 
                 let dotsHtml = '';
                 dayTasks.slice(0,3).forEach(t => {
@@ -8862,10 +8945,6 @@ body.auto-dark .swal2-backdrop-show {
 
                 if (dayGCalEvents.length > 0) {
                     dotsHtml += `<div title="Google Calendar Event" style="width:5px;height:5px;border-radius:50%;background-color:#8580be;flex-shrink:0;"></div>`;
-                }
-
-                if (dayHasStudy) {
-                    dotsHtml += `<div title="มีเวลาอ่านหนังสือ" style="width:5px;height:5px;border-radius:50%;background-color:#10b981;flex-shrink:0;"></div>`;
                 }
                 
                 const todayStyle = isToday
@@ -8945,14 +9024,8 @@ body.auto-dark .swal2-backdrop-show {
             });
 
             const dayGCal = (googleCalendarEvents || []).filter(ev => isGCalEventOnDate(ev, targetDayStr));
-            const dayStudy = (studySessions || []).filter(s => {
-                const dateVal = s.startedAt || s.started_at || s.completedAt || s.completed_at || s.endedAt;
-                if (!dateVal) return false;
-                const td = new Date(dateVal);
-                return td.getDate() === d && td.getMonth() === m && td.getFullYear() === y;
-            });
 
-            if(tasks.length === 0 && dayGCal.length === 0 && dayStudy.length === 0) {
+            if(tasks.length === 0 && dayGCal.length === 0) {
                 Swal.fire({ 
                     title: `กำหนดการวันที่ ${d} ${thaiMonths[m]}`, 
                     html: `
@@ -8960,8 +9033,8 @@ body.auto-dark .swal2-backdrop-show {
                             <div class="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center mx-auto mb-3 text-slate-400 border border-slate-200/70">
                                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                             </div>
-                            <p class="text-sm font-bold text-slate-700">ไม่มีกำหนดการในวันนี้</p>
-                            <p class="text-xs text-slate-400 mt-1">ไม่มีรายการงาน กิจกรรม หรือบันทึกเวลาเรียนในวันที่ ${formattedThaiDate}</p>
+                            <p class="text-sm font-bold text-slate-700">ไม่มีกำหนดส่งงานในวันนี้</p>
+                            <p class="text-xs text-slate-400 mt-1">ไม่มีรายการงานหรือกิจกรรมในวันที่ ${formattedThaiDate}</p>
                         </div>
                     `, 
                     showConfirmButton: false, 
@@ -9000,31 +9073,6 @@ body.auto-dark .swal2-backdrop-show {
                                 </button>
                             </div>
                         </div>`;
-                });
-            }
-
-            if (dayStudy.length > 0) {
-                html += `<div class="text-[11px] font-bold text-emerald-700 uppercase tracking-wider mt-3 mb-1 flex items-center gap-1.5">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    <span>บันทึกการอ่านหนังสือ (${dayStudy.length})</span>
-                </div>`;
-                dayStudy.forEach(s => {
-                    const subName = s.subjectName || s.subject_name || 'ทั่วไป';
-                    const durText = formatDurationDisplay(s.actualDurationSeconds || s.actual_duration_seconds);
-                    html += `
-                        <div class="p-3 bg-emerald-50/70 rounded-xl border border-emerald-200 flex items-center justify-between gap-3">
-                            <div class="min-w-0 flex-1">
-                                <div class="flex items-center gap-2 mb-0.5">
-                                    <span class="text-xs font-bold text-slate-800">${subName}</span>
-                                    <span class="text-[10px] font-bold px-2 py-0.2 rounded-full bg-emerald-100 text-emerald-800">${durText}</span>
-                                </div>
-                                ${s.notes ? `<p class="text-xs text-slate-500 italic truncate">${s.notes}</p>` : ''}
-                            </div>
-                            <button type="button" onclick="Swal.close(); openStudySessionDetail('${s.id}');" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-white text-emerald-800 hover:bg-emerald-100 border border-emerald-200 shadow-2xs transition">
-                                ดูรายละเอียด
-                            </button>
-                        </div>
-                    `;
                 });
             }
 
@@ -9732,11 +9780,6 @@ body.auto-dark .swal2-backdrop-show {
                 });
 
                 const dayGCal = (googleCalendarEvents || []).filter(ev => isGCalEventOnDate(ev, dateStr));
-                const dayStudy = (studySessions || []).filter(s => {
-                    const dateVal = s.startedAt || s.started_at || s.completedAt || s.completed_at || s.endedAt;
-                    if (!dateVal) return false;
-                    return dateVal.split('T')[0] === dateStr;
-                });
 
                 const allItems = [
                     ...dayTasks.map(t => ({
@@ -9751,12 +9794,6 @@ body.auto-dark .swal2-backdrop-show {
                         type: 'gcal',
                         id: ev.id,
                         title: ev.summary || 'Google Calendar'
-                    })),
-                    ...dayStudy.map(s => ({
-                        type: 'study',
-                        id: s.id,
-                        title: `${s.subjectName || 'ทั่วไป'} (${formatDurationDisplay(s.actualDurationSeconds || s.actual_duration_seconds)})`,
-                        subject: s.subjectName
                     }))
                 ];
 
@@ -9775,13 +9812,6 @@ body.auto-dark .swal2-backdrop-show {
                                     return `
                                         <div class="flex items-center gap-1 text-[9px] font-bold truncate px-1.5 py-0.5 rounded transition ${isSelected ? 'bg-white/20 text-white' : 'bg-[#bef264] text-[#14532d]'} ${isDone ? 'line-through opacity-60' : ''}" title="${item.title} (${item.subject || 'ทั่วไป'})">
                                             <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background-color: ${dotColor}"></span>
-                                            <span class="truncate">${item.title}</span>
-                                        </div>
-                                    `;
-                                } else if (item.type === 'study') {
-                                    return `
-                                        <div onclick="event.stopPropagation(); openStudySessionDetail('${item.id}')" class="flex items-center gap-1 text-[9px] font-bold truncate px-1.5 py-0.5 rounded transition ${isSelected ? 'bg-emerald-900/60 text-emerald-200' : 'bg-emerald-100 text-emerald-800'}" title="${item.title}">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
                                             <span class="truncate">${item.title}</span>
                                         </div>
                                     `;
@@ -9824,9 +9854,10 @@ body.auto-dark .swal2-backdrop-show {
             grid.innerHTML = html;
         }
 
-        // ================= SELECTED DAY AGENDA (ปฏิทินส่วนล่าง) =================
+        // ================= SELECTED DAY AGENDA (ปฏิทินและกำหนดส่งส่วนล่าง) =================
         function renderDedicatedSelectedDayAgenda() {
             const container = document.getElementById('dedicated-cal-selected-agenda');
+            const countBadge = document.getElementById('dedicated-cal-tasks-count-badge');
             if (!container) return;
 
             const thaiMonths = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
@@ -9842,12 +9873,11 @@ body.auto-dark .swal2-backdrop-show {
             });
 
             const dayGCal = (googleCalendarEvents || []).filter(ev => isGCalEventOnDate(ev, dateStr));
-            const dayStudySessions = (studySessions || []).filter(s => {
-                const dateVal = s.startedAt || s.started_at || s.completedAt || s.completed_at || s.endedAt;
-                if (!dateVal) return false;
-                return dateVal.split('T')[0] === dateStr;
-            });
-            const totalCount = dayTasks.length + dayGCal.length + dayStudySessions.length;
+            const totalCount = dayTasks.length + dayGCal.length;
+
+            if (countBadge) {
+                countBadge.textContent = `${totalCount} รายการ`;
+            }
 
             const thaiDaysShort = ["อา.", "จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส."];
             const thaiDayShort = thaiDaysShort[dedicatedSelectedDate.getDay()];
@@ -9855,42 +9885,44 @@ body.auto-dark .swal2-backdrop-show {
             let contentHtml = '';
             if (totalCount === 0) {
                 contentHtml = `
-                    <div class="p-5 sm:p-6 rounded-2xl bg-slate-50/70 border border-slate-200/80 flex items-center gap-3.5">
-                        <div class="w-10 h-10 rounded-xl bg-white border border-slate-200/80 flex items-center justify-center text-slate-400 shrink-0 shadow-2xs">
-                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    <div class="py-8 px-6 rounded-2xl bg-slate-50/70 border border-slate-200/80 flex flex-col items-center justify-center text-center max-w-md mx-auto">
+                        <div class="w-12 h-12 rounded-2xl bg-white border border-slate-200/80 flex items-center justify-center text-slate-400 mb-3 shadow-2xs">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                         </div>
-                        <div>
-                            <p class="text-xs font-bold text-slate-700">ไม่มีกำหนดการในวันที่เลือก</p>
-                            <p class="text-[11px] text-slate-400 font-medium mt-0.5">ไม่มีรายการการบ้าน กิจกรรม หรือบันทึกเวลาเรียนสำหรับวันที่ ${formattedThaiDate}</p>
-                        </div>
+                        <h4 class="text-sm font-bold text-slate-800">ไม่มีกำหนดส่งงานในวันที่ ${formattedThaiDate}</h4>
+                        <p class="text-xs text-slate-400 mt-1 max-w-xs leading-relaxed">ไม่มีรายการงานหรือกำหนดสอบที่ต้องส่งในวันนี้ สามารถกดปุ่มด้านล่างเพื่อเพิ่มงานใหม่ได้ทันที</p>
+                        <button type="button" onclick="createTaskForSelectedDate()" class="mt-4 px-4 py-2 rounded-xl text-xs font-bold bg-sidebar text-white hover:bg-slate-800 transition inline-flex items-center gap-1.5 shadow-xs cursor-pointer">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            <span>เพิ่มงานสำหรับวันนี้</span>
+                        </button>
                     </div>
                 `;
             } else {
                 contentHtml = `
-                    <div class="space-y-2.5">
+                    <div class="space-y-3 max-w-3xl mx-auto">
                         ${dayTasks.map(t => {
                             const isDone = t.status === 'ส่งแล้ว';
                             const dotColor = getSubjectColor(t.subject);
                             return `
-                                <div class="flex items-start justify-between gap-3.5 p-3.5 rounded-2xl border transition ${isDone ? 'bg-slate-50/70 border-slate-100 opacity-75' : 'bg-white border-slate-200/90 shadow-2xs hover:border-slate-300'}">
-                                    <div class="flex items-start gap-3 min-w-0 flex-1">
-                                        <!-- Date Stamp Box matching reference image -->
-                                        <div class="w-11 h-12 rounded-xl bg-slate-100/90 border border-slate-200/80 flex flex-col items-center justify-center shrink-0 text-center select-none shadow-2xs">
-                                            <span class="text-xs font-black text-slate-800 leading-none">${d}</span>
-                                            <span class="text-[9.5px] font-bold text-slate-500 uppercase tracking-tight mt-0.5">${thaiDayShort}</span>
+                                <div class="flex items-center justify-between gap-3.5 p-3.5 sm:p-4 rounded-2xl border transition ${isDone ? 'bg-slate-50/70 border-slate-200/60 opacity-80' : 'bg-white border-slate-200/90 shadow-2xs hover:border-slate-300'}">
+                                    <div class="flex items-center gap-3.5 min-w-0 flex-1">
+                                        <!-- Date Stamp Box -->
+                                        <div class="w-12 h-12 rounded-xl bg-slate-100/90 border border-slate-200/80 flex flex-col items-center justify-center shrink-0 text-center select-none shadow-2xs">
+                                            <span class="text-sm font-extrabold text-slate-800 leading-none">${d}</span>
+                                            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-tight mt-0.5">${thaiDayShort}</span>
                                         </div>
                                         
                                         <div class="min-w-0 flex-1">
                                             <div class="flex items-center gap-1.5 flex-wrap mb-1">
                                                 <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10.5px] font-bold" style="background-color: ${dotColor}20; color: ${dotColor}">
                                                     <span class="w-1.5 h-1.5 rounded-full" style="background-color: ${dotColor}"></span>
-                                                    ${t.subject || 'ทั่วไป'}
+                                                    ${escapeHtml(t.subject || 'ทั่วไป')}
                                                 </span>
-                                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${t.priority === 'สอบ' ? 'bg-red-50 text-red-600 border border-red-200' : (t.priority === 'ด่วน' ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'bg-slate-100 text-slate-600')}">${t.priority || 'ปกติ'}</span>
+                                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${t.priority === 'สอบ' ? 'bg-red-50 text-red-600 border border-red-200' : (t.priority === 'ด่วน' ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'bg-slate-100 text-slate-600')}">${escapeHtml(t.priority || 'ปกติ')}</span>
                                                 <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${isDone ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-blue-50 text-blue-700 border border-blue-200'}">${isDone ? 'ส่งแล้ว' : 'ยังไม่ส่ง'}</span>
                                             </div>
-                                            <h4 class="text-xs font-bold text-slate-800 line-clamp-1 ${isDone ? 'line-through text-slate-400' : ''}">${t.title}</h4>
-                                            <div class="flex items-center gap-2 text-[11px] text-slate-400 font-medium mt-1">
+                                            <h4 class="text-xs sm:text-sm font-bold text-slate-800 line-clamp-1 ${isDone ? 'line-through text-slate-400' : ''}">${escapeHtml(t.title)}</h4>
+                                            <div class="flex items-center gap-2 text-[11px] text-slate-400 font-medium mt-0.5">
                                                 <span class="inline-flex items-center gap-1">
                                                     <svg class="w-3 h-3 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                                                     ${t.dueTime ? `${t.dueTime} น.` : 'ไม่ระบุเวลา'}
@@ -9899,53 +9931,12 @@ body.auto-dark .swal2-backdrop-show {
                                         </div>
                                     </div>
                                     
-                                    <div class="flex items-center gap-1.5 shrink-0 pt-0.5">
-                                        <button type="button" onclick="toggleTaskStatusFromCal('${t.id}')" class="w-7 h-7 rounded-lg border flex items-center justify-center transition cursor-pointer ${isDone ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-300 hover:border-emerald-500 bg-white text-transparent hover:text-emerald-500'}" title="${isDone ? 'เปลี่ยนเป็นยังไม่ส่ง' : 'ติ๊กส่งงาน'}">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="13" height="13"><polyline points="20 6 9 17 4 12"/></svg>
+                                    <div class="flex items-center gap-1.5 shrink-0">
+                                        <button type="button" onclick="toggleTaskStatusFromCal('${t.id}')" class="w-8 h-8 rounded-xl border flex items-center justify-center transition cursor-pointer ${isDone ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-300 hover:border-emerald-500 bg-white text-slate-400 hover:text-emerald-500'}" title="${isDone ? 'เปลี่ยนเป็นยังไม่ส่ง' : 'ติ๊กส่งงาน'}">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>
                                         </button>
-                                        <button type="button" onclick="editTask('${t.id}')" class="w-7 h-7 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 flex items-center justify-center transition cursor-pointer" title="แก้ไขงาน">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            `;
-                        }).join('')}
-
-                        ${dayStudySessions.map(session => {
-                            const subName = session.subjectName || session.subject_name || 'ทั่วไป';
-                            const subId = session.subjectId || session.subject_id;
-                            const foundSub = subId ? (subjects || []).find(s => s.id === subId) : (subjects || []).find(s => s.name === subName);
-                            const subColor = foundSub ? foundSub.color : '#10b981';
-                            const durationText = formatDurationDisplay(session.actualDurationSeconds || session.actual_duration_seconds);
-                            const targetText = session.targetMinutes ? `${session.targetMinutes} นาที` : '';
-                            const isCompleted = (session.status === 'สำเร็จตามเป้า' || session.status === 'completed');
-                            return `
-                                <div class="flex items-start justify-between gap-3.5 p-3.5 rounded-2xl bg-emerald-50/40 border border-emerald-100 transition shadow-2xs hover:border-emerald-200">
-                                    <div class="flex items-start gap-3 min-w-0 flex-1">
-                                        <div class="w-11 h-12 rounded-xl bg-emerald-100 text-emerald-800 border border-emerald-200/80 flex flex-col items-center justify-center shrink-0 text-center select-none shadow-2xs">
-                                            <span class="text-xs font-black leading-none">${d}</span>
-                                            <span class="text-[9.5px] font-bold uppercase tracking-tight mt-0.5">โฟกัส</span>
-                                        </div>
-                                        <div class="min-w-0 flex-1">
-                                            <div class="flex items-center gap-1.5 flex-wrap mb-1">
-                                                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10.5px] font-bold" style="background-color: ${subColor}20; color: ${subColor}">
-                                                    <span class="w-1.5 h-1.5 rounded-full" style="background-color: ${subColor}"></span>
-                                                    ${subName}
-                                                </span>
-                                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">อ่านหนังสือ</span>
-                                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${isCompleted ? 'bg-emerald-100 text-emerald-700 border border-emerald-300' : 'bg-amber-100 text-amber-800 border border-amber-300'}">${session.status || 'สำเร็จ'}</span>
-                                            </div>
-                                            <h4 class="text-xs font-bold text-slate-800 line-clamp-1">${durationText} ${targetText ? `(เป้าหมาย ${targetText})` : ''}</h4>
-                                            ${session.notes ? `<p class="text-[11px] text-slate-500 mt-0.5 italic truncate">${session.notes}</p>` : ''}
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-1.5 shrink-0 pt-0.5">
-                                        <button type="button" onclick="openStudySessionDetail('${session.id}')" class="px-2.5 py-1 rounded-xl text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 shadow-2xs transition cursor-pointer flex items-center gap-1">
-                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                                            <span>ดูรายละเอียด</span>
-                                        </button>
-                                        <button type="button" onclick="deleteStudySession('${session.id}')" class="p-1 rounded-xl text-slate-400 hover:text-red-500 hover:bg-red-50 transition cursor-pointer" title="ลบการบันทึกนี้">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
+                                        <button type="button" onclick="editTask('${t.id}')" class="w-8 h-8 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 border border-slate-200 bg-white flex items-center justify-center transition cursor-pointer" title="แก้ไขงาน">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
                                         </button>
                                     </div>
                                 </div>
@@ -9956,11 +9947,11 @@ body.auto-dark .swal2-backdrop-show {
                             const startRaw = ev.start?.dateTime;
                             const timeLabel = startRaw ? new Date(startRaw).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) + ' น.' : 'ตลอดวัน';
                             return `
-                                <div class="flex items-start justify-between gap-3.5 p-3.5 rounded-2xl bg-purple-50/60 border border-purple-100/90 transition shadow-2xs">
-                                    <div class="flex items-start gap-3 min-w-0 flex-1">
-                                        <div class="w-11 h-12 rounded-xl bg-purple-100/80 border border-purple-200/80 flex flex-col items-center justify-center shrink-0 text-center select-none shadow-2xs">
-                                            <span class="text-xs font-black text-purple-950 leading-none">${d}</span>
-                                            <span class="text-[9.5px] font-bold text-purple-700 uppercase tracking-tight mt-0.5">${thaiDayShort}</span>
+                                <div class="flex items-center justify-between gap-3.5 p-3.5 sm:p-4 rounded-2xl bg-purple-50/60 border border-purple-100/90 transition shadow-2xs">
+                                    <div class="flex items-center gap-3.5 min-w-0 flex-1">
+                                        <div class="w-12 h-12 rounded-xl bg-purple-100/80 border border-purple-200/80 flex flex-col items-center justify-center shrink-0 text-center select-none shadow-2xs">
+                                            <span class="text-sm font-extrabold text-purple-950 leading-none">${d}</span>
+                                            <span class="text-[10px] font-bold text-purple-700 uppercase tracking-tight mt-0.5">${thaiDayShort}</span>
                                         </div>
                                         <div class="min-w-0 flex-1">
                                             <div class="flex items-center gap-1.5 flex-wrap mb-1">
@@ -9970,10 +9961,10 @@ body.auto-dark .swal2-backdrop-show {
                                                 </span>
                                                 <span class="text-[10px] font-semibold text-purple-500">${timeLabel}</span>
                                             </div>
-                                            <h4 class="text-xs font-bold text-slate-800 line-clamp-1">${ev.summary || '(ไม่มีชื่อกิจกรรม)'}</h4>
+                                            <h4 class="text-xs sm:text-sm font-bold text-slate-800 line-clamp-1">${escapeHtml(ev.summary || '(ไม่มีชื่อกิจกรรม)')}</h4>
                                         </div>
                                     </div>
-                                    <button type="button" onclick="importGCalEventToTask('${ev.id}')" class="px-2.5 py-1.5 rounded-xl text-[11px] font-bold bg-white text-purple-700 hover:bg-purple-100/80 border border-purple-200 transition shadow-2xs shrink-0 cursor-pointer">
+                                    <button type="button" onclick="importGCalEventToTask('${ev.id}')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-purple-700 hover:bg-purple-100/80 border border-purple-200 transition shadow-2xs shrink-0 cursor-pointer">
                                         นำเข้าเป็นงาน
                                     </button>
                                 </div>
@@ -9983,15 +9974,7 @@ body.auto-dark .swal2-backdrop-show {
                 `;
             }
 
-            container.innerHTML = `
-                <div class="flex items-center justify-between mb-3.5 flex-wrap gap-2">
-                    <div class="flex items-center gap-2">
-                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">กำหนดการวันที่ ${formattedThaiDate}</h3>
-                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">${totalCount} รายการ</span>
-                    </div>
-                </div>
-                ${contentHtml}
-            `;
+            container.innerHTML = contentHtml;
         }
 
         // ================= DRAG AND DROP HANDLERS (DAY & HOURLY SLOTS) =================
@@ -10262,16 +10245,86 @@ body.auto-dark .swal2-backdrop-show {
         function renderRecentTasks() {
             const sorted = [...assignments].sort((a,b) => new Date(b.orderDate) - new Date(a.orderDate)).slice(0,3);
             const tbody = document.getElementById('recent-table-body');
+            const mobContainer = document.getElementById('recent-cards-mobile');
             
             if(sorted.length === 0) {
-                tbody.innerHTML = renderEmptyTableState({
-                    title: 'ไม่มีงานที่เพิ่งเพิ่มล่าสุด',
-                    subtitle: 'ยังไม่มีรายการการบ้านที่เพิ่มเข้าระบบ คลิกปุ่มด้านล่างเพื่อเริ่มสร้างงาน',
-                    actionText: 'เพิ่มงานใหม่',
-                    actionOnClick: "nav('add-task')",
-                    colspan: 8
-                });
+                if (tbody) {
+                    tbody.innerHTML = renderEmptyTableState({
+                        title: 'ไม่มีงานที่เพิ่งเพิ่มล่าสุด',
+                        subtitle: 'ยังไม่มีรายการการบ้านที่เพิ่มเข้าระบบ คลิกปุ่มด้านล่างเพื่อเริ่มสร้างงาน',
+                        actionText: 'เพิ่มงานใหม่',
+                        actionOnClick: "nav('add-task')",
+                        colspan: 8
+                    });
+                }
+                if (mobContainer) {
+                    mobContainer.innerHTML = `
+                        <div class="py-8 px-4 text-center text-slate-400">
+                            <p class="font-bold text-slate-700 text-sm mb-1">ไม่มีงานที่เพิ่งเพิ่มล่าสุด</p>
+                            <p class="text-xs mb-3">ยังไม่มีรายการการบ้านที่เพิ่มเข้าระบบ</p>
+                            <button type="button" onclick="nav('add-task')" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-sidebar text-white hover:bg-slate-800 transition">
+                                เพิ่มงานใหม่
+                            </button>
+                        </div>
+                    `;
+                }
                 return;
+            }
+
+            if (mobContainer) {
+                mobContainer.innerHTML = sorted.map(t => {
+                    const diff = diffDays(t.dueDate);
+                    const isDone = (t.status === 'ส่งแล้ว');
+                    const subColor = getSubjectColor(t.subject);
+                    let prioClass = 'bg-slate-500 text-white';
+                    if (t.priority === 'สอบ') prioClass = 'bg-red-500 text-white';
+                    else if (t.priority === 'ทั่วไป') prioClass = 'bg-blue-500 text-white';
+                    else if (t.priority === 'ด่วน') prioClass = 'bg-yellow-400 text-white';
+                    else if (t.priority === 'ข่าว') prioClass = 'bg-green-500 text-white';
+
+                    const statusBadge = isDone
+                        ? '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-green-100 text-green-700">ส่งแล้ว</span>'
+                        : '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-red-100 text-red-700">ยังไม่ส่ง</span>';
+
+                    return `
+                        <div class="p-3.5 bg-slate-50/70 hover:bg-slate-50 rounded-2xl border border-slate-100 flex flex-col gap-2.5 transition">
+                            <div class="flex items-center justify-between gap-2">
+                                <div class="flex items-center gap-1.5 flex-wrap">
+                                    <span class="inline-block text-white px-2 py-0.5 rounded-md text-[10.5px] font-bold leading-tight" style="background-color: ${subColor}">${escapeHtml(t.subject || 'ทั่วไป')}</span>
+                                    <span class="inline-block px-2 py-0.5 rounded-md text-[10px] font-bold ${prioClass}">${escapeHtml(t.priority || 'ทั่วไป')}</span>
+                                </div>
+                                <div class="shrink-0">${statusBadge}</div>
+                            </div>
+                            <div>
+                                <h4 class="text-xs sm:text-sm font-bold text-slate-800 leading-snug line-clamp-1 ${isDone ? 'line-through text-slate-400' : ''}">${escapeHtml(t.title)}</h4>
+                                <div class="flex items-center gap-1.5 text-[11px] text-slate-400 mt-0.5">
+                                    <span>กำหนดส่ง: ${formatDate(t.dueDate)}</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between gap-2 pt-1 border-t border-slate-100/80">
+                                <div class="flex-1">
+                                    ${!isDone
+                                        ? `<button type="button" onclick="markDone('${t.id}', event)" class="w-full h-8 px-3 rounded-lg bg-primary text-sidebar font-bold text-xs hover:bg-[#bce055] transition flex items-center justify-center gap-1.5 shadow-2xs">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>
+                                            <span>ทำเครื่องหมายว่าเสร็จ</span>
+                                           </button>`
+                                        : `<button type="button" onclick="toggleTaskStatus('${t.id}', event)" class="w-full h-8 px-3 rounded-lg bg-slate-200/80 text-slate-700 font-bold text-xs hover:bg-slate-300 transition flex items-center justify-center gap-1.5">
+                                            <span>เปลี่ยนเป็นยังไม่ส่ง</span>
+                                           </button>`
+                                    }
+                                </div>
+                                <div class="flex items-center gap-1 shrink-0">
+                                    <button type="button" onclick="editTask('${t.id}')" class="w-8 h-8 rounded-lg border border-slate-200 bg-white text-slate-500 hover:text-blue-600 transition flex items-center justify-center" title="แก้ไข">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                                    </button>
+                                    <button type="button" onclick="deleteTask('${t.id}')" class="w-8 h-8 rounded-lg border border-red-200 bg-white text-red-500 hover:bg-red-50 transition flex items-center justify-center" title="ลบ">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
             }
 
             tbody.innerHTML = sorted.map(t => {
@@ -10665,8 +10718,8 @@ body.auto-dark .swal2-backdrop-show {
             PERIOD_COLS.forEach(col => {
                 if (col.type === 'break') {
                     cardsHtml += `
-                        <div class="py-2.5 px-4 rounded-xl bg-slate-100/80 border border-dashed border-slate-200/80 text-center">
-                            <span class="text-xs font-bold text-slate-500">${col.label} (${col.time} น.)</span>
+                        <div class="py-2 px-4 rounded-xl bg-slate-100/70 border border-dashed border-slate-200/80 text-center">
+                            <span class="text-xs font-semibold text-slate-500">${escapeHtml(col.label)} (${col.time} น.)</span>
                         </div>
                     `;
                     return;
@@ -10701,43 +10754,49 @@ body.auto-dark .swal2-backdrop-show {
 
                 if (isNow) {
                     cardsHtml += `
-                        <div ${clickAttr} class="p-3.5 rounded-2xl bg-white border border-slate-800/80 shadow-xs transition ${isViewMode ? '' : 'hover:border-slate-900 cursor-pointer'}">
-                            <div class="flex items-center justify-between mb-1">
+                        <div ${clickAttr} class="p-4 rounded-2xl bg-primary/10 border-2 border-primary/70 shadow-sm ring-2 ring-primary/25 transition ${isViewMode ? '' : 'hover:border-primary cursor-pointer'}">
+                            <div class="flex items-center justify-between mb-2">
                                 <div class="flex items-center gap-2">
-                                    <span class="w-6 h-6 rounded-lg bg-slate-900 text-white flex items-center justify-center text-[11px] font-bold">
+                                    <span class="w-7 h-7 rounded-lg bg-sidebar text-white flex items-center justify-center text-xs font-extrabold shadow-2xs">
                                         ${col.id}
                                     </span>
-                                    <span class="text-[11px] font-bold text-slate-800">${col.time} น.</span>
+                                    <span class="text-xs font-bold text-slate-900">${col.time} น.</span>
                                 </div>
-                                ${hasExam ? `<span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold bg-red-100 text-red-600">มีสอบ</span>` : ''}
+                                <div class="flex items-center gap-1.5">
+                                    <span class="inline-flex items-center gap-1.5 text-[10.5px] font-extrabold text-slate-900 bg-white px-2.5 py-0.5 rounded-full border border-primary/40 shadow-2xs">
+                                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                        กำลังเรียน
+                                    </span>
+                                    ${hasExam ? `<span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold bg-red-100 text-red-600 border border-red-200">มีสอบ</span>` : ''}
+                                </div>
                             </div>
                             <div class="flex items-center justify-between mt-1">
-                                <div class="flex items-center gap-2.5">
-                                    <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background-color: ${dotColor}"></span>
-                                    <h4 class="text-sm font-bold text-slate-900">${sub}</h4>
+                                <div class="flex items-center gap-2.5 min-w-0">
+                                    <span class="w-3 h-3 rounded-full shrink-0" style="background-color: ${dotColor}"></span>
+                                    <h4 class="text-base font-black text-slate-900 truncate">${escapeHtml(sub)}</h4>
                                 </div>
-                                ${!isViewMode ? `<span class="text-xs font-semibold text-slate-400">แก้ไข</span>` : ''}
+                                ${!isViewMode ? `<span class="text-xs font-bold text-slate-600 hover:text-slate-900 shrink-0">แก้ไข</span>` : ''}
                             </div>
                         </div>
                     `;
                 } else {
                     cardsHtml += `
                         <div ${clickAttr} class="p-3.5 rounded-2xl bg-white border border-slate-200/80 shadow-2xs transition ${isViewMode ? '' : 'hover:border-slate-300 cursor-pointer'}">
-                            <div class="flex items-center justify-between mb-1">
+                            <div class="flex items-center justify-between mb-1.5">
                                 <div class="flex items-center gap-2">
-                                    <span class="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center text-[11px] font-bold text-slate-600">
+                                    <span class="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center text-[11px] font-bold text-slate-700">
                                         ${col.id}
                                     </span>
-                                    <span class="text-[11px] font-semibold text-slate-400">${col.time} น.</span>
+                                    <span class="text-xs font-medium text-slate-500">${col.time} น.</span>
                                 </div>
-                                ${hasExam ? `<span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold bg-red-100 text-red-600">มีสอบ</span>` : ''}
+                                ${hasExam ? `<span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold bg-red-100 text-red-600 border border-red-200">มีสอบ</span>` : ''}
                             </div>
                             <div class="flex items-center justify-between mt-1">
-                                <div class="flex items-center gap-2.5">
+                                <div class="flex items-center gap-2.5 min-w-0">
                                     <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background-color: ${dotColor}"></span>
-                                    <h4 class="text-sm font-bold text-slate-800">${sub}</h4>
+                                    <h4 class="text-sm font-bold text-slate-800 truncate">${escapeHtml(sub)}</h4>
                                 </div>
-                                ${!isViewMode ? `<span class="text-xs font-semibold text-slate-400">แก้ไข</span>` : ''}
+                                ${!isViewMode ? `<span class="text-xs font-medium text-slate-400 hover:text-slate-700 shrink-0">แก้ไข</span>` : ''}
                             </div>
                         </div>
                     `;
@@ -10757,45 +10816,61 @@ body.auto-dark .swal2-backdrop-show {
 
             if (!header || !body) return;
 
-            // ---- Header ----
-            let headerHtml = '<tr><th class="p-3 border-r border-slate-100 text-[10px] font-bold text-slate-500 uppercase tracking-widest bg-slate-50/80 min-w-[70px]">วัน</th>';
-            headerHtml += PERIOD_COLS.map(col => {
-                if (col.type === 'break') return `<th class="p-3 border-r border-slate-100 text-[10px] font-bold text-slate-400 bg-slate-100/80 min-w-[60px]"><span class="block">${col.label}</span></th>`;
-                return `<th class="p-3 border-r border-slate-100 text-center bg-slate-50/80 min-w-[90px]"><span class="block text-[11px] font-bold text-slate-600">คาบ ${col.id}</span><span class="block text-[9px] font-medium text-slate-400 mt-0.5">${col.time}</span></th>`;
-            }).join('');
-            headerHtml += '</tr>';
-            header.innerHTML = headerHtml;
-
             const now = new Date();
             const currentDayThai = DAYS[now.getDay()];
             const timeStr = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
 
+            // ---- Header ----
+            let headerHtml = '<tr><th class="p-3.5 border-r border-slate-100 text-xs font-black text-slate-700 uppercase tracking-widest bg-slate-50/90 min-w-[75px]">วัน</th>';
+            headerHtml += PERIOD_COLS.map(col => {
+                if (col.type === 'break') {
+                    return `<th class="p-3 border-r border-slate-100 text-[10px] font-bold text-slate-400 bg-slate-100/70 min-w-[65px]"><span class="block">${escapeHtml(col.label)}</span></th>`;
+                }
+                const [start, end] = col.time.split('-');
+                const isColActive = (timeStr >= start && timeStr <= end);
+                const colHighlight = isColActive ? 'bg-primary/20 text-slate-900 border-b-2 border-primary' : 'bg-slate-50/90 text-slate-600';
+                return `<th class="p-3 border-r border-slate-100 text-center ${colHighlight} min-w-[95px]">
+                    <span class="block text-xs font-black ${isColActive ? 'text-slate-900' : 'text-slate-700'}">คาบ ${col.id}</span>
+                    <span class="block text-[10px] font-semibold ${isColActive ? 'text-slate-800' : 'text-slate-400'} mt-0.5">${col.time} น.</span>
+                </th>`;
+            }).join('');
+            headerHtml += '</tr>';
+            header.innerHTML = headerHtml;
+
             // ---- Body ----
             let bodyHtml = '';
             DAYS.forEach(day => {
+                const isToday = (day === currentDayThai);
+                const dayCellClass = isToday 
+                    ? 'p-3 border-r border-slate-100 bg-primary/20 text-slate-900 font-black border-l-4 border-primary whitespace-nowrap text-center' 
+                    : 'p-3 border-r border-slate-100 bg-slate-50/80 whitespace-nowrap text-center text-slate-700 font-bold';
+
                 bodyHtml += `<tr class="border-b border-slate-100">`;
-                bodyHtml += `<td class="p-3 border-r border-slate-100 bg-slate-50/80 whitespace-nowrap text-center"><span class="text-xs font-bold text-slate-700">${day}</span></td>`;
+                bodyHtml += `<td class="${dayCellClass}">
+                    <span class="text-xs ${isToday ? 'font-black text-slate-950' : 'font-bold text-slate-700'}">${day}</span>
+                    ${isToday ? `<span class="block text-[9.5px] font-bold text-slate-800 mt-0.5">วันนี้</span>` : ''}
+                </td>`;
 
                 PERIOD_COLS.forEach(col => {
                     if (col.type === 'break') {
-                        bodyHtml += `<td class="border-r border-slate-100 bg-slate-100/50"></td>`;
+                        bodyHtml += `<td class="border-r border-slate-100 bg-slate-100/40"></td>`;
                         return;
                     }
                     const sub = (scheduleData[day] && scheduleData[day][col.time]) || '';
                     const [start, end] = col.time.split('-');
                     const isNow = (currentDayThai === day && timeStr >= start && timeStr <= end && sub !== '' && sub !== 'พัก' && sub !== '-');
 
-                    // Indicator dots: exam = red (removed urgent/due date per user request)
+                    // Indicator dots: exam = red
                     let dotsInner = '';
                     if (sub && sub !== 'พัก 20 นาที' && sub !== 'พักเที่ยง' && sub !== '-') {
                         const hasExam = assignments.some(t => t.subject === sub && t.status === 'ยังไม่ส่ง' && t.priority === 'สอบ');
-                        if (hasExam) dotsInner += '<span class="w-1.5 h-1.5 rounded-full bg-red-500 inline-block" title="มีสอบ"></span>';
+                        if (hasExam) dotsInner += '<span class="w-1.5 h-1.5 rounded-full bg-red-500 inline-block shadow-2xs" title="มีสอบ"></span>';
                     }
-                    const dotsHtml = dotsInner ? `<div class="sched-dots">${dotsInner}</div>` : '';
+                    const dotsHtml = dotsInner ? `<div class="sched-dots mt-1 flex justify-center">${dotsInner}</div>` : '';
 
                     const sanitizedSub = sub.replace(/'/g, "\'");
                     const cursorClass  = isViewMode ? 'cursor-default' : 'cursor-pointer';
-                    const hoverClass   = isViewMode ? '' : 'hover:bg-slate-50/60';
+                    const hoverClass   = isViewMode ? '' : 'hover:bg-slate-50/70';
                     const clickAttr    = isViewMode ? '' : `onclick="openSchedEdit('${day}', '${col.time}', '${sanitizedSub}')"`;
 
                     if (!sub) {
@@ -10804,18 +10879,21 @@ body.auto-dark .swal2-backdrop-show {
                     }
 
                     if (isNow) {
-                        // Current active period - subtle clean highlight without bright green border or text badge
+                        // Current active period - Standout Active State that is clean, highly visible and reads immediately
                         bodyHtml += `<td class="p-2 border-r border-slate-100 text-center ${cursorClass} transition align-middle" ${clickAttr} title="${sanitizedSub}">
-                            <div class="sched-cell-active rounded-xl py-1.5 px-2 bg-slate-100/90 border border-slate-300 min-h-[58px] flex flex-col items-center justify-center">
-                                <span class="block text-[11px] font-bold text-slate-900 leading-snug line-clamp-2">${sub}</span>
+                            <div class="sched-cell-active rounded-xl py-2 px-2.5 bg-primary/25 border-2 border-primary shadow-xs ring-2 ring-primary/30 min-h-[64px] flex flex-col items-center justify-center">
+                                <span class="inline-flex items-center gap-1 text-[9px] font-extrabold text-slate-900 bg-white/90 px-1.5 py-0.2 rounded-md mb-1 shadow-2xs">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>กำลังเรียน
+                                </span>
+                                <span class="block text-xs font-black text-slate-950 leading-snug line-clamp-2">${escapeHtml(sub)}</span>
                                 ${dotsHtml}
                             </div>
                         </td>`;
                     } else {
-                        // Normal — plain text, consistent height
+                        // Normal — high-contrast bold subject name
                         bodyHtml += `<td class="p-2.5 border-r border-slate-100 text-center ${cursorClass} ${hoverClass} transition align-middle" ${clickAttr} title="${sanitizedSub}">
-                            <div class="min-h-[54px] flex flex-col items-center justify-center">
-                                <span class="block text-[11px] font-semibold text-slate-700 leading-snug line-clamp-2">${sub}</span>
+                            <div class="min-h-[58px] flex flex-col items-center justify-center">
+                                <span class="block text-xs font-bold text-slate-800 leading-snug line-clamp-2">${escapeHtml(sub)}</span>
                                 ${dotsHtml}
                             </div>
                         </td>`;
@@ -10974,9 +11052,9 @@ body.auto-dark .swal2-backdrop-show {
                         diffClass = 'bg-rose-50 text-rose-700 border border-rose-200/90';
                         timeBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10.5px] font-bold bg-rose-50 text-rose-700 border border-rose-200/90">เกินกำหนด ${Math.abs(diff)} วัน</span>`;
                     } else if (diff === 0) {
-                        diffLabel = 'ส่งวันนี้';
+                        diffLabel = 'วันนี้';
                         diffClass = 'bg-amber-50 text-amber-800 border border-amber-200/90';
-                        timeBadge = `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10.5px] font-bold bg-amber-50 text-amber-800 border border-amber-200/90">ส่งวันนี้</span>`;
+                        timeBadge = '';
                     } else if (diff <= settings.urgentDays) {
                         diffLabel = `อีก ${diff} วัน`;
                         diffClass = 'bg-orange-50 text-orange-700 border border-orange-200/90';
@@ -11057,7 +11135,7 @@ body.auto-dark .swal2-backdrop-show {
                         <div class="flex flex-col justify-center min-w-0 py-0.5">
                             <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap">
                                 <span id="task-title-${t.id}" class="font-bold text-slate-800 text-sm leading-snug break-words ${t.status === 'ส่งแล้ว' ? 'line-through text-slate-400' : ''}">${escapeHtml(t.title)}</span>
-                                ${t.calendarEventId ? `<span class="inline-flex items-center gap-1 text-[10px] font-bold text-blue-600 bg-blue-50 border border-blue-200/80 px-1.5 py-0.5 rounded shrink-0" title="เชื่อมต่อกับ Google Calendar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Cal</span>` : ''}
+                                ${t.calendarEventId ? `<span class="inline-flex items-center gap-1 text-[10px] font-semibold text-blue-600 bg-blue-50 border border-blue-200/80 px-1.5 py-0.5 rounded shrink-0" title="เชื่อมต่อกับ Google Calendar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendar</span>` : ''}
                             </div>
                             ${t.description ? `<p class="text-xs text-slate-400 font-normal line-clamp-1 mt-0.5">${escapeHtml(t.description)}</p>` : ''}
                         </div>
@@ -11069,7 +11147,7 @@ body.auto-dark .swal2-backdrop-show {
                         <div class="flex flex-col items-center justify-center leading-tight">
                             <span class="text-xs font-bold text-slate-800">${formatDate(t.dueDate)}</span>
                             <span class="text-[11px] font-medium text-slate-400 mt-0.5">${displayTime} น.</span>
-                            <div class="mt-1">${timeBadge}</div>
+                            ${timeBadge ? `<div class="mt-1">${timeBadge}</div>` : ''}
                         </div>
                     </td>
                     <!-- 5. ความสำคัญ (Center-aligned, matches th) -->
@@ -11162,7 +11240,7 @@ body.auto-dark .swal2-backdrop-show {
                         <div class="flex items-center gap-1.5 flex-wrap">
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-lg text-xs font-bold text-white shadow-2xs leading-tight whitespace-nowrap" style="background-color: ${getSubjectColor(t.subject)}">${escapeHtml(t.subject)}</span>
                             <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[10.5px] font-bold ${prioBadgeClass}">${escapeHtml(t.priority || 'ทั่วไป')}</span>
-                            ${t.calendarEventId ? `<span class="inline-flex items-center gap-1 text-[10px] font-bold text-blue-600 bg-blue-50 border border-blue-200/80 px-1.5 py-0.5 rounded shrink-0" title="Google Calendar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Cal</span>` : ''}
+                            ${t.calendarEventId ? `<span class="inline-flex items-center gap-1 text-[10px] font-semibold text-blue-600 bg-blue-50 border border-blue-200/80 px-1.5 py-0.5 rounded shrink-0" title="Google Calendar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendar</span>` : ''}
                         </div>
                         <div id="task-card-badge-${t.id}" class="shrink-0">
                             ${statusBadge}
@@ -11184,10 +11262,12 @@ body.auto-dark .swal2-backdrop-show {
                                 <span class="text-slate-400 font-normal text-[11px]">(${displayTime} น.)</span>
                             </div>
                         </div>
+                        ${timeBadge ? `
                         <div class="text-right">
                             <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block">สถานะเวลา</span>
                             <div class="mt-0.5">${timeBadge}</div>
                         </div>
+                        ` : ''}
                     </div>
 
                     <!-- Card Attachment Preview if available -->
@@ -12650,6 +12730,22 @@ body.auto-dark .swal2-backdrop-show {
             }
         }
 
+        let selectedTimerMood = '🤩';
+        function selectTimerMood(mood, btn) {
+            selectedTimerMood = mood;
+            const container = document.getElementById('timer-mood-selector');
+            if (container) {
+                container.querySelectorAll('.timer-mood-btn').forEach(b => {
+                    b.classList.remove('border-2', 'border-slate-900', 'active');
+                    b.classList.add('border-slate-200');
+                });
+            }
+            if (btn) {
+                btn.classList.remove('border-slate-200');
+                btn.classList.add('border-2', 'border-slate-900', 'active');
+            }
+        }
+
         function showTimerReviewMode(data) {
             localStorage.removeItem('jodNGan_active_timer');
             activeTimer = null;
@@ -12672,9 +12768,17 @@ body.auto-dark .swal2-backdrop-show {
             if (actualEl) actualEl.textContent = formatDurationDisplay(data.actualDurationSeconds);
             if (statusEl) {
                 statusEl.textContent = data.status === 'สำเร็จตามเป้า' ? 'สำเร็จตามเป้าหมาย' : 'จบก่อนเวลา';
-                statusEl.className = data.status === 'สำเร็จตามเป้า' ? 'font-semibold text-emerald-600' : 'font-semibold text-amber-600';
+                statusEl.className = data.status === 'สำเร็จตามเป้า' ? 'px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200' : 'px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200';
             }
             if (notesEl) notesEl.value = data.goal || '';
+
+            // Reset mood to default '🤩'
+            selectedTimerMood = '🤩';
+            const moodContainer = document.getElementById('timer-mood-selector');
+            if (moodContainer) {
+                const firstBtn = moodContainer.querySelector('[data-mood="🤩"]');
+                if (firstBtn) selectTimerMood('🤩', firstBtn);
+            }
 
             updateDashboardTimerStats();
         }
@@ -12702,6 +12806,7 @@ body.auto-dark .swal2-backdrop-show {
                 targetDurationMinutes: timerCompletedData.targetMinutes,
                 actualDurationSeconds: timerCompletedData.actualDurationSeconds,
                 status: timerCompletedData.status,
+                mood: selectedTimerMood || '🤩',
                 notes: notes,
                 startedAt: timerCompletedData.startedAt,
                 endedAt: new Date().toISOString(),
@@ -12950,6 +13055,7 @@ body.auto-dark .swal2-backdrop-show {
                             <div class="flex items-center gap-2 flex-wrap">
                                 <span class="text-xs font-bold text-slate-800 truncate">${escapeHtml(subName)}</span>
                                 ${statusBadge}
+                                ${session.mood ? `<span class="text-sm shrink-0 inline-flex items-center" title="ความรู้สึก / สมาธิ">${session.mood}</span>` : ''}
                                 ${linkedTitle ? `<span class="text-[10px] font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100 truncate max-w-[200px]" title="${escapeHtml(linkedTitle)}">${escapeHtml(linkedTitle)}</span>` : ''}
                             </div>
                             <div class="flex items-center gap-2 text-[11px] text-slate-400 mt-0.5 flex-wrap">
@@ -13014,6 +13120,11 @@ body.auto-dark .swal2-backdrop-show {
                     statusBadge.textContent = session.status || 'จบก่อนเวลา';
                     statusBadge.className = 'px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200';
                 }
+            }
+
+            const moodEl = document.getElementById('detail-session-mood-emoji');
+            if (moodEl) {
+                moodEl.textContent = session.mood || '🤩';
             }
 
             const actualSec = parseInt(session.actualDurationSeconds || session.actual_duration_seconds, 10) || 0;
@@ -14028,6 +14139,7 @@ body.auto-dark .swal2-backdrop-show {
         let activeTrashDetailIndex = null;
         function renderTrash() {
             const tbody = document.getElementById('trash-table-body');
+            const mobContainer = document.getElementById('trash-cards-mobile');
             const emptyState = document.getElementById('trash-empty');
             const headerCount = document.getElementById('trash-header-count');
             const badge = document.getElementById('trash-badge');
@@ -14042,61 +14154,118 @@ body.auto-dark .swal2-backdrop-show {
                 }
             }
 
-            if (!tbody) return;
-
             if (trash.length === 0) {
                 if (emptyState) emptyState.classList.remove('hidden');
-                tbody.innerHTML = '';
+                if (tbody) tbody.innerHTML = '';
+                if (mobContainer) mobContainer.innerHTML = '';
                 return;
             }
             
             if (emptyState) emptyState.classList.add('hidden');
-            tbody.innerHTML = trash.map((t, index) => {
-                const subColor = getSubjectColor(t.subject);
-                const isDone = (t.status === 'ส่งแล้ว');
-                const statusBadge = isDone
-                    ? '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">ส่งแล้ว</span>'
-                    : '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200">ยังไม่ส่ง</span>';
-                
-                const deletedDateStr = (t._deletedAt || t.deleted_at) ? formatDate(t._deletedAt || t.deleted_at) : '-';
-                const dueDateStr = t.dueDate ? `${formatDate(t.dueDate)}${t.dueTime ? ` (${t.dueTime} น.)` : ''}` : '-';
 
-                return `
-                <tr class="border-b border-slate-100 hover:bg-slate-50/70 transition-colors">
-                    <td class="py-3.5 px-5 text-center">
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-800 bg-slate-100 border border-slate-200/60 max-w-[130px] truncate" title="${escapeHtml(t.subject || 'ทั่วไป')}">
-                            <span class="w-2 h-2 rounded-full shrink-0" style="background-color: ${subColor}"></span>
-                            <span class="truncate">${escapeHtml(t.subject || 'ทั่วไป')}</span>
-                        </span>
-                    </td>
-                    <td class="py-3.5 px-5">
-                        <div class="cursor-pointer group" onclick="openTrashTaskDetail(${index})" title="คลิกเพื่อดูรายละเอียด">
-                            <p class="font-bold text-sm text-slate-800 line-through decoration-slate-400 group-hover:text-blue-600 transition truncate max-w-xs">${escapeHtml(t.title || 'ไม่มีชื่องาน')}</p>
-                            ${t.category ? `<span class="text-[11px] text-slate-400 font-medium">${escapeHtml(t.category)}</span>` : ''}
+            // Render Desktop Table
+            if (tbody) {
+                tbody.innerHTML = trash.map((t, index) => {
+                    const subColor = getSubjectColor(t.subject);
+                    const isDone = (t.status === 'ส่งแล้ว');
+                    const statusBadge = isDone
+                        ? '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">ส่งแล้ว</span>'
+                        : '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200">ยังไม่ส่ง</span>';
+                    
+                    const deletedDateStr = (t._deletedAt || t.deleted_at) ? formatDate(t._deletedAt || t.deleted_at) : '-';
+                    const dueDateStr = t.dueDate ? `${formatDate(t.dueDate)}${t.dueTime ? ` (${t.dueTime} น.)` : ''}` : '-';
+
+                    return `
+                    <tr class="border-b border-slate-100 hover:bg-slate-50/70 transition-colors">
+                        <td class="py-3.5 px-5 text-center">
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-800 bg-slate-100 border border-slate-200/60 max-w-[130px] truncate" title="${escapeHtml(t.subject || 'ทั่วไป')}">
+                                <span class="w-2 h-2 rounded-full shrink-0" style="background-color: ${subColor}"></span>
+                                <span class="truncate">${escapeHtml(t.subject || 'ทั่วไป')}</span>
+                            </span>
+                        </td>
+                        <td class="py-3.5 px-5">
+                            <div class="cursor-pointer group" onclick="openTrashTaskDetail(${index})" title="คลิกเพื่อดูรายละเอียด">
+                                <p class="font-bold text-sm text-slate-800 line-through decoration-slate-400 group-hover:text-blue-600 transition truncate max-w-xs">${escapeHtml(t.title || 'ไม่มีชื่องาน')}</p>
+                                ${t.category ? `<span class="text-[11px] text-slate-400 font-medium">${escapeHtml(t.category)}</span>` : ''}
+                            </div>
+                        </td>
+                        <td class="py-3.5 px-5 text-center text-xs text-slate-600 font-medium whitespace-nowrap">${dueDateStr}</td>
+                        <td class="py-3.5 px-5 text-center whitespace-nowrap">${statusBadge}</td>
+                        <td class="py-3.5 px-5 text-center text-xs text-red-500 font-medium whitespace-nowrap">${deletedDateStr}</td>
+                        <td class="py-3.5 px-5 text-center whitespace-nowrap">
+                            <div class="inline-flex items-center gap-1.5">
+                                <button type="button" onclick="openTrashTaskDetail(${index})" title="ดูรายละเอียดงาน" class="h-8 px-2.5 rounded-lg text-xs font-medium text-slate-600 hover:text-blue-600 bg-white hover:bg-blue-50 border border-slate-200 hover:border-blue-200 transition cursor-pointer shadow-2xs flex items-center gap-1">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                    <span>ดูรายละเอียด</span>
+                                </button>
+                                <button type="button" onclick="restoreTrash(${index})" title="กู้คืนงาน" class="h-8 px-2.5 rounded-lg text-xs font-semibold text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition cursor-pointer shadow-2xs flex items-center gap-1">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8 M3 3v5h5"/></svg>
+                                    <span>กู้คืน</span>
+                                </button>
+                                <button type="button" onclick="deleteTrashPermanent(${index})" title="ลบถาวร" class="h-8 px-2.5 rounded-lg text-xs font-semibold text-red-600 hover:text-red-700 bg-red-50/70 hover:bg-red-100 border border-red-200 transition cursor-pointer shadow-2xs flex items-center gap-1">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
+                                    <span>ลบถาวร</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    `;
+                }).join('');
+            }
+
+            // Render Mobile Cards
+            if (mobContainer) {
+                mobContainer.innerHTML = trash.map((t, index) => {
+                    const subColor = getSubjectColor(t.subject);
+                    const isDone = (t.status === 'ส่งแล้ว');
+                    const statusBadge = isDone
+                        ? '<span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">ส่งแล้ว</span>'
+                        : '<span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold bg-rose-50 text-rose-700 border border-rose-200">ยังไม่ส่ง</span>';
+                    
+                    const deletedDateStr = (t._deletedAt || t.deleted_at) ? formatDate(t._deletedAt || t.deleted_at) : '-';
+                    const dueDateStr = t.dueDate ? `${formatDate(t.dueDate)}${t.dueTime ? ` (${t.dueTime} น.)` : ''}` : '-';
+
+                    return `
+                    <div class="bg-white border border-slate-200/80 rounded-2xl p-3.5 shadow-2xs space-y-2.5">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-xs font-bold text-slate-800 bg-slate-100 border border-slate-200/60 max-w-[140px] truncate">
+                                <span class="w-2 h-2 rounded-full shrink-0" style="background-color: ${subColor}"></span>
+                                <span class="truncate">${escapeHtml(t.subject || 'ทั่วไป')}</span>
+                            </span>
+                            <div class="flex items-center gap-1.5">
+                                ${statusBadge}
+                            </div>
                         </div>
-                    </td>
-                    <td class="py-3.5 px-5 text-center text-xs text-slate-600 font-medium whitespace-nowrap">${dueDateStr}</td>
-                    <td class="py-3.5 px-5 text-center whitespace-nowrap">${statusBadge}</td>
-                    <td class="py-3.5 px-5 text-center text-xs text-red-500 font-medium whitespace-nowrap">${deletedDateStr}</td>
-                    <td class="py-3.5 px-5 text-center whitespace-nowrap">
-                        <div class="inline-flex items-center gap-1.5">
-                            <button type="button" onclick="openTrashTaskDetail(${index})" title="ดูรายละเอียดงาน" class="h-8 px-2.5 rounded-lg text-xs font-medium text-slate-600 hover:text-blue-600 bg-white hover:bg-blue-50 border border-slate-200 hover:border-blue-200 transition cursor-pointer shadow-2xs flex items-center gap-1">
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                                <span>ดูรายละเอียด</span>
-                            </button>
-                            <button type="button" onclick="restoreTrash(${index})" title="กู้คืนงาน" class="h-8 px-2.5 rounded-lg text-xs font-semibold text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition cursor-pointer shadow-2xs flex items-center gap-1">
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8 M3 3v5h5"/></svg>
-                                <span>กู้คืนงาน</span>
-                            </button>
-                            <button type="button" onclick="deleteTrashPermanent(${index})" title="ลบถาวร" class="h-8 px-2.5 rounded-lg text-xs font-semibold text-red-600 hover:text-red-700 bg-red-50/70 hover:bg-red-100 border border-red-200 transition cursor-pointer shadow-2xs flex items-center gap-1">
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
-                                <span>ลบถาวร</span>
-                            </button>
+
+                        <div onclick="openTrashTaskDetail(${index})" class="cursor-pointer">
+                            <h4 class="font-bold text-sm text-slate-800 line-through decoration-slate-400 line-clamp-2 leading-snug">${escapeHtml(t.title || 'ไม่มีชื่องาน')}</h4>
+                            <div class="flex items-center gap-2 mt-1 text-[11px] text-slate-400 font-medium">
+                                <span>กำหนดส่ง: ${dueDateStr}</span>
+                                <span>·</span>
+                                <span class="text-rose-500">ลบเมื่อ: ${deletedDateStr}</span>
+                            </div>
                         </div>
-                    </td>
-                </tr>
-                `;
-            }).join('');
+
+                        <div class="flex items-center justify-between gap-2 pt-2 border-t border-slate-100">
+                            <button type="button" onclick="openTrashTaskDetail(${index})" class="px-2.5 py-1.5 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition cursor-pointer flex items-center gap-1">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                <span>ดู</span>
+                            </button>
+                            <div class="flex items-center gap-1.5">
+                                <button type="button" onclick="restoreTrash(${index})" class="px-3 py-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl transition cursor-pointer flex items-center gap-1">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8 M3 3v5h5"/></svg>
+                                    <span>กู้คืน</span>
+                                </button>
+                                <button type="button" onclick="deleteTrashPermanent(${index})" class="px-3 py-1.5 text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 rounded-xl transition cursor-pointer flex items-center gap-1">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
+                                    <span>ลบถาวร</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                }).join('');
+            }
         }
 
         function openTrashTaskDetail(index) {
