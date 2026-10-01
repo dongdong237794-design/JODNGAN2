@@ -71,9 +71,11 @@ app.use((req, res) => {
   res.sendFile(indexPath);
 });
 
-// Start server
-app.listen(PORT, HOST, () => {
-  console.log(`Server running at http://${HOST}:${PORT}/`);
-});
+// Start server only when running as standalone process (not inside Vercel serverless)
+if (!process.env.VERCEL) {
+  app.listen(PORT, HOST, () => {
+    console.log(`Server running at http://${HOST}:${PORT}/`);
+  });
+}
 
 export default app;
