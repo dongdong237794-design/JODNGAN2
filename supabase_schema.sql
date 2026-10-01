@@ -2,7 +2,7 @@
 -- JodNGan (จดงาน) Database Schema for Supabase PostgreSQL
 -- ==========================================================
 
--- 1. Create profiles table (Phase 2: User Identity)
+-- 1. Create profiles table (User Identity)
 CREATE TABLE IF NOT EXISTS profiles (
     id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
     email TEXT,
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS subjects (
     updated_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
 
--- 3. Create tasks table
+-- 3. Create tasks table (Empty by default - no sample data)
 CREATE TABLE IF NOT EXISTS tasks (
     id TEXT PRIMARY KEY,
     user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS settings (
     updated_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
 
--- 6. Create study_sessions table (Phase 4: Study Timer)
+-- 6. Create study_sessions table (Study Timer / Pomodoro)
 CREATE TABLE IF NOT EXISTS study_sessions (
     id TEXT PRIMARY KEY,
     user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS study_sessions (
 );
 
 -- ==========================================================
--- Migration script for existing databases (Phase 2 Additions)
+-- Ensure columns exist (for existing tables)
 -- ==========================================================
 ALTER TABLE subjects ADD COLUMN IF NOT EXISTS user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE;
 ALTER TABLE tasks ADD COLUMN IF NOT EXISTS user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE;
@@ -91,10 +91,17 @@ ALTER TABLE tasks ADD COLUMN IF NOT EXISTS calendar_event_id TEXT;
 ALTER TABLE schedule ADD COLUMN IF NOT EXISTS user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE;
 ALTER TABLE settings ADD COLUMN IF NOT EXISTS user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE;
 
--- Adjust schedule unique constraint to be per-user
-ALTER TABLE schedule DROP CONSTRAINT IF EXISTS unique_day_period;
-ALTER TABLE schedule DROP CONSTRAINT IF EXISTS unique_user_day_period;
-ALTER TABLE schedule ADD CONSTRAINT unique_user_day_period UNIQUE (user_id, day, period_time);
+-- Unique constraint for schedule (Supports both per-user and default schedules)
+DO $$
+BEGIN
+    ALTER TABLE schedule DROP CONSTRAINT IF EXISTS unique_day_period;
+    ALTER TABLE schedule DROP CONSTRAINT IF EXISTS unique_user_day_period;
+    BEGIN
+        ALTER TABLE schedule ADD CONSTRAINT unique_user_day_period UNIQUE NULLS NOT DISTINCT (user_id, day, period_time);
+    EXCEPTION WHEN OTHERS THEN
+        ALTER TABLE schedule ADD CONSTRAINT unique_user_day_period UNIQUE (user_id, day, period_time);
+    END;
+END $$;
 
 -- ==========================================================
 -- Indexes for performance & multi-tenant isolation
@@ -112,7 +119,7 @@ CREATE INDEX IF NOT EXISTS idx_study_sessions_started_at ON study_sessions(start
 CREATE INDEX IF NOT EXISTS idx_study_sessions_subject_id ON study_sessions(subject_id);
 
 -- ==========================================================
--- Row Level Security (RLS) Setup (Phase 2: Strict Isolation)
+-- Row Level Security (RLS) Setup
 -- ==========================================================
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE subjects ENABLE ROW LEVEL SECURITY;
@@ -130,15 +137,18 @@ BEGIN
     DROP POLICY IF EXISTS "Users can insert own profile" ON profiles;
 
     DROP POLICY IF EXISTS "Public access subjects" ON subjects;
+    DROP POLICY IF EXISTS "Users can view subjects" ON subjects;
     DROP POLICY IF EXISTS "Users can manage own subjects" ON subjects;
 
     DROP POLICY IF EXISTS "Public access tasks" ON tasks;
     DROP POLICY IF EXISTS "Users can manage own tasks" ON tasks;
 
     DROP POLICY IF EXISTS "Public access schedule" ON schedule;
+    DROP POLICY IF EXISTS "Users can view schedule" ON schedule;
     DROP POLICY IF EXISTS "Users can manage own schedule" ON schedule;
 
     DROP POLICY IF EXISTS "Public access settings" ON settings;
+    DROP POLICY IF EXISTS "Users can view settings" ON settings;
     DROP POLICY IF EXISTS "Users can manage own settings" ON settings;
 
     DROP POLICY IF EXISTS "Public access study_sessions" ON study_sessions;
@@ -164,19 +174,31 @@ CREATE POLICY "Users can manage own tasks" ON tasks
     USING (auth.uid() = user_id)
     WITH CHECK (auth.uid() = user_id);
 
--- 3. Subjects Policies (Strict User Ownership)
+-- 3. Subjects Policies (View default subjects + manage own subjects)
+CREATE POLICY "Users can view subjects" ON subjects
+    FOR SELECT TO authenticated, anon
+    USING (auth.uid() = user_id OR user_id IS NULL);
+
 CREATE POLICY "Users can manage own subjects" ON subjects
     FOR ALL TO authenticated
     USING (auth.uid() = user_id)
     WITH CHECK (auth.uid() = user_id);
 
--- 4. Schedule Policies (Strict User Ownership)
+-- 4. Schedule Policies (View default schedule + manage own schedule)
+CREATE POLICY "Users can view schedule" ON schedule
+    FOR SELECT TO authenticated, anon
+    USING (auth.uid() = user_id OR user_id IS NULL);
+
 CREATE POLICY "Users can manage own schedule" ON schedule
     FOR ALL TO authenticated
     USING (auth.uid() = user_id)
     WITH CHECK (auth.uid() = user_id);
 
--- 5. Settings Policies (Strict User Ownership)
+-- 5. Settings Policies (View default settings + manage own settings)
+CREATE POLICY "Users can view settings" ON settings
+    FOR SELECT TO authenticated, anon
+    USING (auth.uid() = user_id OR user_id IS NULL);
+
 CREATE POLICY "Users can manage own settings" ON settings
     FOR ALL TO authenticated
     USING (auth.uid() = user_id)
@@ -287,10 +309,10 @@ CREATE TRIGGER on_auth_user_created
     FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
 
 -- ==========================================================
--- Initial Seed Data (Original System Data)
+-- Data Seeds (Subjects & Schedule only - No sample tasks)
 -- ==========================================================
 
--- Subjects Seed
+-- 1. Subjects Seed (21 core subjects)
 INSERT INTO subjects (id, name, category, color) VALUES
 ('SUB-R1', 'อัลกุอาน', 'วิชาศาสนา', '#10B981'),
 ('SUB-R2', 'อัลกุรอาน และตัฟซีร (แบบัยด์)', 'วิชาศาสนา', '#10B981'),
@@ -318,52 +340,45 @@ ON CONFLICT (id) DO UPDATE SET
     category = EXCLUDED.category,
     color = EXCLUDED.color;
 
--- Tasks Seed
-INSERT INTO tasks (id, title, description, subject, category, order_date, due_date, status, priority, subject_color, image_base64, file_name, file_mime, is_deleted) VALUES
-('T-1', 'แบบฝึกหัดคณิต หน้า 20', '', 'คณิตศาสตร์ (แบฟุรกอน)', 'วิชาสามัญ', NOW(), NOW() + INTERVAL '2 days', 'ยังไม่ส่ง', 'ด่วน', '#3B82F6', '', '', '', false),
-('T-2', 'หาบุคคลที่เป็นนักวรรณกรรม หรือคนที่เกี่ยวข้องกับศาสนาอิสลาม', 'ส่งในรูปแบบการ์ด A4 แนะนำประวัติคร่าวๆ เพื่อใช้ประกอบแผนการสอนของคาบเรียนในอนาคต', 'MELAYU', 'วิชาศาสนา', NOW() - INTERVAL '5 days', NOW() + INTERVAL '4 days', 'ยังไม่ส่ง', 'ทั่วไป', '#F59E0B', '', '', '', false),
-('T-3', 'แต่งงานแบบ อัลตะห์ลิล', 'เขียนสาระสำคัญ สรุปใจความเรื่องพิธีแต่งงานแบบอิสลามลงในสมุดประจำตัวของนักเรียน', 'อัลฟิกฮ์', 'วิชาศาสนา', NOW() - INTERVAL '5 days', NOW() - INTERVAL '1 day', 'ส่งแล้ว', 'ทั่วไป', '#84CC16', '', '', '', false)
-ON CONFLICT (id) DO NOTHING;
-
--- Schedule Seed
-INSERT INTO schedule (day, period_time, subject) VALUES
-('อาทิตย์', '07:50-08:30', 'อัลกุอาน'),
-('อาทิตย์', '08:50-09:40', 'MELAYU'),
-('อาทิตย์', '09:40-10:30', 'คณิตศาสตร์ (แบฟุรกอน)'),
-('อาทิตย์', '12:05-12:50', 'เคมี'),
-('อาทิตย์', '13:40-14:30', 'เคมี'),
-('จันทร์', '07:50-08:30', 'MELAYU'),
-('จันทร์', '08:50-09:40', 'อัลอากีดะฮ์ (แบวัน)'),
-('จันทร์', '10:30-11:20', 'สังคม'),
-('จันทร์', '11:20-12:05', 'ฟิสิกส์ (แบฟิต)'),
-('จันทร์', '13:40-14:30', 'ฟิสิกส์ (แบฟิต)'),
-('จันทร์', '14:30-15:20', 'ฟิสิกส์ (แบฟิต)'),
-('จันทร์', '15:20-16:10', 'อัลกุรอาน และตัฟซีร (แบบัยด์)'),
-('อังคาร', '07:50-08:30', 'อัลหะดีษ'),
-('อังคาร', '08:50-09:40', 'อัลอัคลาก'),
-('อังคาร', '09:40-10:30', 'ชวีะ (แบวัน)'),
-('อังคาร', '11:20-12:05', 'ฟิสิกส์ (แบฟิต)'),
-('อังคาร', '12:05-12:50', 'ฟิสิกส์ (แบฟิต)'),
-('อังคาร', '15:20-16:10', 'English 1 (บัง)'),
-('พุธ', '07:50-08:30', 'ฮาลากอฮ์'),
-('พุธ', '08:50-09:40', 'ฮาลากอฮ์'),
-('พุธ', '10:30-11:20', 'อัตตารีค'),
-('พุธ', '12:05-12:50', 'อัลฟิกฮ์'),
-('พุธ', '13:40-14:30', 'อัลหะดีษ'),
-('พุธ', '14:30-15:20', 'ตัฟซีร'),
-('พุธ', '15:20-16:10', 'ศิลปะ (อาจารย์ก้อง)'),
-('พฤหัสบดี', '07:50-08:30', 'คณิตศาสตร์ (แบฟุรกอน)'),
-('พฤหัสบดี', '08:50-09:40', 'ไทย (แบบัยด์)'),
-('พฤหัสบดี', '09:40-10:30', 'คณิตศาสตร์'),
-('พฤหัสบดี', '11:20-12:05', 'คณิต (แบฟุรกอน)'),
-('พฤหัสบดี', '12:05-12:50', 'คณิต (แบฟี)'),
-('พฤหัสบดี', '13:40-14:30', 'คณิต (แบฟี)'),
-('พฤหัสบดี', '14:30-15:20', 'อัลฟิกฮ์'),
-('พฤหัสบดี', '15:20-16:10', 'สุขศึกษา (แบฟี)')
-ON CONFLICT (day, period_time) DO UPDATE SET
+-- 2. Schedule Seed (Default weekly timetable)
+INSERT INTO schedule (user_id, day, period_time, subject) VALUES
+(NULL, 'อาทิตย์', '07:50-08:30', 'อัลกุอาน'),
+(NULL, 'อาทิตย์', '08:50-09:40', 'MELAYU'),
+(NULL, 'อาทิตย์', '09:40-10:30', 'คณิตศาสตร์ (แบฟุรกอน)'),
+(NULL, 'อาทิตย์', '12:05-12:50', 'เคมี'),
+(NULL, 'อาทิตย์', '13:40-14:30', 'เคมี'),
+(NULL, 'จันทร์', '07:50-08:30', 'MELAYU'),
+(NULL, 'จันทร์', '08:50-09:40', 'อัลอากีดะฮ์ (แบวัน)'),
+(NULL, 'จันทร์', '10:30-11:20', 'สังคม'),
+(NULL, 'จันทร์', '11:20-12:05', 'ฟิสิกส์ (แบฟิต)'),
+(NULL, 'จันทร์', '13:40-14:30', 'ฟิสิกส์ (แบฟิต)'),
+(NULL, 'จันทร์', '14:30-15:20', 'ฟิสิกส์ (แบฟิต)'),
+(NULL, 'จันทร์', '15:20-16:10', 'อัลกุรอาน และตัฟซีร (แบบัยด์)'),
+(NULL, 'อังคาร', '07:50-08:30', 'อัลหะดีษ'),
+(NULL, 'อังคาร', '08:50-09:40', 'อัลอัคลาก'),
+(NULL, 'อังคาร', '09:40-10:30', 'ชวีะ (แบวัน)'),
+(NULL, 'อังคาร', '11:20-12:05', 'ฟิสิกส์ (แบฟิต)'),
+(NULL, 'อังคาร', '12:05-12:50', 'ฟิสิกส์ (แบฟิต)'),
+(NULL, 'อังคาร', '15:20-16:10', 'English 1 (บัง)'),
+(NULL, 'พุธ', '07:50-08:30', 'ฮาลากอฮ์'),
+(NULL, 'พุธ', '08:50-09:40', 'ฮาลากอฮ์'),
+(NULL, 'พุธ', '10:30-11:20', 'อัตตารีค'),
+(NULL, 'พุธ', '12:05-12:50', 'อัลฟิกฮ์'),
+(NULL, 'พุธ', '13:40-14:30', 'อัลหะดีษ'),
+(NULL, 'พุธ', '14:30-15:20', 'ตัฟซีร'),
+(NULL, 'พุธ', '15:20-16:10', 'ศิลปะ (อาจารย์ก้อง)'),
+(NULL, 'พฤหัสบดี', '07:50-08:30', 'คณิตศาสตร์ (แบฟุรกอน)'),
+(NULL, 'พฤหัสบดี', '08:50-09:40', 'ไทย (แบบัยด์)'),
+(NULL, 'พฤหัสบดี', '09:40-10:30', 'คณิตศาสตร์'),
+(NULL, 'พฤหัสบดี', '11:20-12:05', 'คณิต (แบฟุรกอน)'),
+(NULL, 'พฤหัสบดี', '12:05-12:50', 'คณิต (แบฟี)'),
+(NULL, 'พฤหัสบดี', '13:40-14:30', 'คณิต (แบฟี)'),
+(NULL, 'พฤหัสบดี', '14:30-15:20', 'อัลฟิกฮ์'),
+(NULL, 'พฤหัสบดี', '15:20-16:10', 'สุขศึกษา (แบฟี)')
+ON CONFLICT (user_id, day, period_time) DO UPDATE SET
     subject = EXCLUDED.subject;
 
--- Settings Seed
+-- 3. Settings Seed (Default system config)
 INSERT INTO settings (id, data) VALUES
 ('default', '{"urgentDays": 3, "defaultStatus": "ยังไม่ส่ง", "showCalDone": false, "autoDark": false}'::jsonb)
 ON CONFLICT (id) DO NOTHING;
