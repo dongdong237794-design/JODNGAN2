@@ -30,6 +30,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -46,7 +47,33 @@
                     }
                 }
             }
-        }
+        };
+
+        // Immediate Global Auto-Dark Mode initialization to respect system preferences and prevent flash
+        (function() {
+            try {
+                const saved = localStorage.getItem('jodNGanSettings');
+                let autoDark = true; // Enabled globally by default
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    if (parsed.autoDark !== undefined) {
+                        autoDark = parsed.autoDark;
+                    }
+                }
+                const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const shouldBeDark = autoDark ? !!systemPrefersDark : false;
+                if (shouldBeDark) {
+                    document.documentElement.classList.add('dark');
+                    if (document.body) {
+                        document.body.classList.add('auto-dark');
+                    } else {
+                        document.addEventListener('DOMContentLoaded', () => {
+                            document.body.classList.add('auto-dark');
+                        });
+                    }
+                }
+            } catch (e) {}
+        })();
     </script>
 
     <style>
@@ -3883,9 +3910,39 @@ body.auto-dark .swal2-backdrop-show {
                                         </div>
                                     </label>
 
+                                    <!-- Divider -->
+                                    <div class="relative my-3 text-center">
+                                        <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-slate-200"></div></div>
+                                        <span class="relative bg-white px-3 text-[11px] font-bold text-slate-400 uppercase tracking-wider">หรือเข้าใช้งานใน AI Studio</span>
+                                    </div>
+
+                                    <!-- Direct Guest / Demo Login Button -->
+                                    <button id="btn-guest-login" type="button" onclick="handleGuestLogin()" class="w-full flex items-center justify-center gap-2.5 px-4 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-bold text-sm shadow-md shadow-emerald-600/20 transition cursor-pointer">
+                                        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                                            <polyline points="10 17 15 12 10 7"></polyline>
+                                            <line x1="15" y1="12" x2="3" y2="12"></line>
+                                        </svg>
+                                        <span>เข้าใช้งานทันที (โหมดทดลอง / AI Studio)</span>
+                                    </button>
+
+                                    <!-- Custom student email or name login option -->
+                                    <div class="mt-2.5 pt-2 border-t border-slate-100 text-center">
+                                        <button type="button" onclick="toggleCustomStudentLogin()" class="text-xs font-semibold text-slate-500 hover:text-slate-800 transition flex items-center justify-center gap-1.5 w-full py-1">
+                                            <span>ระบุชื่อหรืออีเมลนักเรียนเพื่อแยกงาน</span>
+                                            <svg id="custom-student-arrow" class="w-3.5 h-3.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                        </button>
+                                        <div id="custom-student-login-wrap" class="hidden mt-2.5 space-y-2 text-left">
+                                            <input type="text" id="custom-student-input" placeholder="พิมพ์ชื่อเล่น หรือ อีเมล (เช่น madaoh7848784@gmail.com)" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500">
+                                            <button type="button" onclick="handleCustomStudentSubmit()" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs transition cursor-pointer flex items-center justify-center gap-1.5">
+                                                <span>เข้าสู่ระบบด้วยชื่อนี้</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
                                     <div class="login-security-note">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.6 2.9 8.7 7 10 4.1-1.3 7-5.4 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
-                                        <span>ปลอดภัย · เชื่อมต่อกับบัญชี Google ของคุณโดยตรง</span>
+                                        <span>ปลอดภัย · ใช้งานได้ทันทีบน Google AI Studio หรือเชื่อมต่อ Google ได้ตามต้องการ</span>
                                     </div>
                                 </div>
                             </div>
@@ -6178,6 +6235,21 @@ body.auto-dark .swal2-backdrop-show {
                     <span>เข้าสู่ระบบด้วย Google</span>
                 </button>
 
+                <div class="relative my-2 text-center">
+                    <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-slate-200"></div></div>
+                    <span class="relative bg-white px-3 text-[11px] font-bold text-slate-400">หรือ</span>
+                </div>
+
+                <!-- Guest Login Button in Modal -->
+                <button type="button" onclick="handleGuestLogin()" class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-xs transition cursor-pointer">
+                    <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                        <polyline points="10 17 15 12 10 7"></polyline>
+                        <line x1="15" y1="12" x2="3" y2="12"></line>
+                    </svg>
+                    <span>เข้าใช้งานทันที (โหมดทดลอง / AI Studio)</span>
+                </button>
+
             </div>
         </div>
     </div>
@@ -6441,8 +6513,8 @@ body.auto-dark .swal2-backdrop-show {
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
                                 </div>
                                 <div class="min-w-0">
-                                    <h5 class="text-sm font-bold text-slate-800">โหมดมืด (Dark Mode)</h5>
-                                    <p class="text-xs text-slate-400 font-medium">ปรับธีมเป็นโหมดมืดเพื่อถนอมสายตา</p>
+                                    <h5 class="text-sm font-bold text-slate-800 dark:text-white">โหมดมืดอัตโนมัติ (Auto Dark Mode)</h5>
+                                    <p class="text-xs text-slate-400 dark:text-slate-400 font-medium">ปรับธีมอัตโนมัติตามการตั้งค่าของระบบเพื่อถนอมสายตาในที่แสงน้อย</p>
                                 </div>
                             </div>
                             <label class="relative inline-flex items-center cursor-pointer shrink-0">
@@ -7879,11 +7951,7 @@ body.auto-dark .swal2-backdrop-show {
                                 console.info('Google OAuth closed or cancelled by user');
                             } else {
                                 console.warn('Google OAuth error:', tokenResponse);
-                                showPremiumAlert({
-                                    type: 'error',
-                                    title: 'เข้าสู่ระบบไม่สำเร็จ',
-                                    text: tokenResponse.error_description || 'การเข้าสู่ระบบถูกยกเลิกหรือเกิดข้อผิดพลาด'
-                                });
+                                handleGoogleAuthFailure(tokenResponse.error, tokenResponse.error_description);
                             }
                         }
                     },
@@ -7896,11 +7964,7 @@ body.auto-dark .swal2-backdrop-show {
                             return;
                         }
                         console.warn('Google token client error:', err);
-                        showPremiumAlert({
-                            type: 'error',
-                            title: 'เกิดข้อผิดพลาด',
-                            text: err?.message || 'ไม่สามารถเปิดหน้าต่างเข้าสู่ระบบ Google ได้'
-                        });
+                        handleGoogleAuthFailure(err?.type || 'token_client_error', err?.message);
                     }
                 });
 
@@ -7908,11 +7972,106 @@ body.auto-dark .swal2-backdrop-show {
             } catch (err) {
                 setGoogleLoginButtonLoading(false);
                 console.error('Google Sign In error:', err);
+                handleGoogleAuthFailure('auth_init_error', err?.message);
+            }
+        }
+
+        // Handle Google OAuth failures specifically in iframe / preview environments like Google AI Studio
+        function handleGoogleAuthFailure(errorCode, errorDesc) {
+            setGoogleLoginButtonLoading(false);
+            console.warn('Google Auth Issue:', errorCode, errorDesc);
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'การเข้าสู่ระบบใน Google AI Studio',
+                    html: `
+                        <div style="text-align: left; font-size: 14px; line-height: 1.6; color: #475569;">
+                            <p style="margin-bottom: 8px;">การเข้าสู่ระบบด้วย Google ต้องใช้ Authorized Domain ที่ลงทะเบียนไว้บน Google Cloud Console ซึ่งโดเมนชั่วคราวของ Google AI Studio ไม่สามารถใช้ Google OAuth ได้โดยตรง</p>
+                            <p style="font-weight: 600; color: #059669; margin-bottom: 0;">ท่านสามารถกดปุ่ม "เข้าใช้งานทันที" เพื่อเข้าสู่ระบบและทดลองใช้ทุกฟังก์ชันได้ทันที</p>
+                        </div>
+                    `,
+                    showCancelButton: true,
+                    confirmButtonText: 'เข้าใช้งานทันที (โหมดทดลอง)',
+                    cancelButtonText: 'ยกเลิก',
+                    confirmButtonColor: '#10B981',
+                    cancelButtonColor: '#94A3B8'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        handleGuestLogin();
+                    }
+                });
+            } else {
+                showPremiumAlert({
+                    type: 'info',
+                    title: 'เข้าสู่ระบบใน Google AI Studio',
+                    text: 'กรุณากดปุ่ม "เข้าใช้งานทันที (โหมดทดลอง)" เพื่อเข้าใช้งานใน Google AI Studio ได้ทันที'
+                });
+            }
+        }
+
+        // Direct Guest / Demo Login for immediate access in AI Studio & development
+        async function handleGuestLogin(customEmail = null, customName = null) {
+            try {
+                showLoading(true);
+                const payload = {};
+                if (customEmail) payload.email = customEmail;
+                if (customName) payload.name = customName;
+
+                const res = await fetch('/api/auth/guest-login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await res.json();
+                if (!res.ok || !data.success) {
+                    throw new Error(data.error || 'ไม่สามารถเข้าใช้งานโหมดทดลองได้');
+                }
+
+                persistUserSession(data.token, data.user);
+                rememberKnownAccount(data.user);
+                closeLoginModal();
+                updateAuthUI();
+                await fetchData();
+                showLoading(false);
+                showToast('ยินดีต้อนรับ เข้าใช้งานสำเร็จ');
+            } catch (err) {
+                showLoading(false);
+                console.error('Guest login error:', err);
                 showPremiumAlert({
                     type: 'error',
-                    title: 'Google Sign-In ยังไม่พร้อม',
-                    text: err.message || 'กรุณาตรวจสอบการตั้งค่า Google OAuth แล้วลองใหม่อีกครั้ง'
+                    title: 'เข้าใช้งานไม่สำเร็จ',
+                    text: err.message || 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ'
                 });
+            }
+        }
+
+        function toggleCustomStudentLogin() {
+            const wrap = document.getElementById('custom-student-login-wrap');
+            const arrow = document.getElementById('custom-student-arrow');
+            if (wrap) {
+                wrap.classList.toggle('hidden');
+                if (arrow) {
+                    arrow.style.transform = wrap.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+                }
+                if (!wrap.classList.contains('hidden')) {
+                    const input = document.getElementById('custom-student-input');
+                    if (input) input.focus();
+                }
+            }
+        }
+
+        async function handleCustomStudentSubmit() {
+            const input = document.getElementById('custom-student-input');
+            const val = input ? input.value.trim() : '';
+            if (!val) {
+                showToast('กรุณาระบุชื่อหรืออีเมล', 'error');
+                return;
+            }
+            if (val.includes('@')) {
+                await handleGuestLogin(val, null);
+            } else {
+                await handleGuestLogin(null, val);
             }
         }
 
@@ -8478,7 +8637,7 @@ body.auto-dark .swal2-backdrop-show {
                 timerSettings = { ...timerSettings, ...JSON.parse(savedTimerSettings) };
             }
         } catch(e) {}
-        let settings = { urgentDays: 3, defaultStatus: 'ยังไม่ส่ง', showCalDone: false };
+        let settings = { urgentDays: 3, defaultStatus: 'ยังไม่ส่ง', showCalDone: false, autoDark: true };
         let currentCalMonth = new Date().getMonth();
         let currentCalYear = new Date().getFullYear();
         let isViewMode = IS_VIEW_ONLY;
@@ -8686,10 +8845,15 @@ body.auto-dark .swal2-backdrop-show {
         function loadSettings() {
             const saved = localStorage.getItem('jodNGanSettings');
             if (saved) settings = { ...settings, ...JSON.parse(saved) };
-            document.getElementById('task-status').value = settings.defaultStatus;
-            if (settings.autoDark) {
-                applyAutoDark(true);
+            if (settings.autoDark === undefined) {
+                settings.autoDark = true;
             }
+            document.getElementById('task-status').value = settings.defaultStatus;
+            
+            const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const shouldBeDark = settings.autoDark ? !!systemPrefersDark : false;
+            applyAutoDark(shouldBeDark);
+
             if (settings.notifEnabled && Notification?.permission === 'granted') {
                 scheduleNotifications();
             }
@@ -8730,9 +8894,12 @@ body.auto-dark .swal2-backdrop-show {
                 }
                 if (data.settings && typeof data.settings === 'object') {
                     settings = { ...settings, ...data.settings };
-                    if (settings.autoDark !== undefined) {
-                        applyAutoDark(settings.autoDark);
+                    if (settings.autoDark === undefined) {
+                        settings.autoDark = true;
                     }
+                    const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    const shouldBeDark = settings.autoDark ? !!systemPrefersDark : false;
+                    applyAutoDark(shouldBeDark);
                 }
                 
                 applyViewMode();
@@ -15086,7 +15253,13 @@ body.auto-dark .swal2-backdrop-show {
         }
 
         function applyAutoDark(enabled, withTransition = false) {
-            const isDark = !!enabled;
+            let isDark;
+            if (typeof enabled === 'boolean') {
+                isDark = enabled;
+            } else {
+                const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                isDark = settings.autoDark ? !!systemPrefersDark : false;
+            }
 
             // Trigger temporary smooth transition class for a soft, premium background & surface shift
             if (withTransition && (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
@@ -15106,12 +15279,17 @@ body.auto-dark .swal2-backdrop-show {
                 document.body.classList.remove('auto-dark');
                 document.documentElement.classList.remove('dark');
             }
+
+            const toggle = document.getElementById('set-dark-toggle');
+            if (toggle) toggle.dataset.on = isDark ? 'true' : 'false';
+            const settingToggle = document.getElementById('setting-dark-mode-toggle');
+            if (settingToggle) settingToggle.checked = !!isDark;
         }
 
-        // Listen for system theme changes
+        // Listen for system theme changes dynamically to respect system preferences in real time
         darkModeMediaQuery.addEventListener('change', (e) => {
             if (settings.autoDark) {
-                applyAutoDark(true);
+                applyAutoDark(e.matches, true);
             }
         });
 
@@ -15264,8 +15442,9 @@ body.auto-dark .swal2-backdrop-show {
         function toggleDarkModeFromSetting(checked) {
             settings.autoDark = checked;
             localStorage.setItem('jodNGanSettings', JSON.stringify(settings));
-            applyAutoDark(checked);
+            applyAutoDark(checked, true);
             setDarkToggleUI(checked);
+            showToast(checked ? 'เปิดโหมดมืดอัตโนมัติ (Auto Dark) แล้ว' : 'ปิดโหมดมืดอัตโนมัติ');
         }
 
         function toggleVibrationSetting(checked) {
@@ -15445,7 +15624,7 @@ body.auto-dark .swal2-backdrop-show {
             if (preNotifyToggle) preNotifyToggle.checked = settings.preNotify !== false;
 
             const darkModeToggle = document.getElementById('setting-dark-mode-toggle');
-            if (darkModeToggle) darkModeToggle.checked = !!settings.autoDark;
+            if (darkModeToggle) darkModeToggle.checked = document.body.classList.contains('auto-dark') || !!settings.autoDark;
 
             const vibrationToggle = document.getElementById('setting-vibration-toggle');
             if (vibrationToggle) vibrationToggle.checked = settings.vibrate !== false;

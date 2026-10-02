@@ -288,8 +288,21 @@ apiRouter.post('/auth/google-login', async (req, res) => {
 // Always resolves to the SAME fixed demo account (no arbitrary email is ever
 // accepted here), so this can never be used to impersonate a real user.
 apiRouter.post('/auth/guest-login', async (req, res) => {
-  const cleanEmail = 'student.demo@jodngan.local';
-  const fullName = 'นักเรียนทดลอง';
+  let cleanEmail = 'student.demo@jodngan.local';
+  let fullName = 'นักเรียนทดลอง';
+
+  if (req.body && typeof req.body.email === 'string' && req.body.email.trim()) {
+    cleanEmail = req.body.email.toLowerCase().trim();
+    if (req.body.name && typeof req.body.name === 'string' && req.body.name.trim()) {
+      fullName = req.body.name.trim();
+    } else {
+      fullName = cleanEmail.includes('@') ? cleanEmail.split('@')[0] : cleanEmail;
+    }
+  } else if (req.body && typeof req.body.name === 'string' && req.body.name.trim()) {
+    fullName = req.body.name.trim();
+    cleanEmail = `${encodeURIComponent(fullName.toLowerCase().replace(/\s+/g, '.'))}@jodngan.local`;
+  }
+
   const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName)}&background=10B981&color=fff&size=96`;
 
   const supabase = getSupabase();
@@ -318,7 +331,7 @@ apiRouter.post('/auth/guest-login', async (req, res) => {
         name: fullName,
         avatar_url: avatarUrl,
         picture: avatarUrl,
-        is_guest: true
+        is_guest: cleanEmail === 'student.demo@jodngan.local'
       }
     }
   });
