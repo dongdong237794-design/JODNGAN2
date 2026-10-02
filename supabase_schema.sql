@@ -1,6 +1,6 @@
 -- ==========================================================
 -- JodNGan (จดงาน) Database Schema for Supabase PostgreSQL
--- ==========================================================
+-- =========================================================
 
 -- 1. Create profiles table (User Identity)
 CREATE TABLE IF NOT EXISTS profiles (
