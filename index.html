@@ -2522,30 +2522,61 @@ button,input,select,textarea{font-family:inherit}
 #calendar-grid>div{border-color:#eeeeea!important;border-radius:14px!important;background:#fff!important}
 #calendar-grid>div:hover{background:#fafaf7!important}
 
-/* TimeFrame Timetable Grid & Cards with Apple-inspired soft gradient and spacing */
-#view-calendar .timeframe-canvas {
-  font-family: inherit;
-  background: radial-gradient(120% 120% at 15% 0%, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.08) 45%, transparent 75%),
-              radial-gradient(100% 100% at 88% 100%, rgba(135, 122, 215, 0.42) 0%, transparent 60%),
-              linear-gradient(142deg, #9e99d8 0%, #8b86c8 42%, #7871b6 100%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.45) !important;
-  border-radius: 2rem !important;
-  padding: 1.75rem !important;
-  box-shadow: 0 24px 60px -12px rgba(112, 101, 179, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
-  backdrop-filter: blur(20px) !important;
+/* Modern Calendar Dashboard Styles (Matching Reference IMG_9124) */
+#view-calendar .modern-cal-dashboard {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 2rem;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
 }
-@media (min-width: 640px) {
-  #view-calendar .timeframe-canvas {
-    border-radius: 2.25rem !important;
-    padding: 2rem !important;
-  }
+body.auto-dark #view-calendar .modern-cal-dashboard {
+  background: #0b1120;
+  border-color: #1e293b;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
 }
-body.auto-dark #view-calendar .timeframe-canvas {
-  background: radial-gradient(120% 120% at 15% 0%, rgba(255, 255, 255, 0.1) 0%, transparent 60%),
-              radial-gradient(100% 100% at 88% 100%, rgba(98, 90, 160, 0.35) 0%, transparent 65%),
-              linear-gradient(142deg, #24223b 0%, #1a192c 50%, #121122 100%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+.modern-cal-day-cell {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+.modern-cal-day-cell:hover:not(.is-selected) {
+  background-color: #f1f5f9;
+}
+body.auto-dark .modern-cal-day-cell:hover:not(.is-selected) {
+  background-color: #1e293b;
+}
+.modern-cal-day-cell.is-selected {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+  font-weight: 800;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.25);
+}
+body.auto-dark .modern-cal-day-cell.is-selected {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+.modern-cal-event-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 9999px;
+  background-color: #0f172a;
+  margin-bottom: 2px;
+}
+.modern-cal-day-cell.is-selected .modern-cal-event-dot {
+  background-color: #ffffff !important;
+}
+body.auto-dark .modern-cal-day-cell.is-selected .modern-cal-event-dot {
+  background-color: #0f172a !important;
+}
+body.auto-dark .modern-cal-event-dot {
+  background-color: #38bdf8;
 }
 
 /* Schedule Header Glassmorphism Gradient */
@@ -3831,7 +3862,7 @@ body.auto-dark .swal2-backdrop-show {
                                     <!-- Consent Checkbox for Google Calendar Connection -->
                                     <label for="main-login-sync-calendar-toggle" class="calendar-consent-container" id="calendar-consent-label" title="คลิกเพื่อยืนยันหรือยกเลิกการเชื่อมต่อ Google Calendar">
                                         <div class="calendar-checkbox-frame">
-                                            <input type="checkbox" id="main-login-sync-calendar-toggle" class="sr-only peer" checked>
+                                            <input type="checkbox" id="main-login-sync-calendar-toggle" class="sr-only peer">
                                             <div class="calendar-checkbox-indicator">
                                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" class="calendar-checkbox-check">
                                                     <polyline points="20 6 9 17 4 12"></polyline>
@@ -3846,9 +3877,9 @@ body.auto-dark .swal2-backdrop-show {
                                                     <line x1="8" y1="2" x2="8" y2="6"/>
                                                     <line x1="3" y1="10" x2="21" y2="10"/>
                                                 </svg>
-                                                <span>ยืนยันการเชื่อมต่อ Google Calendar</span>
+                                                <span>เชื่อมต่อ Google Calendar (ทางเลือก)</span>
                                             </div>
-                                            <div class="calendar-consent-sub">ซิงค์ตารางงานและกำหนดส่งให้อัตโนมัติเมื่อเข้าสู่ระบบ</div>
+                                            <div class="calendar-consent-sub">ติ๊กเลือกหากต้องการซิงค์ปฏิทินทันที หรือเชื่อมต่อภายหลังในแอปได้</div>
                                         </div>
                                     </label>
 
@@ -4159,10 +4190,10 @@ body.auto-dark .swal2-backdrop-show {
                                     </div>
                                     <h3 class="text-sm sm:text-base font-bold text-textprimary whitespace-nowrap">ปฏิทินงาน</h3>
                                     <!-- Month selector placed right beside ปฏิทินงาน on the same axis -->
-                                    <div class="inline-flex items-center justify-between gap-1 bg-slate-100/90 rounded-full p-0.5 border border-slate-200/60 shadow-2xs">
-                                        <button type="button" onclick="changeCalMonth(-1)" class="w-6 h-6 rounded-full hover:bg-white text-slate-600 hover:text-slate-900 flex items-center justify-center transition shadow-2xs cursor-pointer shrink-0" title="เดือนก่อนหน้า"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="11" height="11"><path d="M15 18l-6-6 6-6"/></svg></button>
+                                    <div class="inline-flex items-center justify-between gap-1 bg-slate-100/90 rounded-full p-1 border border-slate-200/60 shadow-2xs">
+                                        <button type="button" onclick="changeCalMonth(-1)" class="w-8 h-8 rounded-full hover:bg-white text-slate-600 hover:text-slate-900 flex items-center justify-center transition shadow-2xs cursor-pointer shrink-0" title="เดือนก่อนหน้า"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><path d="M15 18l-6-6 6-6"/></svg></button>
                                         <span id="cal-month-year" class="font-bold text-xs text-slate-800 px-2 text-center whitespace-nowrap min-w-[95px]">เดือน พ.ศ.</span>
-                                        <button type="button" onclick="changeCalMonth(1)" class="w-6 h-6 rounded-full hover:bg-white text-slate-600 hover:text-slate-900 flex items-center justify-center transition shadow-2xs cursor-pointer shrink-0" title="เดือนถัดไป"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="11" height="11"><path d="M9 18l6-6-6-6"/></svg></button>
+                                        <button type="button" onclick="changeCalMonth(1)" class="w-8 h-8 rounded-full hover:bg-white text-slate-600 hover:text-slate-900 flex items-center justify-center transition shadow-2xs cursor-pointer shrink-0" title="เดือนถัดไป"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><path d="M9 18l6-6-6-6"/></svg></button>
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-2 shrink-0">
@@ -4248,210 +4279,376 @@ body.auto-dark .swal2-backdrop-show {
                     </div>
                 </div>
 
-                <!-- ================= VIEW: CALENDAR (TIMEFRAME UI & GOOGLE CALENDAR) ================= -->
+                <!-- ================= VIEW: CALENDAR (MODERN DASHBOARD MATCHING REFERENCE) ================= -->
                 <div id="view-calendar" class="view-section">
-                    <!-- Outer TimeFrame Shell with soft lilac/periwinkle theme from reference image -->
-                    <div class="timeframe-canvas rounded-[26px] sm:rounded-[32px] p-4 sm:p-6 md:p-8 text-white shadow-xl mb-6 relative overflow-hidden">
+                    <div class="modern-cal-dashboard rounded-[28px] sm:rounded-[36px] p-3 sm:p-5 md:p-6 mb-6">
                         
-                        <!-- Top Header Area: Symmetrical 2-Tier Architecture -->
-                        <div class="space-y-4 mb-6">
-                            <!-- Tier 1: Brand, Centered Switcher, Metrics Capsule -->
-                            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-                                <!-- Left: Brand Icon & Page Heading -->
-                                <div class="flex items-center gap-3 sm:gap-3.5">
-                                    <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full border-2 border-white/60 flex items-center justify-center relative shrink-0 shadow-xs bg-white/10 backdrop-blur-xs">
-                                        <div class="w-5 h-7 sm:w-6 sm:h-8 rounded-full border-2 border-white/80"></div>
-                                    </div>
-                                    <div>
-                                        <div class="flex items-center gap-2">
-                                            <span class="text-xs font-bold uppercase tracking-wider text-white/80">TimeFrame</span>
-                                            <span id="dedicated-cal-gcal-pill" class="hidden text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/25 text-white border border-emerald-300/40">ซิงค์แล้ว</span>
-                                        </div>
-                                        <h2 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight">My Calendar</h2>
-                                        <p class="text-[11px] sm:text-xs text-white/75 font-medium">ภาพรวมตารางเวลาและกำหนดการ · Google Calendar & งาน</p>
-                                    </div>
-                                </div>
-
-                                <!-- Center: Daily, Weekly, Monthly Switcher Pills - 100% full width on mobile with equal columns, inline-flex on desktop -->
-                                <div class="w-full lg:w-auto grid grid-cols-3 lg:inline-flex p-1 bg-white/20 backdrop-blur-md rounded-full border border-white/30 shadow-xs text-center">
-                                    <button type="button" id="btn-view-daily" onclick="setDedicatedCalViewMode('daily')" class="w-full lg:w-auto px-3 sm:px-4 py-2 rounded-full text-xs font-bold transition text-white/80 hover:text-white cursor-pointer text-center">Daily</button>
-                                    <button type="button" id="btn-view-weekly" onclick="setDedicatedCalViewMode('weekly')" class="w-full lg:w-auto px-3 sm:px-4 py-2 rounded-full text-xs font-bold transition bg-[#1e1c2e] text-white shadow-sm cursor-pointer text-center">Weekly</button>
-                                    <button type="button" id="btn-view-monthly" onclick="setDedicatedCalViewMode('monthly')" class="w-full lg:w-auto px-3 sm:px-4 py-2 rounded-full text-xs font-bold transition text-white/80 hover:text-white cursor-pointer text-center">Monthly</button>
-                                </div>
-
-                                <!-- Right: Metrics Capsule in Frosted Glass - 2 equal columns on mobile, flex on desktop -->
-                                <div class="w-full lg:w-auto grid grid-cols-2 lg:flex lg:items-center gap-2 divide-x divide-white/20 bg-white/15 backdrop-blur-md rounded-2xl p-3 border border-white/20 shadow-xs text-white text-center lg:text-left">
-                                    <div class="px-2">
-                                        <p class="text-[10px] text-white/75 uppercase font-bold tracking-wider">Total tasks today</p>
-                                        <p id="tf-metric-tasks" class="text-base sm:text-lg font-extrabold leading-none text-white mt-1">0 <span class="text-xs font-normal text-white/80">tasks</span></p>
-                                    </div>
-                                    <div class="px-2">
-                                        <p class="text-[10px] text-white/75 uppercase font-bold tracking-wider">Google Calendar</p>
-                                        <p id="tf-metric-gcal" class="text-base sm:text-lg font-extrabold leading-none text-white mt-1">0 <span class="text-xs font-normal text-white/80">events</span></p>
-                                    </div>
-                                </div>
+                        <!-- Top Navigation & User Header (Matches Reference Top Bar) -->
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                            <!-- Left: Nav Tabs (Overview, Calendar, Todo list) -->
+                            <div class="inline-flex items-center p-1.5 bg-white dark:bg-slate-800/90 rounded-2xl border border-slate-200/80 dark:border-slate-700 shadow-2xs">
+                                <button type="button" onclick="nav('dashboard')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition cursor-pointer">
+                                    Overview
+                                </button>
+                                <button type="button" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-xs transition">
+                                    Calendar
+                                </button>
+                                <button type="button" onclick="nav('tasks')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition cursor-pointer">
+                                    Todo list
+                                </button>
                             </div>
 
-                            <!-- Tier 2: Dedicated Symmetrical Action Bar -->
-                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3.5 border-t border-white/20">
-                                <!-- Selected Date Context Badge -->
-                                <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md rounded-full px-4 py-2 border border-white/25 text-white whitespace-nowrap shrink-0 self-start sm:self-auto shadow-2xs">
-                                    <svg class="w-3.5 h-3.5 text-white/90 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                                    <span id="dedicated-cal-selected-badge" class="font-bold text-xs tracking-wide text-white whitespace-nowrap">
-                                        ตารางเวลาและกำหนดการ
-                                    </span>
-                                </div>
+                            <!-- Right: Actions & User Profile Capsule -->
+                            <div class="flex items-center gap-2.5 sm:gap-3 self-end sm:self-auto">
+                                <!-- Google Calendar Sync button -->
+                                <button type="button" onclick="syncGoogleCalendarNow()" id="btn-modern-gcal-sync" class="w-10 h-10 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-slate-900 hover:border-slate-300 shadow-2xs transition cursor-pointer" title="ซิงค์ Google Calendar ล่าสุด">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" class="transition-transform"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
+                                </button>
 
-                                <!-- Action Toolbar: Cleanly grouped and aligned -->
-                                <div id="calendar-action-toolbar" class="flex flex-wrap items-center gap-2 sm:justify-end">
-                                    <button type="button" onclick="createTaskForSelectedDate()" id="btn-cal-add-task" class="h-9 px-4 rounded-full font-bold text-xs bg-[#1e1c2e] hover:bg-black text-white transition shadow-sm inline-flex items-center justify-center gap-1.5 cursor-pointer shrink-0 whitespace-nowrap" title="เพิ่มงานใหม่">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13" class="shrink-0"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                                        <span>เพิ่มงาน</span>
-                                    </button>
-                                    <div id="dedicated-gcal-controls" class="inline-flex items-center gap-1.5 flex-wrap">
-                                        <!-- JS injects connect or sync buttons -->
+                                <!-- Notification Bell -->
+                                <button type="button" onclick="showModernNoticesModal()" class="w-10 h-10 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-slate-900 shadow-2xs transition cursor-pointer relative" title="การแจ้งเตือน">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                                    <span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-slate-800"></span>
+                                </button>
+
+                                <!-- Profile Pill matching Reference -->
+                                <div class="inline-flex items-center gap-2.5 bg-white dark:bg-slate-800 py-1.5 px-3 rounded-2xl border border-slate-200/80 dark:border-slate-700 shadow-2xs cursor-pointer" onclick="openLoginModal()">
+                                    <img id="modern-cal-user-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar" class="w-8 h-8 rounded-full object-cover ring-1 ring-slate-200 dark:ring-slate-700">
+                                    <div class="text-left hidden min-[400px]:block">
+                                        <p id="modern-cal-user-name" class="text-xs font-bold text-slate-900 dark:text-white leading-tight truncate max-w-[110px]">Dianne Russell</p>
+                                        <p id="modern-cal-user-role" class="text-[10px] text-slate-400 font-semibold leading-tight">Team manager</p>
                                     </div>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12" class="text-slate-400 shrink-0"><path d="m6 9 6 6 6-6"/></svg>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Two-Column Body Layout matching reference image (Timetable first on mobile) -->
-                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6">
-                            
-                            <!-- Left Column: Mini Month Calendar + My Calendar Checklist + Other Calendar (order-2 on mobile) -->
-                            <div class="lg:col-span-4 space-y-4 sm:space-y-5 order-2 lg:order-1">
-                                
-                                <!-- Card 1: Mini Month Calendar -->
-                                <div class="rounded-2xl sm:rounded-[26px] p-4 sm:p-5 text-white border border-white/25 shadow-sm" style="background: rgba(133, 128, 186, 0.78); backdrop-filter: blur(12px);">
-                                    <div class="flex items-center justify-between gap-2 mb-3 px-0.5">
-                                        <button type="button" onclick="navigateMiniCal(-1)" class="mini-cal-nav-btn w-7 h-7 min-w-[28px] max-w-[28px] min-h-[28px] max-h-[28px] rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition shrink-0 cursor-pointer shadow-2xs" title="เดือนก่อนหน้า">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12"><path d="M15 18l-6-6 6-6"/></svg>
-                                        </button>
-                                        <span id="mini-cal-month-year" class="text-sm font-bold tracking-tight text-center truncate">January 2024</span>
-                                        <button type="button" onclick="navigateMiniCal(1)" class="mini-cal-nav-btn w-7 h-7 min-w-[28px] max-w-[28px] min-h-[28px] max-h-[28px] rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition shrink-0 cursor-pointer shadow-2xs" title="เดือนถัดไป">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12"><path d="M9 18l6-6-6-6"/></svg>
-                                        </button>
-                                    </div>
-                                    <!-- Weekday row -->
-                                    <div class="grid grid-cols-7 gap-1 text-center text-[10px] font-bold text-white/70 mb-2">
-                                        <div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
-                                    </div>
-                                    <!-- Mini days grid -->
-                                    <div id="mini-cal-grid" class="grid grid-cols-7 gap-1 text-center">
-                                        <!-- JS injects mini days with lime green highlight for active day -->
-                                    </div>
-                                </div>
+                        <!-- 4-Quadrant Main Grid (Top 2 Cards + Bottom 2 Cards) -->
+                        <div class="space-y-6">
 
-                                <!-- Card 2: My Calendar (Checklist of draggable tasks) -->
-                                <div class="bg-white rounded-2xl sm:rounded-[26px] p-4 sm:p-5 text-slate-800 shadow-sm border border-slate-100 flex flex-col">
-                                    <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
+                            <!-- Top Grid: Month Calendar (Left) + Your Events (Right) -->
+                            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
+                                
+                                <!-- Card 1: Monthly Calendar -->
+                                <div class="lg:col-span-6 bg-white dark:bg-slate-900 rounded-[26px] sm:rounded-[30px] p-5 sm:p-6 border border-slate-100 dark:border-slate-800 shadow-xs flex flex-col justify-between">
+                                    <!-- Header -->
+                                    <div class="flex items-center justify-between gap-3 mb-4">
+                                        <div class="flex items-center gap-2">
+                                            <h3 id="modern-cal-month-title" class="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-tight">
+                                                December 2025
+                                            </h3>
+                                            <div class="inline-flex items-center gap-1 bg-slate-100 dark:bg-slate-800 rounded-full p-0.5">
+                                                <button type="button" onclick="navigateModernMonth(-1)" class="w-6 h-6 rounded-full hover:bg-white dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 flex items-center justify-center transition cursor-pointer shadow-2xs" title="เดือนก่อนหน้า">
+                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="11" height="11"><path d="M15 18l-6-6 6-6"/></svg>
+                                                </button>
+                                                <button type="button" onclick="navigateModernMonth(1)" class="w-6 h-6 rounded-full hover:bg-white dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 flex items-center justify-center transition cursor-pointer shadow-2xs" title="เดือนถัดไป">
+                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="11" height="11"><path d="M9 18l6-6-6-6"/></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- View Dropdown / Today button -->
                                         <div class="flex items-center gap-1.5">
-                                            <h3 class="text-sm font-extrabold text-slate-900">My Calendar</h3>
-                                            <span class="text-[10px] text-slate-400 font-semibold">(ลากลงตารางได้)</span>
-                                        </div>
-                                        <div class="inline-flex items-center gap-1 text-[11px] font-bold text-slate-500 bg-slate-50 px-2 py-0.5 rounded-lg border border-slate-200">
-                                            <span>Checklist</span>
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><path d="M6 9l6 6 6-6"/></svg>
+                                            <button type="button" onclick="jumpModernCalToToday()" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition cursor-pointer">
+                                                Today
+                                            </button>
+                                            <div class="relative inline-block text-left">
+                                                <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 shadow-2xs">
+                                                    <span>Month</span>
+                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="m6 9 6 6 6-6"/></svg>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <!-- Draggable Task Queue (Checklist style) -->
-                                    <div id="draggable-tasks-queue" class="space-y-2 max-h-[220px] overflow-y-auto pr-1">
-                                        <!-- JS Injects checklist items with checkboxes and drag handles -->
+
+                                    <!-- Weekdays Row (Pills SUN, MON, TUE, WED, THU, FRI, SAT) -->
+                                    <div class="grid grid-cols-7 gap-1.5 sm:gap-2 text-center mb-3">
+                                        <div class="bg-slate-100/90 dark:bg-slate-800/80 text-slate-400 dark:text-slate-400 py-1.5 rounded-xl text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider">SUN</div>
+                                        <div class="bg-slate-100/90 dark:bg-slate-800/80 text-slate-400 dark:text-slate-400 py-1.5 rounded-xl text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider">MON</div>
+                                        <div class="bg-slate-100/90 dark:bg-slate-800/80 text-slate-400 dark:text-slate-400 py-1.5 rounded-xl text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider">TUE</div>
+                                        <div class="bg-slate-100/90 dark:bg-slate-800/80 text-slate-400 dark:text-slate-400 py-1.5 rounded-xl text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider">WED</div>
+                                        <div class="bg-slate-100/90 dark:bg-slate-800/80 text-slate-400 dark:text-slate-400 py-1.5 rounded-xl text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider">THU</div>
+                                        <div class="bg-slate-100/90 dark:bg-slate-800/80 text-slate-400 dark:text-slate-400 py-1.5 rounded-xl text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider">FRI</div>
+                                        <div class="bg-slate-100/90 dark:bg-slate-800/80 text-slate-400 dark:text-slate-400 py-1.5 rounded-xl text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider">SAT</div>
+                                    </div>
+
+                                    <!-- Month Grid -->
+                                    <div id="modern-month-grid" class="grid grid-cols-7 gap-1.5 sm:gap-2 text-center min-h-[260px]">
+                                        <!-- JS injects days matching reference image with dot indicators & solid dark active badge -->
                                     </div>
                                 </div>
 
-                                <!-- Card 3: Other Calendar (Google Calendar Feeds) -->
-                                <div class="bg-white rounded-2xl sm:rounded-[26px] p-4 sm:p-5 text-slate-800 shadow-sm border border-slate-100">
-                                    <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
-                                        <h3 class="text-sm font-extrabold text-slate-900">Other Calendar</h3>
-                                        <button type="button" onclick="showAllGoogleCalendarEventsModal()" class="inline-flex items-center gap-1 text-[11px] font-bold text-blue-600 hover:text-blue-800 bg-blue-50 px-2 py-0.5 rounded-lg border border-blue-200 transition">
-                                            <span>ดูกิจกรรมทั้งหมด</span>
-                                            <span class="text-xs font-bold">+</span>
+                                <!-- Card 2: Your Events -->
+                                <div class="lg:col-span-6 bg-white dark:bg-slate-900 rounded-[26px] sm:rounded-[30px] p-5 sm:p-6 border border-slate-100 dark:border-slate-800 shadow-xs flex flex-col justify-between">
+                                    <!-- Header -->
+                                    <div class="flex items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
+                                        <h3 class="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-tight">
+                                            Your events
+                                        </h3>
+                                        <div class="flex items-center gap-2">
+                                            <div class="relative">
+                                                <select id="modern-events-filter-select" onchange="setModernEventsFilter(this.value)" class="appearance-none bg-slate-100 dark:bg-slate-800 border-none text-slate-700 dark:text-slate-200 text-xs font-bold py-1.5 pl-3 pr-7 rounded-xl focus:ring-1 focus:ring-slate-300 cursor-pointer">
+                                                    <option value="all">All</option>
+                                                    <option value="selected">วันที่เลือก</option>
+                                                    <option value="pending">ยังไม่เสร็จ</option>
+                                                    <option value="completed">เสร็จแล้ว</option>
+                                                    <option value="gcal">Google Calendar</option>
+                                                </select>
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12" class="text-slate-400 absolute right-2 top-2.5 pointer-events-none"><path d="m6 9 6 6 6-6"/></svg>
+                                            </div>
+                                            <button type="button" onclick="openCalendarNewEventModal()" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold bg-slate-900 hover:bg-black dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white transition shadow-xs cursor-pointer">
+                                                <span class="text-sm leading-none font-normal">+</span>
+                                                <span>Add new</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Events List Container -->
+                                    <div id="modern-your-events-list" class="space-y-3 pt-3 overflow-y-auto max-h-[350px] pr-1">
+                                        <!-- JS injects event cards matching reference -->
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Bottom Grid: Messages and notices (Left) + Todo list (Right) -->
+                            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
+                                
+                                <!-- Card 3: Messages and notices -->
+                                <div class="lg:col-span-6 bg-white dark:bg-slate-900 rounded-[26px] sm:rounded-[30px] p-5 sm:p-6 border border-slate-100 dark:border-slate-800 shadow-xs flex flex-col justify-between">
+                                    <!-- Header -->
+                                    <div class="flex items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
+                                        <div class="flex items-center gap-2">
+                                            <h3 class="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-tight">
+                                                Messages and notices
+                                            </h3>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <button type="button" onclick="promptAddNotice()" class="text-xs font-bold text-slate-500 hover:text-slate-900 dark:hover:text-white transition cursor-pointer">
+                                                + เพิ่มบันทึก
+                                            </button>
+                                            <div class="relative">
+                                                <select id="modern-notices-filter-select" onchange="setModernNoticesFilter(this.value)" class="appearance-none bg-slate-100 dark:bg-slate-800 border-none text-slate-700 dark:text-slate-200 text-xs font-bold py-1.5 pl-3 pr-7 rounded-xl focus:ring-1 focus:ring-slate-300 cursor-pointer">
+                                                    <option value="all">All</option>
+                                                    <option value="team">ทีมและข้อความ</option>
+                                                    <option value="system">แจ้งเตือนระบบ</option>
+                                                </select>
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12" class="text-slate-400 absolute right-2 top-2.5 pointer-events-none"><path d="m6 9 6 6 6-6"/></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Notices List Container -->
+                                    <div id="modern-notices-list" class="space-y-3.5 pt-3 overflow-y-auto max-h-[320px] pr-1">
+                                        <!-- JS injects notice cards with avatars matching reference -->
+                                    </div>
+                                </div>
+
+                                <!-- Card 4: Todo list -->
+                                <div class="lg:col-span-6 bg-white dark:bg-slate-900 rounded-[26px] sm:rounded-[30px] p-5 sm:p-6 border border-slate-100 dark:border-slate-800 shadow-xs flex flex-col justify-between">
+                                    <!-- Header -->
+                                    <div class="flex items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
+                                        <h3 class="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-tight">
+                                            Todo list
+                                        </h3>
+                                        <button type="button" onclick="openCalendarNewTodoModal()" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold bg-slate-900 hover:bg-black dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white transition shadow-xs cursor-pointer">
+                                            <span class="text-sm leading-none font-normal">+</span>
+                                            <span>Add new</span>
                                         </button>
                                     </div>
-                                    <!-- Feeds list -->
-                                    <div id="other-calendar-feeds" class="space-y-2 text-xs">
-                                        <!-- JS Injects calendar feeds -->
+
+                                    <!-- Todo Checklist Container -->
+                                    <div id="modern-todo-checklist" class="space-y-3 pt-3 overflow-y-auto max-h-[320px] pr-1">
+                                        <!-- JS injects todo items with Subtodo, Repeat tags and Date badges -->
                                     </div>
                                 </div>
 
                             </div>
 
-                            <!-- Right Column: Timetable Grid Board (order-1 on mobile so timetable is immediately seen) -->
-                            <div class="lg:col-span-8 bg-white rounded-2xl sm:rounded-[28px] p-3.5 sm:p-6 text-slate-800 shadow-sm border border-slate-100 flex flex-col flex-1 order-1 lg:order-2">
+                        </div>
+
+                        <!-- Modal: Edit Task & Calendar Event (With Google Calendar 2-Way Sync) -->
+                        <div id="calendar-item-edit-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm p-4 overflow-y-auto">
+                            <div class="relative w-full max-w-lg bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 shadow-2xl border border-slate-100 dark:border-slate-800 text-left my-8 animate-in fade-in zoom-in-95 duration-200">
                                 
-                                <!-- Timetable Header: Selected Date & Navigation -->
-                                <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100 flex-wrap gap-2.5">
-                                    <div class="flex items-center gap-2 sm:gap-2.5 flex-wrap">
+                                <!-- Header -->
+                                <div class="flex items-start justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
+                                    <div>
+                                        <div class="flex items-center gap-2 mb-1">
+                                            <span id="cal-edit-source-badge" class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300">
+                                                Google Calendar
+                                            </span>
+                                            <span id="cal-edit-sync-status-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300">
+                                                ซิงค์แบบสองทาง
+                                            </span>
+                                        </div>
+                                        <h3 class="text-lg font-black text-slate-900 dark:text-white" id="cal-edit-modal-title">
+                                            แก้ไขข้อมูลงานและกำหนดการ
+                                        </h3>
+                                    </div>
+                                    <button type="button" onclick="closeCalendarEditModal()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white flex items-center justify-center transition cursor-pointer" title="ปิด">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                                    </button>
+                                </div>
+
+                                <!-- Form Content -->
+                                <form id="calendar-edit-form" onsubmit="handleCalendarEditFormSubmit(event)" class="space-y-4 pt-4">
+                                    <input type="hidden" id="cal-edit-item-id">
+                                    <input type="hidden" id="cal-edit-item-type">
+
+                                    <!-- Title -->
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                                            ชื่องาน / กิจกรรม <span class="text-rose-500">*</span>
+                                        </label>
+                                        <input type="text" id="cal-edit-title" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 dark:focus:ring-emerald-500 transition">
+                                    </div>
+
+                                    <!-- Subject & Priority Grid -->
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="cal-edit-subject-priority-row">
+                                        <div>
+                                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                                                รายวิชา / หมวดหมู่
+                                            </label>
+                                            <select id="cal-edit-subject" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-bold focus:outline-none focus:ring-2 focus:ring-slate-900 transition cursor-pointer">
+                                                <!-- Populated by JS -->
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                                                ระดับความสำคัญ
+                                            </label>
+                                            <select id="cal-edit-priority" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-bold focus:outline-none focus:ring-2 focus:ring-slate-900 transition cursor-pointer">
+                                                <option value="ทั่วไป">ทั่วไป (ปกติ)</option>
+                                                <option value="ด่วน">ด่วน</option>
+                                                <option value="สอบ">มีสอบ / สำคัญมาก</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Date & Time Grid -->
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        <div>
+                                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                                                กำหนดส่ง / วันที่ <span class="text-rose-500">*</span>
+                                            </label>
+                                            <input type="date" id="cal-edit-date" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-bold focus:outline-none focus:ring-2 focus:ring-slate-900 transition">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                                                เวลา
+                                            </label>
+                                            <input type="time" id="cal-edit-time" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-bold focus:outline-none focus:ring-2 focus:ring-slate-900 transition">
+                                        </div>
+                                    </div>
+
+                                    <!-- Status (for tasks) -->
+                                    <div id="cal-edit-status-row">
+                                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                                            สถานะงาน
+                                        </label>
+                                        <div class="grid grid-cols-2 gap-2">
+                                            <label class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 cursor-pointer">
+                                                <input type="radio" name="cal-edit-status" value="ยังไม่ส่ง" class="accent-slate-900 dark:accent-emerald-500">
+                                                <span class="text-xs font-bold text-slate-700 dark:text-slate-200">ยังไม่ส่ง</span>
+                                            </label>
+                                            <label class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 cursor-pointer">
+                                                <input type="radio" name="cal-edit-status" value="ส่งแล้ว" class="accent-emerald-500">
+                                                <span class="text-xs font-bold text-emerald-700 dark:text-emerald-400">ส่งแล้ว</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Description -->
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">
+                                            รายละเอียด / บันทึกเพิ่มเติม
+                                        </label>
+                                        <textarea id="cal-edit-desc" rows="3" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-slate-900 transition" placeholder="ระบุรายละเอียดเพิ่มเติมของงานหรือกิจกรรม..."></textarea>
+                                    </div>
+
+                                    <!-- Google Calendar Sync Switch -->
+                                    <div class="p-3.5 rounded-2xl bg-purple-50 dark:bg-purple-950/30 border border-purple-100 dark:border-purple-900/50 flex items-start gap-3">
+                                        <input type="checkbox" id="cal-edit-sync-gcal" class="mt-0.5 w-4 h-4 rounded text-purple-600 focus:ring-purple-500 accent-purple-600 cursor-pointer">
+                                        <label for="cal-edit-sync-gcal" class="text-left cursor-pointer select-none">
+                                            <span class="block text-xs font-bold text-purple-950 dark:text-purple-200 leading-tight">
+                                                ซิงค์การเปลี่ยนแปลงไปยัง Google Calendar
+                                            </span>
+                                            <span class="block text-[11px] text-purple-700 dark:text-purple-300 font-normal mt-0.5 leading-relaxed">
+                                                เมื่อกดบันทึก ระบบจะส่งการแก้ไขไปยัง Google Calendar เพื่ออัปเดตวันและเวลาให้ตรงกันอัตโนมัติ
+                                            </span>
+                                        </label>
+                                    </div>
+
+                                    <!-- Action buttons -->
+                                    <div class="flex items-center justify-between gap-3 pt-3 border-t border-slate-100 dark:border-slate-800">
+                                        <button type="button" id="btn-cal-edit-delete" onclick="handleCalendarEditDelete()" class="px-3.5 py-2 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition cursor-pointer">
+                                            ลบรายการนี้
+                                        </button>
                                         <div class="flex items-center gap-2">
-                                            <div class="w-6 h-6 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
-                                                <svg class="w-3.5 h-3.5" style="color:var(--theme-primary)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                                            </div>
-                                            <h3 class="text-sm sm:text-base font-bold text-slate-900 whitespace-nowrap">ปฏิทินงาน</h3>
-                                        </div>
-                                        <!-- Month selector placed right beside ปฏิทินงาน on the same axis -->
-                                        <div class="inline-flex items-center gap-1 bg-slate-100/90 rounded-full p-0.5 sm:p-1 border border-slate-200/60 shadow-2xs">
-                                            <button type="button" onclick="navigateDedicatedCal(-1)" class="w-6 h-6 rounded-full hover:bg-white text-slate-700 flex items-center justify-center transition shadow-2xs cursor-pointer" title="ก่อนหน้า">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="11" height="11"><path d="M15 18l-6-6 6-6"/></svg>
+                                            <button type="button" onclick="closeCalendarEditModal()" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer">
+                                                ยกเลิก
                                             </button>
-                                            <span id="dedicated-cal-month-display" class="text-xs sm:text-sm font-bold text-slate-900 px-1 sm:px-2 select-none whitespace-nowrap truncate max-w-[130px] sm:max-w-none">January 05 - 2024</span>
-                                            <button type="button" onclick="navigateDedicatedCal(1)" class="w-6 h-6 rounded-full hover:bg-white text-slate-700 flex items-center justify-center transition shadow-2xs cursor-pointer" title="ถัดไป">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="11" height="11"><path d="M9 18l6-6-6-6"/></svg>
+                                            <button type="submit" id="btn-cal-edit-submit" class="inline-flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-extrabold bg-slate-900 hover:bg-black dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white shadow-xs transition cursor-pointer">
+                                                <span>บันทึกและอัปเดต</span>
                                             </button>
                                         </div>
-                                        <button type="button" onclick="jumpDedicatedCalToToday()" class="px-2.5 sm:px-3 py-1 rounded-full text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 transition cursor-pointer border border-slate-200/60 shadow-2xs">Today</button>
                                     </div>
-                                    <span id="timetable-subtitle" class="text-xs text-slate-400 font-medium hidden sm:inline-block">ลากการ์ดงานมาวางในช่องเวลาได้</span>
-                                </div>
-
-                                <!-- Schedule Timetable View (Weekly or Daily) -->
-                                <div id="dedicated-cal-timetable-container" class="flex-1 overflow-x-auto">
-                                    <!-- Injected by JS: Grid for Days + Hourly time slots + Event cards -->
-                                </div>
-
-                                <!-- Month Grid Container (Toggled when in 'monthly' mode) -->
-                                <div id="dedicated-cal-month-container" class="hidden flex-1">
-                                    <div class="grid grid-cols-7 gap-1 md:gap-2 mb-2 text-center text-xs font-bold text-slate-400">
-                                        <div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
-                                    </div>
-                                    <div id="dedicated-cal-month-grid" class="grid grid-cols-7 gap-1 md:gap-2">
-                                        <!-- Injected by JS -->
-                                    </div>
-                                </div>
-
-                                <!-- Dedicated Selected Day Agenda (Bottom section: ปฏิทินและกำหนดส่ง) -->
-                                <div class="mt-7 pt-6 border-t border-slate-100">
-                                    <div class="flex items-center justify-between mb-4">
-                                        <div class="flex items-center gap-2">
-                                            <div class="w-6 h-6 rounded-lg bg-sidebar text-white flex items-center justify-center text-xs">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                                            </div>
-                                            <h4 class="text-sm font-bold text-slate-900">ปฏิทินและกำหนดส่ง</h4>
-                                        </div>
-                                        <span id="dedicated-cal-tasks-count-badge" class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600">0 รายการ</span>
-                                    </div>
-                                    <div id="dedicated-cal-selected-agenda" class="w-full">
-                                        <!-- JS Injects selected day tasks with clean centered balanced layout -->
-                                    </div>
-                                </div>
-
-                                <!-- Bottom Status / Legend Bar -->
-                                <div class="mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
-                                    <div class="flex items-center gap-3">
-                                        <span class="inline-flex items-center gap-1.5 text-slate-600 font-medium">
-                                            <span class="w-3 h-3 rounded-md bg-[#bef264] border border-lime-400 inline-block"></span>
-                                            <span>งาน/การบ้าน (ลากย้ายเวลาได้)</span>
-                                        </span>
-                                        <span class="inline-flex items-center gap-1.5 text-slate-600 font-medium">
-                                            <span class="w-3 h-3 rounded-md bg-[#8580be] inline-block"></span>
-                                            <span>Google Calendar</span>
-                                        </span>
-                                    </div>
-                                    <span id="dedicated-cal-footer-date" class="font-semibold text-slate-600"></span>
-                                </div>
+                                </form>
 
                             </div>
+                        </div>
 
+                        <!-- Modal: Quick Add Task / Event directly in Calendar -->
+                        <div id="calendar-quick-add-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm p-4 overflow-y-auto">
+                            <div class="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-2xl border border-slate-100 dark:border-slate-800 text-left my-8 animate-in fade-in zoom-in-95 duration-200">
+                                <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+                                    <h3 class="text-base font-black text-slate-900 dark:text-white" id="cal-quick-add-title">
+                                        เพิ่มงาน / กำหนดการใหม่
+                                    </h3>
+                                    <button type="button" onclick="closeCalendarQuickAddModal()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-500 flex items-center justify-center cursor-pointer">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                                    </button>
+                                </div>
+                                <form onsubmit="handleCalendarQuickAddSubmit(event)" class="space-y-3.5 pt-3">
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">ชื่องาน / รายการ <span class="text-rose-500">*</span></label>
+                                        <input type="text" id="cal-quick-title" required placeholder="เช่น ทบทวนบทเรียน หรือ ส่งการบ้าน" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-medium focus:outline-none focus:ring-2 focus:ring-slate-900 transition">
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-2.5">
+                                        <div>
+                                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">วิชา</label>
+                                            <select id="cal-quick-subject" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-bold transition"></select>
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">ความสำคัญ</label>
+                                            <select id="cal-quick-priority" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-bold transition">
+                                                <option value="ทั่วไป">ทั่วไป</option>
+                                                <option value="ด่วน">ด่วน</option>
+                                                <option value="สอบ">มีสอบ</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-2.5">
+                                        <div>
+                                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">วันที่ <span class="text-rose-500">*</span></label>
+                                            <input type="date" id="cal-quick-date" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-bold transition">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">เวลา</label>
+                                            <input type="time" id="cal-quick-time" value="23:59" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-bold transition">
+                                        </div>
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-purple-50 dark:bg-purple-950/30 border border-purple-100 dark:border-purple-900 flex items-center gap-2.5">
+                                        <input type="checkbox" id="cal-quick-sync-gcal" class="w-4 h-4 rounded accent-purple-600 cursor-pointer">
+                                        <label for="cal-quick-sync-gcal" class="text-xs font-bold text-purple-900 dark:text-purple-200 cursor-pointer">ซิงค์ไปยัง Google Calendar ทันที</label>
+                                    </div>
+                                    <div class="flex items-center justify-end gap-2 pt-2">
+                                        <button type="button" onclick="closeCalendarQuickAddModal()" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:bg-slate-100 transition cursor-pointer">ยกเลิก</button>
+                                        <button type="submit" id="btn-cal-quick-submit" class="px-5 py-2 rounded-xl text-xs font-extrabold bg-slate-900 text-white hover:bg-black transition cursor-pointer">สร้างรายการ</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
 
                     </div>
@@ -5698,12 +5895,12 @@ body.auto-dark .swal2-backdrop-show {
                         <span id="manual-study-duration-badge" class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-lg border border-emerald-200">25 นาที</span>
                     </div>
                     <input type="number" id="manual-study-duration" min="1" max="600" value="25" required oninput="document.getElementById('manual-study-duration-badge').textContent = (this.value || 0) + ' นาที'" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs font-medium text-slate-800 focus:outline-none focus:border-emerald-500 focus:bg-white transition">
-                    <div class="flex items-center gap-1.5 mt-2 flex-wrap">
-                        <button type="button" onclick="setManualStudyPreset(15)" class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer">15 นาที</button>
-                        <button type="button" onclick="setManualStudyPreset(25)" class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-emerald-100 text-emerald-700 hover:bg-emerald-200 transition cursor-pointer">25 นาที</button>
-                        <button type="button" onclick="setManualStudyPreset(45)" class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer">45 นาที</button>
-                        <button type="button" onclick="setManualStudyPreset(60)" class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer">60 นาที</button>
-                        <button type="button" onclick="setManualStudyPreset(90)" class="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer">90 นาที</button>
+                    <div class="flex items-center gap-2 mt-2 flex-wrap" id="manual-study-preset-container">
+                        <button type="button" onclick="setManualStudyPreset(15)" id="manual-preset-btn-15" class="manual-preset-btn h-9 px-3 rounded-lg text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer">15 นาที</button>
+                        <button type="button" onclick="setManualStudyPreset(25)" id="manual-preset-btn-25" class="manual-preset-btn h-9 px-3 rounded-lg text-xs font-bold bg-emerald-600 text-white shadow-xs ring-2 ring-emerald-500 ring-offset-1 transition cursor-pointer">25 นาที</button>
+                        <button type="button" onclick="setManualStudyPreset(45)" id="manual-preset-btn-45" class="manual-preset-btn h-9 px-3 rounded-lg text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer">45 นาที</button>
+                        <button type="button" onclick="setManualStudyPreset(60)" id="manual-preset-btn-60" class="manual-preset-btn h-9 px-3 rounded-lg text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer">60 นาที</button>
+                        <button type="button" onclick="setManualStudyPreset(90)" id="manual-preset-btn-90" class="manual-preset-btn h-9 px-3 rounded-lg text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer">90 นาที</button>
                     </div>
                 </div>
 
@@ -5982,6 +6179,116 @@ body.auto-dark .swal2-backdrop-show {
                 </button>
 
             </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL: EDIT CALENDAR EVENT (SYNC WITH GOOGLE CALENDAR) ================= -->
+    <div id="modal-calendar-event-edit" class="fixed inset-0 bg-slate-900/60 z-[75] backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-5 sm:p-7 shadow-2xl border border-slate-100 dark:border-slate-800 transform transition-all relative overflow-hidden max-h-[92vh] flex flex-col">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800 shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    </div>
+                    <div>
+                        <h4 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white">แก้ไขงานและกิจกรรม</h4>
+                        <p class="text-xs text-slate-400">อัปเดตข้อมูลและซิงค์การเปลี่ยนแปลงไปยัง Google Calendar ทันที</p>
+                    </div>
+                </div>
+                <button type="button" onclick="closeCalendarEditModal()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-800 dark:hover:text-white flex items-center justify-center transition cursor-pointer">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+
+            <!-- Modal Body Form -->
+            <form id="form-calendar-event-edit" onsubmit="event.preventDefault(); saveCalendarEventEdit();" class="space-y-4 pt-4 overflow-y-auto pr-1 flex-1">
+                <input type="hidden" id="cal-edit-task-id" value="">
+                <input type="hidden" id="cal-edit-gcal-id" value="">
+
+                <!-- Title -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">ชื่องาน / กิจกรรม <span class="text-rose-500">*</span></label>
+                    <input type="text" id="cal-edit-title" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-white text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" placeholder="เช่น ส่งโครงงานวิทยาศาสตร์">
+                </div>
+
+                <!-- Date & Time Row -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">วันที่กำหนดส่ง / จัดกิจกรรม</label>
+                        <input type="date" id="cal-edit-date" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-white text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">เวลากำหนดส่ง</label>
+                        <input type="time" id="cal-edit-time" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-white text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                    </div>
+                </div>
+
+                <!-- Subject / Location & Status -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">วิชา / สถานที่ / แท็ก</label>
+                        <input type="text" id="cal-edit-subject" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-white text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" placeholder="เช่น วิชาเคมี หรือ 3890 Poplar Dr.">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">สถานะงาน</label>
+                        <select id="cal-edit-status" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-white text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                            <option value="ยังไม่ส่ง">รอดำเนินการ (Pending)</option>
+                            <option value="กำลังทำ">กำลังทำ (In Progress)</option>
+                            <option value="ส่งแล้ว">เสร็จสิ้น (Completed)</option>
+                            <option value="ยกเลิก">ยกเลิก (Cancelled)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Priority -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">ความสำคัญ</label>
+                    <select id="cal-edit-priority" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-white text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                        <option value="ทั่วไป">ทั่วไป (Normal)</option>
+                        <option value="สำคัญ">สำคัญ (Important)</option>
+                        <option value="ด่วนมาก">ด่วนมาก (Urgent)</option>
+                    </select>
+                </div>
+
+                <!-- Description -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">รายละเอียดเพิ่มเติม</label>
+                    <textarea id="cal-edit-desc" rows="3" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-white text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none resize-none" placeholder="บันทึกรายละเอียดงานหรือกำหนดการ..."></textarea>
+                </div>
+
+                <!-- Google Calendar Sync Option -->
+                <div class="p-3.5 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800 flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 rounded-xl bg-white dark:bg-slate-800 text-emerald-600 flex items-center justify-center shrink-0 shadow-2xs">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        </div>
+                        <div class="min-w-0">
+                            <p class="text-xs font-bold text-slate-800 dark:text-white leading-tight">ซิงค์ไปยัง Google Calendar</p>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-400 truncate">เมื่อกดบันทึก ข้อมูลใน Google Calendar จะเปลี่ยนตามทันที</p>
+                        </div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer shrink-0">
+                        <input type="checkbox" id="cal-edit-sync-gcal" checked class="sr-only peer">
+                        <div class="w-9 h-5 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-600"></div>
+                    </label>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="pt-3 flex items-center justify-between gap-3 border-t border-slate-100 dark:border-slate-800 shrink-0">
+                    <button type="button" onclick="deleteCurrentCalendarEvent()" id="btn-cal-edit-delete" class="px-4 py-2.5 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition cursor-pointer">
+                        ลบรายการนี้
+                    </button>
+                    <div class="flex items-center gap-2">
+                        <button type="button" onclick="closeCalendarEditModal()" class="px-4 py-2.5 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer">
+                            ยกเลิก
+                        </button>
+                        <button type="submit" id="btn-cal-edit-save" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-slate-900 hover:bg-black dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white transition shadow-sm cursor-pointer">
+                            บันทึกการเปลี่ยนแปลง
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -6320,8 +6627,16 @@ body.auto-dark .swal2-backdrop-show {
                     <div id="settings-guest-card"></div>
                 </div>
 
+                <!-- Section: Logout Action (Subtle Destructive) -->
+                <div class="pt-2">
+                    <button type="button" onclick="signOutUser()" class="w-full py-3 px-4 rounded-xl border border-slate-200 hover:border-red-200 text-slate-600 hover:text-red-600 hover:bg-red-50/60 font-semibold text-xs sm:text-sm transition flex items-center justify-center gap-2 cursor-pointer shadow-2xs">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                        <span>ออกจากระบบ</span>
+                    </button>
+                </div>
+
                 <!-- Footer Quote matching image -->
-                <div class="pt-4 pb-2 text-center text-xs font-medium text-slate-400 select-none">
+                <div class="pt-2 pb-2 text-center text-xs font-medium text-slate-400 select-none">
                     &ldquo; อ่านวันนี้... เพื่ออนาคตที่ดีกว่า &rdquo;
                 </div>
 
@@ -7046,11 +7361,12 @@ body.auto-dark .swal2-backdrop-show {
                         showToast('เชื่อมต่อ Google Calendar สำเร็จ');
                         await syncGoogleCalendarEvents();
                     } else if (tokenResponse && tokenResponse.error) {
-                        console.error('Google Calendar OAuth error:', tokenResponse);
                         if (tokenResponse.error === 'popup_closed_by_user') {
-                            gcalErrorMessage = 'หน้าต่างการอนุญาตสิทธิ์ถูกปิด หากเปิดใน iFrame ลองเปิดหน้าเว็บในแท็บใหม่เพื่ออนุญาตสิทธิ์';
-                            showToast('หน้าต่างยืนยันถูกปิด (หากใช้งานในพรีวิว กรุณาเปิดแอปในแท็บใหม่)', 'warning');
+                            console.info('Google Calendar authorization popup closed by user');
+                            gcalErrorMessage = 'หน้าต่างการอนุญาตสิทธิ์ถูกปิด';
+                            showToast('การเชื่อมต่อถูกยกเลิก', 'info');
                         } else {
+                            console.warn('Google Calendar OAuth error:', tokenResponse);
                             gcalErrorMessage = 'ไม่สามารถขอสิทธิ์เข้าถึงปฏิทินได้ (' + tokenResponse.error + ')';
                             showToast('ไม่สามารถเชื่อมต่อ Google Calendar ได้ (' + tokenResponse.error + ')', 'error');
                         }
@@ -7059,7 +7375,14 @@ body.auto-dark .swal2-backdrop-show {
                 },
                 error_callback: (error) => {
                     isGCalConnecting = false;
-                    console.error('Google Calendar token client error:', error);
+                    const msg = (error && (error.message || error.type || String(error))) || '';
+                    const isClosed = msg.toLowerCase().includes('closed') || (error && error.type === 'popup_closed');
+                    if (isClosed) {
+                        console.info('Google Calendar token client popup closed by user');
+                        updateGCalUI();
+                        return;
+                    }
+                    console.warn('Google Calendar token client error:', error);
                     gcalErrorMessage = 'เกิดข้อผิดพลาดในการเรียกใช้ Google OAuth: ' + (error?.message || 'การเชื่อมต่อขัดข้อง');
                     updateGCalUI();
                     showToast('เกิดข้อผิดพลาดในการเชื่อมต่อ Google Calendar', 'error');
@@ -7492,7 +7815,7 @@ body.auto-dark .swal2-backdrop-show {
 
         async function handleMainGoogleLogin() {
             const calendarCheck = document.getElementById('main-login-sync-calendar-toggle');
-            const wantsCalendar = calendarCheck ? calendarCheck.checked : true;
+            const wantsCalendar = calendarCheck ? calendarCheck.checked : false;
             await startGoogleLogin({ withCalendar: wantsCalendar });
         }
 
@@ -7552,8 +7875,10 @@ body.auto-dark .swal2-backdrop-show {
                         if (tokenResponse && tokenResponse.access_token) {
                             await loginWithGoogleAuth({ accessToken: tokenResponse.access_token });
                         } else if (tokenResponse && tokenResponse.error) {
-                            console.error('Google OAuth error:', tokenResponse);
-                            if (tokenResponse.error !== 'popup_closed_by_user' && tokenResponse.error !== 'access_denied') {
+                            if (tokenResponse.error === 'popup_closed_by_user' || tokenResponse.error === 'access_denied') {
+                                console.info('Google OAuth closed or cancelled by user');
+                            } else {
+                                console.warn('Google OAuth error:', tokenResponse);
                                 showPremiumAlert({
                                     type: 'error',
                                     title: 'เข้าสู่ระบบไม่สำเร็จ',
@@ -7564,11 +7889,17 @@ body.auto-dark .swal2-backdrop-show {
                     },
                     error_callback: (err) => {
                         setGoogleLoginButtonLoading(false);
-                        console.error('Google token client error:', err);
+                        const msg = (err && (err.message || err.type || String(err))) || '';
+                        const isClosed = msg.toLowerCase().includes('closed') || (err && err.type === 'popup_closed');
+                        if (isClosed) {
+                            console.info('Google token client popup closed by user');
+                            return;
+                        }
+                        console.warn('Google token client error:', err);
                         showPremiumAlert({
                             type: 'error',
                             title: 'เกิดข้อผิดพลาด',
-                            text: err.message || 'ไม่สามารถเปิดหน้าต่างเข้าสู่ระบบ Google ได้'
+                            text: err?.message || 'ไม่สามารถเปิดหน้าต่างเข้าสู่ระบบ Google ได้'
                         });
                     }
                 });
@@ -7922,7 +8253,7 @@ body.auto-dark .swal2-backdrop-show {
             if (modalCheck && modalCheck.offsetParent !== null) {
                 return modalCheck.checked;
             }
-            return (mainCheck ? mainCheck.checked : (modalCheck ? modalCheck.checked : true));
+            return (mainCheck ? mainCheck.checked : (modalCheck ? modalCheck.checked : false));
         }
 
         function openLoginModal() {
@@ -8017,13 +8348,13 @@ body.auto-dark .swal2-backdrop-show {
 
             const confirmed = await new Promise((resolve) => {
                 showConfirmAlert(
-                    'ยืนยันการดำเนินการ',
-                    'คุณต้องการออกจากระบบใช่หรือไม่?',
+                    'ออกจากระบบ?',
+                    'คุณต้องการออกจากบัญชีนี้ใช่หรือไม่',
                     () => resolve(true),
                     () => resolve(false),
                     {
                         type: 'danger',
-                        confirmText: 'ยืนยัน',
+                        confirmText: 'ออกจากระบบ',
                         cancelText: 'ยกเลิก'
                     }
                 );
@@ -9241,740 +9572,985 @@ body.auto-dark .swal2-backdrop-show {
             }, 50);
         }
 
+        // ================= MODERN CALENDAR DASHBOARD (MATCHING REFERENCE IMG_9124) =================
+        let modernCalYear = new Date().getFullYear();
+        let modernCalMonth = new Date().getMonth();
+        let modernSelectedDate = new Date();
+        let modernSelectedDateStr = formatLocalDate(modernSelectedDate);
+        let modernEventsFilter = 'all';
+        let modernNoticesFilter = 'all';
+
+        // Load custom notices from localStorage or use defaults
+        let customModernNotices = [];
+        try {
+            const rawNotices = localStorage.getItem('jodngan_modern_notices');
+            if (rawNotices) {
+                customModernNotices = JSON.parse(rawNotices);
+            }
+        } catch (e) {}
+
+        if (!Array.isArray(customModernNotices) || customModernNotices.length === 0) {
+            customModernNotices = [
+                { id: 'n1', author: 'Savannah Nguyen', time: '10:04 AM', text: "อย่าลืมตรวจสอบกำหนดส่งงานและแบบฝึกหัดที่ได้รับมอบหมายประจำสัปดาห์นี้", avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80', type: 'team' },
+                { id: 'n2', author: 'Francisco Kristin', time: '10:04 AM', text: "การนัดหมายและการสอบสำคัญจะถูกซิงค์อัตโนมัติจาก Google Calendar ของคุณ", avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80', type: 'team' },
+                { id: 'n3', author: 'Devon Lane', time: '10:04 AM', text: "สามารถคลิกที่ไอคอนดินสอในกล่อง Your events หรือ Todo list เพื่อแก้ไขงานและซิงค์ไปยัง Google Calendar ได้ทันที", avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80', type: 'system' },
+                { id: 'n4', author: 'Soham Randall', time: '10:04 AM', text: "ระบบบันทึกข้อมูลและส่งงานอัตโนมัติแบบเรียลไทม์ พร้อมแจ้งเตือนกำหนดส่ง", avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&auto=format&fit=crop&q=80', type: 'system' }
+            ];
+        }
+
+        function saveModernNotices() {
+            try {
+                localStorage.setItem('jodngan_modern_notices', JSON.stringify(customModernNotices));
+            } catch (e) {}
+        }
+
+        async function syncGoogleCalendarNow() {
+            const btn = document.getElementById('btn-modern-gcal-sync');
+            if (btn) btn.classList.add('animate-spin');
+            try {
+                if (!isGCalConnected()) {
+                    await connectGoogleCalendar();
+                } else {
+                    await syncGoogleCalendarEvents();
+                }
+                renderDedicatedCalendarView();
+            } catch (err) {
+                console.error('Error syncing Google Calendar:', err);
+                showToast('การซิงค์ปฏิทินขัดข้อง กรุณาลองใหม่อีกครั้ง', 'error');
+            } finally {
+                if (btn) btn.classList.remove('animate-spin');
+            }
+        }
+
+        function showModernNoticesModal() {
+            promptAddNotice();
+        }
+
         function renderDedicatedCalendarView() {
             const engMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            const monthDisplay = document.getElementById('dedicated-cal-month-display');
-            const timetableSubtitle = document.getElementById('timetable-subtitle');
-
-            if (monthDisplay) {
-                const selMonth = engMonths[dedicatedSelectedDate.getMonth()];
-                const selDay = String(dedicatedSelectedDate.getDate()).padStart(2, '0');
-                const selYear = dedicatedSelectedDate.getFullYear();
-                monthDisplay.textContent = `${selMonth} ${selDay} - ${selYear}`;
+            
+            // Header Month Title
+            const monthTitleEl = document.getElementById('modern-cal-month-title');
+            if (monthTitleEl) {
+                monthTitleEl.textContent = `${engMonths[modernCalMonth]} ${modernCalYear}`;
             }
 
-            if (timetableSubtitle) {
-                if (dedicatedCalViewMode === 'weekly') {
-                    timetableSubtitle.textContent = 'Weekly Timetable · ลากการ์ดงานวางลงช่องวัน/เวลาได้';
-                } else if (dedicatedCalViewMode === 'daily') {
-                    timetableSubtitle.textContent = 'Daily Schedule · กำหนดการและงานรายชั่วโมง';
-                } else {
-                    timetableSubtitle.textContent = 'Monthly Calendar · ภาพรวมกำหนดส่งทั้งเดือน';
-                }
+            // User Profile Pill in Header
+            const avatarEl = document.getElementById('modern-cal-user-avatar');
+            const nameEl = document.getElementById('modern-cal-user-name');
+            const roleEl = document.getElementById('modern-cal-user-role');
+            if (nameEl) {
+                const userName = currentUser?.displayName || currentUser?.name || (currentUser?.email ? currentUser.email.split('@')[0] : 'Dianne Russell');
+                nameEl.textContent = userName;
+            }
+            if (roleEl) {
+                roleEl.textContent = isGCalConnected() ? 'Google Calendar ซิงค์แล้ว' : 'นักเรียน / ผู้ใช้งาน';
+            }
+            if (avatarEl && currentUser?.photoURL) {
+                avatarEl.src = currentUser.photoURL;
             }
 
-            const badge = document.getElementById('dedicated-cal-selected-badge');
-            if (badge) {
-                const selStr = formatLocalDate(dedicatedSelectedDate);
-                badge.textContent = `วันที่เลือก: ${selStr}`;
-            }
-            const footerDate = document.getElementById('dedicated-cal-footer-date');
-            if (footerDate) {
-                const selStr = formatLocalDate(dedicatedSelectedDate);
-                footerDate.textContent = `วันที่เลือก: ${selStr}`;
-            }
-
-            // Update Top Metrics
-            updateTimeFrameTopMetrics();
-
-            // Render Left Cards: Mini Calendar, Draggable Queue, Other Calendar Feeds
-            renderMiniMonthCalendar();
-            renderDraggableTasksQueue();
-            renderOtherCalendarFeeds();
-
-            // Render Main Schedule View
-            if (dedicatedCalViewMode === 'weekly') {
-                renderWeeklyTimetable();
-            } else if (dedicatedCalViewMode === 'daily') {
-                renderDailyTimetable();
-            } else {
-                renderDedicatedMonthGrid();
-            }
-
-            renderDedicatedSelectedDayAgenda();
-
+            // Render 4 Quadrants
+            renderModernMonthGrid();
+            renderModernYourEvents();
+            renderModernNotices();
+            renderModernTodoList();
             updateGCalUI();
         }
 
-        function updateTimeFrameTopMetrics() {
-            const tasksMetric = document.getElementById('tf-metric-tasks');
-            const gcalMetric = document.getElementById('tf-metric-gcal');
-            const todayStr = formatLocalDate(dedicatedSelectedDate);
-
-            const dayTasks = assignments.filter(t => {
-                if (!t.dueDate) return false;
-                return t.dueDate.split('T')[0] === todayStr;
-            });
-
-            const dayGCal = (googleCalendarEvents || []).filter(ev => isGCalEventOnDate(ev, todayStr));
-
-            if (tasksMetric) {
-                tasksMetric.innerHTML = `${dayTasks.length} <span class="text-xs font-medium text-white/80">tasks</span>`;
+        function navigateModernMonth(direction) {
+            modernCalMonth += direction;
+            if (modernCalMonth > 11) {
+                modernCalMonth = 0;
+                modernCalYear++;
+            } else if (modernCalMonth < 0) {
+                modernCalMonth = 11;
+                modernCalYear--;
             }
-            if (gcalMetric) {
-                gcalMetric.innerHTML = `${dayGCal.length} <span class="text-xs font-medium text-white/80">events</span>`;
-            }
+            renderDedicatedCalendarView();
         }
 
-        function renderMiniMonthCalendar() {
-            const grid = document.getElementById('mini-cal-grid');
-            const title = document.getElementById('mini-cal-month-year');
+        function jumpModernCalToToday() {
+            const today = new Date();
+            modernCalYear = today.getFullYear();
+            modernCalMonth = today.getMonth();
+            modernSelectedDate = new Date(today);
+            modernSelectedDateStr = formatLocalDate(today);
+            renderDedicatedCalendarView();
+        }
+
+        function selectModernCalDate(y, m, d) {
+            modernCalYear = y;
+            modernCalMonth = m;
+            modernSelectedDate = new Date(y, m, d);
+            modernSelectedDateStr = formatLocalDate(modernSelectedDate);
+            renderDedicatedCalendarView();
+        }
+
+        function renderModernMonthGrid() {
+            const grid = document.getElementById('modern-month-grid');
             if (!grid) return;
 
-            const engMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            if (title) {
-                title.textContent = `${engMonths[miniCalMonth]} ${miniCalYear}`;
-            }
-
-            const firstDayIndex = new Date(miniCalYear, miniCalMonth, 1).getDay();
-            const mondayOffset = (firstDayIndex === 0 ? 6 : firstDayIndex - 1);
-            const daysInMonth = new Date(miniCalYear, miniCalMonth + 1, 0).getDate();
+            const firstDayIndex = new Date(modernCalYear, modernCalMonth, 1).getDay(); // 0 = Sun, 6 = Sat
+            const daysInMonth = new Date(modernCalYear, modernCalMonth + 1, 0).getDate();
+            const daysInPrevMonth = new Date(modernCalYear, modernCalMonth, 0).getDate();
 
             const today = new Date();
             const todayStr = formatLocalDate(today);
-            const selectedStr = formatLocalDate(dedicatedSelectedDate);
 
             let html = '';
-            for (let i = 0; i < mondayOffset; i++) {
-                html += '<div class="h-8 flex items-center justify-center text-white/20 text-xs select-none">·</div>';
-            }
 
-            for (let d = 1; d <= daysInMonth; d++) {
-                const dateObj = new Date(miniCalYear, miniCalMonth, d);
-                const dateStr = formatLocalDate(dateObj);
-                const isSelected = (dateStr === selectedStr);
-                const isToday = (dateStr === todayStr);
-
-                const hasTask = assignments.some(t => t.dueDate && t.dueDate.split('T')[0] === dateStr);
-                const hasGCal = (googleCalendarEvents || []).some(ev => isGCalEventOnDate(ev, dateStr));
-
-                let dayClass = 'cal-day-btn w-7 h-7 mx-auto rounded-full flex items-center justify-center text-xs transition cursor-pointer relative ';
-                if (isSelected) {
-                    dayClass += 'bg-[#bef264] text-slate-900 font-extrabold shadow-sm';
-                } else if (isToday) {
-                    dayClass += 'bg-white/30 text-white font-bold hover:bg-white/40';
-                } else {
-                    dayClass += 'text-white/90 hover:bg-white/20 font-medium';
-                }
+            // 1. Previous month trailing days
+            for (let i = firstDayIndex - 1; i >= 0; i--) {
+                const prevDay = daysInPrevMonth - i;
+                const prevDate = new Date(modernCalYear, modernCalMonth - 1, prevDay);
+                const prevDateStr = formatLocalDate(prevDate);
+                const isSelected = (prevDateStr === modernSelectedDateStr);
 
                 html += `
-                    <div class="h-8 flex items-center justify-center calendar-drop-target"
-                         data-date="${dateStr}"
-                         ondragover="onCalendarDragOver(event)"
-                         ondragleave="onCalendarDragLeave(event)"
-                         ondrop="onCalendarDrop(event, '${dateStr}')">
-                        <button type="button"
-                                class="${dayClass}"
-                                onclick="selectDedicatedDate(${miniCalYear}, ${miniCalMonth}, ${d})"
-                                title="${dateStr}">
-                            <span>${d}</span>
-                            ${!isSelected && (hasTask || hasGCal) ? '<span class="absolute -bottom-0.5 w-1 h-1 rounded-full bg-[#bef264]"></span>' : ''}
-                        </button>
+                    <div class="modern-cal-day-cell text-slate-300 dark:text-slate-600 ${isSelected ? 'is-selected' : ''}"
+                         onclick="selectModernCalDate(${prevDate.getFullYear()}, ${prevDate.getMonth()}, ${prevDay})"
+                         title="${prevDateStr}">
+                        <span class="text-xs sm:text-sm font-semibold">${prevDay}</span>
                     </div>
                 `;
             }
+
+            // 2. Current month days
+            for (let d = 1; d <= daysInMonth; d++) {
+                const dayDate = new Date(modernCalYear, modernCalMonth, d);
+                const dateStr = formatLocalDate(dayDate);
+                const isToday = (dateStr === todayStr);
+                const isSelected = (dateStr === modernSelectedDateStr);
+
+                // Check for tasks and gcal events
+                const dayTasks = assignments.filter(t => t.dueDate && t.dueDate.split('T')[0] === dateStr);
+                const dayGCal = (googleCalendarEvents || []).filter(ev => isGCalEventOnDate(ev, dateStr));
+                const hasItems = dayTasks.length > 0 || dayGCal.length > 0;
+
+                let indicatorDots = '';
+                if (hasItems && !isSelected) {
+                    indicatorDots = `
+                        <div class="flex items-center gap-0.5 mt-0.5">
+                            ${dayTasks.length > 0 ? '<span class="modern-cal-event-dot bg-slate-900 dark:bg-emerald-400"></span>' : ''}
+                            ${dayGCal.length > 0 ? '<span class="modern-cal-event-dot bg-purple-500"></span>' : ''}
+                        </div>
+                    `;
+                } else if (hasItems && isSelected) {
+                    indicatorDots = `
+                        <div class="flex items-center gap-0.5 mt-0.5">
+                            <span class="modern-cal-event-dot bg-white dark:bg-slate-900"></span>
+                        </div>
+                    `;
+                }
+
+                html += `
+                    <div class="modern-cal-day-cell text-slate-800 dark:text-slate-100 ${isSelected ? 'is-selected' : ''} ${isToday && !isSelected ? 'ring-1.5 ring-slate-300 dark:ring-slate-600 font-extrabold' : ''}"
+                         onclick="selectModernCalDate(${modernCalYear}, ${modernCalMonth}, ${d})"
+                         title="${dateStr}${isToday ? ' (วันนี้)' : ''}">
+                        <span class="text-xs sm:text-sm font-bold">${d}</span>
+                        ${indicatorDots}
+                    </div>
+                `;
+            }
+
+            // 3. Next month leading days (to fill 35 or 42 slots)
+            const totalRendered = firstDayIndex + daysInMonth;
+            const targetTotal = totalRendered > 35 ? 42 : 35;
+            const nextDaysCount = targetTotal - totalRendered;
+
+            for (let nextDay = 1; nextDay <= nextDaysCount; nextDay++) {
+                const nextDate = new Date(modernCalYear, modernCalMonth + 1, nextDay);
+                const nextDateStr = formatLocalDate(nextDate);
+                const isSelected = (nextDateStr === modernSelectedDateStr);
+
+                html += `
+                    <div class="modern-cal-day-cell text-slate-300 dark:text-slate-600 ${isSelected ? 'is-selected' : ''}"
+                         onclick="selectModernCalDate(${nextDate.getFullYear()}, ${nextDate.getMonth()}, ${nextDay})"
+                         title="${nextDateStr}">
+                        <span class="text-xs sm:text-sm font-semibold">${nextDay}</span>
+                    </div>
+                `;
+            }
+
             grid.innerHTML = html;
         }
 
-        function renderDraggableTasksQueue() {
-            const queue = document.getElementById('draggable-tasks-queue');
-            if (!queue) return;
+        function setModernEventsFilter(filterVal) {
+            modernEventsFilter = filterVal || 'all';
+            renderModernYourEvents();
+        }
 
-            if (assignments.length === 0) {
-                queue.innerHTML = `
-                    <div class="p-4 rounded-xl bg-slate-50 text-center text-xs text-slate-400">
-                        ไม่มีงานในระบบ กด "+ Add Task" เพื่อสร้างงาน
+        function renderModernYourEvents() {
+            const container = document.getElementById('modern-your-events-list');
+            if (!container) return;
+
+            const engMonthsShort = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+
+            // 1. Gather all tasks
+            let taskItems = assignments.map(t => {
+                const dateStr = t.dueDate ? t.dueDate.split('T')[0] : '';
+                return {
+                    id: t.id,
+                    type: 'task',
+                    title: t.title,
+                    subject: t.subject || 'ทั่วไป',
+                    priority: t.priority || 'ทั่วไป',
+                    status: t.status || 'ยังไม่ส่ง',
+                    dateStr: dateStr,
+                    dueTime: t.dueTime || '23:59',
+                    description: t.description || '',
+                    calendarEventId: t.calendarEventId || null
+                };
+            });
+
+            // 2. Gather Google Calendar events
+            let gcalItems = (googleCalendarEvents || []).map(ev => {
+                const startRaw = ev.start?.dateTime || ev.start?.date || '';
+                const dateStr = startRaw ? startRaw.split('T')[0] : '';
+                let timeStr = 'ตลอดวัน';
+                if (ev.start?.dateTime) {
+                    const d = new Date(ev.start.dateTime);
+                    timeStr = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+                    if (ev.end?.dateTime) {
+                        const endD = new Date(ev.end.dateTime);
+                        timeStr += ' - ' + endD.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+                    }
+                }
+                return {
+                    id: ev.id,
+                    type: 'gcal',
+                    title: ev.summary || '(Google Event)',
+                    subject: 'Google Calendar',
+                    priority: 'ทั่วไป',
+                    status: 'กำหนดการ',
+                    dateStr: dateStr,
+                    dueTime: timeStr,
+                    description: ev.description || '',
+                    calendarEventId: ev.id,
+                    htmlLink: ev.htmlLink
+                };
+            });
+
+            // Apply filter
+            let allItems = [];
+            if (modernEventsFilter === 'selected') {
+                allItems = [...taskItems, ...gcalItems].filter(item => item.dateStr === modernSelectedDateStr);
+            } else if (modernEventsFilter === 'pending') {
+                allItems = taskItems.filter(item => item.status !== 'ส่งแล้ว');
+            } else if (modernEventsFilter === 'completed') {
+                allItems = taskItems.filter(item => item.status === 'ส่งแล้ว');
+            } else if (modernEventsFilter === 'gcal') {
+                allItems = gcalItems;
+            } else {
+                allItems = [...taskItems, ...gcalItems];
+            }
+
+            allItems.sort((a, b) => {
+                const da = a.dateStr || '9999-12-31';
+                const db = b.dateStr || '9999-12-31';
+                return da.localeCompare(db);
+            });
+
+            if (allItems.length === 0) {
+                container.innerHTML = `
+                    <div class="py-10 px-4 text-center rounded-2xl bg-slate-50/70 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800">
+                        <div class="w-12 h-12 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-400 mx-auto mb-2.5 shadow-2xs">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        </div>
+                        <p class="text-xs font-bold text-slate-700 dark:text-slate-300">ไม่มีกิจกรรมหรือรายการงาน</p>
+                        <p class="text-[11px] text-slate-400 mt-0.5">${modernEventsFilter === 'selected' ? `ไม่มีงานในวันที่ ${modernSelectedDateStr}` : 'ยังไม่มีรายการที่ตรงกับตัวกรองที่เลือก'}</p>
+                        <button type="button" onclick="openCalendarNewEventModal()" class="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-900 dark:bg-emerald-600 text-white hover:bg-black transition cursor-pointer">
+                            <span>+ เพิ่มงานสำหรับตอนนี้</span>
+                        </button>
                     </div>
                 `;
                 return;
             }
 
-            // Show both pending and recently finished tasks in checklist format
+            container.innerHTML = allItems.map(item => {
+                let monthLabel = 'DEC';
+                let dayNumber = '20';
+                if (item.dateStr) {
+                    const parts = item.dateStr.split('-');
+                    if (parts.length === 3) {
+                        const mIdx = parseInt(parts[1], 10) - 1;
+                        monthLabel = engMonthsShort[mIdx] || 'DATE';
+                        dayNumber = String(parseInt(parts[2], 10));
+                    }
+                }
+
+                const isTask = item.type === 'task';
+                const isDone = item.status === 'ส่งแล้ว';
+                const subjectColor = isTask ? getSubjectColor(item.subject) : '#8580be';
+
+                return `
+                    <div class="p-3 sm:p-3.5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 hover:border-slate-200 dark:hover:border-slate-600 shadow-2xs hover:shadow-xs transition group flex items-center justify-between gap-3">
+                        
+                        <!-- Left: Date Stamp Box -->
+                        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-slate-100 dark:bg-slate-700 flex flex-col items-center justify-center shrink-0 border border-slate-200/80 dark:border-slate-600 select-none">
+                            <span class="text-[9px] sm:text-[10px] uppercase font-extrabold text-slate-500 dark:text-slate-300 leading-tight">${monthLabel}</span>
+                            <span class="text-sm sm:text-base font-black text-slate-900 dark:text-white leading-none mt-0.5">${dayNumber}</span>
+                        </div>
+
+                        <!-- Center: Info -->
+                        <div class="flex-1 min-w-0 pr-1">
+                            <div class="flex items-center gap-1.5 flex-wrap">
+                                <h4 class="text-xs sm:text-sm font-black text-slate-900 dark:text-white leading-snug truncate max-w-[180px] sm:max-w-xs ${isDone ? 'line-through text-slate-400 dark:text-slate-500' : ''}">
+                                    ${escapeHtml(item.title)}
+                                </h4>
+                                ${item.calendarEventId ? `
+                                    <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md text-[9px] font-bold bg-purple-50 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 border border-purple-200/60 dark:border-purple-800">
+                                        <svg viewBox="0 0 24 24" fill="currentColor" width="8" height="8"><circle cx="12" cy="12" r="10"/></svg>
+                                        GCal
+                                    </span>
+                                ` : ''}
+                            </div>
+
+                            <div class="flex items-center gap-2 text-[10px] sm:text-[11px] text-slate-400 font-medium mt-1">
+                                <span class="text-slate-600 dark:text-slate-300 font-bold">${item.dueTime}</span>
+                                <span>·</span>
+                                <span class="inline-flex items-center gap-1 truncate max-w-[100px] sm:max-w-[140px]">
+                                    <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background-color: ${subjectColor}"></span>
+                                    <span>${escapeHtml(item.subject)}</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Right: Actions (Edit & Toggle) -->
+                        <div class="flex items-center gap-1.5 shrink-0">
+                            <!-- Edit Button (Pencil) -->
+                            <button type="button"
+                                    onclick="openCalendarEditModal('${item.id}', '${item.type}')"
+                                    class="w-8 h-8 rounded-xl bg-slate-50 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-500 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white flex items-center justify-center transition cursor-pointer border border-slate-200/60 dark:border-slate-600"
+                                    title="แก้ไขงาน / อัปเดต Google Calendar">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                            </button>
+
+                            <!-- Task Status Toggle Checkbox -->
+                            ${isTask ? `
+                                <button type="button"
+                                        onclick="toggleModernTodoStatus('${item.id}')"
+                                        class="w-8 h-8 rounded-xl border flex items-center justify-center transition cursor-pointer ${isDone ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-300 dark:border-slate-600 hover:border-emerald-500 bg-white dark:bg-slate-800 text-transparent hover:text-emerald-500'}"
+                                        title="${isDone ? 'คลิกเพื่อเปลี่ยนเป็นยังไม่ส่ง' : 'คลิกเพื่อทำเครื่องหมายว่าส่งแล้ว'}">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>
+                                </button>
+                            ` : `
+                                <button type="button"
+                                        onclick="showGCalEventDetailModal('${item.id}')"
+                                        class="w-8 h-8 rounded-xl border border-slate-200/60 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-purple-600 dark:text-purple-300 hover:bg-purple-100 flex items-center justify-center transition cursor-pointer"
+                                        title="ดูรายละเอียดกิจกรรม Google Calendar">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                </button>
+                            `}
+                        </div>
+
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function setModernNoticesFilter(filterVal) {
+            modernNoticesFilter = filterVal || 'all';
+            renderModernNotices();
+        }
+
+        function renderModernNotices() {
+            const container = document.getElementById('modern-notices-list');
+            if (!container) return;
+
+            let filtered = customModernNotices;
+            if (modernNoticesFilter === 'team') {
+                filtered = customModernNotices.filter(n => n.type === 'team');
+            } else if (modernNoticesFilter === 'system') {
+                filtered = customModernNotices.filter(n => n.type === 'system');
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="py-8 text-center text-xs text-slate-400 dark:text-slate-500">
+                        ไม่มีข้อความหรือประกาศในหมวดนี้
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(n => `
+                <div class="flex items-start gap-3 p-3 rounded-2xl bg-slate-50/80 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-700/80 hover:border-slate-200 transition group relative">
+                    <img src="${n.avatar}" alt="${escapeHtml(n.author)}" class="w-8 h-8 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700">
+                    <div class="flex-1 min-w-0 pr-6">
+                        <div class="flex items-center gap-2 mb-0.5">
+                            <h5 class="text-xs font-bold text-slate-900 dark:text-white leading-tight">${escapeHtml(n.author)}</h5>
+                            <span class="text-[10px] text-slate-400 font-semibold">${n.time}</span>
+                        </div>
+                        <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed font-normal">${escapeHtml(n.text)}</p>
+                    </div>
+                    <button type="button" onclick="deleteModernNotice('${n.id}')" class="absolute top-2.5 right-2.5 w-6 h-6 rounded-lg text-slate-300 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition cursor-pointer" title="ลบข้อความนี้">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        async function promptAddNotice() {
+            const { value: formValues } = await Swal.fire({
+                title: 'เพิ่มบันทึก / ประกาศใหม่',
+                html: `
+                    <div class="space-y-3 text-left pt-2">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">ชื่อผู้บันทึก</label>
+                            <input id="swal-notice-author" class="swal2-input !m-0 !w-full !text-xs !rounded-xl" value="${escapeHtml(currentUser?.displayName || currentUser?.name || 'ผู้ใช้งาน')}">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">ข้อความบันทึก / แจ้งเตือน</label>
+                            <textarea id="swal-notice-text" class="swal2-textarea !m-0 !w-full !text-xs !rounded-xl" rows="3" placeholder="ระบุข้อความประกาศหรือบันทึกประจำวัน..."></textarea>
+                        </div>
+                    </div>
+                `,
+                focusConfirm: false,
+                showCancelButton: true,
+                confirmButtonText: 'บันทึก',
+                cancelButtonText: 'ยกเลิก',
+                customClass: { popup: 'swal-premium' },
+                preConfirm: () => {
+                    const author = document.getElementById('swal-notice-author').value.trim();
+                    const text = document.getElementById('swal-notice-text').value.trim();
+                    if (!text) {
+                        Swal.showValidationMessage('กรุณากรอกข้อความ');
+                        return false;
+                    }
+                    return { author: author || 'ผู้ใช้งาน', text: text };
+                }
+            });
+
+            if (formValues) {
+                const now = new Date();
+                const timeStr = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+                const newNotice = {
+                    id: 'n_' + Date.now(),
+                    author: formValues.author,
+                    time: timeStr,
+                    text: formValues.text,
+                    avatar: currentUser?.photoURL || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80',
+                    type: 'team'
+                };
+                customModernNotices.unshift(newNotice);
+                saveModernNotices();
+                renderModernNotices();
+                showToast('เพิ่มบันทึกเรียบร้อย');
+            }
+        }
+
+        function deleteModernNotice(noticeId) {
+            customModernNotices = customModernNotices.filter(n => n.id !== noticeId);
+            saveModernNotices();
+            renderModernNotices();
+            showToast('ลบข้อความแล้ว');
+        }
+
+        function renderModernTodoList() {
+            const container = document.getElementById('modern-todo-checklist');
+            if (!container) return;
+
+            const engMonthsShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+            if (assignments.length === 0) {
+                container.innerHTML = `
+                    <div class="py-8 px-4 text-center rounded-2xl bg-slate-50/70 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800">
+                        <p class="text-xs font-bold text-slate-700 dark:text-slate-300">ยังไม่มีรายการงานใน Todo list</p>
+                        <p class="text-[11px] text-slate-400 mt-0.5">กดปุ่ม + Add new เพื่อสร้างงานใหม่</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Sort: pending first, then by dueDate
             const sorted = [...assignments].sort((a, b) => {
                 if (a.status === 'ส่งแล้ว' && b.status !== 'ส่งแล้ว') return 1;
                 if (a.status !== 'ส่งแล้ว' && b.status === 'ส่งแล้ว') return -1;
                 return (new Date(a.dueDate || '9999-12-31')) - (new Date(b.dueDate || '9999-12-31'));
             });
 
-            queue.innerHTML = sorted.map(t => {
+            container.innerHTML = sorted.map(t => {
                 const isDone = (t.status === 'ส่งแล้ว');
-                const timeLabel = t.dueTime ? t.dueTime : (t.dueDate ? t.dueDate.split('T')[0] : 'ยังไม่ระบุวัน');
-                const subjectColor = getSubjectColor(t.subject);
+                let dateBadge = 'ยังไม่ระบุวัน';
+                if (t.dueDate) {
+                    const parts = t.dueDate.split('T')[0].split('-');
+                    if (parts.length === 3) {
+                        const mIdx = parseInt(parts[1], 10) - 1;
+                        dateBadge = `${engMonthsShort[mIdx]} ${parseInt(parts[2], 10)}`;
+                    }
+                }
 
                 return `
-                    <div class="checklist-item flex items-center justify-between p-2 rounded-xl border border-slate-100 hover:border-slate-300 hover:shadow-2xs transition group"
-                         draggable="true"
-                         ondragstart="onTaskDragStart(event, '${t.id}')"
-                         ondragend="onTaskDragEnd(event)"
-                         title="ลากงานนี้ไปวางในตารางเวลา">
+                    <div class="flex items-center justify-between gap-3 p-3 rounded-2xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 hover:border-slate-200 dark:hover:border-slate-600 shadow-2xs transition group">
                         
-                        <div class="flex items-center gap-2.5 overflow-hidden">
-                            <!-- Circular Checkbox Button -->
+                        <!-- Left Checkbox & Title -->
+                        <div class="flex items-center gap-3 min-w-0 flex-1">
                             <button type="button"
-                                    onclick="toggleTaskStatusFromCal('${t.id}')"
-                                    class="w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition ${isDone ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-300 hover:border-slate-500 bg-white'}"
-                                    title="${isDone ? 'คลิกเพื่อเปลี่ยนเป็นยังไม่ส่ง' : 'คลิกเพื่อทำเครื่องหมายว่าส่งแล้ว'}">
-                                ${isDone ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg>' : ''}
+                                    onclick="toggleModernTodoStatus('${t.id}')"
+                                    class="w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 transition cursor-pointer ${isDone ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-300 dark:border-slate-600 hover:border-slate-500 bg-white dark:bg-slate-800'}"
+                                    title="${isDone ? 'เปลี่ยนเป็นยังไม่เสร็จ' : 'ทำเครื่องหมายว่าเสร็จแล้ว'}">
+                                ${isDone ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="11" height="11"><polyline points="20 6 9 17 4 12"/></svg>' : ''}
                             </button>
 
-                            <div class="overflow-hidden">
-                                <p class="text-xs font-bold leading-tight truncate ${isDone ? 'line-through text-slate-400' : 'text-slate-800'}">
-                                    ${t.title}
-                                </p>
-                                <div class="flex items-center gap-1.5 text-[10px] text-slate-400">
-                                    <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background-color: ${subjectColor}"></span>
-                                    <span class="truncate">${t.subject || 'ทั่วไป'} · ${timeLabel}</span>
+                            <div class="min-w-0 flex-1">
+                                <h4 class="text-xs sm:text-sm font-bold leading-tight truncate ${isDone ? 'line-through text-slate-400 dark:text-slate-500' : 'text-slate-900 dark:text-white'}">
+                                    ${escapeHtml(t.title)}
+                                </h4>
+                                <div class="flex items-center gap-1.5 flex-wrap mt-1">
+                                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">
+                                        Subtodo
+                                    </span>
+                                    <span class="text-[10px] font-semibold text-slate-400">
+                                        Repeat: None
+                                    </span>
+                                    <span class="text-[10px] font-semibold text-slate-400">·</span>
+                                    <span class="text-[10px] font-bold text-slate-500 dark:text-slate-300">
+                                        ${dateBadge}
+                                    </span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Drag indicator icon -->
-                        <div class="text-slate-300 group-hover:text-slate-500 shrink-0 cursor-grab pl-1">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/></svg>
+                        <!-- Right: Actions -->
+                        <div class="flex items-center gap-1 shrink-0">
+                            <!-- Edit Button -->
+                            <button type="button"
+                                    onclick="openCalendarEditModal('${t.id}', 'task')"
+                                    class="w-8 h-8 rounded-xl bg-slate-50 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-500 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white flex items-center justify-center transition cursor-pointer"
+                                    title="แก้ไขงาน">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                            </button>
                         </div>
+
                     </div>
                 `;
             }).join('');
         }
 
-        function renderOtherCalendarFeeds() {
-            const container = document.getElementById('other-calendar-feeds');
-            if (!container) return;
+        async function toggleModernTodoStatus(taskId) {
+            const task = assignments.find(t => String(t.id) === String(taskId));
+            if (!task) return;
 
-            const isConnected = isGCalConnected();
-            const gcalEventsCount = (googleCalendarEvents || []).length;
-            const primaryEmail = currentUser?.email || 'Google Calendar Feed';
+            const previousStatus = task.status;
+            task.status = (task.status === 'ส่งแล้ว' ? 'ยังไม่ส่ง' : 'ส่งแล้ว');
 
-            container.innerHTML = `
-                <!-- Feed 1: Google Calendar -->
-                <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 border border-slate-100">
-                    <div class="flex items-center gap-2">
-                        <div class="w-4 h-4 rounded-full bg-[#8580be] flex items-center justify-center text-white text-[9px] font-bold">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="8" height="8"><polyline points="20 6 9 17 4 12"/></svg>
-                        </div>
-                        <span class="font-bold text-slate-800 text-xs">Google Calendar</span>
-                    </div>
-                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${isConnected ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-600'}">
-                        ${isConnected ? `${gcalEventsCount} รายการ` : 'ยังไม่เชื่อม'}
-                    </span>
-                </div>
-
-                <!-- Feed 2: Holidays & Exams -->
-                <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 border border-slate-100">
-                    <div class="flex items-center gap-2">
-                        <div class="w-4 h-4 rounded-full bg-[#bef264] flex items-center justify-center text-slate-900 text-[9px] font-bold">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="8" height="8"><polyline points="20 6 9 17 4 12"/></svg>
-                        </div>
-                        <span class="font-bold text-slate-800 text-xs">วันหยุด & ตารางสอบ</span>
-                    </div>
-                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-200 text-slate-600">เปิดใช้งาน</span>
-                </div>
-
-                <!-- Status & Action Link -->
-                <div class="pt-1 flex items-center justify-between text-[11px]">
-                    <span class="text-slate-400 font-medium truncate max-w-[170px]">${isConnected ? primaryEmail : 'เชื่อมต่อบัญชีเพื่อดึงงานอัตโนมัติ'}</span>
-                    ${isConnected 
-                        ? `<button type="button" onclick="syncGoogleCalendarNow()" class="text-blue-600 font-bold hover:underline">ซิงค์ทันที</button>`
-                        : `<button type="button" onclick="connectGoogleCalendar()" class="text-blue-600 font-bold hover:underline">เชื่อมต่อ</button>`}
-                </div>
-            `;
-        }
-
-        // ================= WEEKLY TIMETABLE GRID (REFERENCE IMAGE MATCH) =================
-        function renderWeeklyTimetable() {
-            const container = document.getElementById('dedicated-cal-timetable-container');
-            if (!container) return;
-
-            const daysMeta = [
-                { short: 'Mon', dayIndex: 0 },
-                { short: 'Tue', dayIndex: 1 },
-                { short: 'Wed', dayIndex: 2 },
-                { short: 'Thu', dayIndex: 3 },
-                { short: 'Fri', dayIndex: 4 },
-                { short: 'Sat', dayIndex: 5 },
-                { short: 'Sun', dayIndex: 6 }
-            ];
-
-            const today = new Date();
-            const todayStr = formatLocalDate(today);
-            const selectedStr = formatLocalDate(dedicatedSelectedDate);
-
-            // Compute dates for 7 columns
-            const weekDates = [];
-            for (let i = 0; i < 7; i++) {
-                const d = new Date(dedicatedWeekStart.getTime() + i * 86400000);
-                weekDates.push({
-                    date: d,
-                    dateStr: formatLocalDate(d),
-                    dayNum: String(d.getDate()).padStart(2, '0'),
-                    dayName: daysMeta[i].short,
-                    isToday: (formatLocalDate(d) === todayStr),
-                    isSelected: (formatLocalDate(d) === selectedStr)
-                });
-            }
-
-            // Hours: 8 Am to 8 Pm (8 to 20)
-            const hours = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
-
-            let html = '<div class="timetable-grid-wrapper min-w-[700px] select-none">';
-
-            // 1. Column Header: GMT+7 | 03 Mon | 04 Tue | 05 Wed | 06 Thu | 07 Fri | 08 Sat | 09 Sun
-            html += `
-                <div class="grid grid-cols-8 pb-3 border-b border-slate-100 text-center items-end">
-                    <div class="text-left pl-2">
-                        <span class="text-xs font-extrabold text-slate-400 tracking-wider">GMT+7</span>
-                    </div>
-            `;
-
-            weekDates.forEach((col, idx) => {
-                const headerHighlight = col.isSelected
-                    ? 'bg-[#242332] text-white shadow-xs ring-2 ring-[#242332]/20'
-                    : (col.isToday ? 'bg-slate-100 text-slate-900 font-bold' : 'text-slate-800 hover:bg-slate-50');
-
-                html += `
-                    <div class="calendar-drop-target py-2 px-1 rounded-2xl transition cursor-pointer ${headerHighlight}"
-                         data-date="${col.dateStr}"
-                         onclick="selectDedicatedDate(${col.date.getFullYear()}, ${col.date.getMonth()}, ${col.date.getDate()})"
-                         ondragover="onCalendarDragOver(event)"
-                         ondragleave="onCalendarDragLeave(event)"
-                         ondrop="onCalendarDrop(event, '${col.dateStr}')">
-                        <div class="text-xl font-extrabold leading-none">${col.dayNum}</div>
-                        <div class="text-[11px] font-bold ${col.isSelected ? 'text-white/80' : 'text-slate-400'} mt-1">${col.dayName}</div>
-                    </div>
-                `;
-            });
-            html += '</div>';
-
-            // 2. Hourly Grid Rows
-            hours.forEach(h => {
-                const hourLabel = formatHourLabel(h);
-                html += `
-                    <div class="timetable-hour-row grid grid-cols-8 items-stretch">
-                        <!-- Left Time Label -->
-                        <div class="py-3 pl-2 pr-3 text-right">
-                            <span class="text-xs font-extrabold text-slate-400 whitespace-nowrap">${hourLabel}</span>
-                        </div>
-                `;
-
-                // 7 Day Slots for this hour
-                weekDates.forEach(col => {
-                    const dateStr = col.dateStr;
-
-                    // Find tasks matching this date & hour
-                    const matchingTasks = assignments.filter(t => {
-                        if (!t.dueDate || t.dueDate.split('T')[0] !== dateStr) return false;
-                        if (!t.dueTime) return h === 9; // default unscheduled tasks to 9 Am slot
-                        const taskHour = parseInt(t.dueTime.split(':')[0], 10);
-                        return taskHour === h;
-                    });
-
-                    // Find Google Calendar events matching this date & hour
-                    const matchingGCal = (googleCalendarEvents || []).filter(ev => {
-                        if (!isGCalEventOnDate(ev, dateStr)) return false;
-                        if (ev.start?.dateTime) {
-                            const evHour = new Date(ev.start.dateTime).getHours();
-                            return evHour === h;
-                        }
-                        return h === 8; // all-day events placed in 8 Am
-                    });
-
-                    html += `
-                        <div class="timetable-slot p-1 flex flex-col gap-1 min-h-[68px]"
-                             data-date="${dateStr}"
-                             data-hour="${h}"
-                             ondragover="onCalendarHourDragOver(event)"
-                             ondragleave="onCalendarHourDragLeave(event)"
-                             ondrop="onCalendarHourDrop(event, '${dateStr}', ${h})"
-                             onclick="if(!event.target.closest('.tf-event-card-lime, .tf-event-card-lilac')) selectDedicatedDate(${col.date.getFullYear()}, ${col.date.getMonth()}, ${col.date.getDate()})">
-                    `;
-
-                    // Render Task Cards (Lime Green, like in reference screenshot)
-                    matchingTasks.forEach(t => {
-                        const isDone = (t.status === 'ส่งแล้ว');
-                        const nextHour = h + 1;
-                        const timeRange = `${hourLabel} - ${formatHourLabel(nextHour)}`;
-
-                        html += `
-                            <div class="tf-event-card-lime"
-                                 draggable="true"
-                                 ondragstart="onTaskDragStart(event, '${t.id}')"
-                                 ondragend="onTaskDragEnd(event)"
-                                 onclick="event.stopPropagation(); editTask('${t.id}')"
-                                 title="คลิกเพื่อแก้ไข หรือลากเพื่อเปลี่ยนวันและเวลา">
-                                <div class="flex items-center justify-between gap-1">
-                                    <h5 class="text-xs font-extrabold leading-tight truncate ${isDone ? 'line-through text-green-900/60' : 'text-[#14532d]'}">
-                                        ${t.title}
-                                    </h5>
-                                    ${isDone ? '<span class="text-[9px] font-bold px-1 rounded bg-black/10">ส่งแล้ว</span>' : ''}
-                                </div>
-                                <p class="text-[10px] font-medium text-[#14532d]/80 mt-0.5 leading-none">
-                                    ${timeRange}
-                                </p>
-                                <!-- Avatar cluster matching reference image -->
-                                <div class="flex items-center justify-between mt-2 pt-1">
-                                    <div class="flex items-center -space-x-1.5">
-                                        <div class="w-4 h-4 rounded-full bg-emerald-700 text-white flex items-center justify-center text-[8px] font-bold border border-white">U</div>
-                                        <div class="w-4 h-4 rounded-full bg-[#14532d] text-white flex items-center justify-center text-[8px] font-bold border border-white">A</div>
-                                        <span class="text-[9px] font-bold text-[#14532d] pl-2">+2</span>
-                                    </div>
-                                    <span class="text-[9px] font-bold text-[#14532d]/70 bg-white/40 px-1 rounded truncate max-w-[50px]">${t.subject || 'งาน'}</span>
-                                </div>
-                            </div>
-                        `;
-                    });
-
-                    // Render Google Calendar Cards (Lilac Purple, like in reference screenshot)
-                    matchingGCal.forEach(ev => {
-                        const nextHour = h + 1;
-                        const timeRange = `${hourLabel} - ${formatHourLabel(nextHour)}`;
-
-                        html += `
-                            <div class="tf-event-card-lilac"
-                                 onclick="event.stopPropagation(); showGCalEventDetailModal('${ev.id}')"
-                                 title="กิจกรรม Google Calendar: คลิกเพื่อดูรายละเอียดหรือนำเข้าเป็นงาน">
-                                <h5 class="text-xs font-extrabold leading-tight text-white truncate">
-                                    ${ev.summary || '(Google Event)'}
-                                </h5>
-                                <p class="text-[10px] font-medium text-white/80 mt-0.5 leading-none">
-                                    ${timeRange}
-                                </p>
-                                <!-- Avatar cluster matching reference image -->
-                                <div class="flex items-center justify-between mt-2 pt-1">
-                                    <div class="flex items-center -space-x-1.5">
-                                        <div class="w-4 h-4 rounded-full bg-white text-[#8580be] flex items-center justify-center text-[8px] font-extrabold border border-[#8580be]">G</div>
-                                        <div class="w-4 h-4 rounded-full bg-indigo-900 text-white flex items-center justify-center text-[8px] font-bold border border-white">C</div>
-                                        <span class="text-[9px] font-bold text-white pl-2">+4</span>
-                                    </div>
-                                    <span class="text-[9px] font-bold text-white bg-white/20 px-1 rounded">GCal</span>
-                                </div>
-                            </div>
-                        `;
-                    });
-
-                    html += '</div>';
-                });
-
-                html += '</div>';
-            });
-
-            html += '</div>';
-            container.innerHTML = html;
-        }
-
-        // ================= DAILY TIMETABLE VIEW =================
-        function renderDailyTimetable() {
-            const container = document.getElementById('dedicated-cal-timetable-container');
-            if (!container) return;
-
-            const selStr = formatLocalDate(dedicatedSelectedDate);
-            const hours = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
-
-            let html = '<div class="space-y-3 max-w-3xl mx-auto select-none">';
-
-            hours.forEach(h => {
-                const hourLabel = formatHourLabel(h);
-                const nextHour = h + 1;
-
-                const matchingTasks = assignments.filter(t => {
-                    if (!t.dueDate || t.dueDate.split('T')[0] !== selStr) return false;
-                    if (!t.dueTime) return h === 9;
-                    return parseInt(t.dueTime.split(':')[0], 10) === h;
-                });
-
-                const matchingGCal = (googleCalendarEvents || []).filter(ev => {
-                    if (!isGCalEventOnDate(ev, selStr)) return false;
-                    if (ev.start?.dateTime) {
-                        return new Date(ev.start.dateTime).getHours() === h;
+            showLoading(true);
+            try {
+                if (task.calendarEventId && isGCalConnected()) {
+                    try {
+                        await createOrUpdateGCalEvent(task);
+                    } catch (e) {
+                        console.warn('GCal status sync notice:', e);
                     }
-                    return h === 8;
-                });
-
-                html += `
-                    <div class="flex items-start gap-4 p-3 rounded-2xl border border-slate-100 hover:border-slate-300 transition timetable-slot"
-                         data-date="${selStr}"
-                         data-hour="${h}"
-                         ondragover="onCalendarHourDragOver(event)"
-                         ondragleave="onCalendarHourDragLeave(event)"
-                         ondrop="onCalendarHourDrop(event, '${selStr}', ${h})">
-                        
-                        <div class="w-20 pt-1 shrink-0 text-right">
-                            <span class="text-sm font-extrabold text-slate-500">${hourLabel}</span>
-                            <p class="text-[10px] text-slate-400">${hourLabel} - ${formatHourLabel(nextHour)}</p>
-                        </div>
-
-                        <div class="flex-1 space-y-2">
-                            ${matchingTasks.map(t => {
-                                const isDone = (t.status === 'ส่งแล้ว');
-                                return `
-                                    <div class="tf-event-card-lime flex items-center justify-between gap-3"
-                                         draggable="true"
-                                         ondragstart="onTaskDragStart(event, '${t.id}')"
-                                         ondragend="onTaskDragEnd(event)"
-                                         onclick="editTask('${t.id}')">
-                                        <div>
-                                            <h4 class="text-sm font-extrabold ${isDone ? 'line-through text-green-900/60' : 'text-[#14532d]'}">${t.title}</h4>
-                                            <p class="text-xs text-[#14532d]/80 mt-0.5">${t.subject || 'ทั่วไป'} · ${t.priority || 'ปกติ'}</p>
-                                        </div>
-                                        <div class="flex items-center gap-2">
-                                            <button type="button" onclick="event.stopPropagation(); toggleTaskStatusFromCal('${t.id}')" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-white/60 text-[#14532d] hover:bg-white transition">
-                                                ${isDone ? 'ส่งแล้ว' : 'ติ๊กส่ง'}
-                                            </button>
-                                        </div>
-                                    </div>
-                                `;
-                            }).join('')}
-
-                            ${matchingGCal.map(ev => `
-                                <div class="tf-event-card-lilac flex items-center justify-between gap-3"
-                                     onclick="showGCalEventDetailModal('${ev.id}')">
-                                    <div>
-                                        <h4 class="text-sm font-extrabold text-white">${ev.summary || '(ไม่มีชื่อกิจกรรม)'}</h4>
-                                        <p class="text-xs text-white/80 mt-0.5">Google Calendar Event</p>
-                                    </div>
-                                    <button type="button" onclick="event.stopPropagation(); importGCalEventToTask('${ev.id}')" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-white/20 hover:bg-white/30 text-white transition">
-                                        นำเข้าเป็นงาน
-                                    </button>
-                                </div>
-                            `).join('')}
-
-                            ${matchingTasks.length === 0 && matchingGCal.length === 0 ? `
-                                <div class="py-2 text-xs text-slate-300 font-medium cursor-pointer" onclick="createTaskForSelectedDate(${h})">
-                                    + เพิ่มงานในช่วงเวลานี้ หรือลากงานมาวาง
-                                </div>
-                            ` : ''}
-                        </div>
-                    </div>
-                `;
-            });
-
-            html += '</div>';
-            container.innerHTML = html;
-        }
-
-        // ================= MONTHLY CALENDAR GRID =================
-        function renderDedicatedMonthGrid() {
-            const grid = document.getElementById('dedicated-cal-month-grid');
-            if (!grid) return;
-
-            const firstDay = new Date(currentCalYear, currentCalMonth, 1).getDay();
-            const mondayOffset = (firstDay === 0 ? 6 : firstDay - 1);
-            const daysInMonth = new Date(currentCalYear, currentCalMonth + 1, 0).getDate();
-            const today = new Date();
-            const todayStr = formatLocalDate(today);
-            const selectedStr = formatLocalDate(dedicatedSelectedDate);
-
-            let html = '';
-            for (let i = 0; i < mondayOffset; i++) {
-                html += `<div class="min-h-[70px] bg-slate-50/40 rounded-xl border border-dashed border-slate-100"></div>`;
-            }
-
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dayDate = new Date(currentCalYear, currentCalMonth, day);
-                const dateStr = formatLocalDate(dayDate);
-                const isToday = (dateStr === todayStr);
-                const isSelected = (dateStr === selectedStr);
-
-                const dayTasks = assignments.filter(t => {
-                    if (!t.dueDate) return false;
-                    return t.dueDate.split('T')[0] === dateStr;
-                });
-
-                const dayGCal = (googleCalendarEvents || []).filter(ev => isGCalEventOnDate(ev, dateStr));
-
-                const allItems = [
-                    ...dayTasks.map(t => ({
-                        type: 'task',
-                        id: t.id,
-                        title: t.title,
-                        subject: t.subject,
-                        status: t.status,
-                        priority: t.priority
-                    })),
-                    ...dayGCal.map(ev => ({
-                        type: 'gcal',
-                        id: ev.id,
-                        title: ev.summary || 'Google Calendar'
-                    }))
-                ];
-
-                const maxDisplay = 3;
-                const displayItems = allItems.slice(0, maxDisplay);
-                const extraCount = allItems.length - maxDisplay;
-
-                let itemsHtml = '';
-                if (displayItems.length > 0) {
-                    itemsHtml = `
-                        <div class="flex flex-col gap-1 mt-1 w-full">
-                            ${displayItems.map(item => {
-                                if (item.type === 'task') {
-                                    const isDone = item.status === 'ส่งแล้ว';
-                                    const dotColor = getSubjectColor(item.subject);
-                                    return `
-                                        <div class="flex items-center gap-1 text-[9px] font-bold truncate px-1.5 py-0.5 rounded transition ${isSelected ? 'bg-white/20 text-white' : 'bg-[#bef264] text-[#14532d]'} ${isDone ? 'line-through opacity-60' : ''}" title="${item.title} (${item.subject || 'ทั่วไป'})">
-                                            <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background-color: ${dotColor}"></span>
-                                            <span class="truncate">${item.title}</span>
-                                        </div>
-                                    `;
-                                } else {
-                                    return `
-                                        <div class="flex items-center gap-1 text-[9px] font-bold truncate px-1.5 py-0.5 rounded transition ${isSelected ? 'bg-purple-900/60 text-purple-200' : 'bg-[#8580be] text-white'}" title="${item.title}">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-purple-300 shrink-0"></span>
-                                            <span class="truncate">${item.title}</span>
-                                        </div>
-                                    `;
-                                }
-                            }).join('')}
-                            ${extraCount > 0 ? `
-                                <div onclick="event.stopPropagation(); showDayTasks(${currentCalYear}, ${currentCalMonth}, ${day});"
-                                     class="text-[9px] font-extrabold text-center px-1.5 py-0.5 rounded cursor-pointer transition ${isSelected ? 'bg-white/30 text-white hover:bg-white/40' : 'bg-slate-200/90 text-slate-700 hover:bg-slate-300'}"
-                                     title="คลิกเพื่อดูรายการทั้งหมด (+${extraCount})">
-                                    +${extraCount} รายการ
-                                </div>
-                            ` : ''}
-                        </div>
-                    `;
                 }
 
-                html += `
-                    <div class="month-day-cell p-2 rounded-xl border transition-all cursor-pointer flex flex-col justify-between min-h-[90px] md:min-h-[105px] calendar-drop-target ${isSelected ? 'bg-slate-900 border-slate-900 text-white shadow-sm' : (isToday ? 'bg-slate-50 border-slate-300 text-slate-800' : 'bg-white hover:bg-slate-50 border-slate-200 text-slate-700')}"
-                         data-date="${dateStr}"
-                         onclick="selectDedicatedDate(${currentCalYear}, ${currentCalMonth}, ${day})"
-                         ondragover="onCalendarDragOver(event)"
-                         ondragleave="onCalendarDragLeave(event)"
-                         ondrop="onCalendarDrop(event, '${dateStr}')">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold ${isToday ? (isSelected ? 'bg-white/20 text-white px-1.5 py-0.5 rounded-full' : 'bg-sidebar text-white px-1.5 py-0.5 rounded-full') : ''}">${day}</span>
-                            ${allItems.length > 0 ? `<span class="text-[10px] font-bold px-1.5 py-0.5 rounded ${isSelected ? 'bg-white/20 text-white' : 'bg-[#bef264] text-slate-900'}">${allItems.length}</span>` : ''}
-                        </div>
-                        ${itemsHtml}
-                        <div class="drop-zone-prompt text-[9px] font-bold py-0.5 px-1.5 rounded bg-emerald-500 text-white text-center">วางที่นี่</div>
-                    </div>
-                `;
+                await api.saveTask(task);
+                renderDedicatedCalendarView();
+                renderRecentTasks();
+                renderUrgentTasks();
+                renderTasksList();
+                renderDashboard();
+                showToast(`อัปเดตสถานะ "${task.title}" สำเร็จ`);
+            } catch (err) {
+                console.error('Error toggling status:', err);
+                task.status = previousStatus;
+                showToast('ไม่สามารถอัปเดตสถานะได้', 'error');
+            } finally {
+                showLoading(false);
             }
-            grid.innerHTML = html;
         }
 
-        // ================= SELECTED DAY AGENDA (ปฏิทินและกำหนดส่งส่วนล่าง) =================
-        function renderDedicatedSelectedDayAgenda() {
-            const container = document.getElementById('dedicated-cal-selected-agenda');
-            const countBadge = document.getElementById('dedicated-cal-tasks-count-badge');
-            if (!container) return;
+        // ================= CALENDAR ITEM EDIT & TWO-WAY GOOGLE CALENDAR SYNC =================
+        function populateCalendarSubjectDropdown(selectedSubject) {
+            const selectEl = document.getElementById('cal-edit-subject');
+            const quickSelectEl = document.getElementById('cal-quick-subject');
 
-            const thaiMonths = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
-            const d = dedicatedSelectedDate.getDate();
-            const m = dedicatedSelectedDate.getMonth();
-            const y = dedicatedSelectedDate.getFullYear();
-            const dateStr = formatLocalDate(dedicatedSelectedDate);
-            const formattedThaiDate = `${d} ${thaiMonths[m]} ${y + 543}`;
+            const optionsHtml = `
+                <option value="ทั่วไป">ทั่วไป (General)</option>
+                ${(subjects || []).map(s => `
+                    <option value="${escapeHtml(s.name)}" ${s.name === selectedSubject ? 'selected' : ''}>
+                        ${escapeHtml(s.name)} (${escapeHtml(s.category || 'วิชา')})
+                    </option>
+                `).join('')}
+            `;
 
-            const dayTasks = assignments.filter(t => {
-                if (!t.dueDate) return false;
-                return t.dueDate.split('T')[0] === dateStr;
+            if (selectEl) selectEl.innerHTML = optionsHtml;
+            if (quickSelectEl) quickSelectEl.innerHTML = optionsHtml;
+        }
+
+        function openCalendarNewEventModal() {
+            openCalendarQuickAddModal('event');
+        }
+
+        function openCalendarNewTodoModal() {
+            openCalendarQuickAddModal('todo');
+        }
+
+        function openCalendarQuickAddModal(type = 'todo') {
+            const modal = document.getElementById('calendar-quick-add-modal');
+            const titleEl = document.getElementById('cal-quick-add-title');
+            const dateInput = document.getElementById('cal-quick-date');
+            const timeInput = document.getElementById('cal-quick-time');
+            const syncCheck = document.getElementById('cal-quick-sync-gcal');
+
+            if (titleEl) {
+                titleEl.textContent = (type === 'event' ? 'เพิ่มกิจกรรม / งานใหม่' : 'เพิ่ม Todo ใหม่');
+            }
+            if (dateInput) {
+                dateInput.value = modernSelectedDateStr || formatLocalDate(new Date());
+            }
+            if (timeInput) {
+                timeInput.value = '23:59';
+            }
+            if (syncCheck) {
+                syncCheck.checked = isGCalConnected();
+            }
+
+            populateCalendarSubjectDropdown('ทั่วไป');
+
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
+        function closeCalendarQuickAddModal() {
+            const modal = document.getElementById('calendar-quick-add-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        async function handleCalendarQuickAddSubmit(event) {
+            event.preventDefault();
+            const btn = document.getElementById('btn-cal-quick-submit');
+            btn.disabled = true;
+            btn.textContent = 'กำลังสร้าง...';
+
+            const title = document.getElementById('cal-quick-title').value.trim();
+            const subject = document.getElementById('cal-quick-subject').value;
+            const priority = document.getElementById('cal-quick-priority').value;
+            const dueDate = document.getElementById('cal-quick-date').value;
+            const dueTime = document.getElementById('cal-quick-time').value || '23:59';
+            const wantSyncGCal = document.getElementById('cal-quick-sync-gcal')?.checked || false;
+
+            const newTask = {
+                id: "T-" + Date.now(),
+                title: title,
+                description: '',
+                subject: subject,
+                category: getSubjectCategory(subject),
+                orderDate: new Date().toISOString(),
+                dueDate: dueDate ? dueDate + "T00:00:00.000Z" : null,
+                dueTime: dueTime,
+                status: 'ยังไม่ส่ง',
+                priority: priority,
+                subjectColor: getSubjectColor(subject),
+                calendarEventId: null
+            };
+
+            try {
+                if (wantSyncGCal && isGCalConnected()) {
+                    try {
+                        const eventId = await createOrUpdateGCalEvent(newTask);
+                        if (eventId) newTask.calendarEventId = eventId;
+                    } catch (gcalErr) {
+                        console.warn('GCal sync error in quick add:', gcalErr);
+                    }
+                }
+
+                assignments.unshift(newTask);
+                await api.saveTask(newTask);
+
+                closeCalendarQuickAddModal();
+                renderDedicatedCalendarView();
+                renderDashboard();
+                renderTasksList();
+                showToast('เพิ่มรายการใหม่เรียบร้อยแล้ว');
+            } catch (err) {
+                console.error('Error creating quick item:', err);
+                showToast('เกิดข้อผิดพลาดในการสร้างรายการ', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'สร้างรายการ';
+            }
+        }
+
+        function openCalendarEditModal(itemId, itemType) {
+            const modal = document.getElementById('calendar-item-edit-modal');
+            const titleEl = document.getElementById('cal-edit-title');
+            const dateEl = document.getElementById('cal-edit-date');
+            const timeEl = document.getElementById('cal-edit-time');
+            const descEl = document.getElementById('cal-edit-desc');
+            const priorityEl = document.getElementById('cal-edit-priority');
+            const syncCheck = document.getElementById('cal-edit-sync-gcal');
+            const sourceBadge = document.getElementById('cal-edit-source-badge');
+            const syncStatusBadge = document.getElementById('cal-edit-sync-status-badge');
+            const modalTitle = document.getElementById('cal-edit-modal-title');
+            const statusRow = document.getElementById('cal-edit-status-row');
+            const subjectPriorityRow = document.getElementById('cal-edit-subject-priority-row');
+
+            document.getElementById('cal-edit-item-id').value = itemId;
+            document.getElementById('cal-edit-item-type').value = itemType;
+
+            if (itemType === 'task') {
+                const task = assignments.find(t => String(t.id) === String(itemId));
+                if (!task) return;
+
+                modalTitle.textContent = 'แก้ไขข้อมูลงาน';
+                sourceBadge.textContent = 'งานในระบบ';
+                sourceBadge.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300';
+
+                const isConnected = isGCalConnected();
+                syncStatusBadge.textContent = isConnected ? 'Google Calendar พร้อมซิงค์' : 'ยังไม่เชื่อม Google Calendar';
+                syncStatusBadge.className = isConnected
+                    ? 'px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-300'
+                    : 'px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400';
+
+                titleEl.value = task.title || '';
+                populateCalendarSubjectDropdown(task.subject);
+                priorityEl.value = task.priority || 'ทั่วไป';
+
+                dateEl.value = task.dueDate ? task.dueDate.split('T')[0] : '';
+                timeEl.value = task.dueTime || '23:59';
+                descEl.value = task.description || '';
+
+                statusRow.style.display = 'block';
+                const statusRadios = document.querySelectorAll('input[name="cal-edit-status"]');
+                statusRadios.forEach(r => {
+                    r.checked = (r.value === (task.status || 'ยังไม่ส่ง'));
+                });
+
+                syncCheck.checked = !!(task.calendarEventId || isConnected);
+                syncCheck.disabled = false;
+
+                if (subjectPriorityRow) subjectPriorityRow.style.display = 'grid';
+
+            } else if (itemType === 'gcal') {
+                const ev = (googleCalendarEvents || []).find(e => String(e.id) === String(itemId));
+                if (!ev) return;
+
+                modalTitle.textContent = 'แก้ไขกิจกรรม Google Calendar';
+                sourceBadge.textContent = 'Google Calendar Event';
+                sourceBadge.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300';
+                syncStatusBadge.textContent = 'ซิงค์สองทางอัตโนมัติ';
+                syncStatusBadge.className = 'px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300';
+
+                titleEl.value = ev.summary || '';
+                populateCalendarSubjectDropdown('ทั่วไป');
+
+                const startRaw = ev.start?.dateTime || ev.start?.date || '';
+                dateEl.value = startRaw ? startRaw.split('T')[0] : '';
+                if (ev.start?.dateTime) {
+                    const dt = new Date(ev.start.dateTime);
+                    timeEl.value = `${String(dt.getHours()).padStart(2, '0')}:${String(dt.getMinutes()).padStart(2, '0')}`;
+                } else {
+                    timeEl.value = '09:00';
+                }
+
+                descEl.value = ev.description || '';
+                statusRow.style.display = 'none';
+
+                syncCheck.checked = true;
+                syncCheck.disabled = true; // Always sync changes back to Google Calendar
+
+                if (subjectPriorityRow) subjectPriorityRow.style.display = 'none';
+            }
+
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
+        function closeCalendarEditModal() {
+            const modal = document.getElementById('calendar-item-edit-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        async function handleCalendarEditFormSubmit(event) {
+            event.preventDefault();
+            const btn = document.getElementById('btn-cal-edit-submit');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="animate-spin inline-block mr-1">·</span> กำลังบันทึกและซิงค์...';
+
+            const itemId = document.getElementById('cal-edit-item-id').value;
+            const itemType = document.getElementById('cal-edit-item-type').value;
+
+            const title = document.getElementById('cal-edit-title').value.trim();
+            const dateVal = document.getElementById('cal-edit-date').value;
+            const timeVal = document.getElementById('cal-edit-time').value || '23:59';
+            const desc = document.getElementById('cal-edit-desc').value.trim();
+            const wantSyncGCal = document.getElementById('cal-edit-sync-gcal').checked;
+
+            try {
+                if (itemType === 'task') {
+                    const task = assignments.find(t => String(t.id) === String(itemId));
+                    if (!task) throw new Error('ไม่พบข้อมูลงาน');
+
+                    const subjectVal = document.getElementById('cal-edit-subject').value;
+                    const priorityVal = document.getElementById('cal-edit-priority').value;
+                    const statusVal = document.querySelector('input[name="cal-edit-status"]:checked')?.value || task.status;
+
+                    task.title = title;
+                    task.subject = subjectVal;
+                    task.category = getSubjectCategory(subjectVal);
+                    task.priority = priorityVal;
+                    task.status = statusVal;
+                    task.description = desc;
+                    task.dueDate = dateVal ? dateVal + "T00:00:00.000Z" : null;
+                    task.dueTime = timeVal;
+                    task.subjectColor = getSubjectColor(subjectVal);
+
+                    // Sync to Google Calendar
+                    if (wantSyncGCal && isGCalConnected()) {
+                        try {
+                            const newCalId = await createOrUpdateGCalEvent(task);
+                            if (newCalId) task.calendarEventId = newCalId;
+                        } catch (gcalErr) {
+                            console.warn('Google Calendar update failed:', gcalErr);
+                        }
+                    } else if (!wantSyncGCal && task.calendarEventId) {
+                        try {
+                            await deleteGCalEvent(task.calendarEventId);
+                            task.calendarEventId = null;
+                        } catch (delErr) {
+                            console.warn('GCal delete event notice:', delErr);
+                        }
+                    }
+
+                    await api.saveTask(task);
+
+                    closeCalendarEditModal();
+                    renderDedicatedCalendarView();
+                    renderDashboard();
+                    renderTasksList();
+                    renderRecentTasks();
+                    renderUrgentTasks();
+                    showToast('บันทึกและอัปเดต Google Calendar เรียบร้อยแล้ว');
+
+                } else if (itemType === 'gcal') {
+                    // Update Google Calendar event directly
+                    const token = await getValidGoogleAccessToken();
+                    if (!token) throw new Error('ไม่พบสิทธิ์การเข้าถึง Google Calendar กรุณาเข้าสู่ระบบใหม่อีกครั้ง');
+
+                    const startDt = new Date(`${dateVal}T${timeVal}:00`);
+                    const endDt = new Date(startDt.getTime() + 60 * 60 * 1000); // 1 hour duration default
+
+                    const eventPayload = {
+                        summary: title,
+                        description: desc,
+                        start: {
+                            dateTime: startDt.toISOString(),
+                            timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                        },
+                        end: {
+                            dateTime: endDt.toISOString(),
+                            timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                        }
+                    };
+
+                    const updateRes = await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events/${encodeURIComponent(itemId)}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(eventPayload)
+                    });
+
+                    if (!updateRes.ok) {
+                        const errText = await updateRes.text();
+                        throw new Error(`Google Calendar API ข้อผิดพลาด (${updateRes.status}): ${errText}`);
+                    }
+
+                    const updatedGCal = await updateRes.json();
+
+                    // Update memory array
+                    const gIdx = (googleCalendarEvents || []).findIndex(e => String(e.id) === String(itemId));
+                    if (gIdx !== -1) {
+                        googleCalendarEvents[gIdx] = { ...googleCalendarEvents[gIdx], ...updatedGCal };
+                    }
+                    try {
+                        localStorage.setItem('jodngan_gcal_cache', JSON.stringify(googleCalendarEvents));
+                    } catch(e) {}
+
+                    // If linked task exists, update it too
+                    const linkedTask = assignments.find(t => t.calendarEventId === itemId);
+                    if (linkedTask) {
+                        linkedTask.title = title;
+                        linkedTask.dueDate = dateVal + 'T00:00:00.000Z';
+                        linkedTask.dueTime = timeVal;
+                        if (desc) linkedTask.description = desc;
+                        await api.saveTask(linkedTask);
+                    }
+
+                    closeCalendarEditModal();
+                    renderDedicatedCalendarView();
+                    renderDashboard();
+                    renderTasksList();
+                    showToast('อัปเดตกิจกรรมบน Google Calendar สำเร็จแล้ว');
+                }
+            } catch (err) {
+                console.error('Error saving calendar item:', err);
+                showToast(err.message || 'เกิดข้อผิดพลาดในการบันทึกข้อมูล', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<span>บันทึกและอัปเดต</span>';
+            }
+        }
+
+        async function handleCalendarEditDelete() {
+            const itemId = document.getElementById('cal-edit-item-id').value;
+            const itemType = document.getElementById('cal-edit-item-type').value;
+
+            const result = await Swal.fire({
+                title: 'ยืนยันการลบรายการ?',
+                text: itemType === 'gcal' 
+                    ? 'รายการนี้จะถูกลบออกจาก Google Calendar ของคุณถาวร'
+                    : 'รายการงานนี้จะถูกย้ายไปยังถังลบ และลบออกจาก Google Calendar (ถ้ามี)',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'ลบรายการ',
+                cancelButtonText: 'ยกเลิก',
+                confirmButtonColor: '#e11d48',
+                customClass: { popup: 'swal-premium' }
             });
 
-            const dayGCal = (googleCalendarEvents || []).filter(ev => isGCalEventOnDate(ev, dateStr));
-            const totalCount = dayTasks.length + dayGCal.length;
+            if (!result.isConfirmed) return;
 
-            if (countBadge) {
-                countBadge.textContent = `${totalCount} รายการ`;
+            try {
+                if (itemType === 'task') {
+                    await deleteTask(itemId);
+                } else if (itemType === 'gcal') {
+                    await deleteGCalEvent(itemId);
+                    googleCalendarEvents = (googleCalendarEvents || []).filter(e => String(e.id) !== String(itemId));
+                    try {
+                        localStorage.setItem('jodngan_gcal_cache', JSON.stringify(googleCalendarEvents));
+                    } catch(e) {}
+                    showToast('ลบกิจกรรมจาก Google Calendar เรียบร้อยแล้ว');
+                }
+
+                closeCalendarEditModal();
+                renderDedicatedCalendarView();
+                renderDashboard();
+                renderTasksList();
+            } catch (err) {
+                console.error('Error deleting calendar item:', err);
+                showToast('เกิดข้อผิดพลาดในการลบรายการ', 'error');
             }
+        }
 
-            const thaiDaysShort = ["อา.", "จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส."];
-            const thaiDayShort = thaiDaysShort[dedicatedSelectedDate.getDay()];
-
-            let contentHtml = '';
-            if (totalCount === 0) {
-                contentHtml = `
-                    <div class="py-8 px-6 rounded-2xl bg-slate-50/70 border border-slate-200/80 flex flex-col items-center justify-center text-center max-w-md mx-auto">
-                        <div class="w-12 h-12 rounded-2xl bg-white border border-slate-200/80 flex items-center justify-center text-slate-400 mb-3 shadow-2xs">
-                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                        </div>
-                        <h4 class="text-sm font-bold text-slate-800">ไม่มีกำหนดส่งงานในวันที่ ${formattedThaiDate}</h4>
-                        <p class="text-xs text-slate-400 mt-1 max-w-xs leading-relaxed">ไม่มีรายการงานหรือกำหนดสอบที่ต้องส่งในวันนี้ สามารถกดปุ่มด้านล่างเพื่อเพิ่มงานใหม่ได้ทันที</p>
-                        <button type="button" onclick="createTaskForSelectedDate()" class="mt-4 px-4 py-2 rounded-xl text-xs font-bold bg-sidebar text-white hover:bg-slate-800 transition inline-flex items-center gap-1.5 shadow-xs cursor-pointer">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                            <span>เพิ่มงานสำหรับวันนี้</span>
-                        </button>
-                    </div>
-                `;
-            } else {
-                contentHtml = `
-                    <div class="space-y-3 max-w-3xl mx-auto">
-                        ${dayTasks.map(t => {
-                            const isDone = t.status === 'ส่งแล้ว';
-                            const dotColor = getSubjectColor(t.subject);
-                            return `
-                                <div class="flex items-center justify-between gap-3.5 p-3.5 sm:p-4 rounded-2xl border transition ${isDone ? 'bg-slate-50/70 border-slate-200/60 opacity-80' : 'bg-white border-slate-200/90 shadow-2xs hover:border-slate-300'}">
-                                    <div class="flex items-center gap-3.5 min-w-0 flex-1">
-                                        <!-- Date Stamp Box -->
-                                        <div class="w-12 h-12 rounded-xl bg-slate-100/90 border border-slate-200/80 flex flex-col items-center justify-center shrink-0 text-center select-none shadow-2xs">
-                                            <span class="text-sm font-extrabold text-slate-800 leading-none">${d}</span>
-                                            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-tight mt-0.5">${thaiDayShort}</span>
-                                        </div>
-                                        
-                                        <div class="min-w-0 flex-1">
-                                            <div class="flex items-center gap-1.5 flex-wrap mb-1">
-                                                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10.5px] font-bold" style="background-color: ${dotColor}20; color: ${dotColor}">
-                                                    <span class="w-1.5 h-1.5 rounded-full" style="background-color: ${dotColor}"></span>
-                                                    ${escapeHtml(t.subject || 'ทั่วไป')}
-                                                </span>
-                                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${t.priority === 'สอบ' ? 'bg-red-50 text-red-600 border border-red-200' : (t.priority === 'ด่วน' ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'bg-slate-100 text-slate-600')}">${escapeHtml(t.priority || 'ปกติ')}</span>
-                                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${isDone ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-blue-50 text-blue-700 border border-blue-200'}">${isDone ? 'ส่งแล้ว' : 'ยังไม่ส่ง'}</span>
-                                            </div>
-                                            <h4 class="text-xs sm:text-sm font-bold text-slate-800 line-clamp-1 ${isDone ? 'line-through text-slate-400' : ''}">${escapeHtml(t.title)}</h4>
-                                            <div class="flex items-center gap-2 text-[11px] text-slate-400 font-medium mt-0.5">
-                                                <span class="inline-flex items-center gap-1">
-                                                    <svg class="w-3 h-3 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                                                    ${t.dueTime ? `${t.dueTime} น.` : 'ไม่ระบุเวลา'}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="flex items-center gap-1.5 shrink-0">
-                                        <button type="button" onclick="toggleTaskStatusFromCal('${t.id}')" class="w-8 h-8 rounded-xl border flex items-center justify-center transition cursor-pointer ${isDone ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-slate-300 hover:border-emerald-500 bg-white text-slate-400 hover:text-emerald-500'}" title="${isDone ? 'เปลี่ยนเป็นยังไม่ส่ง' : 'ติ๊กส่งงาน'}">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>
-                                        </button>
-                                        <button type="button" onclick="editTask('${t.id}')" class="w-8 h-8 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 border border-slate-200 bg-white flex items-center justify-center transition cursor-pointer" title="แก้ไขงาน">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            `;
-                        }).join('')}
-
-                        ${dayGCal.map(ev => {
-                            const startRaw = ev.start?.dateTime;
-                            const timeLabel = startRaw ? new Date(startRaw).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) + ' น.' : 'ตลอดวัน';
-                            return `
-                                <div class="flex items-center justify-between gap-3.5 p-3.5 sm:p-4 rounded-2xl bg-purple-50/60 border border-purple-100/90 transition shadow-2xs">
-                                    <div class="flex items-center gap-3.5 min-w-0 flex-1">
-                                        <div class="w-12 h-12 rounded-xl bg-purple-100/80 border border-purple-200/80 flex flex-col items-center justify-center shrink-0 text-center select-none shadow-2xs">
-                                            <span class="text-sm font-extrabold text-purple-950 leading-none">${d}</span>
-                                            <span class="text-[10px] font-bold text-purple-700 uppercase tracking-tight mt-0.5">${thaiDayShort}</span>
-                                        </div>
-                                        <div class="min-w-0 flex-1">
-                                            <div class="flex items-center gap-1.5 flex-wrap mb-1">
-                                                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10.5px] font-bold bg-purple-100 text-purple-700">
-                                                    <span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
-                                                    Google Calendar
-                                                </span>
-                                                <span class="text-[10px] font-semibold text-purple-500">${timeLabel}</span>
-                                            </div>
-                                            <h4 class="text-xs sm:text-sm font-bold text-slate-800 line-clamp-1">${escapeHtml(ev.summary || '(ไม่มีชื่อกิจกรรม)')}</h4>
-                                        </div>
-                                    </div>
-                                    <button type="button" onclick="importGCalEventToTask('${ev.id}')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-purple-700 hover:bg-purple-100/80 border border-purple-200 transition shadow-2xs shrink-0 cursor-pointer">
-                                        นำเข้าเป็นงาน
-                                    </button>
-                                </div>
-                            `;
-                        }).join('')}
-                    </div>
-                `;
-            }
-
-            container.innerHTML = contentHtml;
+        async function confirmDeleteCalendarItem(itemId, itemType) {
+            document.getElementById('cal-edit-item-id').value = itemId;
+            document.getElementById('cal-edit-item-type').value = itemType;
+            await handleCalendarEditDelete();
         }
 
         // ================= DRAG AND DROP HANDLERS (DAY & HOURLY SLOTS) =================
@@ -12502,8 +13078,23 @@ body.auto-dark .swal2-backdrop-show {
             tickStudyTimer();
         }
 
-        function resetCurrentCycleTimer() {
+        async function resetCurrentCycleTimer() {
             if (activeTimer) {
+                const confirmed = await new Promise((resolve) => {
+                    showConfirmAlert(
+                        'รีเซ็ตเวลารอบนี้?',
+                        'ความคืบหน้าที่กำลังจับเวลาอยู่จะถูกยกเลิก คุณต้องการรีเซ็ตใช่หรือไม่',
+                        () => resolve(true),
+                        () => resolve(false),
+                        {
+                            type: 'warning',
+                            confirmText: 'รีเซ็ตเวลา',
+                            cancelText: 'ยกเลิก'
+                        }
+                    );
+                });
+                if (!confirmed) return;
+
                 clearInterval(timerInterval);
                 activeTimer = null;
                 localStorage.removeItem('jodNGan_active_timer');
@@ -12516,8 +13107,23 @@ body.auto-dark .swal2-backdrop-show {
             showToast('รีเซ็ตเวลารอบนี้แล้ว');
         }
 
-        function skipTimerCycle() {
+        async function skipTimerCycle() {
             if (activeTimer) {
+                const confirmed = await new Promise((resolve) => {
+                    showConfirmAlert(
+                        'ข้ามช่วงเวลานี้?',
+                        'ความคืบหน้าที่กำลังจับเวลาอยู่จะถูกยกเลิก คุณต้องการข้ามใช่หรือไม่',
+                        () => resolve(true),
+                        () => resolve(false),
+                        {
+                            type: 'warning',
+                            confirmText: 'ข้ามช่วงเวลา',
+                            cancelText: 'ยกเลิก'
+                        }
+                    );
+                });
+                if (!confirmed) return;
+
                 clearInterval(timerInterval);
                 activeTimer = null;
                 localStorage.removeItem('jodNGan_active_timer');
@@ -13029,21 +13635,44 @@ body.auto-dark .swal2-backdrop-show {
                 const targetText = targetMins ? `${targetMins} นาที` : '';
                 const isCompleted = (session.status === 'สำเร็จตามเป้า' || session.status === 'completed' || session.status === 'สำเร็จตามเป้าหมาย');
                 const isManual = (session.status === 'บันทึกด้วยตนเอง' || session.status === 'manual');
+                const actualSec = session.actualDurationSeconds || session.actual_duration_seconds || 0;
                 
-                let statusBadge = '';
-                if (isCompleted) {
-                    statusBadge = '<span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">สำเร็จ</span>';
-                } else if (isManual) {
-                    statusBadge = '<span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200">บันทึกเอง</span>';
+                // แกนที่ 1: ความคืบหน้า (จบรอบแล้ว / บันทึกเอง)
+                let progressBadge = '';
+                if (isManual) {
+                    progressBadge = `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                        <span>บันทึกเอง</span>
+                    </span>`;
                 } else {
-                    statusBadge = '<span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">จบก่อนเวลา</span>';
+                    progressBadge = `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        <span>จบรอบแล้ว</span>
+                    </span>`;
+                }
+
+                // แกนที่ 2: ผลเทียบเป้าหมาย (ครบเป้าหมาย / ยังไม่ครบเป้าหมาย)
+                let goalBadge = '';
+                if (targetMins && targetMins > 0) {
+                    const metGoal = (actualSec >= targetMins * 60) || isCompleted;
+                    if (metGoal) {
+                        goalBadge = `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>ครบเป้าหมาย</span>
+                        </span>`;
+                    } else {
+                        goalBadge = `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                            <span>ยังไม่ครบเป้าหมาย</span>
+                        </span>`;
+                    }
                 }
 
                 const dateDisplay = formatThaiDateTime(session.startedAt || session.started_at || session.completedAt || session.completed_at || session.endedAt);
                 const linkedTaskId = session.taskId || session.task_id;
                 const linkedTask = linkedTaskId ? (assignments || []).find(t => t.id === linkedTaskId) : null;
                 const linkedTitle = linkedTask ? linkedTask.title : (session.taskTitle || session.goal || null);
-                const notes = session.notes ? `<p class="text-[11px] text-slate-500 mt-1 italic line-clamp-1">${escapeHtml(session.notes)}</p>` : '';
+                const notes = session.notes ? `<p class="text-xs text-slate-500 mt-1 italic line-clamp-1">${escapeHtml(session.notes)}</p>` : '';
 
                 return `
                 <div class="py-3 px-3.5 my-1 bg-white hover:bg-slate-50/80 rounded-2xl border border-slate-200/70 hover:border-slate-300 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs">
@@ -13053,14 +13682,15 @@ body.auto-dark .swal2-backdrop-show {
                         </div>
                         <div class="min-w-0 flex-1">
                             <div class="flex items-center gap-2 flex-wrap">
-                                <span class="text-xs font-bold text-slate-800 truncate">${escapeHtml(subName)}</span>
-                                ${statusBadge}
+                                <span class="text-sm font-bold text-slate-800 truncate">${escapeHtml(subName)}</span>
+                                ${progressBadge}
+                                ${goalBadge}
                                 ${session.mood ? `<span class="text-sm shrink-0 inline-flex items-center" title="ความรู้สึก / สมาธิ">${session.mood}</span>` : ''}
-                                ${linkedTitle ? `<span class="text-[10px] font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100 truncate max-w-[200px]" title="${escapeHtml(linkedTitle)}">${escapeHtml(linkedTitle)}</span>` : ''}
+                                ${linkedTitle ? `<span class="text-[11px] font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100 truncate max-w-[200px]" title="${escapeHtml(linkedTitle)}">${escapeHtml(linkedTitle)}</span>` : ''}
                             </div>
-                            <div class="flex items-center gap-2 text-[11px] text-slate-400 mt-0.5 flex-wrap">
-                                <span class="font-bold text-slate-700">${durationText}</span>
-                                ${targetText ? `<span class="text-slate-400">(เป้าหมาย ${targetText})</span>` : ''}
+                            <div class="flex items-center gap-2 text-xs text-slate-500 mt-1 flex-wrap">
+                                <span class="font-bold text-slate-800">${durationText}</span>
+                                ${targetText ? `<span class="text-slate-400 font-medium">(เป้าหมาย ${targetText})</span>` : ''}
                                 <span>•</span>
                                 <span>${dateDisplay}</span>
                             </div>
@@ -13927,6 +14557,18 @@ body.auto-dark .swal2-backdrop-show {
                 durationInput.value = mins;
                 if (badge) badge.textContent = `${mins} นาที`;
             }
+
+            const presets = [15, 25, 45, 60, 90];
+            presets.forEach(p => {
+                const btn = document.getElementById(`manual-preset-btn-${p}`);
+                if (btn) {
+                    if (p === mins) {
+                        btn.className = 'manual-preset-btn h-9 px-3 rounded-lg text-xs font-bold bg-emerald-600 text-white shadow-xs ring-2 ring-emerald-500 ring-offset-1 transition cursor-pointer';
+                    } else {
+                        btn.className = 'manual-preset-btn h-9 px-3 rounded-lg text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer';
+                    }
+                }
+            });
         }
 
         async function handleManualStudySessionSubmit(e) {

@@ -444,79 +444,13 @@ export async function verifyUserToken(token) {
   return null;
 }
 
-// Fallback in-memory and file-backed storage
+// Fallback in-memory and file-backed storage (clean empty state - users add own data)
 export const fallbackStore = {
-  subjects: [
-    { id: 'SUB-R1', name: 'อัลกุอาน', category: 'วิชาศาสนา', color: '#10B981' },
-    { id: 'SUB-R2', name: 'อัลกุรอาน และตัฟซีร (แบบัยด์)', category: 'วิชาศาสนา', color: '#10B981' },
-    { id: 'SUB-R3', name: 'MELAYU', category: 'วิชาศาสนา', color: '#F59E0B' },
-    { id: 'SUB-R4', name: 'อัลอากีดะฮ์ (แบวัน)', category: 'วิชาศาสนา', color: '#8B5CF6' },
-    { id: 'SUB-R5', name: 'อัลหะดีษ', category: 'วิชาศาสนา', color: '#06B6D4' },
-    { id: 'SUB-R6', name: 'อัลอัคลาก', category: 'วิชาศาสนา', color: '#EC4899' },
-    { id: 'SUB-R7', name: 'ฮาลากอฮ์', category: 'วิชาศาสนา', color: '#14B8A6' },
-    { id: 'SUB-R8', name: 'อัตตารีค', category: 'วิชาศาสนา', color: '#F97316' },
-    { id: 'SUB-R9', name: 'ตัฟซีร', category: 'วิชาศาสนา', color: '#6366F1' },
-    { id: 'SUB-R10', name: 'อัลฟิกฮ์', category: 'วิชาศาสนา', color: '#84CC16' },
-    { id: 'SUB-G1', name: 'คณิตศาสตร์ (แบฟุรกอน)', category: 'วิชาสามัญ', color: '#3B82F6' },
-    { id: 'SUB-G2', name: 'คณิต (แบฟี)', category: 'วิชาสามัญ', color: '#2563EB' },
-    { id: 'SUB-G3', name: 'คณิตศาสตร์', category: 'วิชาสามัญ', color: '#3B82F6' },
-    { id: 'SUB-G4', name: 'สังคม', category: 'วิชาสามัญ', color: '#F59E0B' },
-    { id: 'SUB-G5', name: 'เคมี', category: 'วิชาสามัญ', color: '#EC4899' },
-    { id: 'SUB-G6', name: 'ฟิสิกส์ (แบฟิต)', category: 'วิชาสามัญ', color: '#8B5CF6' },
-    { id: 'SUB-G7', name: 'ชวีะ (แบวัน)', category: 'วิชาสามัญ', color: '#10B981' },
-    { id: 'SUB-G8', name: 'English 1 (บัง)', category: 'วิชาสามัญ', color: '#3B82F6' },
-    { id: 'SUB-G9', name: 'ศิลปะ (อาจารย์ก้อง)', category: 'วิชาสามัญ', color: '#F43F5E' },
-    { id: 'SUB-G10', name: 'ไทย (แบบัยด์)', category: 'วิชาสามัญ', color: '#EAB308' },
-    { id: 'SUB-G11', name: 'สุขศึกษา (แบฟี)', category: 'วิชาสามัญ', color: '#14B8A6' }
-  ],
+  subjects: [],
   assignments: [],
   trash: [],
   studySessions: [],
-  schedule: {
-    'อาทิตย์': {
-      '07:50-08:30': 'อัลกุอาน',
-      '08:50-09:40': 'MELAYU',
-      '09:40-10:30': 'คณิตศาสตร์ (แบฟุรกอน)',
-      '12:05-12:50': 'เคมี',
-      '13:40-14:30': 'เคมี'
-    },
-    'จันทร์': {
-      '07:50-08:30': 'MELAYU',
-      '08:50-09:40': 'อัลอากีดะฮ์ (แบวัน)',
-      '10:30-11:20': 'สังคม',
-      '11:20-12:05': 'ฟิสิกส์ (แบฟิต)',
-      '13:40-14:30': 'ฟิสิกส์ (แบฟิต)',
-      '14:30-15:20': 'ฟิสิกส์ (แบฟิต)',
-      '15:20-16:10': 'อัลกุรอาน และตัฟซีร (แบบัยด์)'
-    },
-    'อังคาร': {
-      '07:50-08:30': 'อัลหะดีษ',
-      '08:50-09:40': 'อัลอัคลาก',
-      '09:40-10:30': 'ชวีะ (แบวัน)',
-      '11:20-12:05': 'ฟิสิกส์ (แบฟิต)',
-      '12:05-12:50': 'ฟิสิกส์ (แบฟิต)',
-      '15:20-16:10': 'English 1 (บัง)'
-    },
-    'พุธ': {
-      '07:50-08:30': 'ฮาลากอฮ์',
-      '08:50-09:40': 'ฮาลากอฮ์',
-      '10:30-11:20': 'อัตตารีค',
-      '12:05-12:50': 'อัลฟิกฮ์',
-      '13:40-14:30': 'อัลหะดีษ',
-      '14:30-15:20': 'ตัฟซีร',
-      '15:20-16:10': 'ศิลปะ (อาจารย์ก้อง)'
-    },
-    'พฤหัสบดี': {
-      '07:50-08:30': 'คณิตศาสตร์ (แบฟุรกอน)',
-      '08:50-09:40': 'ไทย (แบบัยด์)',
-      '09:40-10:30': 'คณิตศาสตร์',
-      '11:20-12:05': 'คณิต (แบฟุรกอน)',
-      '12:05-12:50': 'คณิต (แบฟี)',
-      '13:40-14:30': 'คณิต (แบฟี)',
-      '14:30-15:20': 'อัลฟิกฮ์',
-      '15:20-16:10': 'สุขศึกษา (แบฟี)'
-    }
-  },
+  schedule: {},
   settings: {
     urgentDays: 3,
     defaultStatus: 'ยังไม่ส่ง',
@@ -649,50 +583,14 @@ export async function seedUserDataIfNeeded(supabaseClient, userId) {
   if (!supabaseClient || !userId) return;
 
   try {
-    // Check if user already has subjects
-    const { count, error: countErr } = await supabaseClient
-      .from('subjects')
-      .select('id', { count: 'exact', head: true })
-      .eq('user_id', userId);
-
-    if (countErr || count > 0) return;
-
-    // Seed default subjects for this user
-    const defaultSubjects = fallbackStore.subjects.map((sub, idx) => ({
-      id: `SUB-U-${userId.slice(0, 6)}-${idx + 1}`,
-      user_id: userId,
-      name: sub.name,
-      category: sub.category,
-      color: sub.color
-    }));
-
-    await supabaseClient.from('subjects').insert(defaultSubjects);
-
-    // Seed default schedule for this user
-    const scheduleRows = [];
-    for (const [day, periods] of Object.entries(fallbackStore.schedule)) {
-      for (const [periodTime, subject] of Object.entries(periods)) {
-        scheduleRows.push({
-          user_id: userId,
-          day,
-          period_time: periodTime,
-          subject
-        });
-      }
-    }
-
-    if (scheduleRows.length > 0) {
-      await supabaseClient.from('schedule').insert(scheduleRows);
-    }
-
-    // Seed default settings for this user
+    // Seed default settings for this user if not already set
     await supabaseClient.from('settings').upsert({
       id: userId,
       user_id: userId,
       data: fallbackStore.settings
     });
   } catch (err) {
-    console.warn('Auto-seed for user failed (harmless if already exists):', err.message);
+    console.warn('Auto-seed settings for user failed:', err.message);
   }
 }
 

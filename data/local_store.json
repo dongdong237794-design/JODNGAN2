@@ -1,0 +1,14 @@
+{
+  "assignments": [],
+  "subjects": [],
+  "trash": [],
+  "studySessions": [],
+  "schedule": {},
+  "settings": {
+    "urgentDays": 3,
+    "defaultStatus": "ยังไม่ส่ง",
+    "showCalDone": false,
+    "autoDark": false
+  },
+  "savedAt": "2026-10-01T00:00:00.000Z"
+}
