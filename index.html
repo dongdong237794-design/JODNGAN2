@@ -37,12 +37,39 @@
                         outer: '#A78ED6',
                         bgbase: '#F8FAFC',
                         sidebar: '#1E293B',
-                        primary: '#35b982',
+                        primary: '#35B984',
                         brand: {
-                            DEFAULT: '#35b982',
-                            dark: '#2ba070',
-                            light: '#eefbf6',
-                            border: '#bbf0dd'
+                            DEFAULT: '#35B984',
+                            dark: '#2ba072',
+                            light: '#ebfaf3',
+                            border: '#a3ecc9',
+                            text: '#156b46'
+                        },
+                        emerald: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            300: '#6ee7b7',
+                            400: '#48d59b',
+                            500: '#35B984',
+                            600: '#35B984',
+                            700: '#2ba072',
+                            800: '#1e7553',
+                            900: '#144f38',
+                            950: '#092a1e'
+                        },
+                        green: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            300: '#6ee7b7',
+                            400: '#48d59b',
+                            500: '#35B984',
+                            600: '#35B984',
+                            700: '#2ba072',
+                            800: '#1e7553',
+                            900: '#144f38',
+                            950: '#092a1e'
                         },
                         card: '#FFFFFF',
                         textprimary: '#1E293B',
@@ -97,7 +124,7 @@
         .login-shell{position:relative;display:flex;flex-direction:column;align-items:center;min-width:0;width:100%;z-index:2}
         .login-topbar{width:min(1080px,100%);display:flex;align-items:center;justify-content:space-between;margin-bottom:clamp(14px,3vh,26px)}
         .login-brand{display:flex;align-items:center;gap:12px;max-width:100%}
-        .login-brand-mark{width:46px;height:46px;display:grid;place-items:center;border-radius:14px;background:#35b982;color:#fff;box-shadow:0 10px 22px rgba(53,185,130,.22)}
+        .login-brand-mark{width:46px;height:46px;display:grid;place-items:center;border-radius:14px;background:#35B984;color:#ffffff;box-shadow:0 10px 22px rgba(53,185,132,.35)}
         .login-brand-mark svg{width:28px;height:28px}
         .login-brand-name{font-size:clamp(22px,2.8vw,28px);line-height:1;font-weight:850;letter-spacing:-.04em;color:#123b3a}
         .login-brand-subtitle{margin-top:3px;font-size:10px;color:#69908b;letter-spacing:.01em}
@@ -157,10 +184,10 @@
         .calendar-consent-sub{font-size:11px;color:#618780;margin-top:2px;line-height:1.4}
 
         .login-security-note{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:16px;color:#8ba6a1;font-size:10.5px;line-height:1.5;text-align:center}
-        .login-security-note svg{width:15px;height:15px;flex:0 0 15px;color:#35b982}
+        .login-security-note svg{width:15px;height:15px;flex:0 0 15px;color:#7ecb42}
         .login-footer{margin:16px auto 0;max-width:470px;color:#91aaa6;font-size:10.5px;line-height:1.6;text-align:center}
         .login-progress-dots{display:flex;justify-content:center;gap:6px;margin-top:16px}
-        .login-progress-dots span{width:6px;height:6px;border-radius:50%;background:#cfe6df}.login-progress-dots span:first-child{width:22px;border-radius:10px;background:#35b982}
+        .login-progress-dots span{width:6px;height:6px;border-radius:50%;background:#cfe6df}.login-progress-dots span:first-child{width:22px;border-radius:10px;background:#B9F584}
 
         /* TABLET ADAPTATION (641px - 960px): Keeps 3 columns with properly scaled, non-overlapping elements */
         @media(max-width:960px) and (min-width:641px){
@@ -207,8 +234,8 @@
         :root {
             --theme-bg:        #A78ED6;
             --theme-sidebar:   #1E293B;
-            --theme-primary:   #35b982;
-            --theme-primary-h: #2ba070;
+            --theme-primary:   #35B984;
+            --theme-primary-h: #2ba072;
             --theme-card:      #FFFFFF;
             --theme-base:      #F8FAFC;
             --theme-text:      #1E293B;
@@ -252,7 +279,7 @@
         }
         #app-sidebar.collapsed #sidebar-logo-icon:hover {
             transform: scale(1.08);
-            box-shadow: 0 0 0 3px rgba(53,185,130,0.30), 0 4px 12px rgba(53,185,130,0.25);
+            box-shadow: 0 0 0 3px rgba(53,185,132,0.35), 0 4px 12px rgba(53,185,132,0.25);
             background-color: var(--theme-primary-h) !important;
             color: #ffffff !important;
         }
@@ -263,7 +290,7 @@
             color: #ffffff !important;
             -webkit-text-fill-color: #ffffff !important;
         }
-        /* ป้องกัน J icon เปลี่ยนสีเมื่อกด — ทุก state ใช้สีเขียวตาม Logo หลัก #35b982 */
+        /* ป้องกัน J icon เปลี่ยนสีเมื่อกด — ทุก state ใช้สีเขียว Primary Green #35B984 และข้อความเป็นสีขาว */
         #sidebar-logo-icon,
         #sidebar-logo-icon:link,
         #sidebar-logo-icon:visited,
@@ -273,7 +300,7 @@
         #app-sidebar #sidebar-logo-icon,
         #app-sidebar #sidebar-logo-icon:active,
         #app-sidebar.collapsed #sidebar-logo-icon:active {
-            background-color: #35b982 !important;
+            background-color: #35B984 !important;
             color: #ffffff !important;
             -webkit-text-fill-color: #ffffff !important;
             -webkit-tap-highlight-color: transparent !important;
@@ -642,13 +669,14 @@
         /* nav-item press */
         .nav-item:active {
             transform: scale(0.95);
-            background-color: rgba(203, 234, 109, 0.12) !important;
+            background-color: rgba(53, 185, 132, 0.15) !important;
         }
         /* J icon ต้องชนะ nav-item:active เสมอ */
         #sidebar-logo-icon.nav-item:active,
         #sidebar-logo-icon:active {
-            background-color: var(--theme-primary) !important;
-            color: var(--theme-sidebar) !important;
+            background-color: #35B984 !important;
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
             transform: scale(0.95);
         }
         /* Add task btn pulse on hover */
@@ -721,7 +749,7 @@
         .sel-chip-dot { width: 7px; height: 7px; border-radius: 50%; }
 
         /* Sidebar toggle hover */
-        #sidebar-toggle-btn:hover, #sidebar-logo-icon:hover {
+        #sidebar-toggle-btn:hover {
             background: rgba(203,234,109,0.12) !important;
         }
 
@@ -1301,8 +1329,8 @@
 :root {
     --theme-bg:        #A78ED6;
     --theme-sidebar:   #1E293B;
-    --theme-primary:   #35b982;
-    --theme-primary-h: #2ba070;
+    --theme-primary:   #B9F584;
+    --theme-primary-h: #9fe262;
     --theme-card:      #FFFFFF;
     --theme-base:      #F8FAFC;
     --theme-text:      #1E293B;
@@ -1360,7 +1388,7 @@ body {
     padding: 0 1rem !important;
 }
 
-/* Logo icon */
+/* Logo icon - Primary Green #35B984 พร้อมข้อความสีขาวเสมอ */
 #sidebar-logo-icon,
 #sidebar-logo-icon:link,
 #sidebar-logo-icon:visited,
@@ -1370,15 +1398,15 @@ body {
 #app-sidebar #sidebar-logo-icon,
 #app-sidebar #sidebar-logo-icon:active,
 #app-sidebar.collapsed #sidebar-logo-icon:active {
-    background-color: var(--theme-primary) !important;
-    color: #1E293B !important;
-    -webkit-text-fill-color: #1E293B !important;
+    background-color: #35B984 !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
     border-radius: 10px !important;
     width: 34px !important;
     height: 34px !important;
-    font-size: 0.9rem !important;
-    font-weight: 700 !important;
-    box-shadow: none !important;
+    font-size: 0.95rem !important;
+    font-weight: 800 !important;
+    box-shadow: 0 4px 12px rgba(53,185,132,0.25) !important;
 }
 
 /* Logo text */
@@ -1427,11 +1455,11 @@ body {
     color: rgba(255,255,255,0.9) !important;
 }
 .nav-item.active {
-    background: rgba(203,234,109,0.15) !important;
-    color: var(--theme-primary) !important;
+    background: rgba(53, 185, 132, 0.15) !important;
+    color: var(--theme-primary, #35B984) !important;
 }
-.nav-item.active i {
-    color: var(--theme-primary) !important;
+.nav-item.active i, .nav-item.active svg {
+    color: var(--theme-primary, #35B984) !important;
 }
 .nav-item i {
     font-size: 0.85rem !important;
@@ -1639,7 +1667,7 @@ table tbody tr:hover td {
 /* =============================================
    FORM INPUTS — minimal
    ============================================= */
-input[type="text"]:not(#filter-search), input[type="date"], select:not(#filter-priority):not(#filter-subject):not(#filter-status):not(#set-default-status), textarea {
+input[type="text"]:not(#filter-search):not(#global-search-input), input[type="date"], select:not(#filter-priority):not(#filter-subject):not(#filter-status):not(#set-default-status), textarea {
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
@@ -1651,6 +1679,10 @@ input[type="text"]:not(#filter-search), input[type="date"], select:not(#filter-p
     padding: 0.6rem 0.875rem !important;
     transition: border-color 0.15s ease !important;
     box-shadow: none !important;
+}
+#global-search-input {
+    padding-left: 3rem !important;
+    padding-right: 1rem !important;
 }
 input:focus, select:focus, textarea:focus {
     border-color: #AAAAAA !important;
@@ -2017,7 +2049,7 @@ body.auto-dark #app-sidebar {
 }
 body.auto-dark .nav-item { color: rgba(255,255,255,0.45) !important; }
 body.auto-dark .nav-item:hover { background: rgba(255,255,255,0.06) !important; color: rgba(255,255,255,0.9) !important; }
-body.auto-dark .nav-item.active { background: rgba(203,234,109,0.12) !important; }
+body.auto-dark .nav-item.active { background: rgba(53, 185, 132, 0.15) !important; }
 /* Schedule table dark */
 body.auto-dark #view-schedule .bg-white.rounded-2xl,
 body.auto-dark #view-schedule .rounded-2xl.border {
@@ -2446,10 +2478,10 @@ button.text-sm.font-semibold.text-primary { font-size: 0.75rem !important; font-
   --ui-line:#e9e9e7;
   --ui-bg:#f5f5f2;
   --ui-white:#fff;
-  --ui-green:#35b982;
-  --ui-green-soft:#eefbf6;
-  --theme-primary:#35b982;
-  --theme-primary-h:#2ba070;
+  --ui-green:#35B984;
+  --ui-green-soft:#ebfaf3;
+  --theme-primary:#35B984;
+  --theme-primary-h:#2ba072;
   --ui-yellow:#f8df76;
   --ui-pink:#f6c8d8;
   --ui-blue:#c9daf7;
@@ -2477,7 +2509,7 @@ button,input,select,textarea{font-family:inherit}
 }
 #app-sidebar.collapsed{width:76px!important;min-width:76px!important}
 #sidebar-header-area{height:82px!important;padding:0 18px!important;border-bottom:1px solid var(--ui-line)!important}
-#sidebar-logo-icon{width:42px!important;height:42px!important;border-radius:14px!important;background:#35b982!important;color:#ffffff!important;box-shadow:0 8px 20px rgba(53,185,130,0.22)!important;font-size:18px!important;font-weight:800!important}
+#sidebar-logo-icon{width:42px!important;height:42px!important;border-radius:14px!important;background:#35B984!important;color:#ffffff!important;box-shadow:0 8px 20px rgba(53,185,132,0.25)!important;font-size:18px!important;font-weight:800!important}
 #sidebar-logo-text{color:var(--ui-ink)!important;font-weight:850!important;letter-spacing:normal!important}
 #sidebar-toggle-btn{color:#555!important;background:#f4f4f1!important;border:1px solid #e6e6e2!important;box-shadow:none!important;border-radius:12px!important}
 #sidebar-toggle-btn:hover{background:#ecece8!important;color:#111!important}
@@ -2488,8 +2520,8 @@ button,input,select,textarea{font-family:inherit}
 #app-sidebar .nav-item:hover{background:#f5f5f2!important;color:#18191b!important}
 #app-sidebar .nav-item.active{background:#17181b!important;color:#fff!important;box-shadow:0 8px 18px rgba(23,24,27,.12)!important}
 #app-sidebar .nav-item.active svg{color:#fff!important}
-#add-task-btn{background:#35b982!important;color:#ffffff!important;border-radius:16px!important;box-shadow:0 6px 16px rgba(53,185,130,0.2)!important;min-height:48px!important;font-weight:700!important}
-#add-task-btn:hover{background:#2ba070!important;color:#ffffff!important}
+#add-task-btn{background:#35B984!important;color:#ffffff!important;border-radius:16px!important;box-shadow:0 6px 16px rgba(53,185,132,0.2)!important;min-height:48px!important;font-weight:800!important}
+#add-task-btn:hover{background:#2ba072!important;color:#ffffff!important}
 #sidebar-footer{padding:12px 14px 18px!important}
 #sidebar-footer-credit{color:#a0a09b!important}
 #sidebar-footer-credit *{color:inherit!important}
@@ -2590,42 +2622,128 @@ body.auto-dark #view-calendar .modern-cal-dashboard {
   align-items: center;
   justify-content: center;
   border-radius: 1rem;
-  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   cursor: pointer;
   user-select: none;
+  background-color: #ffffff;
+  border: 1.5px solid #f1f5f9;
+  color: #334155;
 }
-.modern-cal-day-cell:hover:not(.is-selected) {
-  background-color: #f1f5f9;
-}
-body.auto-dark .modern-cal-day-cell:hover:not(.is-selected) {
+body.auto-dark .modern-cal-day-cell {
   background-color: #1e293b;
+  border-color: #334155;
+  color: #f1f5f9;
 }
+.modern-cal-day-cell.is-other-month {
+  opacity: 0.35;
+}
+.modern-cal-day-cell:hover:not(.is-today):not(.is-selected) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* 7 Thai Day Colors (วันอาทิตย์ #F5A6A6, วันจันทร์ #FFDE85, วันอังคาร #FCAFD1, วันพุธ #B9F584, วันพฤหัสบดี #FFC28A, วันศุกร์ #92C8F4, วันเสาร์ #C5A7F2) */
+/* Hover subtle tint */
+.cal-day-0:hover:not(.is-today):not(.is-selected) { background-color: #fff5f5; border-color: #F5A6A6; }
+.cal-day-1:hover:not(.is-today):not(.is-selected) { background-color: #fffdf5; border-color: #FFDE85; }
+.cal-day-2:hover:not(.is-today):not(.is-selected) { background-color: #fff5f9; border-color: #FCAFD1; }
+.cal-day-3:hover:not(.is-today):not(.is-selected) { background-color: #f7fee7; border-color: #B9F584; }
+.cal-day-4:hover:not(.is-today):not(.is-selected) { background-color: #fff8f0; border-color: #FFC28A; }
+.cal-day-5:hover:not(.is-today):not(.is-selected) { background-color: #f0f7ff; border-color: #92C8F4; }
+.cal-day-6:hover:not(.is-today):not(.is-selected) { background-color: #faf5ff; border-color: #C5A7F2; }
+
+/* เมื่อถึงวันนั้น หรือเป็นวันนี้ (Today) และเมื่อคลิกเลือก (Selected) แผ่นนั้นจะแสดงสีประจำวันตามที่ระบุ */
+/* วันอาทิตย์: #F5A6A6 */
+.cal-day-0.is-today,
+.cal-day-0.is-selected {
+  background-color: #F5A6A6 !important;
+  border-color: #e58888 !important;
+  color: #5c1313 !important;
+  font-weight: 850 !important;
+  box-shadow: 0 4px 14px rgba(245, 166, 166, 0.45) !important;
+}
+/* วันจันทร์: #FFDE85 */
+.cal-day-1.is-today,
+.cal-day-1.is-selected {
+  background-color: #FFDE85 !important;
+  border-color: #ecc968 !important;
+  color: #4d3800 !important;
+  font-weight: 850 !important;
+  box-shadow: 0 4px 14px rgba(255, 222, 133, 0.45) !important;
+}
+/* วันอังคาร: #FCAFD1 */
+.cal-day-2.is-today,
+.cal-day-2.is-selected {
+  background-color: #FCAFD1 !important;
+  border-color: #f08cb6 !important;
+  color: #520b2d !important;
+  font-weight: 850 !important;
+  box-shadow: 0 4px 14px rgba(252, 175, 209, 0.45) !important;
+}
+/* วันพุธ: #B9F584 (Aura Light Green) */
+.cal-day-3.is-today,
+.cal-day-3.is-selected {
+  background-color: #B9F584 !important;
+  border-color: #9fe262 !important;
+  color: #1e4a05 !important;
+  font-weight: 850 !important;
+  box-shadow: 0 4px 14px rgba(185, 245, 132, 0.45) !important;
+}
+/* วันพฤหัสบดี: #FFC28A */
+.cal-day-4.is-today,
+.cal-day-4.is-selected {
+  background-color: #FFC28A !important;
+  border-color: #f1a868 !important;
+  color: #4d2303 !important;
+  font-weight: 850 !important;
+  box-shadow: 0 4px 14px rgba(255, 194, 138, 0.45) !important;
+}
+/* วันศุกร์: #92C8F4 */
+.cal-day-5.is-today,
+.cal-day-5.is-selected {
+  background-color: #92C8F4 !important;
+  border-color: #72b2e8 !important;
+  color: #08375e !important;
+  font-weight: 850 !important;
+  box-shadow: 0 4px 14px rgba(146, 200, 244, 0.45) !important;
+}
+/* วันเสาร์: #C5A7F2 */
+.cal-day-6.is-today,
+.cal-day-6.is-selected {
+  background-color: #C5A7F2 !important;
+  border-color: #af8be8 !important;
+  color: #32165c !important;
+  font-weight: 850 !important;
+  box-shadow: 0 4px 14px rgba(197, 167, 242, 0.45) !important;
+}
+
+/* Active Ring for Selected Cell */
 .modern-cal-day-cell.is-selected {
-  background-color: #0f172a !important;
-  color: #ffffff !important;
-  font-weight: 800;
-  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.25);
+  ring-width: 2px;
+  --tw-ring-color: #1e293b;
+  outline: 2px solid rgba(30, 41, 59, 0.6);
+  outline-offset: 1px;
 }
 body.auto-dark .modern-cal-day-cell.is-selected {
-  background-color: #f8fafc !important;
-  color: #0f172a !important;
+  outline-color: rgba(255, 255, 255, 0.8);
 }
+
 .modern-cal-event-dot {
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
   border-radius: 9999px;
-  background-color: #0f172a;
+  background-color: #35b982;
   margin-bottom: 2px;
 }
 .modern-cal-day-cell.is-selected .modern-cal-event-dot {
   background-color: #ffffff !important;
 }
 body.auto-dark .modern-cal-day-cell.is-selected .modern-cal-event-dot {
-  background-color: #0f172a !important;
+  background-color: #ffffff !important;
 }
 body.auto-dark .modern-cal-event-dot {
-  background-color: #38bdf8;
+  background-color: #86e2bf;
 }
 
 /* Schedule Header Glassmorphism Gradient */
@@ -2821,18 +2939,21 @@ body:not(.auto-dark) #view-subjects .bg-white, body:not(.auto-dark) #view-trash 
 }
 #settings-card button,#login-modal-card button,#success-card button{border-radius:15px!important}
 
-/* Mobile bottom nav — sleek dock fitting all items with zero cut-off */
+/* Mobile bottom nav — sleek dock with concentric rounded corners (R_inner = R_outer - padding) */
 #mobile-bottom-nav{
-  left:50%!important;right:auto!important;bottom:max(10px,env(safe-area-inset-bottom))!important;
-  transform:translateX(-50%)!important;width:calc(100% - 16px)!important;max-width:520px!important;
-  height:62px!important;padding:4px 6px!important;gap:3px!important;
-  background:#17181b!important;border:1px solid rgba(255,255,255,0.08)!important;border-radius:24px!important;
-  box-shadow:0 16px 36px rgba(0,0,0,.28)!important;
+  left:50%!important;right:auto!important;bottom:max(12px,env(safe-area-inset-bottom))!important;
+  transform:translateX(-50%)!important;width:calc(100% - 20px)!important;max-width:520px!important;
+  height:64px!important;padding:5px 6px!important;gap:4px!important;
+  background:#17181b!important;border:1px solid rgba(255,255,255,0.08)!important;
+  border-radius:30px!important; /* Smooth concentric outer curve */
+  box-shadow:0 18px 40px rgba(0,0,0,.35)!important;
   display:flex!important;justify-content:space-around!important;align-items:center!important;overflow-x:hidden!important
 }
 .mob-nav-btn{
   position:relative!important;min-width:0!important;height:52px!important;
-  flex:1 1 0!important;border-radius:16px!important;color:#94a3b8!important;
+  flex:1 1 0!important;
+  border-radius:24px!important; /* Concentric inner curve: R_outer(30px) - padding(6px) = 24px */
+  color:#94a3b8!important;
   padding:4px 2px!important;gap:2px!important;display:flex!important;flex-direction:column!important;
   align-items:center!important;justify-content:center!important;transition:all 0.18s ease!important;
   background:transparent!important;border:1px solid transparent!important;
@@ -2841,12 +2962,12 @@ body:not(.auto-dark) #view-subjects .bg-white, body:not(.auto-dark) #view-trash 
 .mob-nav-btn span{font-size:10px!important;font-weight:600!important;line-height:1.15!important;color:inherit!important;white-space:nowrap!important;letter-spacing:-0.1px!important}
 .mob-nav-btn:hover{background:rgba(255,255,255,0.06)!important;color:#e2e8f0!important}
 .mob-nav-btn.active{
-  background:rgba(255,255,255,0.12)!important;
+  background:rgba(53, 185, 132, 0.16)!important;
   color:#ffffff!important;
-  border-color:rgba(255,255,255,0.14)!important;
-  box-shadow:0 2px 8px rgba(0,0,0,0.22)!important;
+  border-color:rgba(53, 185, 132, 0.35)!important;
+  box-shadow:0 4px 14px rgba(53, 185, 132, 0.22)!important;
 }
-.mob-nav-btn.active svg,.mob-nav-btn.active i{color:var(--theme-primary, #35b982)!important}
+.mob-nav-btn.active svg,.mob-nav-btn.active i{color:#35B984!important}
 .mob-nav-btn.active span{color:#ffffff!important;font-weight:700!important}
 
 /* Avoid horizontal overflow at every breakpoint */
@@ -2877,8 +2998,8 @@ img,svg,video,canvas{max-width:100%}
   #view-dashboard .stats-grid{gap:8px!important}
   #view-dashboard .stats-grid>div{padding:12px!important;border-radius:17px!important}
   #view-dashboard .stats-grid p:last-child{font-size:1.45rem!important}
-  #mobile-bottom-nav{width:calc(100% - 12px)!important;height:60px!important;bottom:max(8px,env(safe-area-inset-bottom))!important;border-radius:22px!important;padding:3px 2px!important}
-  .mob-nav-btn{min-width:0!important;flex:1 1 0!important;height:52px!important;border-radius:14px!important;padding:2px 1px!important}
+  #mobile-bottom-nav{width:calc(100% - 14px)!important;height:62px!important;bottom:max(8px,env(safe-area-inset-bottom))!important;border-radius:28px!important;padding:4px 4px!important}
+  .mob-nav-btn{min-width:0!important;flex:1 1 0!important;height:52px!important;border-radius:22px!important;padding:2px 1px!important}
   .mob-nav-btn svg{width:18px!important;height:18px!important}
   .mob-nav-btn span{font-size:9px!important}
 }
@@ -4027,7 +4148,7 @@ body.auto-dark .swal2-backdrop-show {
             <!-- Header Logo -->
             <div class="h-20 px-4 flex items-center border-b border-white/10 shrink-0 overflow-hidden" id="sidebar-header-area">
                 <!-- โลโก้ J (fixed) -->
-                <div id="sidebar-logo-icon" onclick="document.getElementById('app-sidebar').classList.contains('collapsed') && toggleSidebar()" class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-sidebar font-bold text-lg shadow-lg shadow-primary/20 shrink-0 select-none" style="color:var(--theme-sidebar);background-color:var(--theme-primary);-webkit-tap-highlight-color:transparent;">J</div>
+                <div id="sidebar-logo-icon" onclick="document.getElementById('app-sidebar').classList.contains('collapsed') && toggleSidebar()" class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-primary/20 shrink-0 select-none" style="color:#ffffff;background-color:var(--theme-primary);-webkit-tap-highlight-color:transparent;">J</div>
                 <!-- ชื่อ JodNGan (fade ออกเมื่อ collapse) -->
                 <h1 id="sidebar-logo-text" class="sidebar-label text-white font-bold text-xl tracking-wide ml-3 flex-1 overflow-hidden whitespace-nowrap">JodNGan</h1>
                 <!-- ปุ่ม toggle (fixed ขวาสุด เสมอ) -->
@@ -4096,7 +4217,7 @@ body.auto-dark .swal2-backdrop-show {
 
             <!-- Footer Sidebar -->
             <div id="sidebar-footer" class="p-3 shrink-0">
-                <button id="add-task-btn" onclick="nav('add-task')" class="w-full bg-primary hover:bg-[#bce055] text-sidebar font-bold py-3.5 rounded-2xl transition shadow-lg shadow-primary/20 flex items-center justify-center gap-2 mb-3">
+                <button id="add-task-btn" onclick="nav('add-task')" class="w-full bg-[#35B984] hover:bg-[#2ba072] text-white font-bold py-3.5 rounded-2xl transition shadow-lg shadow-[#35B984]/25 flex items-center justify-center gap-2 mb-3 cursor-pointer">
                     <svg class="shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0"><path d="M12 5v14M5 12h14"/></svg>
                     <span id="sidebar-add-btn-text" class="sidebar-label"> เพิ่มงานใหม่</span>
                 </button>
@@ -4109,28 +4230,30 @@ body.auto-dark .swal2-backdrop-show {
         <!-- Main Content -->
         <main class="flex-1 flex flex-col h-full bg-bgbase overflow-hidden relative">
             <!-- Header matching Image 1 & 2 -->
-            <header class="h-16 sm:h-20 px-3 sm:px-6 md:px-8 flex items-center justify-between bg-white/75 backdrop-blur-md border-b border-slate-200/60 md:border-b-0 md:bg-transparent shrink-0 z-10 transition-all gap-3 sm:gap-4">
-                <div class="flex items-center gap-2 sm:gap-3 flex-1 max-w-xl min-w-0">
-                    <!-- Mobile Hamburger Menu Button -->
-                    <button onclick="toggleSidebar()" class="md:hidden w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white border border-slate-200 text-slate-700 flex items-center justify-center hover:bg-slate-50 transition shadow-xs cursor-pointer shrink-0" title="เปิดเมนูนำทาง">
+            <header class="h-16 sm:h-20 px-3 sm:px-6 md:px-8 flex items-center justify-between bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 md:border-b-0 md:bg-transparent shrink-0 z-10 transition-all gap-3 sm:gap-4">
+                <div class="flex items-center gap-2.5 sm:gap-3 flex-1 max-w-xl min-w-0">
+                    <!-- Mobile Hamburger Menu Button (Matches height and curvature of search & sidebar buttons) -->
+                    <button onclick="toggleSidebar()" class="md:hidden w-11 h-11 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200/90 dark:border-slate-700 text-slate-700 dark:text-slate-200 flex items-center justify-center hover:bg-slate-50 dark:hover:bg-slate-700/60 transition shadow-2xs cursor-pointer shrink-0" title="เปิดเมนูนำทาง">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
                     </button>
-                    <!-- Global Search input -->
-                    <div class="relative flex-1">
-                        <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                        <input type="text" id="global-search-input" onkeyup="handleGlobalSearch(event)" placeholder="ค้นหางาน วิชา หรือเอกสาร..." class="w-full h-10 sm:h-11 bg-white border border-slate-200/90 rounded-2xl pl-10 pr-3.5 text-xs sm:text-sm font-normal text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-[#35b982] focus:ring-2 focus:ring-[#35b982]/15 transition shadow-2xs">
+                    <!-- Global Search input (Proper left padding 3rem / 48px to prevent icon-text overlap on all screen ratios including phone and ipad) -->
+                    <div class="relative flex-1 min-w-0">
+                        <span class="absolute left-3.5 sm:left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-400 pointer-events-none z-10 flex items-center justify-center">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="16" height="16"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        </span>
+                        <input type="text" id="global-search-input" onkeyup="handleGlobalSearch(event)" placeholder="ค้นหางาน วิชา หรือเอกสาร..." class="w-full h-11 bg-white dark:bg-slate-800 border border-slate-200/90 dark:border-slate-700 rounded-2xl pr-4 text-xs sm:text-sm font-normal text-slate-700 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#35B984] focus:ring-2 focus:ring-[#35B984]/20 transition shadow-2xs" style="padding-left: 3rem !important;">
                     </div>
                 </div>
                 
                 <div class="flex items-center gap-2 sm:gap-2.5 shrink-0">
-                    <!-- ปุ่มที่ 1: การแจ้งเตือน (Bell) -->
-                    <button type="button" onclick="showUrgentModal()" class="relative w-10 h-10 rounded-2xl bg-white border border-slate-200/90 text-slate-600 hover:text-slate-900 flex items-center justify-center shadow-2xs hover:bg-slate-50 transition shrink-0 cursor-pointer" title="การแจ้งเตือน">
+                    <!-- ปุ่มที่ 1: การแจ้งเตือน (Bell) - ขนาด h-11 w-11 มนเท่ากับ Sidebar -->
+                    <button type="button" onclick="showUrgentModal()" class="relative w-11 h-11 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200/90 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white flex items-center justify-center shadow-2xs hover:bg-slate-50 dark:hover:bg-slate-700/60 transition shrink-0 cursor-pointer" title="การแจ้งเตือน">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-                        <span id="sidebar-urgent-badge" class="absolute top-2 right-2 w-2 h-2 rounded-full bg-rose-500 hidden"></span>
+                        <span id="sidebar-urgent-badge" class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-rose-500 hidden"></span>
                     </button>
 
-                    <!-- ปุ่มที่ 2: ตั้งค่า (Settings) matching user request -->
-                    <button type="button" id="settings-btn" onclick="openSettings()" class="relative w-10 h-10 rounded-2xl bg-white border border-slate-200/90 text-slate-600 hover:text-slate-900 flex items-center justify-center shadow-2xs hover:bg-slate-50 transition shrink-0 cursor-pointer" title="การตั้งค่า">
+                    <!-- ปุ่มที่ 2: ตั้งค่า (Settings) - ขนาด h-11 w-11 มนเท่ากับ Sidebar -->
+                    <button type="button" id="settings-btn" onclick="openSettings()" class="relative w-11 h-11 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200/90 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white flex items-center justify-center shadow-2xs hover:bg-slate-50 dark:hover:bg-slate-700/60 transition shrink-0 cursor-pointer" title="การตั้งค่า">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
                     </button>
 
@@ -4163,21 +4286,32 @@ body.auto-dark .swal2-backdrop-show {
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6">
                         <!-- LEFT COLUMN (Main Stream - 8 cols on lg) -->
                         <div class="lg:col-span-8 flex flex-col gap-5 sm:gap-6 min-w-0">
-                            <!-- 1. Hero Greeting Banner (Integrated with Daily Advice & Brand Green #35b982) -->
-                            <div class="bg-gradient-to-r from-[#eefbf6] via-[#f7fdfb] to-[#e4f8f0] border border-[#bbf0dd] rounded-3xl p-5 sm:p-7 shadow-xs relative overflow-hidden flex flex-col sm:flex-row sm:items-center justify-between gap-5">
-                                <div class="max-w-md z-1 flex flex-col gap-3">
-                                    <div>
-                                        <div class="flex items-center gap-2 mb-1.5">
-                                            <span class="w-6 h-6 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center shrink-0">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-                                            </span>
-                                            <h2 id="dash-greeting-title" class="text-xl sm:text-2xl font-black text-slate-800 tracking-normal">สวัสดีตอนเช้า!</h2>
+                            <!-- 1. Hero Greeting Banner (With Top-Row 'สู้ๆ' Button, 4 Login Mascots, and Time-Based Greeting) -->
+                            <div class="bg-gradient-to-r from-[#eefbf6] via-[#f7fdfb] to-[#e4f8f0] border border-[#bbf0dd] rounded-3xl p-5 sm:p-7 shadow-xs relative overflow-hidden flex flex-col gap-4">
+                                <!-- Top Row: Dynamic Greeting Title + Subtitle on Left, 'สู้ๆ' Button on Right in same row -->
+                                <div class="flex items-center justify-between gap-3 w-full">
+                                    <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                                        <!-- โลโก้ไอคอนสวัสดีขนาดใหญ่ขึ้น -->
+                                        <span id="dash-greeting-icon-wrap" class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-amber-100 text-amber-600 border border-amber-200/70 flex items-center justify-center shrink-0 shadow-xs transition-all">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-7 h-7 sm:w-8 sm:h-8"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                                        </span>
+                                        <div class="min-w-0">
+                                            <h2 id="dash-greeting-title" class="text-xl sm:text-2xl font-black text-slate-800 tracking-tight leading-tight">สวัสดีตอนค่ำ!</h2>
+                                            <p id="dash-greeting-subtitle" class="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed mt-0.5 truncate sm:whitespace-normal">ขอให้วันนี้เป็นวันที่ดี และเต็มไปด้วยความสำเร็จนะครับ</p>
                                         </div>
-                                        <p id="dash-greeting-subtitle" class="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">ขอให้วันนี้เป็นวันที่ดี และเต็มไปด้วยความสำเร็จนะครับ</p>
                                     </div>
 
-                                    <!-- Integrated Daily Advice Banner matching user request -->
-                                    <div class="p-3 rounded-2xl bg-white/85 border border-[#bbf0dd] shadow-2xs flex items-center justify-between gap-3">
+                                    <!-- ปุ่ม "สู้ๆ" พร้อมไอคอนชี้ไปด้านขวา อยู่ในแนวระดับเดียวกันกับคำทักทายสวัสดี -->
+                                    <button type="button" onclick="nav('tasks')" class="inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#35B984] hover:bg-[#2ba072] text-white font-extrabold text-xs sm:text-sm shadow-sm hover:shadow transition active:scale-95 cursor-pointer shrink-0" title="ไปที่รายการงาน">
+                                        <span>สู้ๆ</span>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14" class="translate-x-0.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                                    </button>
+                                </div>
+
+                                <!-- Bottom Row: Daily Advice (Left) + All 4 Cartoon Characters from Login (Right) -->
+                                <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 pt-1">
+                                    <!-- Integrated Daily Advice Banner -->
+                                    <div class="flex-1 p-3 rounded-2xl bg-white/90 border border-[#bbf0dd] shadow-2xs flex items-center justify-between gap-3">
                                         <div class="flex items-center gap-2.5 min-w-0">
                                             <div class="w-7 h-7 rounded-xl bg-[#eefbf6] text-[#1e825a] flex items-center justify-center shrink-0">
                                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7z"/><path d="M9 21h6"/></svg>
@@ -4192,53 +4326,78 @@ body.auto-dark .swal2-backdrop-show {
                                         </button>
                                     </div>
 
-                                    <div>
-                                        <button type="button" onclick="nav('tasks')" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#35b982] hover:bg-[#2ba070] text-white font-bold text-xs shadow-sm shadow-[#35b982]/20 transition cursor-pointer">
-                                            <span>สู้ๆ ไปด้วยกัน</span>
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                                        </button>
+                                    <!-- 4 Mascots matching Login Page (Pink, Green, Blue, Yellow) in neat arranged cluster -->
+                                    <div class="flex items-center justify-center gap-2.5 sm:gap-3 py-1 px-2 select-none shrink-0" title="ผองเพื่อนให้กำลังใจ!">
+                                        <!-- Pink Mascot (เหมือนในหน้า login) -->
+                                        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-md transition-transform hover:scale-110 cursor-default" style="background: linear-gradient(145deg, #ffc8e2, #f596c6); box-shadow: inset -3px -4px 6px rgba(0,0,0,0.06), 0 4px 12px rgba(245,150,198,0.35);">
+                                            <svg class="w-7 h-7" viewBox="0 0 100 80" fill="none">
+                                                <ellipse cx="35" cy="32" rx="10.5" ry="14.5" fill="#ffffff"/>
+                                                <ellipse cx="36" cy="33" rx="6.2" ry="8.8" fill="#4a152e"/>
+                                                <circle cx="34" cy="29" r="2.4" fill="#ffffff"/>
+                                                <circle cx="38" cy="36" r="1.1" fill="#ffffff"/>
+                                                <ellipse cx="65" cy="32" rx="10.5" ry="14.5" fill="#ffffff"/>
+                                                <ellipse cx="64" cy="33" rx="6.2" ry="8.8" fill="#4a152e"/>
+                                                <circle cx="62" cy="29" r="2.4" fill="#ffffff"/>
+                                                <circle cx="66" cy="36" r="1.1" fill="#ffffff"/>
+                                                <ellipse cx="23" cy="44" rx="8" ry="5" fill="#d93b7a" opacity="0.32"/>
+                                                <ellipse cx="77" cy="44" rx="8" ry="5" fill="#d93b7a" opacity="0.32"/>
+                                                <path d="M 40 46 Q 50 60 60 46" stroke="#4a152e" stroke-width="4.2" stroke-linecap="round" fill="none"/>
+                                            </svg>
+                                        </div>
+                                        <!-- Green Mascot (เหมือนในหน้า login) -->
+                                        <div class="w-12 h-12 sm:w-13 sm:h-13 rounded-full flex items-center justify-center shadow-md transition-transform hover:scale-110 cursor-default" style="background: linear-gradient(145deg, #d2ff94, #9be770); box-shadow: inset -3px -4px 6px rgba(0,0,0,0.06), 0 6px 14px rgba(155,231,112,0.4);">
+                                            <svg class="w-8 h-8" viewBox="0 0 100 80" fill="none">
+                                                <ellipse cx="35" cy="32" rx="10.5" ry="14.5" fill="#ffffff"/>
+                                                <ellipse cx="36" cy="33" rx="6.2" ry="8.8" fill="#143e33"/>
+                                                <circle cx="34" cy="29" r="2.4" fill="#ffffff"/>
+                                                <circle cx="38" cy="36" r="1.1" fill="#ffffff"/>
+                                                <ellipse cx="65" cy="32" rx="10.5" ry="14.5" fill="#ffffff"/>
+                                                <ellipse cx="64" cy="33" rx="6.2" ry="8.8" fill="#143e33"/>
+                                                <circle cx="62" cy="29" r="2.4" fill="#ffffff"/>
+                                                <circle cx="66" cy="36" r="1.1" fill="#ffffff"/>
+                                                <ellipse cx="23" cy="44" rx="8" ry="5" fill="#58a436" opacity="0.28"/>
+                                                <ellipse cx="77" cy="44" rx="8" ry="5" fill="#58a436" opacity="0.28"/>
+                                                <path d="M 40 46 Q 50 60 60 46" stroke="#143e33" stroke-width="4.2" stroke-linecap="round" fill="none"/>
+                                            </svg>
+                                        </div>
+                                        <!-- Blue Mascot (เหมือนในหน้า login) -->
+                                        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-md transition-transform hover:scale-110 cursor-default" style="background: linear-gradient(145deg, #b2e0ff, #78bcf3); box-shadow: inset -3px -4px 6px rgba(0,0,0,0.06), 0 4px 12px rgba(120,188,243,0.35);">
+                                            <svg class="w-7 h-7" viewBox="0 0 100 80" fill="none">
+                                                <ellipse cx="35" cy="32" rx="10.5" ry="14.5" fill="#ffffff"/>
+                                                <ellipse cx="36" cy="33" rx="6.2" ry="8.8" fill="#0e325c"/>
+                                                <circle cx="34" cy="29" r="2.4" fill="#ffffff"/>
+                                                <circle cx="38" cy="36" r="1.1" fill="#ffffff"/>
+                                                <ellipse cx="65" cy="32" rx="10.5" ry="14.5" fill="#ffffff"/>
+                                                <ellipse cx="64" cy="33" rx="6.2" ry="8.8" fill="#0e325c"/>
+                                                <circle cx="62" cy="29" r="2.4" fill="#ffffff"/>
+                                                <circle cx="66" cy="36" r="1.1" fill="#ffffff"/>
+                                                <ellipse cx="23" cy="44" rx="8" ry="5" fill="#1e73c3" opacity="0.28"/>
+                                                <ellipse cx="77" cy="44" rx="8" ry="5" fill="#1e73c3" opacity="0.28"/>
+                                                <path d="M 40 46 Q 50 60 60 46" stroke="#0e325c" stroke-width="4.2" stroke-linecap="round" fill="none"/>
+                                            </svg>
+                                        </div>
+                                        <!-- Yellow Mascot (เหมือนในหน้า login) -->
+                                        <div class="w-12 h-12 sm:w-13 sm:h-13 rounded-full flex items-center justify-center shadow-md transition-transform hover:scale-110 cursor-default" style="background: linear-gradient(145deg, #ffe8a8, #ffd266); box-shadow: inset -3px -4px 6px rgba(0,0,0,0.06), 0 6px 14px rgba(255,210,102,0.4);">
+                                            <svg class="w-8 h-8" viewBox="0 0 100 80" fill="none">
+                                                <ellipse cx="35" cy="32" rx="10.5" ry="14.5" fill="#ffffff"/>
+                                                <ellipse cx="36" cy="33" rx="6.2" ry="8.8" fill="#452f07"/>
+                                                <circle cx="34" cy="29" r="2.4" fill="#ffffff"/>
+                                                <circle cx="38" cy="36" r="1.1" fill="#ffffff"/>
+                                                <ellipse cx="65" cy="32" rx="10.5" ry="14.5" fill="#ffffff"/>
+                                                <ellipse cx="64" cy="33" rx="6.2" ry="8.8" fill="#452f07"/>
+                                                <circle cx="62" cy="29" r="2.4" fill="#ffffff"/>
+                                                <circle cx="66" cy="36" r="1.1" fill="#ffffff"/>
+                                                <ellipse cx="23" cy="44" rx="8" ry="5" fill="#d97e14" opacity="0.28"/>
+                                                <ellipse cx="77" cy="44" rx="8" ry="5" fill="#d97e14" opacity="0.28"/>
+                                                <path d="M 40 46 Q 50 60 60 46" stroke="#452f07" stroke-width="4.2" stroke-linecap="round" fill="none"/>
+                                            </svg>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- Mascot Illustration Right (Reading companion with lamp & books) -->
-                                <div class="sm:shrink-0 flex items-center justify-center relative">
-                                    <svg viewBox="0 0 220 140" class="w-48 sm:w-56 h-auto drop-shadow-sm select-none">
-                                        <!-- Lamp -->
-                                        <path d="M190 120 L210 120 L200 120 L200 70 L180 50 L195 40 L170 30 L160 55 L175 65 L195 72 L195 120 Z" fill="#64748B"/>
-                                        <polygon points="160,30 185,20 195,50 160,55" fill="#475569"/>
-                                        <!-- Lamp Light Cone -->
-                                        <polygon points="160,40 185,30 140,120 70,120" fill="#FEF08A" opacity="0.25"/>
-                                        <!-- Book Stack -->
-                                        <rect x="75" y="112" width="40" height="8" rx="2" fill="#93C5FD"/>
-                                        <rect x="70" y="104" width="45" height="8" rx="2" fill="#F472B6"/>
-                                        <!-- Mascot Body in Logo Green -->
-                                        <ellipse cx="145" cy="85" rx="38" ry="34" fill="#35b982"/>
-                                        <ellipse cx="145" cy="82" rx="36" ry="32" fill="#45c28e"/>
-                                        <!-- Eyes -->
-                                        <ellipse cx="134" cy="78" rx="4" ry="5.5" fill="#064E3B"/>
-                                        <ellipse cx="156" cy="78" rx="4" ry="5.5" fill="#064E3B"/>
-                                        <circle cx="135.5" cy="76" r="1.5" fill="#FFFFFF"/>
-                                        <circle cx="157.5" cy="76" r="1.5" fill="#FFFFFF"/>
-                                        <!-- Cheeks -->
-                                        <ellipse cx="127" cy="86" rx="3.5" ry="2" fill="#F472B6" opacity="0.6"/>
-                                        <ellipse cx="163" cy="86" rx="3.5" ry="2" fill="#F472B6" opacity="0.6"/>
-                                        <!-- Smile -->
-                                        <path d="M141 86 Q145 91 149 86" stroke="#064E3B" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-                                        <!-- Open Book in hands -->
-                                        <path d="M120 115 L145 108 L145 124 L120 130 Z" fill="#bbf0dd"/>
-                                        <path d="M170 115 L145 108 L145 124 L170 130 Z" fill="#86e2bf"/>
-                                        <path d="M122 113 L144 107 L144 122 L122 128 Z" fill="#FFFFFF"/>
-                                        <path d="M168 113 L146 107 L146 122 L168 128 Z" fill="#F8FAFC"/>
-                                        <!-- Book text lines -->
-                                        <line x1="126" y1="114" x2="140" y2="110" stroke="#CBD5E1" stroke-width="1.5"/>
-                                        <line x1="126" y1="119" x2="140" y2="115" stroke="#CBD5E1" stroke-width="1.5"/>
-                                        <line x1="150" y1="110" x2="164" y2="114" stroke="#CBD5E1" stroke-width="1.5"/>
-                                        <line x1="150" y1="115" x2="164" y2="119" stroke="#CBD5E1" stroke-width="1.5"/>
-                                    </svg>
                                 </div>
                             </div>
 
                             <!-- 2. สถิติการอ่านหนังสือ (Reading Statistics with 100% REAL DATA from studySessions) -->
-                            <div class="card bg-white rounded-3xl border border-slate-200/90 p-5 sm:p-6 shadow-xs flex flex-col justify-between gap-4 min-h-[340px]">
+                            <div class="card bg-white rounded-3xl border border-slate-200/90 p-5 sm:p-6 shadow-xs flex flex-col justify-between gap-4 min-h-[350px]">
                                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
                                     <div class="flex items-center gap-2.5">
                                         <div class="w-8 h-8 rounded-xl bg-[#eefbf6] text-[#1e825a] flex items-center justify-center shrink-0">
@@ -4290,10 +4449,10 @@ body.auto-dark .swal2-backdrop-show {
                                 </div>
                             </div>
 
-                            <!-- 3. Middle Cards: Study Hours Today + Tasks To-Do (Both with clean internal grid dividers) -->
+                            <!-- 3. Middle Cards: Study Hours Today + Tasks To-Do (Both with clean internal grid dividers & matching heights) -->
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                 <!-- Card A: ชั่วโมงการเรียนวันนี้ (Roomy expanded display & clean dividers) -->
-                                <div class="card bg-white rounded-3xl border border-slate-200/90 p-5 sm:p-6 shadow-xs flex flex-col justify-between gap-4">
+                                <div class="card bg-white rounded-3xl border border-slate-200/90 p-5 sm:p-6 shadow-xs flex flex-col justify-between gap-4 min-h-[310px] h-full">
                                     <div>
                                         <div class="flex items-center justify-between gap-2 pb-3 border-b border-slate-100">
                                             <div class="flex items-center gap-2">
@@ -4360,8 +4519,8 @@ body.auto-dark .swal2-backdrop-show {
                                     </div>
                                 </div>
 
-                                <!-- Card B: งานที่ต้องทำ (Tasks to do - Clean internal dividers & NO overdue badge) -->
-                                <div class="card bg-white rounded-3xl border border-slate-200/90 p-5 sm:p-6 shadow-xs flex flex-col justify-between gap-3">
+                                <!-- Card B: งานที่ต้องทำ (Tasks to do - Clean internal dividers & NO overdue tasks) -->
+                                <div class="card bg-white rounded-3xl border border-slate-200/90 p-5 sm:p-6 shadow-xs flex flex-col justify-between gap-4 min-h-[310px] h-full">
                                     <div>
                                         <div class="flex items-center justify-between gap-2 pb-3 border-b border-slate-100">
                                             <div class="flex items-center gap-2">
@@ -4386,8 +4545,8 @@ body.auto-dark .swal2-backdrop-show {
 
                         <!-- RIGHT COLUMN (Sidebar Panel - 4 cols on lg) -->
                         <div class="lg:col-span-4 flex flex-col gap-5 sm:gap-6 min-w-0">
-                            <!-- 1. Mini Calendar Widget (Symmetrical close to square ratio & 7 Thai Day Colors) -->
-                            <div class="card bg-white rounded-3xl border border-slate-200/90 p-5 shadow-xs flex flex-col justify-between gap-3 min-h-[320px] aspect-[4/3.8] sm:min-h-[330px]">
+                            <!-- 1. Mini Calendar Widget (Symmetrical square ratio & 7 Thai Day Colors) -->
+                            <div class="card bg-white rounded-3xl border border-slate-200/90 p-5 shadow-xs flex flex-col justify-between gap-3 aspect-square w-full max-w-full">
                                 <div class="flex items-center justify-between gap-2 pb-2.5 border-b border-slate-100">
                                     <div class="flex items-center gap-2">
                                         <span class="w-7 h-7 rounded-lg bg-[#eefbf6] text-[#1e825a] flex items-center justify-center shrink-0">
@@ -4403,24 +4562,14 @@ body.auto-dark .swal2-backdrop-show {
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Days Header with Official Thai 7-Day Colors: อา (แดง), จ (เหลือง), อ (ชมพู), พ (เขียว), พฤ (ส้ม), ศ (ฟ้า), ส (ม่วง) -->
-                                <div class="grid grid-cols-7 gap-1 text-center text-[10px] font-bold py-1">
-                                    <div class="py-1 rounded-lg bg-rose-50 text-rose-600 border border-rose-200/60 font-black">อา</div>
-                                    <div class="py-1 rounded-lg bg-amber-50 text-amber-700 border border-amber-200/60 font-black">จ</div>
-                                    <div class="py-1 rounded-lg bg-pink-50 text-pink-600 border border-pink-200/60 font-black">อ</div>
-                                    <div class="py-1 rounded-lg bg-[#eefbf6] text-[#1e825a] border border-[#bbf0dd] font-black">พ</div>
-                                    <div class="py-1 rounded-lg bg-orange-50 text-orange-700 border border-orange-200/60 font-black">พฤ</div>
-                                    <div class="py-1 rounded-lg bg-sky-50 text-sky-700 border border-sky-200/60 font-black">ศ</div>
-                                    <div class="py-1 rounded-lg bg-purple-50 text-purple-700 border border-purple-200/60 font-black">ส</div>
-                                </div>
                                 <!-- Mini Grid Days (Squared symmetrical layout) -->
                                 <div id="dash-mini-cal-grid" class="grid grid-cols-7 gap-1 text-center text-xs flex-1 items-center">
                                     <!-- Injected by renderCalendar -->
                                 </div>
                             </div>
 
-                            <!-- 2. ตารางเรียนวันนี้ (Today's Class Schedule - Balanced height matching Reading Stats min-h-[340px]) -->
-                            <div class="card bg-white rounded-3xl border border-slate-200/90 p-5 shadow-xs flex flex-col justify-between gap-3 min-h-[340px]">
+                            <!-- 2. ตารางเรียนวันนี้ (Today's Class Schedule - Balanced height matching Reading Stats min-h-[350px]) -->
+                            <div class="card bg-white rounded-3xl border border-slate-200/90 p-5 sm:p-6 shadow-xs flex flex-col justify-between gap-3 min-h-[350px]">
                                 <div class="flex items-center justify-between gap-2 pb-2.5 border-b border-slate-100">
                                     <div class="flex items-center gap-2">
                                         <span class="w-7 h-7 rounded-lg bg-[#eefbf6] text-[#1e825a] flex items-center justify-center shrink-0">
@@ -4550,36 +4699,15 @@ body.auto-dark .swal2-backdrop-show {
                                         </div>
                                     </div>
 
-                                    <!-- Weekdays Row with 7 Official Thai Day Colors: อา (แดง), จ (เหลือง), อ (ชมพู), พ (เขียว), พฤ (ส้ม), ศ (ฟ้า), ส (ม่วง) -->
-                                    <div class="grid grid-cols-7 gap-1.5 sm:gap-2 text-center mb-3">
-                                        <div class="bg-rose-50/90 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 border border-rose-200/70 dark:border-rose-900/50 py-1.5 sm:py-2 rounded-xl text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex flex-col items-center justify-center">
-                                            <span>อา</span>
-                                            <span class="text-[9px] opacity-75 font-bold">SUN</span>
-                                        </div>
-                                        <div class="bg-amber-50/90 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border border-amber-200/70 dark:border-amber-900/50 py-1.5 sm:py-2 rounded-xl text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex flex-col items-center justify-center">
-                                            <span>จ</span>
-                                            <span class="text-[9px] opacity-75 font-bold">MON</span>
-                                        </div>
-                                        <div class="bg-pink-50/90 dark:bg-pink-950/40 text-pink-600 dark:text-pink-400 border border-pink-200/70 dark:border-pink-900/50 py-1.5 sm:py-2 rounded-xl text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex flex-col items-center justify-center">
-                                            <span>อ</span>
-                                            <span class="text-[9px] opacity-75 font-bold">TUE</span>
-                                        </div>
-                                        <div class="bg-[#eefbf6] dark:bg-emerald-950/40 text-[#1e825a] dark:text-emerald-400 border border-[#bbf0dd] dark:border-emerald-900/50 py-1.5 sm:py-2 rounded-xl text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex flex-col items-center justify-center">
-                                            <span>พ</span>
-                                            <span class="text-[9px] opacity-75 font-bold">WED</span>
-                                        </div>
-                                        <div class="bg-orange-50/90 dark:bg-orange-950/40 text-orange-700 dark:text-orange-400 border border-orange-200/70 dark:border-orange-900/50 py-1.5 sm:py-2 rounded-xl text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex flex-col items-center justify-center">
-                                            <span>พฤ</span>
-                                            <span class="text-[9px] opacity-75 font-bold">THU</span>
-                                        </div>
-                                        <div class="bg-sky-50/90 dark:bg-sky-950/40 text-sky-700 dark:text-sky-400 border border-sky-200/70 dark:border-sky-900/50 py-1.5 sm:py-2 rounded-xl text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex flex-col items-center justify-center">
-                                            <span>ศ</span>
-                                            <span class="text-[9px] opacity-75 font-bold">FRI</span>
-                                        </div>
-                                        <div class="bg-purple-50/90 dark:bg-purple-950/40 text-purple-700 dark:text-purple-400 border border-purple-200/70 dark:border-purple-900/50 py-1.5 sm:py-2 rounded-xl text-[10px] sm:text-[11px] font-black uppercase tracking-wider flex flex-col items-center justify-center">
-                                            <span>ส</span>
-                                            <span class="text-[9px] opacity-75 font-bold">SAT</span>
-                                        </div>
+                                    <!-- Weekdays Row: ลบภาษาอังกฤษ ไม่มีแผ่นสี เป็นข้อความตรงตามคอลัมน์ -->
+                                    <div class="grid grid-cols-7 gap-1.5 sm:gap-2 text-center mb-2 select-none">
+                                        <div class="py-1 text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400">อา</div>
+                                        <div class="py-1 text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400">จ</div>
+                                        <div class="py-1 text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400">อ</div>
+                                        <div class="py-1 text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400">พ</div>
+                                        <div class="py-1 text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400">พฤ</div>
+                                        <div class="py-1 text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400">ศ</div>
+                                        <div class="py-1 text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400">ส</div>
                                     </div>
 
                                     <!-- Month Grid -->
@@ -4609,7 +4737,7 @@ body.auto-dark .swal2-backdrop-show {
                                                     <option value="gcal">Google Calendar</option>
                                                 </select>
                                             </div>
-                                            <button type="button" onclick="openCalendarNewEventModal()" class="h-8 inline-flex items-center gap-1.5 px-3.5 rounded-xl text-xs font-bold bg-slate-900 hover:bg-black dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white transition shadow-xs cursor-pointer whitespace-nowrap shrink-0">
+                                            <button type="button" onclick="openCalendarNewEventModal()" class="h-8 inline-flex items-center gap-1.5 px-3.5 rounded-xl text-xs font-black hover:brightness-105 active:scale-95 transition shadow-2xs cursor-pointer whitespace-nowrap shrink-0" style="background-color: #FFDE85; color: #4d3800; border: 1.5px solid #ecc968;">
                                                 <span class="text-sm leading-none font-normal">+</span>
                                                 <span>Add new</span>
                                             </button>
@@ -4648,7 +4776,7 @@ body.auto-dark .swal2-backdrop-show {
                                                     <option value="system">แจ้งเตือนระบบ</option>
                                                 </select>
                                             </div>
-                                            <button type="button" onclick="promptAddNotice()" class="h-8 inline-flex items-center gap-1.5 px-3.5 rounded-xl text-xs font-bold bg-slate-900 hover:bg-black dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white transition shadow-xs cursor-pointer whitespace-nowrap shrink-0" title="Add new">
+                                            <button type="button" onclick="promptAddNotice()" class="h-8 inline-flex items-center gap-1.5 px-3.5 rounded-xl text-xs font-black hover:brightness-105 active:scale-95 transition shadow-2xs cursor-pointer whitespace-nowrap shrink-0" style="background-color: #B9F584; color: #1e4a05; border: 1.5px solid #9fe262;" title="Add new">
                                                 <span class="text-sm leading-none font-normal">+</span>
                                                 <span>Add new</span>
                                             </button>
@@ -4668,7 +4796,7 @@ body.auto-dark .swal2-backdrop-show {
                                         <h3 class="text-lg sm:text-xl font-black text-slate-900 dark:text-white tracking-tight">
                                             Todo list
                                         </h3>
-                                        <button type="button" onclick="openCalendarNewTodoModal()" class="h-8 inline-flex items-center gap-1.5 px-3.5 rounded-xl text-xs font-bold bg-slate-900 hover:bg-black dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white transition shadow-xs cursor-pointer whitespace-nowrap shrink-0">
+                                        <button type="button" onclick="openCalendarNewTodoModal()" class="h-8 inline-flex items-center gap-1.5 px-3.5 rounded-xl text-xs font-black hover:brightness-105 active:scale-95 transition shadow-2xs cursor-pointer whitespace-nowrap shrink-0" style="background-color: #FCAFD1; color: #520b2d; border: 1.5px solid #f08cb6;">
                                             <span class="text-sm leading-none font-normal">+</span>
                                             <span>Add new</span>
                                         </button>
@@ -4956,11 +5084,11 @@ body.auto-dark .swal2-backdrop-show {
                         <div class="flex items-center justify-between w-full sm:w-auto">
                             <div class="flex items-center gap-2.5">
                                 <h2 class="text-2xl sm:text-3xl font-black text-slate-800 tracking-normal">รายการงาน</h2>
-                                <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0"></span>
+                                <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#35B984] shrink-0"></span>
                             </div>
                             
                             <!-- Mobile-only Add Task button (in the same row on the far right) -->
-                            <button type="button" onclick="nav('add-task')" class="sm:hidden h-10 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-xs transition flex items-center gap-1.5 cursor-pointer shrink-0">
+                            <button type="button" onclick="nav('add-task')" class="sm:hidden h-10 px-4 rounded-2xl bg-[#35B984] hover:bg-[#2ba072] text-white font-bold text-xs shadow-xs transition flex items-center gap-1.5 cursor-pointer shrink-0">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                                 <span>เพิ่มงานใหม่</span>
                             </button>
@@ -5040,7 +5168,7 @@ body.auto-dark .swal2-backdrop-show {
 
                         <!-- Right on desktop (sm and up): Add Task button -->
                         <div class="hidden sm:flex items-center shrink-0">
-                            <button type="button" onclick="nav('add-task')" class="h-10 sm:h-11 px-4 sm:px-5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm shadow-xs transition flex items-center gap-2 cursor-pointer shrink-0">
+                            <button type="button" onclick="nav('add-task')" class="h-10 sm:h-11 px-4 sm:px-5 rounded-2xl bg-[#35B984] hover:bg-[#2ba072] text-white font-bold text-xs sm:text-sm shadow-xs transition flex items-center gap-2 cursor-pointer shrink-0">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                                 <span class="whitespace-nowrap">เพิ่มงานใหม่</span>
                             </button>
@@ -9727,13 +9855,37 @@ body.auto-dark .swal2-backdrop-show {
             const bar = document.getElementById('progress-bar-line');
             if (bar) bar.style.width = percent + '%';
 
-            // 1. Dynamic Greeting
+            // 1. Dynamic Greeting based on time of day (เปลี่ยนตามช่วงเวลา: เช้า, บ่าย, เย็น, ค่ำ)
             const hourNow = new Date().getHours();
             let greetingText = 'สวัสดีตอนเช้า!';
-            if (hourNow >= 12 && hourNow < 17) greetingText = 'สวัสดีตอนบ่าย!';
-            else if (hourNow >= 17 || hourNow < 5) greetingText = 'สวัสดีตอนเย็น!';
+            let greetingIconHtml = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-7 h-7 sm:w-8 sm:h-8"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+            let greetingIconWrapClass = 'w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-amber-100 text-amber-600 border border-amber-200/70 flex items-center justify-center shrink-0 shadow-xs transition-all';
+
+            if (hourNow >= 5 && hourNow < 12) {
+                greetingText = 'สวัสดีตอนเช้า!';
+                greetingIconWrapClass = 'w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-amber-100 text-amber-600 border border-amber-200/70 flex items-center justify-center shrink-0 shadow-xs transition-all';
+                greetingIconHtml = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-7 h-7 sm:w-8 sm:h-8"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+            } else if (hourNow >= 12 && hourNow < 17) {
+                greetingText = 'สวัสดีตอนบ่าย!';
+                greetingIconWrapClass = 'w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-orange-100 text-orange-600 border border-orange-200/70 flex items-center justify-center shrink-0 shadow-xs transition-all';
+                greetingIconHtml = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-7 h-7 sm:w-8 sm:h-8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`;
+            } else if (hourNow >= 17 && hourNow < 21) {
+                greetingText = 'สวัสดีตอนเย็น!';
+                greetingIconWrapClass = 'w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-rose-100 text-rose-600 border border-rose-200/70 flex items-center justify-center shrink-0 shadow-xs transition-all';
+                greetingIconHtml = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-7 h-7 sm:w-8 sm:h-8"><path d="M17 18a5 5 0 0 0-10 0"/><line x1="12" y1="9" x2="12" y2="2"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/><line x1="23" y1="22" x2="1" y2="22"/></svg>`;
+            } else {
+                greetingText = 'สวัสดีตอนค่ำ!';
+                greetingIconWrapClass = 'w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-indigo-100 text-indigo-600 border border-indigo-200/70 flex items-center justify-center shrink-0 shadow-xs transition-all';
+                greetingIconHtml = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-7 h-7 sm:w-8 sm:h-8"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/><path d="M19 3v4"/><path d="M21 5h-4"/></svg>`;
+            }
+
             const greetTitleEl = document.getElementById('dash-greeting-title');
             if (greetTitleEl) greetTitleEl.textContent = greetingText;
+            const greetIconEl = document.getElementById('dash-greeting-icon-wrap');
+            if (greetIconEl) {
+                greetIconEl.className = greetingIconWrapClass;
+                greetIconEl.innerHTML = greetingIconHtml;
+            }
 
             const dueTodayCount = assignments.filter(t => t.status === 'ยังไม่ส่ง' && diffDays(t.dueDate) === 0).length;
             const greetSubEl = document.getElementById('dash-greeting-subtitle');
@@ -9751,7 +9903,7 @@ body.auto-dark .swal2-backdrop-show {
             const quickTasksContainer = document.getElementById('dash-quick-tasks-list');
             if (quickTasksContainer) {
                 const pendingTasks = assignments
-                    .filter(t => t.status === 'ยังไม่ส่ง')
+                    .filter(t => t.status === 'ยังไม่ส่ง' && diffDays(t.dueDate) >= 0)
                     .sort((a,b) => new Date(a.dueDate) - new Date(b.dueDate))
                     .slice(0, 3);
                 if (pendingTasks.length === 0) {
@@ -9767,24 +9919,24 @@ body.auto-dark .swal2-backdrop-show {
                 } else {
                     quickTasksContainer.innerHTML = pendingTasks.map((t, idx) => {
                         const diff = diffDays(t.dueDate);
-                        let diffText = diff < 0 ? `เกินกำหนด ${Math.abs(diff)} วัน` : (diff === 0 ? 'วันนี้' : `อีก ${diff} วัน`);
-                        let badgeColor = diff < 0 ? 'bg-rose-50 text-rose-700 border-rose-200/80' : (diff === 0 ? 'bg-amber-50 text-amber-700 border-amber-200/80' : 'bg-slate-100 text-slate-600 border-slate-200/80');
+                        let diffText = diff === 0 ? 'วันนี้' : `อีก ${diff} วัน`;
+                        let badgeColor = diff === 0 ? 'bg-amber-50 text-amber-700 border-amber-200/80' : 'bg-slate-100 text-slate-600 border-slate-200/80';
                         return `
-                            <div class="flex items-center justify-between p-3 border-b border-slate-100 last:border-b-0 hover:bg-slate-50/80 transition group cursor-pointer" onclick="toggleTaskStatus('${t.id}', event)">
+                            <div class="flex items-center justify-between p-3 border-b border-slate-100 dark:border-slate-800 last:border-b-0 hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition group cursor-pointer" onclick="toggleTaskStatus('${t.id}', event)">
                                 <div class="flex items-center gap-2.5 min-w-0">
-                                    <div class="w-5 h-5 rounded-md border ${t.status === 'ส่งแล้ว' ? 'border-[#35b982] bg-[#35b982] text-white' : 'border-slate-300 group-hover:border-[#35b982] bg-white'} flex items-center justify-center shrink-0 transition">
+                                    <div class="w-5 h-5 rounded-md border ${t.status === 'ส่งแล้ว' ? 'border-[#35b982] bg-[#35b982] text-white' : 'border-slate-300 dark:border-slate-600 group-hover:border-[#35b982] bg-white dark:bg-slate-700'} flex items-center justify-center shrink-0 transition">
                                         ${t.status === 'ส่งแล้ว' ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="10" height="10"><polyline points="20 6 9 17 4 12"/></svg>' : ''}
                                     </div>
                                     <div class="min-w-0">
-                                        <p class="text-xs font-bold text-slate-800 truncate ${t.status === 'ส่งแล้ว' ? 'line-through text-slate-400' : ''}">${escapeHtml(t.title)}</p>
+                                        <p class="text-xs font-bold text-slate-800 dark:text-slate-100 truncate ${t.status === 'ส่งแล้ว' ? 'line-through text-slate-400' : ''}">${escapeHtml(t.title)}</p>
                                         <div class="flex items-center gap-1.5 text-[10px] text-slate-400 mt-0.5">
-                                            <span class="font-semibold text-slate-600">${escapeHtml(t.subject)}</span>
+                                            <span class="font-semibold text-slate-600 dark:text-slate-300">${escapeHtml(t.subject)}</span>
                                             <span>•</span>
-                                            <span class="${diff < 0 ? 'text-rose-500 font-bold' : ''}">${formatDate(t.dueDate)}</span>
+                                            <span>${formatDate(t.dueDate)}</span>
                                         </div>
                                     </div>
                                 </div>
-                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeColor} shrink-0">${diffText}</span>
+                                <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${badgeColor} shrink-0">${diffText}</span>
                             </div>
                         `;
                     }).join('');
@@ -9945,26 +10097,38 @@ body.auto-dark .swal2-backdrop-show {
                 }
             }
 
-            // Populate Mini Calendar on new Dashboard (จ อ พ พฤ ศ ส อา)
+            // Populate Mini Calendar on new Dashboard (อา จ อ พ พฤ ศ ส)
             const miniCalGrid = document.getElementById('dash-mini-cal-grid');
             if (miniCalGrid) {
                 miniCalGrid.innerHTML = '';
-                // Monday is 0, Sunday is 6
-                let startOffset = (new Date(currentCalYear, currentCalMonth, 1).getDay() + 6) % 7;
+                // Sunday is 0, matching the header: อา จ อ พ พฤ ศ ส
+                const startOffset = new Date(currentCalYear, currentCalMonth, 1).getDay();
                 for (let i = 0; i < startOffset; i++) {
-                    miniCalGrid.innerHTML += `<div></div>`;
+                    miniCalGrid.innerHTML += `<div class="aspect-square"></div>`;
                 }
                 for (let day = 1; day <= daysInMonth; day++) {
                     const isToday = day === today.getDate() && currentCalMonth === today.getMonth() && currentCalYear === today.getFullYear();
+                    const dayCol = new Date(currentCalYear, currentCalMonth, day).getDay();
+                    const dayColors = ['#F5A6A6', '#FFDE85', '#FCAFD1', '#B9F584', '#FFC28A', '#92C8F4', '#C5A7F2'];
+                    const dayTextColors = ['#5c1313', '#4d3800', '#520b2d', '#1e4a05', '#4d2303', '#08375e', '#32165c'];
+                    const dayBorders = ['#e58888', '#ecc968', '#f08cb6', '#9fe262', '#f1a868', '#72b2e8', '#af8be8'];
+
                     const hasTasks = assignments.some(t => {
                         if (!t.dueDate) return false;
                         const d = new Date(t.dueDate);
                         return d.getDate() === day && d.getMonth() === currentCalMonth && d.getFullYear() === currentCalYear;
                     });
+
+                    const todayStyle = isToday ? `background-color: ${dayColors[dayCol]}; color: ${dayTextColors[dayCol]}; border: 1.5px solid ${dayBorders[dayCol]}; font-weight: 850; box-shadow: 0 4px 12px rgba(0,0,0,0.12);` : '';
+
                     miniCalGrid.innerHTML += `
-                        <div onclick="showDayTasks(${currentCalYear}, ${currentCalMonth}, ${day})" class="h-7 flex flex-col items-center justify-center rounded-lg cursor-pointer transition ${isToday ? 'bg-emerald-600 text-white font-bold shadow-2xs' : 'text-slate-700 hover:bg-slate-100'}">
+                        <div onclick="showDayTasks(${currentCalYear}, ${currentCalMonth}, ${day})"
+                             class="aspect-square flex flex-col items-center justify-center rounded-xl cursor-pointer transition ${isToday ? '' : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'}"
+                             style="${todayStyle}"
+                             title="${day}/${currentCalMonth + 1}/${currentCalYear}${isToday ? ' (วันนี้)' : ''}">
                             <span class="text-[11px] leading-none">${day}</span>
-                            ${hasTasks && !isToday ? `<span class="w-1 h-1 rounded-full bg-emerald-500 mt-0.5"></span>` : ''}
+                            ${hasTasks && !isToday ? `<span class="w-1.5 h-1.5 rounded-full bg-[#B9F584] mt-0.5"></span>` : ''}
+                            ${hasTasks && isToday ? `<span class="w-1.5 h-1.5 rounded-full mt-0.5" style="background-color: ${dayTextColors[dayCol]}; opacity: 0.8;"></span>` : ''}
                         </div>
                     `;
                 }
@@ -10402,9 +10566,10 @@ body.auto-dark .swal2-backdrop-show {
                 const prevDate = new Date(modernCalYear, modernCalMonth - 1, prevDay);
                 const prevDateStr = formatLocalDate(prevDate);
                 const isSelected = (prevDateStr === modernSelectedDateStr);
+                const dayCol = prevDate.getDay();
 
                 html += `
-                    <div class="modern-cal-day-cell text-slate-300 dark:text-slate-600 ${isSelected ? 'is-selected' : ''}"
+                    <div class="modern-cal-day-cell cal-day-${dayCol} is-other-month ${isSelected ? 'is-selected' : ''}"
                          onclick="selectModernCalDate(${prevDate.getFullYear()}, ${prevDate.getMonth()}, ${prevDay})"
                          title="${prevDateStr}">
                         <span class="text-xs sm:text-sm font-semibold">${prevDay}</span>
@@ -10418,6 +10583,7 @@ body.auto-dark .swal2-backdrop-show {
                 const dateStr = formatLocalDate(dayDate);
                 const isToday = (dateStr === todayStr);
                 const isSelected = (dateStr === modernSelectedDateStr);
+                const dayCol = dayDate.getDay();
 
                 // Check for tasks and gcal events
                 const dayTasks = assignments.filter(t => t.dueDate && t.dueDate.split('T')[0] === dateStr);
@@ -10425,23 +10591,18 @@ body.auto-dark .swal2-backdrop-show {
                 const hasItems = dayTasks.length > 0 || dayGCal.length > 0;
 
                 let indicatorDots = '';
-                if (hasItems && !isSelected) {
+                if (hasItems) {
+                    const dotClass = (isToday || isSelected) ? 'bg-slate-900/80 dark:bg-slate-900/80' : 'bg-slate-500';
                     indicatorDots = `
                         <div class="flex items-center gap-0.5 mt-0.5">
-                            ${dayTasks.length > 0 ? '<span class="modern-cal-event-dot bg-slate-900 dark:bg-emerald-400"></span>' : ''}
-                            ${dayGCal.length > 0 ? '<span class="modern-cal-event-dot bg-purple-500"></span>' : ''}
-                        </div>
-                    `;
-                } else if (hasItems && isSelected) {
-                    indicatorDots = `
-                        <div class="flex items-center gap-0.5 mt-0.5">
-                            <span class="modern-cal-event-dot bg-white dark:bg-slate-900"></span>
+                            ${dayTasks.length > 0 ? `<span class="modern-cal-event-dot ${dotClass}"></span>` : ''}
+                            ${dayGCal.length > 0 ? '<span class="modern-cal-event-dot bg-purple-600"></span>' : ''}
                         </div>
                     `;
                 }
 
                 html += `
-                    <div class="modern-cal-day-cell text-slate-800 dark:text-slate-100 ${isSelected ? 'is-selected' : ''} ${isToday && !isSelected ? 'ring-1.5 ring-slate-300 dark:ring-slate-600 font-extrabold' : ''}"
+                    <div class="modern-cal-day-cell cal-day-${dayCol} ${isToday ? 'is-today' : ''} ${isSelected ? 'is-selected' : ''}"
                          onclick="selectModernCalDate(${modernCalYear}, ${modernCalMonth}, ${d})"
                          title="${dateStr}${isToday ? ' (วันนี้)' : ''}">
                         <span class="text-xs sm:text-sm font-bold">${d}</span>
@@ -10459,9 +10620,10 @@ body.auto-dark .swal2-backdrop-show {
                 const nextDate = new Date(modernCalYear, modernCalMonth + 1, nextDay);
                 const nextDateStr = formatLocalDate(nextDate);
                 const isSelected = (nextDateStr === modernSelectedDateStr);
+                const dayCol = nextDate.getDay();
 
                 html += `
-                    <div class="modern-cal-day-cell text-slate-300 dark:text-slate-600 ${isSelected ? 'is-selected' : ''}"
+                    <div class="modern-cal-day-cell cal-day-${dayCol} is-other-month ${isSelected ? 'is-selected' : ''}"
                          onclick="selectModernCalDate(${nextDate.getFullYear()}, ${nextDate.getMonth()}, ${nextDay})"
                          title="${nextDateStr}">
                         <span class="text-xs sm:text-sm font-semibold">${nextDay}</span>
@@ -10594,13 +10756,26 @@ body.auto-dark .swal2-backdrop-show {
                 const isDone = item.status === 'ส่งแล้ว';
                 const subjectColor = isTask ? getSubjectColor(item.subject) : '#8580be';
 
+                // Color code the date sheet according to day of week (วันอาทิตย์ #F5A6A6, วันจันทร์ #FFDE85, etc.)
+                let eventDayCol = 0;
+                if (item.dateStr) {
+                    const parts = item.dateStr.split('-');
+                    if (parts.length === 3) {
+                        eventDayCol = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10)).getDay();
+                    }
+                }
+                const dayStampBg = ['#F5A6A6', '#FFDE85', '#FCAFD1', '#B9F584', '#FFC28A', '#92C8F4', '#C5A7F2'][eventDayCol] || '#f1f5f9';
+                const dayStampText = ['#5c1313', '#4d3800', '#520b2d', '#1e4a05', '#4d2303', '#08375e', '#32165c'][eventDayCol] || '#1e293b';
+                const dayStampBorder = ['#e58888', '#ecc968', '#f08cb6', '#9fe262', '#f1a868', '#72b2e8', '#af8be8'][eventDayCol] || '#e2e8f0';
+
                 return `
                     <div class="p-3 sm:p-3.5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 hover:border-slate-200 dark:hover:border-slate-600 shadow-2xs hover:shadow-xs transition group flex items-center justify-between gap-3">
                         
-                        <!-- Left: Date Stamp Box -->
-                        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-slate-100 dark:bg-slate-700 flex flex-col items-center justify-center shrink-0 border border-slate-200/80 dark:border-slate-600 select-none">
-                            <span class="text-[9px] sm:text-[10px] uppercase font-extrabold text-slate-500 dark:text-slate-300 leading-tight">${monthLabel}</span>
-                            <span class="text-sm sm:text-base font-black text-slate-900 dark:text-white leading-none mt-0.5">${dayNumber}</span>
+                        <!-- Left: Date Stamp Box (แผ่นแสดงวันตามสีประจำวัน) -->
+                        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex flex-col items-center justify-center shrink-0 border select-none shadow-2xs"
+                             style="background-color: ${dayStampBg}; color: ${dayStampText}; border-color: ${dayStampBorder};">
+                            <span class="text-[9px] sm:text-[10px] uppercase font-black leading-tight opacity-90">${monthLabel}</span>
+                            <span class="text-sm sm:text-base font-black leading-none mt-0.5">${dayNumber}</span>
                         </div>
 
                         <!-- Center: Info -->
@@ -15642,8 +15817,112 @@ body.auto-dark .swal2-backdrop-show {
 
         function updateDashboardTimerStats() {
             const today = new Date();
+            
+            // 1. All-time Real Statistics from studySessions
+            let totalSecondsAll = 0;
+            const uniqueDayKeys = new Set();
+            const dayMapTotalSeconds = {};
+
+            (studySessions || []).forEach(s => {
+                const sec = parseInt(s.actualDurationSeconds || s.actual_duration_seconds, 10) || 0;
+                totalSecondsAll += sec;
+
+                const dateVal = s.startedAt || s.started_at || s.completedAt || s.completed_at || s.endedAt;
+                if (dateVal) {
+                    const d = new Date(dateVal);
+                    if (!isNaN(d.getTime())) {
+                        const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+                        uniqueDayKeys.add(key);
+                        dayMapTotalSeconds[key] = (dayMapTotalSeconds[key] || 0) + sec;
+                    }
+                }
+            });
+
+            const totalMinsAll = Math.round(totalSecondsAll / 60);
+            const totalHoursAll = Math.floor(totalMinsAll / 60);
+            const remainMinsAll = totalMinsAll % 60;
+            const totalTimeFormatted = totalHoursAll > 0 
+                ? (remainMinsAll > 0 ? `${totalHoursAll} ชม. ${remainMinsAll} นาที` : `${totalHoursAll} ชม.`)
+                : `${totalMinsAll} นาที`;
+
+            const statTotalEl = document.getElementById('dash-stat-study-total');
+            if (statTotalEl) statTotalEl.textContent = totalTimeFormatted;
+
+            const badgeTotalEl = document.getElementById('dash-reading-total-badge');
+            if (badgeTotalEl) badgeTotalEl.textContent = totalTimeFormatted;
+
+            const statSessionsEl = document.getElementById('dash-stat-study-sessions');
+            if (statSessionsEl) statSessionsEl.textContent = `${(studySessions || []).length} ครั้ง`;
+
+            const statAvgEl = document.getElementById('dash-stat-study-avg');
+            if (statAvgEl) {
+                const activeDaysCount = Math.max(1, uniqueDayKeys.size);
+                const avgMins = Math.round(totalMinsAll / activeDaysCount);
+                if (avgMins >= 60) {
+                    statAvgEl.textContent = `${Math.floor(avgMins / 60)} ชม. ${avgMins % 60} นาที`;
+                } else {
+                    statAvgEl.textContent = `${avgMins} นาที`;
+                }
+            }
+
+            // Streak calculation
+            let streak = 0;
+            const checkDate = new Date();
+            checkDate.setHours(0, 0, 0, 0);
+            const todayKey = `${checkDate.getFullYear()}-${String(checkDate.getMonth() + 1).padStart(2, '0')}-${String(checkDate.getDate()).padStart(2, '0')}`;
+            if (!uniqueDayKeys.has(todayKey)) {
+                checkDate.setDate(checkDate.getDate() - 1);
+            }
+            while (true) {
+                const k = `${checkDate.getFullYear()}-${String(checkDate.getMonth() + 1).padStart(2, '0')}-${String(checkDate.getDate()).padStart(2, '0')}`;
+                if (uniqueDayKeys.has(k)) {
+                    streak++;
+                    checkDate.setDate(checkDate.getDate() - 1);
+                } else {
+                    break;
+                }
+            }
+            const statStreakEl = document.getElementById('dash-stat-study-streak');
+            if (statStreakEl) statStreakEl.textContent = `${streak} วัน`;
+            const streakLegacyEl = document.getElementById('dash-study-streak');
+            if (streakLegacyEl) streakLegacyEl.textContent = `${streak} วัน`;
+
+            // 7-day Activity Chart (Today and 6 prior days)
+            const chartContainer = document.getElementById('dash-study-7day-chart');
+            if (chartContainer) {
+                const thaiDayShort = ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'];
+                const daysData = [];
+                for (let i = 6; i >= 0; i--) {
+                    const d = new Date();
+                    d.setDate(d.getDate() - i);
+                    const k = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+                    const secs = dayMapTotalSeconds[k] || 0;
+                    const mins = Math.round(secs / 60);
+                    daysData.push({
+                        dateKey: k,
+                        dayName: thaiDayShort[d.getDay()],
+                        minutes: mins,
+                        isToday: (i === 0)
+                    });
+                }
+                const maxMins = Math.max(...daysData.map(d => d.minutes), 30); // scale reference
+                chartContainer.innerHTML = daysData.map(d => {
+                    const pct = Math.max(8, Math.round((d.minutes / maxMins) * 100));
+                    return `
+                        <div class="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+                            <span class="text-[9.5px] font-bold text-slate-500 dark:text-slate-400 opacity-0 group-hover:opacity-100 transition duration-150 tabular-nums">${d.minutes}น.</span>
+                            <div class="w-full max-w-[28px] bg-slate-100 dark:bg-slate-800 rounded-t-lg overflow-hidden flex flex-col justify-end" style="height: 64px;">
+                                <div class="w-full rounded-t-lg transition-all duration-500 ${d.minutes > 0 ? 'bg-[#35b982]' : 'bg-slate-200/50 dark:bg-slate-700/50'}" style="height: ${pct}%;"></div>
+                            </div>
+                            <span class="text-[10.5px] font-bold ${d.isToday ? 'text-[#1e825a] dark:text-[#35b982] font-black' : 'text-slate-500 dark:text-slate-400'}">${d.dayName}</span>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // 2. Today's Study Hours and Daily Goal
             const todaySessions = (studySessions || []).filter(s => {
-                const dateVal = s.startedAt || s.started_at || s.completedAt || s.completed_at;
+                const dateVal = s.startedAt || s.started_at || s.completedAt || s.completed_at || s.endedAt;
                 if (!dateVal) return false;
                 const d = new Date(dateVal);
                 return d.getDate() === today.getDate() && d.getMonth() === today.getMonth() && d.getFullYear() === today.getFullYear();
@@ -15655,73 +15934,58 @@ body.auto-dark .swal2-backdrop-show {
                 totalSecondsToday += sec;
             });
 
-            const totalMins = Math.round(totalSecondsToday / 60);
-            const dashTimeEl = document.getElementById('dash-today-study-time');
-            const dashCountEl = document.getElementById('dash-today-study-count');
-            const streakEl = document.getElementById('dash-study-streak');
-            const badgeEl = document.getElementById('dash-timer-active-badge');
-            const recentListEl = document.getElementById('dash-recent-study-list');
+            const totalMinsToday = Math.round(totalSecondsToday / 60);
+            const hoursToday = Math.floor(totalMinsToday / 60);
+            const minsTodayRem = totalMinsToday % 60;
+            const todayTimeFormatted = hoursToday > 0 
+                ? (minsTodayRem > 0 ? `${hoursToday} ชม. ${minsTodayRem} นาที` : `${hoursToday} ชม.`)
+                : `${totalMinsToday} นาที`;
 
-            if (dashTimeEl) {
-                if (totalMins >= 60) {
-                    const h = Math.floor(totalMins / 60);
-                    const m = totalMins % 60;
-                    dashTimeEl.textContent = `${h} ชม. ${m} นาที`;
-                } else {
-                    dashTimeEl.textContent = `${totalMins} นาที`;
-                }
-            }
+            const dashTimeEl = document.getElementById('dash-today-study-time');
+            if (dashTimeEl) dashTimeEl.textContent = todayTimeFormatted;
+
+            const dashCountEl = document.getElementById('dash-today-study-count');
             if (dashCountEl) dashCountEl.textContent = todaySessions.length;
 
-            // Also update new Dashboard Card A gauge elements
             const hoursTextEl = document.getElementById('dash-study-hours-text');
-            const gaugeCircle = document.getElementById('dash-gauge-circle');
-            const gaugeText = document.getElementById('dash-gauge-text');
-            if (hoursTextEl) {
-                if (totalMins >= 60) {
-                    const h = Math.floor(totalMins / 60);
-                    const m = totalMins % 60;
-                    hoursTextEl.textContent = `${h} ชม. ${m} นาที`;
+            if (hoursTextEl) hoursTextEl.textContent = todayTimeFormatted;
+
+            // Target (default 8 hours = 480 mins)
+            const targetMins = 8 * 60;
+            const percentGoal = Math.min(100, Math.round((totalMinsToday / targetMins) * 100));
+
+            const progressBarFill = document.getElementById('dash-progress-bar-fill');
+            if (progressBarFill) {
+                progressBarFill.style.width = `${percentGoal}%`;
+            }
+
+            const progressStatusText = document.getElementById('dash-progress-status-text');
+            if (progressStatusText) {
+                progressStatusText.textContent = `อ่านแล้ว ${percentGoal}% ของเป้าหมาย`;
+            }
+
+            const remainingText = document.getElementById('dash-remaining-time-text');
+            if (remainingText) {
+                if (totalMinsToday >= targetMins) {
+                    remainingText.textContent = 'บรรลุเป้าหมายแล้ว 🎉';
                 } else {
-                    hoursTextEl.textContent = `${totalMins} นาที`;
+                    const diffMins = targetMins - totalMinsToday;
+                    const diffH = Math.floor(diffMins / 60);
+                    const diffM = diffMins % 60;
+                    remainingText.textContent = diffH > 0 
+                        ? `เหลืออีก ${diffH} ชม. ${diffM > 0 ? diffM + ' นาที' : ''}`
+                        : `เหลืออีก ${diffM} นาที`;
                 }
             }
-            const targetMins = 8 * 60; // 8 hours goal
-            const percentGoal = Math.min(100, Math.round((totalMins / targetMins) * 100));
+
+            const gaugeText = document.getElementById('dash-gauge-text');
             if (gaugeText) gaugeText.textContent = `${percentGoal}%`;
+
+            const gaugeCircle = document.getElementById('dash-gauge-circle');
             if (gaugeCircle) gaugeCircle.setAttribute('stroke-dasharray', `${percentGoal}, 100`);
 
-            // Calculate reading streak
-            const dateMap = {};
-            (studySessions || []).forEach(s => {
-                const dateVal = s.startedAt || s.started_at || s.completedAt || s.completed_at;
-                if (!dateVal) return;
-                const d = new Date(dateVal);
-                if (isNaN(d.getTime())) return;
-                const k = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-                dateMap[k] = (dateMap[k] || 0) + 1;
-            });
-
-            let streak = 0;
-            const checkDate = new Date();
-            checkDate.setHours(0, 0, 0, 0);
-            const todayKey = `${checkDate.getFullYear()}-${String(checkDate.getMonth() + 1).padStart(2, '0')}-${String(checkDate.getDate()).padStart(2, '0')}`;
-            if (!dateMap[todayKey]) {
-                checkDate.setDate(checkDate.getDate() - 1);
-            }
-
-            while (true) {
-                const k = `${checkDate.getFullYear()}-${String(checkDate.getMonth() + 1).padStart(2, '0')}-${String(checkDate.getDate()).padStart(2, '0')}`;
-                if (dateMap[k] && dateMap[k] > 0) {
-                    streak++;
-                    checkDate.setDate(checkDate.getDate() - 1);
-                } else {
-                    break;
-                }
-            }
-            if (streakEl) streakEl.textContent = `${streak} วัน`;
-
             // Active timer pulse badge
+            const badgeEl = document.getElementById('dash-timer-active-badge');
             if (badgeEl) {
                 if (activeTimer && !activeTimer.isPaused) {
                     badgeEl.classList.remove('hidden');
@@ -15731,13 +15995,14 @@ body.auto-dark .swal2-backdrop-show {
             }
 
             // Render recent 3 sessions on dashboard
+            const recentListEl = document.getElementById('dash-recent-study-list');
             if (recentListEl) {
                 const recentSessions = (studySessions || []).slice(0, 3);
                 if (recentSessions.length === 0) {
                     recentListEl.innerHTML = `
                         <div class="py-3 px-4 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between text-xs text-slate-500">
                             <span>ยังไม่มีประวัติการอ่านหนังสือ</span>
-                            <button type="button" onclick="nav('timer'); switchTimerTab('focus');" class="font-bold text-blue-600 hover:text-blue-700 cursor-pointer">
+                            <button type="button" onclick="nav('timer'); switchTimerTab('focus');" class="font-bold text-[#35b982] hover:text-[#2ba070] cursor-pointer">
                                 เริ่มรอบแรก
                             </button>
                         </div>
@@ -15750,7 +16015,6 @@ body.auto-dark .swal2-backdrop-show {
                         const subColor = foundSub ? foundSub.color : (s.subjectColor || getSubjectColor(subName));
                         const durText = formatDurationDisplay(s.actualDurationSeconds || s.actual_duration_seconds);
                         const dateText = formatThaiDateTime(s.startedAt || s.started_at || s.completedAt || s.completed_at || s.endedAt);
-                        const isDone = (s.status === 'สำเร็จตามเป้า' || s.status === 'completed' || s.status === 'สำเร็จตามเป้าหมาย');
 
                         return `
                             <div class="p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100/70 border border-slate-100/80 transition flex items-center justify-between gap-3">
