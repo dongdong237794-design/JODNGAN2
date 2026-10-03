@@ -450,6 +450,7 @@ export const fallbackStore = {
   assignments: [],
   trash: [],
   studySessions: [],
+  notices: [],
   schedule: {},
   settings: {
     urgentDays: 3,
@@ -607,6 +608,7 @@ export function initFallbackStore() {
         if (Array.isArray(parsed.subjects) && parsed.subjects.length > 0) fallbackStore.subjects = parsed.subjects;
         if (Array.isArray(parsed.trash)) fallbackStore.trash = parsed.trash;
         if (Array.isArray(parsed.studySessions)) fallbackStore.studySessions = parsed.studySessions;
+        if (Array.isArray(parsed.notices)) fallbackStore.notices = parsed.notices;
         if (parsed.schedule && typeof parsed.schedule === 'object') {
           fallbackStore.schedule = { ...fallbackStore.schedule, ...parsed.schedule };
         }
@@ -621,6 +623,7 @@ export function initFallbackStore() {
         subjects: fallbackStore.subjects,
         trash: fallbackStore.trash,
         studySessions: fallbackStore.studySessions,
+        notices: fallbackStore.notices,
         schedule: fallbackStore.schedule,
         settings: fallbackStore.settings,
         savedAt: new Date().toISOString()
@@ -645,6 +648,7 @@ export function saveFallbackStore() {
         subjects: fallbackStore.subjects,
         trash: fallbackStore.trash,
         studySessions: fallbackStore.studySessions,
+        notices: fallbackStore.notices,
         schedule: fallbackStore.schedule,
         settings: fallbackStore.settings,
         savedAt: new Date().toISOString()

@@ -82,6 +82,19 @@ CREATE TABLE IF NOT EXISTS study_sessions (
     updated_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
 
+-- 7. Create notices table (ตารางบันทึกข้อความและประกาศ Messages and notices)
+CREATE TABLE IF NOT EXISTS notices (
+    id TEXT PRIMARY KEY,
+    user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+    author TEXT NOT NULL,
+    text TEXT NOT NULL,
+    time TEXT,
+    avatar TEXT DEFAULT '',
+    type TEXT DEFAULT 'team',
+    created_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
+    updated_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
+);
+
 -- ==========================================================
 -- Ensure columns exist (for existing tables)
 -- ==========================================================
@@ -195,6 +208,13 @@ CREATE POLICY "Users can manage own settings" ON settings
 
 -- 6. Study Sessions Policies (Strict User Ownership)
 CREATE POLICY "Users can manage own study sessions" ON study_sessions
+    FOR ALL TO authenticated
+    USING (auth.uid() = user_id)
+    WITH CHECK (auth.uid() = user_id);
+
+-- 7. Notices Policies (User Ownership)
+ALTER TABLE notices ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Users can manage own notices" ON notices
     FOR ALL TO authenticated
     USING (auth.uid() = user_id)
     WITH CHECK (auth.uid() = user_id);

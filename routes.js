@@ -92,6 +92,22 @@ async function dbSupportsCalendarEventId(supabase) {
   return _hasCalendarEventIdCache;
 }
 
+let _hasNoticesCache = null;
+async function dbSupportsNotices(supabase) {
+  if (!supabase || !isSupabaseAvailable()) return false;
+  if (_hasNoticesCache !== null) return _hasNoticesCache;
+  try {
+    const { error } = await supabase.from('notices').select('id').limit(1);
+    _hasNoticesCache = !error;
+  } catch (err) {
+    if (err.message && (err.message.includes('fetch failed') || err.message.includes('network'))) {
+      markSupabaseFailed(err);
+    }
+    _hasNoticesCache = false;
+  }
+  return _hasNoticesCache;
+}
+
 // Helper to read Google OAuth client ID from firebase config or env
 function getGoogleOAuthClientId() {
   if (process.env.GOOGLE_CLIENT_ID) return process.env.GOOGLE_CLIENT_ID;
@@ -542,6 +558,7 @@ apiRouter.get('/data', requireAuth, async (req, res) => {
       schedule: fallbackStore.schedule,
       trash: fallbackStore.trash,
       settings: fallbackStore.settings,
+      notices: (fallbackStore.notices || []).filter(n => !n.user_id || n.user_id === userId),
       studySessions: (fallbackStore.studySessions || []).filter(s => !s.userId || s.userId === userId)
     });
   }
@@ -639,6 +656,23 @@ apiRouter.get('/data', requireAuth, async (req, res) => {
     const subjects = subData || [];
     const settings = setRow?.data || fallbackStore.settings;
 
+    // 7. Fetch Notices
+    let notices = [];
+    const hasNoticesTable = await dbSupportsNotices(supabase);
+    if (hasNoticesTable) {
+      try {
+        let nQuery = supabase.from('notices').select('*').order('created_at', { ascending: false });
+        if (hasUserId) nQuery = nQuery.or(`user_id.eq.${userId},user_id.is.null`);
+        const { data: nData, error: nErr } = await nQuery;
+        if (!nErr && nData) notices = nData;
+      } catch (err) {
+        console.warn('Could not fetch notices from supabase:', err.message);
+      }
+    }
+    if (!notices.length) {
+      notices = (fallbackStore.notices || []).filter(n => !n.user_id || n.user_id === userId);
+    }
+
     return res.json({
       source: 'supabase',
       userId,
@@ -647,7 +681,8 @@ apiRouter.get('/data', requireAuth, async (req, res) => {
       schedule: Object.keys(formattedSchedule).length > 0 ? formattedSchedule : fallbackStore.schedule,
       trash,
       settings,
-      studySessions
+      studySessions,
+      notices
     });
   } catch (err) {
     if (err.message && (err.message.includes('fetch failed') || err.message.includes('network'))) {
@@ -663,6 +698,7 @@ apiRouter.get('/data', requireAuth, async (req, res) => {
       schedule: fallbackStore.schedule,
       trash: fallbackStore.trash,
       settings: fallbackStore.settings,
+      notices: (fallbackStore.notices || []).filter(n => !n.user_id || n.user_id === userId),
       studySessions: (fallbackStore.studySessions || []).filter(s => !s.userId || s.userId === userId)
     });
   }
@@ -1019,6 +1055,36 @@ apiRouter.post('/schedule', requireAuth, async (req, res) => {
   return res.json({ success: true, day, period, subject });
 });
 
+// POST /api/schedule/clear - Clear all schedule entries for current user
+apiRouter.post('/schedule/clear', requireAuth, async (req, res) => {
+  const supabase = req.supabase || getSupabase();
+  const userId = req.user.id;
+
+  if (supabase) {
+    try {
+      const hasUserId = await dbSupportsUserId(supabase);
+      let query = supabase.from('schedule').delete();
+      if (hasUserId) {
+        query = query.eq('user_id', userId);
+      } else {
+        query = query.neq('id', '00000000-0000-0000-0000-000000000000');
+      }
+      await query;
+    } catch (err) {
+      if (err.message && (err.message.includes('fetch failed') || err.message.includes('network'))) {
+        markSupabaseFailed(err);
+      } else {
+        console.error('Failed to clear schedule in Supabase:', err.message);
+      }
+    }
+  }
+
+  // Clear local fallback
+  fallbackStore.schedule = {};
+  saveFallbackStore();
+  return res.json({ success: true, schedule: {} });
+});
+
 // POST /api/settings - Update application settings for current user
 apiRouter.post('/settings', requireAuth, async (req, res) => {
   const settingsData = req.body;
@@ -1210,5 +1276,105 @@ apiRouter.delete('/study-sessions/:id', requireAuth, async (req, res) => {
     fallbackStore.studySessions = fallbackStore.studySessions.filter(s => s.id !== id);
     saveFallbackStore();
     return res.json({ success: true, source: 'fallback' });
+  }
+});
+
+// GET /api/notices - List all notices (Messages and notices)
+apiRouter.get('/notices', requireAuth, async (req, res) => {
+  const userId = req.user.id;
+  const supabase = req.supabase || getSupabase();
+
+  if (!supabase) {
+    const list = (fallbackStore.notices || []).filter(n => !n.user_id || n.user_id === userId);
+    return res.json({ success: true, notices: list, source: 'fallback' });
+  }
+
+  try {
+    const hasTable = await dbSupportsNotices(supabase);
+    if (!hasTable) {
+      const list = (fallbackStore.notices || []).filter(n => !n.user_id || n.user_id === userId);
+      return res.json({ success: true, notices: list, source: 'fallback_no_table' });
+    }
+
+    const hasUserId = await dbSupportsUserId(supabase);
+    let query = supabase.from('notices').select('*').order('created_at', { ascending: false });
+    if (hasUserId) query = query.or(`user_id.eq.${userId},user_id.is.null`);
+    const { data, error } = await query;
+    if (error) throw error;
+    return res.json({ success: true, notices: data || [], source: 'supabase' });
+  } catch (err) {
+    console.warn('GET /notices error:', err.message);
+    const list = (fallbackStore.notices || []).filter(n => !n.user_id || n.user_id === userId);
+    return res.json({ success: true, notices: list, source: 'fallback_error' });
+  }
+});
+
+// POST /api/notices - Create or update notice
+apiRouter.post('/notices', requireAuth, async (req, res) => {
+  const notice = req.body;
+  const userId = req.user.id;
+  const supabase = req.supabase || getSupabase();
+
+  if (!notice || !notice.text) {
+    return res.status(400).json({ error: 'Text is required' });
+  }
+
+  const noticeObj = {
+    id: notice.id || ('n_' + Date.now()),
+    author: notice.author || req.user.email?.split('@')[0] || 'ผู้ใช้งาน',
+    text: String(notice.text).trim(),
+    time: notice.time || new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }),
+    avatar: notice.avatar || '',
+    type: notice.type || 'team',
+    user_id: userId,
+    updated_at: new Date().toISOString()
+  };
+
+  const idx = (fallbackStore.notices || []).findIndex(n => n.id === noticeObj.id);
+  if (idx >= 0) {
+    fallbackStore.notices[idx] = noticeObj;
+  } else {
+    fallbackStore.notices.unshift(noticeObj);
+  }
+  saveFallbackStore();
+
+  if (!supabase) {
+    return res.json({ success: true, notice: noticeObj, source: 'fallback' });
+  }
+
+  try {
+    const hasTable = await dbSupportsNotices(supabase);
+    if (hasTable) {
+      const { error } = await supabase.from('notices').upsert(noticeObj);
+      if (error) throw error;
+    }
+    return res.json({ success: true, notice: noticeObj, source: 'supabase' });
+  } catch (err) {
+    console.warn('POST /notices error:', err.message);
+    return res.json({ success: true, notice: noticeObj, source: 'fallback_error' });
+  }
+});
+
+// DELETE /api/notices/:id - Delete a notice
+apiRouter.delete('/notices/:id', requireAuth, async (req, res) => {
+  const { id } = req.params;
+  const userId = req.user.id;
+  const supabase = req.supabase || getSupabase();
+
+  fallbackStore.notices = (fallbackStore.notices || []).filter(n => n.id !== id);
+  saveFallbackStore();
+
+  if (!supabase) {
+    return res.json({ success: true, source: 'fallback' });
+  }
+
+  try {
+    const hasTable = await dbSupportsNotices(supabase);
+    if (hasTable) {
+      await supabase.from('notices').delete().eq('id', id).eq('user_id', userId);
+    }
+    return res.json({ success: true });
+  } catch (err) {
+    return res.json({ success: true, source: 'fallback_error' });
   }
 });
