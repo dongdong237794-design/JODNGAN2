@@ -22,13 +22,53 @@ import {
   mapStudySessionToDb,
   emailToUuid,
   resolveRealSupabaseUserId,
-  createSessionToken
+  createSessionToken,
+  getResolvedSupabaseUrl,
+  getResolvedSupabaseAnonKey,
+  normalizeSupabaseUrl,
+  resetSupabaseClientCache,
+  onSupabaseConfigChange
 } from './supabase.js';
 
 export const apiRouter = express.Router();
 
 // Helper to detect whether Supabase database currently has user_id columns
 let _hasUserIdCache = null;
+let _hasStudySessionsCache = null;
+let _hasDueTimeCache = null;
+let _hasCalendarEventIdCache = null;
+let _hasNoticesCache = null;
+
+export function resetDbFeatureCache() {
+  _hasUserIdCache = null;
+  _hasStudySessionsCache = null;
+  _hasDueTimeCache = null;
+  _hasCalendarEventIdCache = null;
+  _hasNoticesCache = null;
+}
+onSupabaseConfigChange(resetDbFeatureCache);
+
+// Sync client-supplied headers (supports serverless & ephemeral cloud deployments like Vercel/Render)
+apiRouter.use((req, res, next) => {
+  const hUrl = req.headers['x-supabase-url'];
+  const hKey = req.headers['x-supabase-anon-key'];
+  if (hUrl && hKey && typeof hUrl === 'string' && typeof hKey === 'string') {
+    const normUrl = normalizeSupabaseUrl(hUrl);
+    const cleanKey = (hKey || '').trim().replace(/^["']|["']$/g, '').trim();
+    if (normUrl && cleanKey) {
+      const curUrl = getResolvedSupabaseUrl();
+      const curKey = getResolvedSupabaseAnonKey();
+      if (!curUrl || !curKey || curUrl !== normUrl || curKey !== cleanKey) {
+        process.env.SUPABASE_URL = normUrl;
+        process.env.SUPABASE_ANON_KEY = cleanKey;
+        resetSupabaseClientCache();
+        updateSupabaseConfig({ supabaseUrl: normUrl, supabaseAnonKey: cleanKey }).catch(() => {});
+      }
+    }
+  }
+  next();
+});
+
 async function dbSupportsUserId(supabase) {
   if (!supabase || !isSupabaseAvailable()) return false;
   if (_hasUserIdCache !== null) return _hasUserIdCache;
@@ -44,7 +84,6 @@ async function dbSupportsUserId(supabase) {
   return _hasUserIdCache;
 }
 
-let _hasStudySessionsCache = null;
 async function dbSupportsStudySessions(supabase) {
   if (!supabase || !isSupabaseAvailable()) return false;
   if (_hasStudySessionsCache !== null) return _hasStudySessionsCache;
@@ -60,7 +99,6 @@ async function dbSupportsStudySessions(supabase) {
   return _hasStudySessionsCache;
 }
 
-let _hasDueTimeCache = null;
 async function dbSupportsDueTime(supabase) {
   if (!supabase || !isSupabaseAvailable()) return false;
   if (_hasDueTimeCache !== null) return _hasDueTimeCache;
@@ -76,7 +114,6 @@ async function dbSupportsDueTime(supabase) {
   return _hasDueTimeCache;
 }
 
-let _hasCalendarEventIdCache = null;
 async function dbSupportsCalendarEventId(supabase) {
   if (!supabase || !isSupabaseAvailable()) return false;
   if (_hasCalendarEventIdCache !== null) return _hasCalendarEventIdCache;
@@ -92,7 +129,6 @@ async function dbSupportsCalendarEventId(supabase) {
   return _hasCalendarEventIdCache;
 }
 
-let _hasNoticesCache = null;
 async function dbSupportsNotices(supabase) {
   if (!supabase || !isSupabaseAvailable()) return false;
   if (_hasNoticesCache !== null) return _hasNoticesCache;
@@ -208,13 +244,15 @@ async function verifyGoogleAccessToken(accessToken) {
 apiRouter.get('/auth-config', async (req, res) => {
   const configured = isSupabaseConfigured();
   const available = await checkSupabaseHealth(req.query.retry === 'true');
+  const supUrl = getResolvedSupabaseUrl();
+  const supKey = getResolvedSupabaseAnonKey();
   res.json({
-    configured: configured && available,
+    configured: configured && (available || Boolean(supUrl && supKey)),
     supabaseConfigured: configured,
     supabaseAvailable: available,
     googleConfigured: !!getGoogleOAuthClientId(),
-    supabaseUrl: available ? (process.env.SUPABASE_URL || '') : '',
-    supabaseAnonKey: available ? (process.env.SUPABASE_ANON_KEY || '') : '',
+    supabaseUrl: supUrl,
+    supabaseAnonKey: supKey,
     googleClientId: getGoogleOAuthClientId(),
     calendarScope: 'https://www.googleapis.com/auth/calendar.events'
   });
@@ -424,15 +462,23 @@ apiRouter.get('/status', async (req, res) => {
   }
 
   try {
-    const { error } = await supabase.from('subjects').select('id', { head: true, count: 'exact' });
+    const { error } = await supabase.from('subjects').select('id').limit(1);
     if (error) {
+      const isMissingTable = error.code === '42P01' || String(error.message).includes('does not exist') || String(error.message).includes('relation');
+      const isRlsError = error.code === '42501' || String(error.message).includes('permission denied');
+      let schemaMsg = `เชื่อมต่อไปยัง Supabase สำเร็จแล้ว แต่ยังไม่พบตารางในฐานข้อมูล (${error.message}) กรุณากดปุ่ม "คัดลอก SQL" แล้วนำไปรันใน Supabase SQL Editor`;
+      if (isRlsError) {
+        schemaMsg = `เชื่อมต่อไปยัง Supabase ได้แล้ว แต่สิทธิ์การเข้าถึง (RLS) ไม่อนุญาต (${error.message}) กรุณารัน supabase_schema.sql เพื่อเปิดใช้งาน RLS Policies สำหรับ Anon และ Authenticated`;
+      }
       return res.json({
         configured: true,
-        connected: false,
-        mode: 'local_storage',
+        connected: true,
+        mode: 'supabase',
         maskedUrl: diag.maskedUrl,
-        hasSchemaError: true,
-        message: `เชื่อมต่อเซิร์ฟเวอร์สำเร็จ แต่ยังไม่พบตารางในฐานข้อมูล (${error.message}) กรุณารัน supabase_schema.sql ใน Supabase SQL Editor`
+        hasSchemaError: Boolean(isMissingTable || isRlsError),
+        isMissingTable: Boolean(isMissingTable),
+        isRlsError: Boolean(isRlsError),
+        message: schemaMsg
       });
     }
     return res.json({
@@ -440,6 +486,7 @@ apiRouter.get('/status', async (req, res) => {
       connected: true,
       mode: 'supabase',
       maskedUrl: diag.maskedUrl,
+      hasSchemaError: false,
       message: 'เชื่อมต่อฐานข้อมูล Supabase PostgreSQL สำเร็จ ข้อมูลจะถูกบันทึกบนคลาวด์'
     });
   } catch (err) {
@@ -460,7 +507,7 @@ apiRouter.get('/supabase-config', async (req, res) => {
   res.json({
     configured: diag.configured,
     connected: diag.connected,
-    supabaseUrl: process.env.SUPABASE_URL || '',
+    supabaseUrl: getResolvedSupabaseUrl() || '',
     maskedUrl: diag.maskedUrl,
     hasKey: diag.hasKey,
     mode: diag.mode,

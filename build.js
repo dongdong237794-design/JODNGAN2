@@ -8,4 +8,7 @@ const __dirname = path.dirname(__filename);
 const distDir = path.join(__dirname, 'dist');
 fs.mkdirSync(distDir, { recursive: true });
 fs.copyFileSync(path.join(__dirname, 'index.html'), path.join(distDir, 'index.html'));
+if (fs.existsSync(path.join(__dirname, 'extracted_style.css'))) {
+  fs.copyFileSync(path.join(__dirname, 'extracted_style.css'), path.join(distDir, 'extracted_style.css'));
+}
 console.log('Build completed successfully: dist/index.html generated.');

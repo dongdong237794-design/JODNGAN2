@@ -219,6 +219,15 @@ CREATE POLICY "Users can manage own notices" ON notices
     USING (auth.uid() = user_id)
     WITH CHECK (auth.uid() = user_id);
 
+-- 8. Allow anon key (used by Node.js backend proxy and client auth) to read and write safely
+CREATE POLICY "Anon access profiles" ON profiles FOR ALL TO anon USING (true) WITH CHECK (true);
+CREATE POLICY "Anon access subjects" ON subjects FOR ALL TO anon USING (true) WITH CHECK (true);
+CREATE POLICY "Anon access tasks" ON tasks FOR ALL TO anon USING (true) WITH CHECK (true);
+CREATE POLICY "Anon access schedule" ON schedule FOR ALL TO anon USING (true) WITH CHECK (true);
+CREATE POLICY "Anon access settings" ON settings FOR ALL TO anon USING (true) WITH CHECK (true);
+CREATE POLICY "Anon access study_sessions" ON study_sessions FOR ALL TO anon USING (true) WITH CHECK (true);
+CREATE POLICY "Anon access notices" ON notices FOR ALL TO anon USING (true) WITH CHECK (true);
+
 -- ==========================================================
 -- Automatic User Provisioning Trigger (Google OAuth Sign-in)
 -- ==========================================================

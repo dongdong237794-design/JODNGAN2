@@ -9,51 +9,131 @@ dotenv.config({ override: true });
 const DATA_DIR = path.join(process.cwd(), 'data');
 const LOCAL_STORE_FILE = path.join(DATA_DIR, 'local_store.json');
 const CONFIG_FILE = path.join(DATA_DIR, 'supabase_config.json');
+const TMP_CONFIG_FILE = path.join('/tmp', 'supabase_config.json');
 
 let supabaseClient = null;
 const userEmailToIdCache = new Map();
+
+// Configuration change listeners (e.g. for routes to clear table caches)
+const configChangeListeners = [];
+export function onSupabaseConfigChange(fn) {
+  if (typeof fn === 'function') configChangeListeners.push(fn);
+}
+function notifyConfigChanged() {
+  configChangeListeners.forEach(fn => {
+    try { fn(); } catch(e) {}
+  });
+}
 
 // Supabase reachability tracking
 let isSupabaseOnline = false;
 let hasCheckedHealth = false;
 let lastHealthCheck = 0;
 let lastHealthCheckError = null;
-const HEALTH_CHECK_COOLDOWN = 60000; // 60s cooldown before retesting if offline
+const HEALTH_CHECK_COOLDOWN = 6000; // 6s cooldown before retesting if offline
 let healthCheckPromise = null;
 
-// Load persisted Supabase credentials from data/supabase_config.json if available
+// Clean and normalize Supabase Project URL (auto-handles dashboard URLs, quotes, and missing protocols)
+export function normalizeSupabaseUrl(inputUrl) {
+  if (!inputUrl || typeof inputUrl !== 'string') return '';
+  let url = inputUrl.trim().replace(/^["']|["']$/g, '').trim().replace(/\/+$/, '');
+  
+  // If user pasted a dashboard URL: https://supabase.com/dashboard/project/abcxyz...
+  const dashMatch = url.match(/supabase\.com\/dashboard\/project\/([a-z0-9_-]+)/i);
+  if (dashMatch) {
+    return `https://${dashMatch[1]}.supabase.co`;
+  }
+
+  // If user omitted https://
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    url = `https://${url}`;
+  }
+
+  return url.replace(/\/+$/, '');
+}
+
+// Get resolved credentials across all common environment variable names
+export function getResolvedSupabaseUrl() {
+  const envUrl = process.env.SUPABASE_URL ||
+    process.env.SUPABASE_PROJECT_URL ||
+    process.env.NEXT_PUBLIC_SUPABASE_URL ||
+    process.env.VITE_SUPABASE_URL ||
+    process.env.PUBLIC_SUPABASE_URL ||
+    '';
+  return normalizeSupabaseUrl(envUrl);
+}
+
+export function getResolvedSupabaseAnonKey() {
+  const key = (
+    process.env.SUPABASE_ANON_KEY ||
+    process.env.SUPABASE_KEY ||
+    process.env.SUPABASE_API_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    process.env.VITE_SUPABASE_ANON_KEY ||
+    process.env.PUBLIC_SUPABASE_ANON_KEY ||
+    process.env.SUPABASE_PUBLIC_KEY ||
+    ''
+  ).trim().replace(/^["']|["']$/g, '').trim();
+  return key;
+}
+
+export function getResolvedSupabaseServiceRoleKey() {
+  const key = (
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.SUPABASE_SERVICE_KEY ||
+    process.env.SERVICE_ROLE_KEY ||
+    ''
+  ).trim().replace(/^["']|["']$/g, '').trim();
+  return key;
+}
+
+export function resetSupabaseClientCache() {
+  supabaseClient = null;
+  hasCheckedHealth = false;
+  isSupabaseOnline = true;
+  lastHealthCheck = 0;
+  lastHealthCheckError = null;
+  userEmailToIdCache.clear();
+  notifyConfigChanged();
+}
+
+// Load persisted Supabase credentials from data/supabase_config.json or /tmp
 export function loadSavedSupabaseConfig() {
-  try {
-    if (fs.existsSync(CONFIG_FILE)) {
-      const raw = fs.readFileSync(CONFIG_FILE, 'utf8');
-      const cfg = JSON.parse(raw);
-      if (cfg && typeof cfg === 'object') {
-        if (typeof cfg.supabaseUrl === 'string') {
-          process.env.SUPABASE_URL = cfg.supabaseUrl;
-        }
-        if (typeof cfg.supabaseAnonKey === 'string') {
-          process.env.SUPABASE_ANON_KEY = cfg.supabaseAnonKey;
-        }
-        if (typeof cfg.supabaseServiceRoleKey === 'string') {
-          process.env.SUPABASE_SERVICE_ROLE_KEY = cfg.supabaseServiceRoleKey;
+  const pathsToTry = [CONFIG_FILE, TMP_CONFIG_FILE];
+  for (const filePath of pathsToTry) {
+    try {
+      if (fs.existsSync(filePath)) {
+        const raw = fs.readFileSync(filePath, 'utf8');
+        const cfg = JSON.parse(raw);
+        if (cfg && typeof cfg === 'object') {
+          if (typeof cfg.supabaseUrl === 'string' && cfg.supabaseUrl) {
+            process.env.SUPABASE_URL = normalizeSupabaseUrl(cfg.supabaseUrl);
+          }
+          if (typeof cfg.supabaseAnonKey === 'string' && cfg.supabaseAnonKey) {
+            process.env.SUPABASE_ANON_KEY = cfg.supabaseAnonKey.trim();
+          }
+          if (typeof cfg.supabaseServiceRoleKey === 'string' && cfg.supabaseServiceRoleKey) {
+            process.env.SUPABASE_SERVICE_ROLE_KEY = cfg.supabaseServiceRoleKey.trim();
+          }
+          return;
         }
       }
+    } catch (e) {
+      // Continue to next path
     }
-  } catch (e) {
-    // Config read error ignored
   }
 }
 loadSavedSupabaseConfig();
 
 export function isSupabaseConfigured() {
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
-  return Boolean(url && key && typeof url === 'string' && url.startsWith('http'));
+  const url = getResolvedSupabaseUrl();
+  const key = getResolvedSupabaseServiceRoleKey() || getResolvedSupabaseAnonKey();
+  return Boolean(url && key && url.startsWith('http'));
 }
 
 export function getSupabaseDiagnosticInfo() {
-  const url = process.env.SUPABASE_URL || '';
-  const hasKey = Boolean(process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY);
+  const url = getResolvedSupabaseUrl();
+  const hasKey = Boolean(getResolvedSupabaseAnonKey() || getResolvedSupabaseServiceRoleKey());
   const isDnsError = Boolean(
     lastHealthCheckError && (
       lastHealthCheckError.includes('ENOTFOUND') ||
@@ -76,20 +156,24 @@ export function getSupabaseDiagnosticInfo() {
 }
 
 export async function testSupabaseCredentials(url, key) {
-  if (!url || typeof url !== 'string' || !url.startsWith('http')) {
+  const cleanUrl = normalizeSupabaseUrl(url);
+  if (!cleanUrl || !cleanUrl.startsWith('http')) {
     return { ok: false, error: 'URL ต้องขึ้นต้นด้วย https://' };
   }
-  const cleanUrl = url.trim().replace(/\/$/, '');
   const cleanKey = (key || '').trim();
+  if (!cleanKey) {
+    return { ok: false, error: 'กรุณากรอก API Key (Anon Key)' };
+  }
 
   try {
-    const res = await fetch(`${cleanUrl}/rest/v1/`, {
+    const res = await fetch(`${cleanUrl.replace(/\/+$/, '')}/rest/v1/`, {
       method: 'GET',
       headers: {
         apikey: cleanKey,
-        ...(cleanKey ? { Authorization: `Bearer ${cleanKey}` } : {})
+        Authorization: `Bearer ${cleanKey}`,
+        Accept: 'application/json, text/plain, */*'
       },
-      signal: AbortSignal.timeout(4000)
+      signal: AbortSignal.timeout(12000)
     });
 
     if (res.status === 401 || res.status === 403) {
@@ -109,13 +193,13 @@ export async function testSupabaseCredentials(url, key) {
     if (errMsg.includes('ENOTFOUND') || errMsg.includes('getaddrinfo') || causeCode === 'ENOTFOUND') {
       return {
         ok: false,
-        error: 'ไม่พบชื่อโฮสต์ (ENOTFOUND) โปรเจกต์อาจถูก Pause บน Supabase หรือกรอก URL ไม่ถูกต้อง'
+        error: 'ไม่พบชื่อโฮสต์ Supabase (ENOTFOUND) โครงการอาจถูกหยุดชั่วคราว (Paused) บน Supabase หรือกรอก URL ไม่ถูกต้อง'
       };
     }
-    if (err?.name === 'TimeoutError' || errMsg.includes('timeout')) {
+    if (err?.name === 'TimeoutError' || errMsg.includes('timeout') || errMsg.includes('aborted')) {
       return {
         ok: false,
-        error: 'หมดเวลาการเชื่อมต่อ (Timeout) เซิร์ฟเวอร์ไม่ตอบสนอง'
+        error: 'หมดเวลาการเชื่อมต่อ (Timeout 12 วินาที) โฮสต์อาจกำลังตื่นจากการ Pause หรือเซิร์ฟเวอร์ตอบสนองช้า'
       };
     }
     return {
@@ -126,7 +210,7 @@ export async function testSupabaseCredentials(url, key) {
 }
 
 export async function updateSupabaseConfig({ supabaseUrl, supabaseAnonKey, supabaseServiceRoleKey }) {
-  const cleanUrl = (supabaseUrl || '').trim();
+  const cleanUrl = normalizeSupabaseUrl(supabaseUrl);
   const cleanAnon = (supabaseAnonKey || '').trim();
   const cleanService = (supabaseServiceRoleKey || '').trim();
 
@@ -155,20 +239,25 @@ export async function updateSupabaseConfig({ supabaseUrl, supabaseAnonKey, supab
   lastHealthCheck = 0;
   lastHealthCheckError = null;
   userEmailToIdCache.clear();
+  notifyConfigChanged();
 
-  // Save to config file
+  // Save to config file (try data/ first, then /tmp for read-only systems)
+  const configData = JSON.stringify({
+    supabaseUrl: cleanUrl,
+    supabaseAnonKey: cleanAnon,
+    supabaseServiceRoleKey: cleanService || '',
+    updatedAt: new Date().toISOString()
+  }, null, 2);
+
   try {
     if (!fs.existsSync(DATA_DIR)) {
       fs.mkdirSync(DATA_DIR, { recursive: true });
     }
-    fs.writeFileSync(CONFIG_FILE, JSON.stringify({
-      supabaseUrl: cleanUrl,
-      supabaseAnonKey: cleanAnon,
-      supabaseServiceRoleKey: cleanService || '',
-      updatedAt: new Date().toISOString()
-    }, null, 2), 'utf8');
+    fs.writeFileSync(CONFIG_FILE, configData, 'utf8');
   } catch (e) {
-    // ignore
+    try {
+      fs.writeFileSync(TMP_CONFIG_FILE, configData, 'utf8');
+    } catch(errTmp) {}
   }
 
   if (cleanUrl && (cleanAnon || cleanService)) {
@@ -177,7 +266,7 @@ export async function updateSupabaseConfig({ supabaseUrl, supabaseAnonKey, supab
       success: true,
       connected: isHealthy,
       message: isHealthy
-        ? 'เชื่อมต่อกับ Supabase สำเร็จแล้ว ระบบพร้อมใช้งาน'
+        ? 'เชื่อมต่อกับ Supabase สำเร็จแล้ว ระบบพร้อมบันทึกข้อมูลบนคลาวด์'
         : 'บันทึกการตั้งค่าแล้ว แต่ยังไม่สามารถอ่านตารางได้ กรุณาตรวจสอบว่าสร้างตารางด้วย supabase_schema.sql แล้ว'
     };
   }
@@ -200,11 +289,13 @@ export async function clearCustomSupabaseConfig() {
   lastHealthCheck = Date.now();
   lastHealthCheckError = null;
   userEmailToIdCache.clear();
+  notifyConfigChanged();
 
   try {
-    if (fs.existsSync(CONFIG_FILE)) {
-      fs.unlinkSync(CONFIG_FILE);
-    }
+    if (fs.existsSync(CONFIG_FILE)) fs.unlinkSync(CONFIG_FILE);
+  } catch (e) {}
+  try {
+    if (fs.existsSync(TMP_CONFIG_FILE)) fs.unlinkSync(TMP_CONFIG_FILE);
   } catch (e) {}
 
   return {
@@ -232,21 +323,32 @@ export async function checkSupabaseHealth(force = false) {
   }
 
   healthCheckPromise = (async () => {
-    const url = process.env.SUPABASE_URL;
+    const url = getResolvedSupabaseUrl();
+    const key = getResolvedSupabaseServiceRoleKey() || getResolvedSupabaseAnonKey();
     try {
-      // Test host DNS resolution and reachability with 2500ms timeout
-      await fetch(`${url.replace(/\/$/, '')}/rest/v1/`, {
+      // Test host reachability with 12000ms timeout to support slow/cold cloud startups
+      const res = await fetch(`${url.replace(/\/+$/, '')}/rest/v1/`, {
         method: 'GET',
         headers: {
-          apikey: process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+          apikey: key,
+          Authorization: `Bearer ${key}`,
+          Accept: 'application/json, text/plain, */*'
         },
-        signal: AbortSignal.timeout(2500)
+        signal: AbortSignal.timeout(12000)
       });
-      isSupabaseOnline = true;
+      
+      // If we received an answer (even 200, 204, or 404 for missing route), the host is alive
+      if (res.status === 401 || res.status === 403) {
+        lastHealthCheckError = `API key invalid or unauthorized (HTTP ${res.status})`;
+        // Host is reached, but key is invalid
+        isSupabaseOnline = false;
+      } else {
+        isSupabaseOnline = true;
+        lastHealthCheckError = null;
+      }
       hasCheckedHealth = true;
       lastHealthCheck = Date.now();
-      lastHealthCheckError = null;
-      return true;
+      return isSupabaseOnline;
     } catch (err) {
       isSupabaseOnline = false;
       hasCheckedHealth = true;
@@ -265,8 +367,10 @@ export async function checkSupabaseHealth(force = false) {
 export function isSupabaseAvailable() {
   if (!isSupabaseConfigured()) return false;
   if (!hasCheckedHealth) {
+    // Fire health check in background but don't block
     checkSupabaseHealth();
-    return false;
+    // Return true optimistically if configured to avoid unnecessary fallback on first request
+    return true;
   }
   if (!isSupabaseOnline) {
     if (Date.now() - lastHealthCheck > HEALTH_CHECK_COOLDOWN) {
@@ -278,7 +382,10 @@ export function isSupabaseAvailable() {
 }
 
 export function markSupabaseFailed(err) {
-  if (isSupabaseOnline) {
+  // Only mark failed if error is clearly a network or host unreachable error, not application logic error
+  const errMsg = String(err?.message || '').toLowerCase();
+  const isNetworkFailure = errMsg.includes('enotfound') || errMsg.includes('fetch failed') || errMsg.includes('econnrefused') || errMsg.includes('aborted');
+  if (isNetworkFailure && isSupabaseOnline) {
     isSupabaseOnline = false;
     lastHealthCheck = Date.now();
     lastHealthCheckError = err?.message || 'network error';
@@ -358,8 +465,8 @@ export function getSupabase() {
   }
   if (supabaseClient) return supabaseClient;
 
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
+  const url = getResolvedSupabaseUrl();
+  const key = getResolvedSupabaseServiceRoleKey() || getResolvedSupabaseAnonKey();
 
   if (url && key && url.startsWith('http')) {
     try {
@@ -378,8 +485,8 @@ export function getScopedSupabase(accessToken) {
   if (!isSupabaseAvailable()) {
     return null;
   }
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const url = getResolvedSupabaseUrl();
+  const key = getResolvedSupabaseAnonKey() || getResolvedSupabaseServiceRoleKey();
 
   if (url && key && url.startsWith('http')) {
     const isSupabaseJwt = accessToken && typeof accessToken === 'string' && accessToken.split('.').length === 3;
